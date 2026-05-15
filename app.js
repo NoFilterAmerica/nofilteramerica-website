@@ -244,11 +244,18 @@ async function loadNews() {
   // Fetch top political/world news
   const articles = await fetchTopNews();
 
-  // Hero + side stack: first 4 articles
-  renderFeatured(articles.slice(0, 5));
+  // Hero + side stack: first 4 articles (1 hero + 3 side)
+  renderFeatured(articles.slice(0, 4));
 
-  // More stories grid: articles 4-9
-  renderNewsCards(articles.slice(5, 11), false);
+  // More stories grid: exactly 6 cards — pad with samples if API is short
+  const moreArticles = articles.slice(4);
+  const samples = getSampleStories();
+  let gridArticles = moreArticles;
+  if (gridArticles.length < 6) {
+    // Pad with sample stories to always hit exactly 6
+    gridArticles = [...moreArticles, ...samples.slice(0, 6 - moreArticles.length)];
+  }
+  renderNewsCards(gridArticles.slice(0, 6), false);
 
   // Ticker — update both spans for seamless infinite loop
   if (articles.length > 0) {
