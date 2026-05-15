@@ -268,30 +268,9 @@
       padding-top:12px; width:100%; text-align:center;
     }
 
-    /* ===== BREAKING TICKER ===== */
-    .ticker-bar {
-      background:#cc2200; display:flex; align-items:center; height:42px; overflow:hidden;
-    }
-    .ticker-badge {
-      background:#8b0000; color:#fff; height:100%;
-      display:flex; align-items:center; gap:8px;
-      padding:0 20px; font-family:'Oswald',sans-serif;
-      font-size:13px; font-weight:600; letter-spacing:2px;
-      white-space:nowrap; flex-shrink:0;
-    }
+    /* ===== BREAKING TICKER — handled by style.css ===== */
     .ticker-dot { color:#ff8080; font-size:10px; animation:blink 1s infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-    .ticker-track { overflow:hidden; flex:1; }
-    #ticker-text {
-      display:inline-block; white-space:nowrap; padding-left:100%;
-      animation:tickerScroll 55s linear infinite;
-      font-family:'Oswald',sans-serif; font-size:14px;
-      font-weight:500; letter-spacing:1px; color:#fff;
-    }
-    @keyframes tickerScroll {
-      0% { transform:translateX(0); }
-      100% { transform:translateX(-100%); }
-    }
 
     /* ===== NEWS SECTION ===== */
     .news-section { max-width:1300px; margin:0 auto; padding:60px 24px; }

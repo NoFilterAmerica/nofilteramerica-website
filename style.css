@@ -61,17 +61,19 @@ body {
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: ticker-scroll 55s linear infinite;
+  animation: ticker-scroll 60s linear infinite;
   will-change: transform;
 }
-.ticker-track:hover { animation-play-state: running; }
-#ticker-text {
+.ticker-track:hover { animation-play-state: paused; }
+#ticker-text,
+#ticker-text-dupe {
   display: inline-block;
   white-space: nowrap;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.5px;
-  padding-right: 80px;
+  padding-right: 100px;
+  color: #fff;
 }
 @keyframes ticker-scroll {
   0%   { transform: translateX(0); }
