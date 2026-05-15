@@ -5,83 +5,674 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>No Filter America – Truth. Freedom. Accountability.</title>
   <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    /* ===== PRESIDENTIAL HERO ===== */
+    .pres-hero {
+      background: #08111e;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 3px solid #c9a84c;
+    }
+
+    /* Top bar */
+    .pres-topbar {
+      background: #0a1628;
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+      text-align: center;
+      padding: 8px 20px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: rgba(201,168,76,0.7);
+      text-transform: uppercase;
+    }
+
+    /* Main hero layout */
+    .pres-body {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: stretch;
+      min-height: 440px;
+      max-width: 100%;
+    }
+
+    /* Left photo panel */
+    .pres-photo {
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+    }
+    .pres-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: brightness(0.85) contrast(1.05);
+    }
+    .pres-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(8,17,30,0.2) 0%, rgba(8,17,30,0.0) 40%, rgba(8,17,30,0.6) 100%);
+    }
+    .pres-photo.right .pres-photo-overlay {
+      background: linear-gradient(to left, rgba(8,17,30,0.2) 0%, rgba(8,17,30,0.0) 40%, rgba(8,17,30,0.6) 100%);
+    }
+    .pres-photo-label {
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: rgba(201,168,76,0.9);
+      text-transform: uppercase;
+    }
+
+    /* Center column */
+    .pres-center {
+      width: 380px;
+      background: linear-gradient(180deg, #08111e 0%, #0d1f3c 50%, #08111e 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 30px;
+      gap: 18px;
+      border-left: 1px solid rgba(201,168,76,0.2);
+      border-right: 1px solid rgba(201,168,76,0.2);
+      position: relative;
+      z-index: 2;
+    }
+    .pres-date {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: rgba(201,168,76,0.7);
+      text-transform: uppercase;
+    }
+    .pres-seal {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 20px rgba(201,168,76,0.4));
+      animation: seal-glow 3s ease-in-out infinite;
+    }
+    @keyframes seal-glow {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(201,168,76,0.3)); }
+      50% { filter: drop-shadow(0 0 30px rgba(201,168,76,0.6)); }
+    }
+    .pres-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: #c9a84c;
+      text-align: center;
+      line-height: 1.05;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 20px rgba(201,168,76,0.3);
+    }
+    .pres-subtitle {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .pres-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .pres-tag {
+      border: 1px solid rgba(201,168,76,0.5);
+      color: #c9a84c;
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      padding: 4px 12px;
+      text-transform: uppercase;
+    }
+    .pres-est {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: rgba(201,168,76,0.5);
+      text-align: center;
+      border-top: 1px solid rgba(201,168,76,0.2);
+      padding-top: 16px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* BREAKING TICKER */
+    .breaking-ticker {
+      background: #cc2200;
+      display: flex;
+      align-items: center;
+      height: 42px;
+      overflow: hidden;
+    }
+    .breaking-label {
+      background: #8b0000;
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 0 22px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      letter-spacing: 2px;
+      flex-shrink: 0;
+      gap: 8px;
+    }
+    .breaking-ticker-content {
+      overflow: hidden;
+      flex: 1;
+    }
+    #ticker-text {
+      display: inline-block;
+      white-space: nowrap;
+      animation: ticker-scroll 50s linear infinite;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #fff;
+      padding-left: 100%;
+    }
+    @keyframes ticker-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: rgba(8,17,30,0.98);
+      border-bottom: 2px solid #c9a84c;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo-img { height: 48px; width: auto; }
+    .nav-brand {
+      font-family: 'Oswald', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #c9a84c;
+      border-bottom-color: #c9a84c;
+    }
+    .nav-social {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .nav-social a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 3px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .nav-yt { background: #ff0000; color: #fff; }
+    .nav-yt:hover { background: #cc0000; }
+    .nav-tt { background: #111; color: #fff; border: 1px solid #333; }
+    .nav-tt:hover { background: #222; }
+
+    /* NEWS SECTION */
+    .news-section {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 60px 30px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    }
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #c9a84c;
+      letter-spacing: 5px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    /* News grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .news-card {
+      background: #111d33;
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: all 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+    .news-card:hover {
+      transform: translateY(-4px);
+      border-color: #c9a84c;
+      box-shadow: 0 12px 40px rgba(201,168,76,0.15);
+    }
+    .news-card.skeleton {
+      height: 280px;
+      background: linear-gradient(90deg, #111d33 25%, #152a4e 50%, #111d33 75%);
+      background-size: 400% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .card-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+    .card-body { padding: 18px; }
+    .card-category {
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #c9a84c;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.4;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .card-desc {
+      font-size: 12px;
+      color: #8899aa;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .card-meta { font-size: 11px; color: #556677; letter-spacing: 0.5px; }
+
+    /* BOTH SIDES */
+    .both-sides {
+      background: #0a1628;
+      border-top: 1px solid rgba(201,168,76,0.2);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      padding: 60px 30px;
+    }
+    .both-sides-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .both-sides-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .both-sides-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: rgba(201,168,76,0.6);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .both-sides-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #c9a84c;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+    .both-sides-sub {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 8px;
+    }
+    .both-sides-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      align-items: stretch;
+    }
+    .side-card {
+      background: #111d33;
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 32px;
+      border-radius: 6px;
+    }
+    .side-card.left { border-right: none; border-radius: 6px 0 0 6px; }
+    .side-card.right { border-left: none; border-radius: 0 6px 6px 0; }
+    .side-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding: 4px 12px;
+      display: inline-block;
+      border-radius: 2px;
+    }
+    .side-label.left-label { background: rgba(0,80,200,0.2); color: #6699ff; }
+    .side-label.right-label { background: rgba(200,0,0,0.2); color: #ff6666; }
+    .side-topic {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: rgba(201,168,76,0.6);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .side-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.85);
+      font-style: italic;
+    }
+    .side-source {
+      margin-top: 16px;
+      font-size: 11px;
+      color: #556677;
+      letter-spacing: 1px;
+    }
+    .vs-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      gap: 8px;
+    }
+    .vs-line { flex: 1; width: 1px; background: rgba(201,168,76,0.3); }
+    .vs-badge {
+      font-family: 'Oswald', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #c9a84c;
+      border: 2px solid #c9a84c;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    /* PLATFORM CARDS */
+    .platform-section {
+      background: #08111e;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      padding: 60px 30px;
+    }
+    .platform-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .platform-card {
+      background: #111d33;
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 6px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: all 0.3s;
+    }
+    .platform-card:hover {
+      border-color: #c9a84c;
+      box-shadow: 0 8px 32px rgba(201,168,76,0.15);
+      transform: translateY(-3px);
+    }
+    .platform-icon { font-size: 2rem; color: #c9a84c; }
+    .platform-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .platform-card p { font-size: 13px; color: #8899aa; line-height: 1.5; }
+    .platform-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #c9a84c;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-top: auto;
+      transition: gap 0.2s;
+    }
+    .platform-link:hover { gap: 12px; }
+
+    /* FOOTER */
+    .footer {
+      background: #050d1a;
+      border-top: 2px solid #c9a84c;
+      padding: 50px 30px 20px;
+    }
+    .footer-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .footer-logo img { height: 70px; margin-bottom: 14px; }
+    .footer-logo p { font-size: 13px; color: #8899aa; letter-spacing: 1px; }
+    .footer-links h4, .footer-social h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: #c9a84c;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .footer-links a, .footer-social a {
+      display: block;
+      color: #8899aa;
+      text-decoration: none;
+      font-size: 13px;
+      padding: 5px 0;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover, .footer-social a:hover { color: #c9a84c; }
+    .footer-bottom {
+      max-width: 1300px;
+      margin: 20px auto 0;
+      text-align: center;
+      font-size: 12px;
+      color: #556677;
+      letter-spacing: 1px;
+    }
+
+    /* LOAD MORE */
+    .load-more-wrap { text-align: center; margin-top: 50px; }
+    .load-more-btn {
+      background: transparent;
+      border: 2px solid #c9a84c;
+      color: #c9a84c;
+      padding: 14px 48px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all 0.3s;
+      text-transform: uppercase;
+    }
+    .load-more-btn:hover { background: #c9a84c; color: #08111e; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .pres-body { grid-template-columns: 1fr; }
+      .pres-photo { display: none; }
+      .pres-center { width: 100%; border: none; }
+      .news-grid { grid-template-columns: 1fr 1fr; }
+      .both-sides-grid { grid-template-columns: 1fr; }
+      .vs-divider { flex-direction: row; padding: 10px 0; }
+      .vs-line { width: 100%; height: 1px; }
+      .side-card.left, .side-card.right { border-radius: 6px; border: 1px solid rgba(201,168,76,0.15); }
+      .platform-inner { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-social { gap: 6px; }
+    }
+    @media (max-width: 600px) {
+      .news-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-
-  <!-- BREAKING NEWS TICKER -->
-  <div class="ticker-wrap">
-    <div class="ticker-label">🔴 BREAKING</div>
-    <div class="ticker-content">
-      <span id="ticker-text">Loading latest headlines...</span>
-    </div>
-  </div>
 
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-inner">
-      <div class="nav-logo">
+      <a href="index.html" class="nav-brand">
         <img src="assets/logo.png" alt="No Filter America" class="logo-img"/>
-      </div>
+        NO FILTER AMERICA
+      </a>
       <div class="nav-links">
         <a href="index.html" class="active">Home</a>
         <a href="no-filter-zone.html">No-Filter Zone</a>
         <a href="true-crime.html">True Crime</a>
         <a href="contact.html">Contact</a>
-        <a href="admin.html" class="admin-btn"><i class="fas fa-lock"></i> Admin</a>
       </div>
-      <div class="hamburger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
+      <div class="nav-social">
+        <a href="http://www.youtube.com/@NofilterAmerica" target="_blank" class="nav-yt"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="https://www.tiktok.com/@nofilteramerica" target="_blank" class="nav-tt"><i class="fab fa-tiktok"></i> TikTok</a>
       </div>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="index.html">Home</a>
-      <a href="no-filter-zone.html">No-Filter Zone</a>
-      <a href="true-crime.html">True Crime</a>
-      <a href="contact.html">Contact</a>
-      <a href="admin.html">Admin</a>
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-left">
-        <div class="hero-badge">EST. 2024 · TRUTH · FREEDOM · ACCOUNTABILITY</div>
-        <h1 class="hero-title">THE NEWS THEY <span class="gold">DON'T WANT</span> YOU TO SEE</h1>
-        <p class="hero-sub">Unfiltered. Unafraid. Unapologetically American.</p>
-        <div class="hero-socials">
-          <a href="https://www.tiktok.com/@nofilteramerica" target="_blank" class="social-btn tiktok"><i class="fab fa-tiktok"></i> TikTok</a>
-          <a href="http://www.youtube.com/@NofilterAmerica" target="_blank" class="social-btn youtube"><i class="fab fa-youtube"></i> YouTube</a>
-        </div>
+  <!-- PRESIDENTIAL HERO -->
+  <section class="pres-hero">
+    <div class="pres-topbar">NO FILTER AMERICA &nbsp;·&nbsp; INDEPENDENT POLITICAL NEWS &nbsp;·&nbsp; TRUTH · FREEDOM · ACCOUNTABILITY</div>
+    <div class="pres-body">
+
+      <!-- Left Photo -->
+      <div class="pres-photo left">
+        <img src="assets/liam.png" alt="Liam - No Filter America"/>
+        <div class="pres-photo-overlay"></div>
+        <div class="pres-photo-label">NO FILTER AMERICA</div>
       </div>
-      <div class="hero-right">
-        <div class="liam-wrap">
-          <img src="assets/liam.png" alt="Liam" class="liam-img"/>
-          <div class="liam-badge">
-            <span class="liam-name">LIAM</span>
-            <span class="liam-title">Host & Founder · No Filter America</span>
-          </div>
+
+      <!-- Center -->
+      <div class="pres-center">
+        <div class="pres-date" id="heroDate">LOADING...</div>
+        <img src="assets/logo.png" alt="No Filter America Seal" class="pres-seal"/>
+        <div class="pres-title">NO FILTER<br>AMERICA</div>
+        <div class="pres-subtitle">UNFILTERED NEWS · BOTH SIDES · NO AGENDA</div>
+        <div class="pres-tags">
+          <span class="pres-tag">TRUTH</span>
+          <span class="pres-tag">FREEDOM</span>
+          <span class="pres-tag">ACCOUNTABILITY</span>
         </div>
+        <div class="pres-est">EST. 2024 · INDEPENDENT POLITICAL NEWS</div>
       </div>
-    </div>
-    <div class="scroll-indicator">
-      <span>SCROLL FOR LATEST NEWS</span>
-      <i class="fas fa-chevron-down"></i>
+
+      <!-- Right Photo (mirrored) -->
+      <div class="pres-photo right">
+        <img src="assets/liam.png" alt="Liam - No Filter America" style="transform: scaleX(-1);"/>
+        <div class="pres-photo-overlay"></div>
+        <div class="pres-photo-label">EST. 2024</div>
+      </div>
+
     </div>
   </section>
 
-  <!-- FEATURED STORIES -->
+  <!-- BREAKING NEWS TICKER -->
+  <div class="breaking-ticker">
+    <div class="breaking-label"><span style="color:#ff6666;">●</span> BREAKING</div>
+    <div class="breaking-ticker-content">
+      <span id="ticker-text">Loading latest headlines...</span>
+    </div>
+  </div>
+
+  <!-- LATEST NEWS -->
   <section class="news-section">
     <div class="section-header">
       <div class="section-line"></div>
-      <h2 class="section-title">LATEST STORIES</h2>
+      <h2 class="section-title">Latest Stories</h2>
       <div class="section-line"></div>
     </div>
     <div class="news-grid" id="newsGrid">
-      <!-- News cards injected by JS -->
       <div class="news-card skeleton"></div>
       <div class="news-card skeleton"></div>
       <div class="news-card skeleton"></div>
@@ -90,36 +681,60 @@
       <div class="news-card skeleton"></div>
     </div>
     <div class="load-more-wrap">
-      <button class="load-more-btn" onclick="loadMoreNews()">LOAD MORE STORIES</button>
+      <button class="load-more-btn" onclick="loadMoreNews()">Load More Stories</button>
+    </div>
+  </section>
+
+  <!-- BOTH SIDES NOW -->
+  <section class="both-sides">
+    <div class="both-sides-inner">
+      <div class="both-sides-header">
+        <div class="both-sides-label">One Issue · Two Perspectives</div>
+        <div class="both-sides-title">Both Sides Now</div>
+        <div class="both-sides-sub">We present both sides. You decide.</div>
+      </div>
+      <div class="both-sides-grid" id="bothSidesGrid">
+        <div class="side-card left">
+          <span class="side-label left-label">◀ Left Perspective</span>
+          <div class="side-topic" id="leftTopic">Loading...</div>
+          <div class="side-quote" id="leftQuote">Fetching today's perspectives...</div>
+          <div class="side-source" id="leftSource"></div>
+        </div>
+        <div class="vs-divider">
+          <div class="vs-line"></div>
+          <div class="vs-badge">VS</div>
+          <div class="vs-line"></div>
+        </div>
+        <div class="side-card right">
+          <span class="side-label right-label">Right Perspective ▶</span>
+          <div class="side-topic" id="rightTopic">Loading...</div>
+          <div class="side-quote" id="rightQuote">Fetching today's perspectives...</div>
+          <div class="side-source" id="rightSource"></div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- PLATFORM LINKS -->
   <section class="platform-section">
     <div class="platform-inner">
-      <div class="platform-card tiktok-card">
+      <div class="platform-card">
         <i class="fab fa-tiktok platform-icon"></i>
-        <div>
-          <h3>No-Filter Zone</h3>
-          <p>Raw. Uncut. Unfiltered TikTok content.</p>
-        </div>
-        <a href="no-filter-zone.html" class="platform-link">WATCH NOW <i class="fas fa-arrow-right"></i></a>
+        <h3>No-Filter Zone</h3>
+        <p>Raw. Uncut. Unfiltered TikTok content direct from the front lines.</p>
+        <a href="no-filter-zone.html" class="platform-link">Watch Now <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div class="platform-card crime-card">
+      <div class="platform-card">
         <i class="fas fa-gavel platform-icon"></i>
-        <div>
-          <h3>True Crime</h3>
-          <p>Deep dives into cases they want buried.</p>
-        </div>
-        <a href="true-crime.html" class="platform-link">EXPLORE <i class="fas fa-arrow-right"></i></a>
+        <h3>True Crime</h3>
+        <p>Deep dives into cases they want buried. No filter, no agenda.</p>
+        <a href="true-crime.html" class="platform-link">Explore <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div class="platform-card yt-card">
+      <div class="platform-card">
         <i class="fab fa-youtube platform-icon"></i>
-        <div>
-          <h3>YouTube Channel</h3>
-          <p>Full episodes and exclusive content.</p>
-        </div>
-        <a href="http://www.youtube.com/@NofilterAmerica" target="_blank" class="platform-link">SUBSCRIBE <i class="fas fa-arrow-right"></i></a>
+        <h3>YouTube Channel</h3>
+        <p>Full episodes, exclusive content, and unfiltered commentary.</p>
+        <a href="http://www.youtube.com/@NofilterAmerica" target="_blank" class="platform-link">Subscribe <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
@@ -128,28 +743,36 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-logo">
-        <img src="assets/logo.png" alt="No Filter America" style="height:80px;"/>
-        <p>Truth. Freedom. Accountability.</p>
+        <img src="assets/logo.png" alt="No Filter America"/>
+        <p>Truth. Freedom. Accountability.<br/>Independent Political News since 2024.</p>
       </div>
       <div class="footer-links">
-        <h4>NAVIGATE</h4>
+        <h4>Navigate</h4>
         <a href="index.html">Home</a>
         <a href="no-filter-zone.html">No-Filter Zone</a>
         <a href="true-crime.html">True Crime</a>
         <a href="contact.html">Contact Us</a>
       </div>
       <div class="footer-social">
-        <h4>FOLLOW US</h4>
+        <h4>Follow Us</h4>
         <a href="https://www.tiktok.com/@nofilteramerica" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
         <a href="http://www.youtube.com/@NofilterAmerica" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
         <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2024 No Filter America · All Rights Reserved · <a href="https://www.nofilteramerica.com">nofilteramerica.com</a></p>
+      © 2024 No Filter America · All Rights Reserved · Truth · Freedom · Accountability
     </div>
   </footer>
 
   <script src="app.js"></script>
+  <script>
+    // Set date
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const now = new Date();
+    document.getElementById('heroDate').textContent =
+      days[now.getDay()].toUpperCase() + ', ' + months[now.getMonth()].toUpperCase() + ' ' + now.getDate() + ', ' + now.getFullYear();
+  </script>
 </body>
 </html>
