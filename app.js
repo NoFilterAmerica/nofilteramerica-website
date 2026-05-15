@@ -7,6 +7,7 @@ function toggleMenu() {
 }
 
 const NEWS_API_KEY = 'pub_174f039e3cf945a3a0b9491b18a2befd';
+const API_BASE = 'https://6a0717be1b2d3fb43fda6201.base44.app/functions';
 let nextPageCursor = null;
 
 // ---- FETCH: Politics + World + Domestic (NO sports) ----
@@ -290,27 +291,40 @@ function showToast(msg, type = 'success') {
 }
 
 // ---- VIDEO RENDERS ----
-function renderPublicVideos(containerId, storageKey, gridClass = 'video-grid-3') {
+async function renderPublicVideos(containerId, storageKey, gridClass = 'video-grid-3') {
   const container = document.getElementById(containerId);
   if (!container) return;
-  const videos = getVideos(storageKey);
   container.className = 'nfz-grid';
+  container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--gray);"><i class="fas fa-spinner fa-spin" style="font-size:2rem;color:var(--gold);"></i></div>';
+
+  // Fetch from cloud backend
+  let videos = [];
+  try {
+    const res = await fetch(API_BASE + '/getVideos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ section: 'nofilter' })
+    });
+    const data = await res.json();
+    videos = (data.videos || []).sort((a,b) => a.slot - b.slot);
+  } catch(e) { videos = []; }
+
   container.innerHTML = '';
 
   // Always render 3 portrait (9:16) slots
   for (let i = 0; i < 3; i++) {
-    const vid = videos[i];
+    const vid = videos.find(v => v.slot === i);
     const slot = document.createElement('div');
     slot.className = 'nfz-slot';
-    if (vid) {
+    if (vid && vid.video_url) {
       slot.innerHTML = `
         <div class="nfz-media">
-          <video controls preload="none" playsinline style="width:100%;height:100%;object-fit:cover;"><source src="${vid.dataUrl}" type="video/mp4"></video>
+          <video controls preload="none" playsinline style="width:100%;height:100%;object-fit:cover;"><source src="${vid.video_url}" type="video/mp4"></video>
         </div>
         <div class="nfz-info">
           <div class="nfz-title">${vid.title || 'No Filter Video ' + (i+1)}</div>
-          ${vid.desc ? `<div class="nfz-desc">${vid.desc}</div>` : ''}
-          <div class="nfz-date">${vid.date || ''}</div>
+          ${vid.description ? `<div class="nfz-desc">${vid.description}</div>` : ''}
+          <div class="nfz-date">${vid.upload_date || ''}</div>
         </div>`;
     } else {
       slot.innerHTML = `
@@ -328,24 +342,37 @@ function renderPublicVideos(containerId, storageKey, gridClass = 'video-grid-3')
   }
 }
 
-function renderTrueCrimeSlots(containerId) {
+async function renderTrueCrimeSlots(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
-  const allVideos = getVideos('truecrime_videos');
   container.className = 'video-grid-3';
+  container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--gray);"><i class="fas fa-spinner fa-spin" style="font-size:2rem;color:var(--gold);"></i></div>';
+
+  // Fetch from cloud backend
+  let allVideos = [];
+  try {
+    const res = await fetch(API_BASE + '/getVideos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ section: 'truecrime' })
+    });
+    const data = await res.json();
+    allVideos = (data.videos || []).sort((a,b) => a.slot - b.slot);
+  } catch(e) { allVideos = []; }
+
   container.innerHTML = '';
   for (let i = 0; i < 6; i++) {
-    const vid = allVideos[i];
+    const vid = allVideos.find(v => v.slot === i);
     const slot = document.createElement('div');
     slot.className = 'video-slot';
-    if (vid) {
+    if (vid && vid.video_url) {
       slot.innerHTML = `
-        <video controls preload="none"><source src="${vid.dataUrl}" type="video/mp4"></video>
+        <video controls preload="none"><source src="${vid.video_url}" type="video/mp4"></video>
         <div class="video-info">
           <div class="video-title">${vid.title || 'Case File ' + (i+1)}</div>
-          ${vid.storyLine ? `<div class="video-storyline">${vid.storyLine}</div>` : ''}
-          ${vid.desc ? `<div class="video-desc">${vid.desc}</div>` : ''}
-          <div class="video-date">${vid.date || ''}</div>
+          ${vid.story_line ? `<div class="video-storyline">${vid.story_line}</div>` : ''}
+          ${vid.description ? `<div class="video-desc">${vid.description}</div>` : ''}
+          <div class="video-date">${vid.upload_date || ''}</div>
         </div>`;
     } else {
       slot.innerHTML = `
