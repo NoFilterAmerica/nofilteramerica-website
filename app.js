@@ -252,7 +252,7 @@ async function loadNews() {
 
   // Ticker — update both spans for seamless infinite loop
   if (articles.length > 0) {
-    const headlines = articles.map(a => '★ ' + a.title).join('   ·   ');
+    const headlines = articles.map(a => '▸ ' + a.title).join('   ·   ');
     const t1 = document.getElementById('ticker-text');
     const t2 = document.getElementById('ticker-text-dupe');
     if (t1) t1.textContent = headlines;

@@ -30,6 +30,9 @@ body {
 }
 
 /* ======== TICKER ======== */
+.ticker-wrap, .ticker-wrap * {
+  color: #ffffff !important;
+}
 .ticker-wrap {
   background: #cc0000;
   display: flex;
