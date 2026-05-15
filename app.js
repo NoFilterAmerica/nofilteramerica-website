@@ -274,6 +274,8 @@ async function loadNews() {
     const t2 = document.getElementById('ticker-text-dupe');
     if (t1) t1.textContent = headlines;
     if (t2) t2.textContent = headlines;
+    // Tell the ticker engine to recalculate width now that real text is loaded
+    if (window.resetTickerWidth) window.resetTickerWidth();
   }
 
   // Both Sides: fetch in parallel

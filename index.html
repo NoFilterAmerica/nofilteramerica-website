@@ -776,42 +776,56 @@
 
   </script>
 
-  <!-- JS TICKER ENGINE — works on all iOS/Android -->
+  <!-- JS TICKER ENGINE — iOS/Android compatible -->
   <script>
   (function() {
-    function startTicker() {
+    var pos = 0;
+    var speed = 0.8;
+    var paused = false;
+    var halfWidth = 0;
+    var raf;
+
+    function getHalf() {
+      var t1 = document.getElementById('ticker-text');
+      if (!t1) return 0;
+      // Only trust width once text is real content (not placeholder)
+      var w = t1.offsetWidth;
+      return w > 50 ? w + 80 : 0;
+    }
+
+    function step() {
+      if (!paused) {
+        // Recalculate halfWidth if it hasn't been set properly yet
+        if (!halfWidth || halfWidth < 100) {
+          halfWidth = getHalf();
+        }
+        if (halfWidth > 100) {
+          pos -= speed;
+          if (Math.abs(pos) >= halfWidth) pos = 0;
+          var track = document.getElementById('ticker-track');
+          if (track) {
+            track.style.webkitTransform = 'translateX(' + pos + 'px)';
+            track.style.transform = 'translateX(' + pos + 'px)';
+          }
+        }
+      }
+      raf = requestAnimationFrame(step);
+    }
+
+    // Called by app.js after headlines are set
+    window.resetTickerWidth = function() {
+      halfWidth = 0;
+      pos = 0;
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
       var track = document.getElementById('ticker-track');
-      if (!track) return;
-      var pos = 0;
-      var speed = 0.6; // px per frame — adjust for faster/slower
-      var halfWidth = 0;
-
-      function getHalf() {
-        var t1 = document.getElementById('ticker-text');
-        return t1 ? t1.offsetWidth + 80 : track.scrollWidth / 2;
+      if (track) {
+        track.addEventListener('touchstart', function() { paused = true; }, {passive: true});
+        track.addEventListener('touchend',   function() { paused = false; }, {passive: true});
       }
-
-      function step() {
-        if (!halfWidth) halfWidth = getHalf();
-        pos -= speed;
-        if (Math.abs(pos) >= halfWidth) pos = 0;
-        track.style.transform = 'translateX(' + pos + 'px)';
-        track.style.webkitTransform = 'translateX(' + pos + 'px)';
-        requestAnimationFrame(step);
-      }
-
-      // Pause on touch
-      track.addEventListener('touchstart', function() { speed = 0; });
-      track.addEventListener('touchend', function() { speed = 0.6; });
-
       requestAnimationFrame(step);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', startTicker);
-    } else {
-      startTicker();
-    }
+    });
   })();
   </script>
 
