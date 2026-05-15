@@ -31,17 +31,17 @@ body {
 
 /* ======== TICKER ======== */
 .ticker-wrap {
-  background: var(--red);
+  background: #cc0000;
   display: flex;
   align-items: center;
   overflow: hidden;
-  height: 36px;
+  height: 38px;
   position: relative;
   z-index: 100;
 }
 .ticker-label {
   background: #8b0000;
-  color: #fff;
+  color: #ffffff !important;
   font-weight: 700;
   font-size: 12px;
   padding: 0 18px;
@@ -61,8 +61,9 @@ body {
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: ticker-scroll 60s linear infinite;
+  animation: ticker-scroll 35s linear infinite;
   will-change: transform;
+  -webkit-animation: ticker-scroll 35s linear infinite;
 }
 .ticker-track:hover { animation-play-state: paused; }
 #ticker-text,
@@ -73,11 +74,15 @@ body {
   font-weight: 600;
   letter-spacing: 0.5px;
   padding-right: 100px;
-  color: #fff;
+  color: #ffffff !important;
 }
 @keyframes ticker-scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+@-webkit-keyframes ticker-scroll {
+  0%   { -webkit-transform: translateX(0); }
+  100% { -webkit-transform: translateX(-50%); }
 }
 
 /* ======== NAVBAR ======== */
