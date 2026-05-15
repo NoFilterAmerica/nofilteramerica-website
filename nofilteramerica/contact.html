@@ -5,34 +5,135 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact Us – No Filter America</title>
   <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --navy:#07101e; --navy2:#0a1628; --navy3:#0d1f3c;
+      --gold:#c9a84c; --gold2:#f0c96a; --red:#cc2200;
+      --white:#ffffff; --gray:#8899aa; --card:#0f1a2e;
+      --border-gold:rgba(201,168,76,0.25);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;overflow-x:hidden;}
+
+    /* NAVBAR */
+    .navbar{background:rgba(7,16,30,0.98);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:999;}
+    .nav-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:66px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .nav-logo-img{height:46px;filter:drop-shadow(0 0 8px rgba(201,168,76,0.4));}
+    .nav-links{display:flex;align-items:center;gap:2px;}
+    .nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-family:'Oswald',sans-serif;font-size:13px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:8px 12px;transition:color 0.2s;border-bottom:2px solid transparent;}
+    .nav-links a:hover,.nav-links a.active{color:var(--gold);border-bottom-color:var(--gold);}
+    .nav-right{display:flex;align-items:center;gap:8px;}
+    .nav-yt{display:inline-flex;align-items:center;gap:6px;background:#ff0000;color:#fff;padding:7px 14px;border-radius:3px;font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;text-decoration:none;text-transform:uppercase;}
+    .nav-tt{display:inline-flex;align-items:center;gap:6px;background:#111;color:#fff;padding:7px 14px;border:1px solid #333;border-radius:3px;font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;text-decoration:none;text-transform:uppercase;}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--gold);border-radius:2px;}
+    .mobile-menu{display:none;flex-direction:column;background:var(--navy2);border-top:1px solid var(--border-gold);}
+    .mobile-menu a{padding:13px 24px;color:#ddd;text-decoration:none;font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:1px;border-bottom:1px solid var(--border-gold);text-transform:uppercase;}
+    .mobile-menu.open{display:flex;}
+
+    /* TICKER */
+    .ticker-bar{background:#cc2200;display:flex;align-items:center;height:42px;overflow:hidden;}
+    .ticker-badge{background:#8b0000;color:#fff;height:100%;display:flex;align-items:center;gap:8px;padding:0 20px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;white-space:nowrap;flex-shrink:0;}
+    .ticker-track{overflow:hidden;flex:1;}
+    #ticker-text{display:inline-block;white-space:nowrap;padding-left:60%;font-family:'Oswald',sans-serif;font-size:14px;font-weight:500;letter-spacing:1px;color:#fff;animation:tickerScroll 40s linear infinite;}
+    @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+
+    /* PAGE HERO */
+    .page-hero{background:linear-gradient(135deg,#05090f,var(--navy3));border-bottom:2px solid var(--border-gold);padding:70px 24px 60px;text-align:center;}
+    .page-hero h1{font-family:'Oswald',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;color:var(--gold);letter-spacing:5px;text-transform:uppercase;margin-bottom:12px;}
+    .page-hero p{font-size:15px;color:rgba(255,255,255,0.55);max-width:500px;margin:0 auto;line-height:1.6;}
+
+    /* CONTACT LAYOUT */
+    .contact-section{max-width:1200px;margin:0 auto;padding:60px 24px;display:grid;grid-template-columns:1fr 1.8fr;gap:50px;align-items:start;}
+
+    /* Info cards */
+    .contact-info{display:flex;flex-direction:column;gap:14px;}
+    .contact-card{background:var(--card);border:1px solid var(--border-gold);border-radius:6px;padding:20px;display:flex;align-items:center;gap:16px;transition:all 0.3s;}
+    .contact-card:hover{border-color:var(--gold);transform:translateX(4px);}
+    .contact-card i{font-size:1.5rem;color:var(--gold);width:32px;text-align:center;flex-shrink:0;}
+    .contact-card span{display:block;font-size:11px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:3px;}
+    .contact-card strong{font-size:14px;color:#fff;font-weight:600;}
+
+    /* Forms shared */
+    .form-card{background:var(--card);border:1px solid var(--border-gold);border-radius:8px;padding:36px;}
+    .form-card+.form-card{margin-top:30px;}
+    .form-card-title{font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;}
+    .form-card-sub{font-size:13px;color:var(--gray);margin-bottom:28px;line-height:1.5;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+    .form-group label{font-size:11px;font-weight:600;letter-spacing:1.5px;color:rgba(255,255,255,0.5);text-transform:uppercase;}
+    .form-group input,.form-group textarea,.form-group select{
+      background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+      color:#fff;padding:12px 16px;border-radius:4px;font-size:14px;
+      font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;
+    }
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--gold);}
+    .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.25);}
+    .form-group textarea{min-height:120px;resize:vertical;}
+    .form-group select option{background:var(--navy2);color:#fff;}
+    .submit-btn{
+      background:var(--gold);color:var(--navy);padding:13px 36px;
+      border:none;border-radius:4px;font-family:'Oswald',sans-serif;
+      font-size:13px;font-weight:700;letter-spacing:2px;cursor:pointer;
+      text-transform:uppercase;transition:background 0.2s;width:100%;margin-top:4px;
+    }
+    .submit-btn:hover{background:var(--gold2);}
+    .tip-btn{background:var(--red)!important;color:#fff!important;}
+    .tip-btn:hover{background:#a81a00!important;}
+
+    /* Tip badge */
+    .tip-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(204,34,0,0.15);border:1px solid rgba(204,34,0,0.4);
+      color:#ff8080;font-family:'Oswald',sans-serif;font-size:11px;
+      letter-spacing:2px;padding:5px 14px;border-radius:2px;text-transform:uppercase;
+      margin-bottom:16px;
+    }
+
+    /* FOOTER */
+    .footer{background:#040810;border-top:2px solid var(--gold);padding:50px 24px 20px;}
+    .footer-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding-bottom:36px;border-bottom:1px solid var(--border-gold);}
+    .footer-logo img{height:65px;margin-bottom:12px;display:block;}
+    .footer-logo p{font-size:13px;color:var(--gray);letter-spacing:1px;line-height:1.6;}
+    .footer-col h4{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+    .footer-col a{display:block;color:var(--gray);text-decoration:none;font-size:13px;padding:4px 0;transition:color 0.2s;}
+    .footer-col a:hover{color:var(--gold);}
+    .footer-bottom{max-width:1300px;margin:18px auto 0;text-align:center;font-size:12px;color:#334455;letter-spacing:1px;}
+
+    @media(max-width:860px){
+      .contact-section{grid-template-columns:1fr;}
+      .footer-inner{grid-template-columns:1fr 1fr;}
+      .nav-links{display:none;}
+      .hamburger{display:flex;}
+      .form-row{grid-template-columns:1fr;}
+    }
+    @media(max-width:500px){
+      .footer-inner{grid-template-columns:1fr;}
+    }
+  </style>
 </head>
 <body>
-
-  <!-- TICKER -->
-  <div class="ticker-wrap">
-    <div class="ticker-label">🔴 BREAKING</div>
-    <div class="ticker-content">
-      <span id="ticker-text">Have a tip? A story? Contact No Filter America — we want to hear from you.</span>
-    </div>
-  </div>
 
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-inner">
-      <div class="nav-logo">
-        <img src="assets/logo.png" alt="No Filter America" class="logo-img"/>
-      </div>
+      <a href="index.html" class="nav-brand">
+        <img src="assets/logo.png" alt="No Filter America" class="nav-logo-img"/>
+      </a>
       <div class="nav-links">
         <a href="index.html">Home</a>
+        <a href="index.html#both-sides">Both Sides</a>
         <a href="no-filter-zone.html">No-Filter Zone</a>
         <a href="true-crime.html">True Crime</a>
         <a href="contact.html" class="active">Contact</a>
-        <a href="admin.html" class="admin-btn"><i class="fas fa-lock"></i> Admin</a>
       </div>
-      <div class="hamburger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
+      <div class="nav-right">
+        <a href="http://www.youtube.com/@NofilterAmerica" target="_blank" class="nav-yt"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="https://www.tiktok.com/@nofilteramerica" target="_blank" class="nav-tt"><i class="fab fa-tiktok"></i> TikTok</a>
+        <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
       </div>
     </div>
     <div class="mobile-menu" id="mobileMenu">
@@ -40,87 +141,123 @@
       <a href="no-filter-zone.html">No-Filter Zone</a>
       <a href="true-crime.html">True Crime</a>
       <a href="contact.html">Contact</a>
-      <a href="admin.html">Admin</a>
     </div>
   </nav>
 
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <div class="ticker-badge"><span style="color:#ff8080;">●</span> BREAKING</div>
+    <div class="ticker-track">
+      <span id="ticker-text">Have a tip? A story? Contact No Filter America — we want to hear from real Americans. &nbsp;·&nbsp; Submit your tip securely below.</span>
+    </div>
+  </div>
+
   <!-- PAGE HERO -->
   <section class="page-hero">
-    <h1>CONTACT <span>US</span></h1>
-    <p>Have a tip, story, or just want to connect? We want to hear from real Americans.</p>
+    <h1>Contact <span style="color:#fff;">Us</span></h1>
+    <p>Have a tip, story, or just want to connect? We want to hear from real Americans — no filter required.</p>
   </section>
 
   <!-- CONTACT SECTION -->
   <section class="contact-section">
 
-    <!-- Contact Cards -->
+    <!-- Left: info cards -->
     <div class="contact-info">
       <div class="contact-card">
         <i class="fas fa-envelope"></i>
-        <div>
-          <span>Email Us</span>
-          <strong>news@nofilteramerica.com</strong>
-        </div>
+        <div><span>Email Us</span><strong>news@nofilteramerica.com</strong></div>
       </div>
       <div class="contact-card">
         <i class="fab fa-tiktok"></i>
-        <div>
-          <span>TikTok</span>
-          <strong>@NoFilterAmerica</strong>
-        </div>
+        <div><span>TikTok</span><strong>@NoFilterAmerica</strong></div>
       </div>
       <div class="contact-card">
         <i class="fab fa-youtube"></i>
-        <div>
-          <span>YouTube</span>
-          <strong>@NofilterAmerica</strong>
-        </div>
+        <div><span>YouTube</span><strong>@NofilterAmerica</strong></div>
       </div>
       <div class="contact-card">
         <i class="fas fa-globe"></i>
-        <div>
-          <span>Website</span>
-          <strong>nofilteramerica.com</strong>
-        </div>
+        <div><span>Website</span><strong>nofilteramerica.com</strong></div>
       </div>
     </div>
 
-    <!-- Contact Form — Netlify Forms -->
-    <div class="contact-form">
-      <h2 style="font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:8px;font-size:1.6rem;">SEND A MESSAGE</h2>
-      <p style="color:var(--gray);font-size:13px;margin-bottom:30px;letter-spacing:0.5px;">All messages go directly to our team. We read everything.</p>
+    <!-- Right: forms -->
+    <div>
 
-      <!-- netlify attribute activates Netlify Forms automatically on deploy -->
-      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success.html">
-        <!-- Hidden field required by Netlify -->
-        <input type="hidden" name="form-name" value="contact"/>
-        <!-- Honeypot spam filter (hidden from real users) -->
-        <p style="display:none;"><label>Don't fill this out: <input name="bot-field"/></label></p>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" name="firstName" placeholder="John" required/>
+      <!-- CONTACT FORM -->
+      <div class="form-card">
+        <div class="form-card-title">Send a Message</div>
+        <p class="form-card-sub">All messages go directly to our team. We read everything.</p>
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success.html">
+          <input type="hidden" name="form-name" value="contact"/>
+          <p style="display:none;"><label>Don't fill this out: <input name="bot-field"/></label></p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" name="firstName" placeholder="John" required/>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" name="lastName" placeholder="Smith"/>
+            </div>
           </div>
           <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Smith"/>
+            <label>Your Email</label>
+            <input type="email" name="email" placeholder="you@example.com" required/>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="email">Your Email</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com" required/>
-        </div>
-        <div class="form-group">
-          <label for="subject">Subject</label>
-          <input type="text" id="subject" name="subject" placeholder="News tip, feedback, collaboration..." required/>
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell us what's on your mind. We don't filter anything here." required></textarea>
-        </div>
-        <button type="submit" class="submit-btn">SEND MESSAGE</button>
-      </form>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" name="subject" placeholder="Feedback, collaboration, question..." required/>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea name="message" placeholder="Tell us what's on your mind. We don't filter anything here." required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+
+      <!-- REPORT A TIP -->
+      <div class="form-card" style="margin-top:28px;border-color:rgba(204,34,0,0.35);">
+        <div class="tip-badge"><i class="fas fa-exclamation-triangle"></i> CONFIDENTIAL</div>
+        <div class="form-card-title" style="color:#ff8080;">Report a Tip</div>
+        <p class="form-card-sub">Have information the public needs to know? Got a story the mainstream media won't touch? Submit it here — your identity is kept strictly confidential.</p>
+        <form name="tip" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success.html">
+          <input type="hidden" name="form-name" value="tip"/>
+          <p style="display:none;"><label>Don't fill this out: <input name="bot-field"/></label></p>
+          <div class="form-group">
+            <label>Your Name <span style="color:var(--gray);font-size:10px;">(Optional — tips can be anonymous)</span></label>
+            <input type="text" name="tipName" placeholder="Anonymous"/>
+          </div>
+          <div class="form-group">
+            <label>Contact Email <span style="color:var(--gray);font-size:10px;">(Optional — only if you want a follow-up)</span></label>
+            <input type="email" name="tipEmail" placeholder="Optional — leave blank to stay anonymous"/>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select name="tipCategory">
+              <option value="">Select a category...</option>
+              <option value="government">Government / Corruption</option>
+              <option value="crime">Crime / True Crime</option>
+              <option value="politics">Politics</option>
+              <option value="law-enforcement">Law Enforcement</option>
+              <option value="corporate">Corporate Misconduct</option>
+              <option value="local">Local Stories</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Your Tip</label>
+            <textarea name="tipMessage" style="min-height:150px;" placeholder="Describe the situation in as much detail as possible. Include names, dates, locations, and any other relevant information. All submissions are confidential." required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Evidence / Source Links <span style="color:var(--gray);font-size:10px;">(Optional)</span></label>
+            <input type="text" name="tipEvidence" placeholder="Any URLs, document names, or evidence references..."/>
+          </div>
+          <button type="submit" class="submit-btn tip-btn">Submit Tip Confidentially <i class="fas fa-shield-alt"></i></button>
+        </form>
+      </div>
+
     </div>
   </section>
 
@@ -128,26 +265,24 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-logo">
-        <img src="assets/logo.png" alt="No Filter America" style="height:80px;"/>
-        <p>Truth. Freedom. Accountability.</p>
+        <img src="assets/logo.png" alt="No Filter America"/>
+        <p>Truth. Freedom. Accountability.<br/>Independent Political News since 2024.</p>
       </div>
-      <div class="footer-links">
-        <h4>NAVIGATE</h4>
+      <div class="footer-col">
+        <h4>Navigate</h4>
         <a href="index.html">Home</a>
         <a href="no-filter-zone.html">No-Filter Zone</a>
         <a href="true-crime.html">True Crime</a>
         <a href="contact.html">Contact Us</a>
       </div>
-      <div class="footer-social">
-        <h4>FOLLOW US</h4>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
         <a href="https://www.tiktok.com/@nofilteramerica" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
         <a href="http://www.youtube.com/@NofilterAmerica" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
         <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2024 No Filter America · All Rights Reserved · <a href="https://www.nofilteramerica.com">nofilteramerica.com</a></p>
-    </div>
+    <div class="footer-bottom">© 2024 No Filter America · All Rights Reserved · Truth · Freedom · Accountability</div>
   </footer>
 
   <script src="app.js"></script>
