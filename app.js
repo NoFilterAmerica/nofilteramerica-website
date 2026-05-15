@@ -132,7 +132,7 @@ function renderFeatured(articles) {
   if (!layout || articles.length === 0) return;
 
   const hero = articles[0];
-  const sideItems = articles.slice(1, 4);
+  const sideItems = articles.slice(1, 4); // hero=0, side=1,2,3
   const { label, cls } = getCatLabel(hero);
 
   // Use article image, or a category-specific fallback image
@@ -242,7 +242,7 @@ async function loadNews() {
   const articles = await fetchTopNews();
 
   // Hero + side stack: first 4 articles
-  renderFeatured(articles.slice(0, 4));
+  renderFeatured(articles.slice(0, 5));
 
   // More stories grid: articles 4-9
   renderNewsCards(articles.slice(4, 13), false);
