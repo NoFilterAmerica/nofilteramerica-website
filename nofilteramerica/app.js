@@ -7,44 +7,47 @@ function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-// ---- NEWS FEED (News.io API) ----
-// Replace YOUR_NEWSIO_API_KEY with your actual News.io API key
-const NEWS_API_KEY = 'YOUR_NEWSIO_API_KEY';
-const NEWS_CATEGORIES = ['politics','crime','breaking','us-news','world'];
-let currentPage = 1;
+// ---- NEWS FEED (newsdata.io API) ----
+const NEWS_API_KEY = 'pub_174f039e3cf945a3a0b9491b18a2befd';
+let currentPage = null; // newsdata.io uses cursor-based pagination
+let nextPageCursor = null;
 
-async function fetchNews(page = 1) {
+async function fetchNews(nextCursor = null) {
   try {
-    // News.io endpoint - adjust endpoint if your plan differs
-    const url = `https://api.thenewsapi.com/v1/news/top?api_token=${NEWS_API_KEY}&locale=us&language=en&limit=6&page=${page}`;
+    let url = `https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&country=us&language=en&category=politics,crime,world,top`;
+    if (nextCursor) url += `&page=${nextCursor}`;
     const res = await fetch(url);
     const data = await res.json();
-    return data.data || [];
+    if (data.status === 'success') {
+      nextPageCursor = data.nextPage || null;
+      return data.results || [];
+    }
+    return getSampleStories();
   } catch(e) {
-    // Fallback sample stories if API not configured
     return getSampleStories();
   }
 }
 
 function getSampleStories() {
   return [
-    { title: "Breaking: Major Political Shake-Up Rocks Washington D.C.", published_at: new Date().toISOString(), image_url: null, categories: ["politics"], url: "#", source: "No Filter America" },
-    { title: "Exclusive: The Story Mainstream Media Won't Cover", published_at: new Date().toISOString(), image_url: null, categories: ["breaking"], url: "#", source: "No Filter America" },
-    { title: "True Crime Bombshell: Cold Case Gets New Evidence", published_at: new Date().toISOString(), image_url: null, categories: ["crime"], url: "#", source: "No Filter America" },
-    { title: "Government Accountability Report: What They're Hiding", published_at: new Date().toISOString(), image_url: null, categories: ["politics"], url: "#", source: "No Filter America" },
-    { title: "America First: Economic Policies That Actually Work", published_at: new Date().toISOString(), image_url: null, categories: ["us-news"], url: "#", source: "No Filter America" },
-    { title: "Freedom Watch: Your Constitutional Rights Under Threat", published_at: new Date().toISOString(), image_url: null, categories: ["us-news"], url: "#", source: "No Filter America" },
+    { title: "Breaking: Major Political Shake-Up Rocks Washington D.C.", pubDate: new Date().toISOString(), image_url: null, category: ["politics"], link: "#", source_id: "No Filter America" },
+    { title: "Exclusive: The Story Mainstream Media Won't Cover", pubDate: new Date().toISOString(), image_url: null, category: ["top"], link: "#", source_id: "No Filter America" },
+    { title: "True Crime Bombshell: Cold Case Gets New Evidence", pubDate: new Date().toISOString(), image_url: null, category: ["crime"], link: "#", source_id: "No Filter America" },
+    { title: "Government Accountability Report: What They're Hiding", pubDate: new Date().toISOString(), image_url: null, category: ["politics"], link: "#", source_id: "No Filter America" },
+    { title: "America First: Economic Policies That Actually Work", pubDate: new Date().toISOString(), image_url: null, category: ["top"], link: "#", source_id: "No Filter America" },
+    { title: "Freedom Watch: Your Constitutional Rights Under Threat", pubDate: new Date().toISOString(), image_url: null, category: ["politics"], link: "#", source_id: "No Filter America" },
   ];
 }
 
-function formatDate(iso) {
-  const d = new Date(iso);
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
 function categoryLabel(article) {
-  if (article.categories && article.categories.length > 0) {
-    return article.categories[0].toUpperCase().replace('-', ' ');
+  if (article.category && article.category.length > 0) {
+    return article.category[0].toUpperCase();
   }
   return 'NEWS';
 }
@@ -57,13 +60,13 @@ function renderNewsCards(articles, append = false) {
   articles.forEach(article => {
     const card = document.createElement('div');
     card.className = 'news-card';
-    card.onclick = () => { if(article.url && article.url !== '#') window.open(article.url, '_blank'); };
+    card.onclick = () => { if(article.link && article.link !== '#') window.open(article.link, '_blank'); };
     card.innerHTML = `
       ${article.image_url ? `<img class="card-img" src="${article.image_url}" alt="${article.title}" onerror="this.style.display='none'"/>` : ''}
       <div class="card-body">
         <div class="card-category">${categoryLabel(article)}</div>
         <div class="card-title">${article.title}</div>
-        <div class="card-meta">${article.source || 'No Filter America'} · ${formatDate(article.published_at)}</div>
+        <div class="card-meta">${article.source_id || 'No Filter America'} · ${formatDate(article.pubDate)}</div>
       </div>
     `;
     grid.appendChild(card);
@@ -71,10 +74,10 @@ function renderNewsCards(articles, append = false) {
 }
 
 async function loadNews() {
-  const articles = await fetchNews(1);
+  const articles = await fetchNews();
   renderNewsCards(articles, false);
 
-  // Update ticker with headlines
+  // Update ticker with live headlines
   if (articles.length > 0) {
     const headlines = articles.map(a => a.title).join('   ·   ');
     const ticker = document.getElementById('ticker-text');
@@ -83,12 +86,12 @@ async function loadNews() {
 }
 
 async function loadMoreNews() {
-  currentPage++;
-  const articles = await fetchNews(currentPage);
+  if (!nextPageCursor) return;
+  const articles = await fetchNews(nextPageCursor);
   renderNewsCards(articles, true);
 }
 
-// ---- LOCAL VIDEO STORAGE (localStorage for demo; swap for backend in production) ----
+// ---- LOCAL VIDEO STORAGE ----
 function getVideos(key) {
   try { return JSON.parse(localStorage.getItem(key)) || []; } catch(e) { return []; }
 }
@@ -131,7 +134,7 @@ function renderPublicVideos(containerId, storageKey, gridClass = 'video-grid-2')
     const slot = document.createElement('div');
     slot.className = 'video-slot';
     slot.innerHTML = `
-      <video controls preload="none" poster="">
+      <video controls preload="none">
         <source src="${vid.dataUrl}" type="video/mp4">
         Your browser does not support video.
       </video>
@@ -185,15 +188,10 @@ function renderTrueCrimeSlots(containerId) {
 
 // ---- INIT ----
 document.addEventListener('DOMContentLoaded', () => {
-  // Load news on homepage
   if (document.getElementById('newsGrid')) loadNews();
-
-  // Render public no-filter zone videos
   if (document.getElementById('noFilterVideos')) {
     renderPublicVideos('noFilterVideos', 'nofilter_videos', 'video-grid-2');
   }
-
-  // Render true crime slots
   if (document.getElementById('trueCrimeSlots')) {
     renderTrueCrimeSlots('trueCrimeSlots');
   }
