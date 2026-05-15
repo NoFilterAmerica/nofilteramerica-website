@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel – No Filter America</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy2: #0d1f3c;
+      --navy3: #111f35;
+      --gold: #c5a046;
+      --gold2: #e8c96d;
+      --red: #8b0000;
+      --gray: #8899aa;
+      --border: rgba(197,160,70,0.2);
+      --border-gold: rgba(197,160,70,0.35);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--navy); color: #fff; font-family: 'Inter', sans-serif; min-height: 100vh; }
+
+    /* ---- ADMIN HEADER ---- */
+    .admin-header {
+      background: #040810;
+      border-bottom: 2px solid var(--gold);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-header img { height: 44px; }
+    .admin-header-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .admin-header-badge {
+      background: var(--red);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    /* ---- LOGIN ---- */
+    .admin-login {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 74px);
+      padding: 40px 20px;
+    }
+    .admin-login-card {
+      background: var(--navy2);
+      border: 1px solid var(--border-gold);
+      border-radius: 8px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .admin-login-card h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.8rem;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
+    }
+    .admin-login-card p { color: var(--gray); font-size: 13px; margin-bottom: 28px; letter-spacing: 1px; }
+
+    /* ---- PANEL ---- */
+    .admin-panel { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+    .admin-panel h2 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.6rem; margin-bottom: 6px; }
+    .admin-panel > p { color: var(--gray); font-size: 13px; margin-bottom: 28px; }
+    .admin-tabs { display: flex; gap: 4px; margin-bottom: 28px; border-bottom: 1px solid var(--border); padding-bottom: 0; }
+    .admin-tab { background: transparent; border: none; color: var(--gray); font-size: 13px; font-weight: 600; letter-spacing: 1px; padding: 12px 20px; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; text-transform: uppercase; }
+    .admin-tab:hover { color: var(--gold); }
+    .admin-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .admin-card { background: var(--navy2); border: 1px solid var(--border); border-radius: 6px; padding: 28px; margin-bottom: 24px; }
+    .admin-card h3 { font-family: 'Playfair Display', serif; color: var(--gold2); font-size: 1.1rem; margin-bottom: 20px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+    .form-group input, .form-group select { width: 100%; background: var(--navy3); border: 1px solid var(--border); color: #fff; padding: 10px 14px; border-radius: 4px; font-size: 14px; outline: none; transition: border 0.2s; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+    .form-group textarea { width: 100%; background: var(--navy3); border: 1px solid var(--border); color: #fff; padding: 10px 14px; border-radius: 4px; font-size: 14px; resize: vertical; outline: none; transition: border 0.2s; }
+    .form-group textarea:focus { border-color: var(--gold); }
+    .upload-zone { display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed var(--border-gold); border-radius: 6px; padding: 36px 20px; cursor: pointer; transition: all 0.2s; text-align: center; margin-top: 8px; }
+    .upload-zone:hover { border-color: var(--gold); background: rgba(197,160,70,0.05); }
+    .upload-zone i { font-size: 2rem; color: var(--gold); margin-bottom: 10px; }
+    .upload-zone p { color: var(--gray); font-size: 14px; margin-bottom: 4px; }
+    .upload-zone strong { color: var(--gold); font-size: 13px; }
+    .upload-zone input[type="file"] { display: none; }
+    .submit-btn { width: 100%; background: var(--gold); color: var(--navy); border: none; padding: 14px; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: background 0.2s; }
+    .submit-btn:hover { background: var(--gold2); }
+    .progress-bar-wrap { background: var(--navy3); border-radius: 4px; height: 6px; margin-top: 12px; overflow: hidden; }
+    .progress-bar { background: var(--gold); height: 100%; width: 0%; transition: width 0.3s; }
+    .success-msg { color: #4caf50; font-size: 13px; font-weight: 600; margin-top: 10px; }
+    .slot-select { appearance: none; }
+    .current-video { margin-top: 12px; }
+    .current-video video { width: 100%; max-width: 300px; border-radius: 4px; border: 1px solid var(--border); }
+    .current-video p { font-size: 12px; color: var(--gray); margin-top: 6px; }
+    @media (max-width: 600px) {
+      .admin-login-card { padding: 32px 20px; }
+      .admin-panel { padding: 24px 16px 60px; }
+      .admin-tabs { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ADMIN HEADER -->
+  <div class="admin-header">
+    <img src="https://nofilteramerica.com/assets/logo.png" alt="No Filter America"/>
+    <span class="admin-header-title">Control Panel</span>
+    <span class="admin-header-badge">🔒 SECURE</span>
+  </div>
+
+  
+
+  <!-- LOGIN SCREEN -->
+  <div id="loginSection" class="admin-login">
+    <div class="admin-login-card">
+      <img src="https://nofilteramerica.com/assets/logo.png" alt="NFA" style="height:80px;margin-bottom:20px;"/>
+      <h2>ADMIN ACCESS</h2>
+      <p>No Filter America Control Panel</p>
+      <div class="form-group" style="margin-bottom:16px;">
+        <label for="adminPass">Password</label>
+        <input type="password" id="adminPass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')adminLogin()"/>
+      </div>
+      <button class="submit-btn" onclick="adminLogin()">ENTER PANEL</button>
+      <div id="loginError" style="color:#ff4444;font-size:13px;margin-top:12px;display:none;">
+        ❌ Incorrect password. Try again.
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL (hidden until login) -->
+  <div id="adminSection" style="display:none;">
+    <section class="admin-panel">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <h2><i class="fas fa-shield-alt" style="color:var(--gold);margin-right:12px;"></i>Admin Control Panel</h2>
+        <button onclick="adminLogout()" style="background:transparent;border:1px solid var(--border);color:var(--gray);padding:8px 16px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:1px;">LOGOUT</button>
+      </div>
+      <p>Manage videos for No-Filter Zone and True Crime pages.</p>
+
+      <!-- TABS -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab('nofilter')">📱 No-Filter Zone</button>
+        <button class="admin-tab" onclick="switchTab('truecrime')">🔪 True Crime</button>
+        <button class="admin-tab" onclick="switchTab('settings')">⚙️ Settings</button>
+      </div>
+
+      <!-- NO-FILTER ZONE TAB -->
+      <div id="tab-nofilter" class="tab-content active">
+        <p style="color:var(--gray);font-size:13px;margin-bottom:24px;">Upload up to 3 TikTok-style videos. Each slot has its own title and description that appears beneath the video on the site.</p>
+
+        <!-- SLOT 1 -->
+        <div class="admin-card">
+          <h3>📱 TikTok Slot 1</h3>
+          <div class="form-group">
+            <label>Video Title</label>
+            <input type="text" id="nfTitle0" placeholder="e.g. Raw Footage: Capitol Chaos"/>
+          </div>
+          <div class="form-group">
+            <label>Video Description</label>
+            <textarea id="nfDesc0" rows="3" placeholder="Describe what this video is about..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+          <label class="upload-zone" for="nfFileInput0" id="nfDropZone0">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Drag & drop your MP4 here</p>
+            <strong>or click to browse files</strong>
+            <input type="file" id="nfFileInput0" accept="video/mp4,video/*" onchange="handleNFUpload(0, this)"/>
+          </label>
+          <div class="progress-bar-wrap" id="nfProgress0" style="display:none;">
+            <div class="progress-bar" id="nfProgressBar0" style="width:0%"></div>
+          </div>
+          <div class="success-msg" id="nfSuccess0" style="display:none;">✅ Slot 1 uploaded!</div>
+          <div id="nfCurrent0" style="margin-top:10px;"></div>
+        </div>
+
+        <!-- SLOT 2 -->
+        <div class="admin-card">
+          <h3>📱 TikTok Slot 2</h3>
+          <div class="form-group">
+            <label>Video Title</label>
+            <input type="text" id="nfTitle1" placeholder="e.g. Behind the Story: Unfiltered"/>
+          </div>
+          <div class="form-group">
+            <label>Video Description</label>
+            <textarea id="nfDesc1" rows="3" placeholder="Describe what this video is about..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+          <label class="upload-zone" for="nfFileInput1" id="nfDropZone1">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Drag & drop your MP4 here</p>
+            <strong>or click to browse files</strong>
+            <input type="file" id="nfFileInput1" accept="video/mp4,video/*" onchange="handleNFUpload(1, this)"/>
+          </label>
+          <div class="progress-bar-wrap" id="nfProgress1" style="display:none;">
+            <div class="progress-bar" id="nfProgressBar1" style="width:0%"></div>
+          </div>
+          <div class="success-msg" id="nfSuccess1" style="display:none;">✅ Slot 2 uploaded!</div>
+          <div id="nfCurrent1" style="margin-top:10px;"></div>
+        </div>
+
+        <!-- SLOT 3 -->
+        <div class="admin-card">
+          <h3>📱 TikTok Slot 3</h3>
+          <div class="form-group">
+            <label>Video Title</label>
+            <input type="text" id="nfTitle2" placeholder="e.g. No Filter Exclusive"/>
+          </div>
+          <div class="form-group">
+            <label>Video Description</label>
+            <textarea id="nfDesc2" rows="3" placeholder="Describe what this video is about..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+          <label class="upload-zone" for="nfFileInput2" id="nfDropZone2">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Drag & drop your MP4 here</p>
+            <strong>or click to browse files</strong>
+            <input type="file" id="nfFileInput2" accept="video/mp4,video/*" onchange="handleNFUpload(2, this)"/>
+          </label>
+          <div class="progress-bar-wrap" id="nfProgress2" style="display:none;">
+            <div class="progress-bar" id="nfProgressBar2" style="width:0%"></div>
+          </div>
+          <div class="success-msg" id="nfSuccess2" style="display:none;">✅ Slot 3 uploaded!</div>
+          <div id="nfCurrent2" style="margin-top:10px;"></div>
+        </div>
+      </div>
+
+      <!-- TRUE CRIME TAB -->
+      <div id="tab-truecrime" class="tab-content">
+        <div class="admin-card">
+          <h3>Upload True Crime Video</h3>
+          <div class="form-group">
+            <label>Case Title</label>
+            <input type="text" id="tcTitle" placeholder="e.g. The Disappearance of Jane Doe"/>
+          </div>
+          <div class="form-group">
+            <label>Story Description / Case Summary</label>
+            <textarea id="tcDesc" rows="3" placeholder="Summarize the case — what happened, who was involved, key details..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Story Line (short tagline)</label>
+            <input type="text" id="tcStoryLine" placeholder="e.g. A cold case reopened 20 years later..."/>
+          </div>
+          <div class="form-group">
+            <label>Assign to Slot</label>
+            <select class="slot-select" id="tcSlot">
+              <option value="0">Case File 1</option>
+              <option value="1">Case File 2</option>
+              <option value="2">Case File 3</option>
+              <option value="3">Case File 4</option>
+              <option value="4">Case File 5</option>
+              <option value="5">Case File 6</option>
+            </select>
+          </div>
+          <label class="upload-zone" for="tcFileInput" id="tcDropZone">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Drag & drop your MP4 here</p>
+            <strong>or click to browse files</strong>
+            <input type="file" id="tcFileInput" accept="video/mp4,video/*" onchange="handleUpload('truecrime', this)"/>
+          </label>
+          <div class="progress-bar-wrap" id="tcProgress">
+            <div class="progress-bar" id="tcProgressBar" style="width:0%"></div>
+          </div>
+          <div class="success-msg" id="tcSuccess">✅ Video uploaded to slot!</div>
+        </div>
+
+        <div class="admin-card">
+          <h3>Current Case File Slots</h3>
+          <div class="video-list" id="tcVideoList">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS TAB -->
+      <div id="tab-settings" class="tab-content">
+        <div class="admin-card">
+          <h3>Change Admin Password</h3>
+          <div class="form-group">
+            <label>Current Password</label>
+            <input type="password" id="currPass" placeholder="Current password"/>
+          </div>
+          <div class="form-group">
+            <label>New Password</label>
+            <input type="password" id="newPass" placeholder="New password"/>
+          </div>
+          <div class="form-group">
+            <label>Confirm New Password</label>
+            <input type="password" id="confPass" placeholder="Confirm new password"/>
+          </div>
+          <button class="submit-btn" onclick="changePassword()">UPDATE PASSWORD</button>
+          <div id="passMsg" style="margin-top:12px;font-size:13px;display:none;"></div>
+        </div>
+        <div class="admin-card">
+          <h3>Site Info</h3>
+          <div style="color:var(--gray);font-size:14px;line-height:2;">
+            <p>🌐 <strong style="color:var(--white);">Domain:</strong> nofilteramerica.com</p>
+            <p>📧 <strong style="color:var(--white);">Email:</strong> news@nofilteramerica.com</p>
+            <p>📱 <strong style="color:var(--white);">TikTok:</strong> @NoFilterAmerica</p>
+            <p>▶️ <strong style="color:var(--white);">YouTube:</strong> @NofilterAmerica</p>
+            <p>🦅 <strong style="color:var(--white);">Est.:</strong> 2024</p>
+          </div>
+        </div>
+        <div class="admin-card">
+          <h3 style="color:var(--red);">⚠️ Clear All Videos</h3>
+          <p style="color:var(--gray);font-size:14px;margin-bottom:16px;">This will permanently remove all uploaded videos from the site. This cannot be undone.</p>
+          <button onclick="clearAllVideos()" style="background:var(--red);color:#fff;border:none;padding:12px 28px;font-size:13px;font-weight:700;letter-spacing:2px;cursor:pointer;border-radius:4px;">CLEAR ALL VIDEOS</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="https://nofilteramerica.com/assets/logo.png" alt="No Filter America" style="height:80px;"/>
+        <p>Truth. Freedom. Accountability.</p>
+      </div>
+      <div class="footer-links">
+        <h4>NAVIGATE</h4>
+        <a href="index.html">Home</a>
+        <a href="no-filter-zone.html">No-Filter Zone</a>
+        <a href="true-crime.html">True Crime</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="footer-social">
+        <h4>FOLLOW US</h4>
+        <a href="https://www.tiktok.com/@nofilteramerica" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a href="http://www.youtube.com/@NofilterAmerica" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 No Filter America · All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // ---- ADMIN AUTH ----
+    const DEFAULT_PASS = 'NFA2024!';
+    function getAdminPass() { return localStorage.getItem('nfa_admin_pass') || DEFAULT_PASS; }
+
+    function adminLogin() {
+      const input = document.getElementById('adminPass').value;
+      if (input === getAdminPass()) {
+        sessionStorage.setItem('nfa_admin', '1');
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('adminSection').style.display = 'block';
+        renderAdminLists();
+        renderNFCurrentSlots();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    }
+
+    function adminLogout() {
+      sessionStorage.removeItem('nfa_admin');
+      document.getElementById('loginSection').style.display = 'flex';
+      document.getElementById('adminSection').style.display = 'none';
+      document.getElementById('adminPass').value = '';
+    }
+
+    // Auto-login if session active
+    if (sessionStorage.getItem('nfa_admin') === '1') {
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('adminSection').style.display = 'block';
+    }
+
+    // ---- TABS ----
+    function switchTab(name) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+      event.target.classList.add('active');
+      renderAdminLists();
+    }
+
+    // ---- FILE UPLOAD ----
+    function handleUpload(type, input) {
+      const file = input.files[0];
+      if (!file) return;
+
+      const progressWrap = document.getElementById(type === 'nofilter' ? 'nfProgress' : 'tcProgress');
+      const progressBar = document.getElementById(type === 'nofilter' ? 'nfProgressBar' : 'tcProgressBar');
+      const successEl = document.getElementById(type === 'nofilter' ? 'nfSuccess' : 'tcSuccess');
+
+      progressWrap.style.display = 'block';
+      progressBar.style.width = '0%';
+      successEl.style.display = 'none';
+
+      // Simulate progress while reading file
+      let prog = 0;
+      const interval = setInterval(() => {
+        prog = Math.min(prog + 10, 90);
+        progressBar.style.width = prog + '%';
+      }, 100);
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        clearInterval(interval);
+        progressBar.style.width = '100%';
+
+        const title = type === 'nofilter'
+          ? (document.getElementById('nfTitle') ? document.getElementById('nfTitle').value : '') || file.name.replace('.mp4','')
+          : document.getElementById('tcTitle').value || file.name.replace('.mp4','');
+
+        const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+        if (type === 'nofilter') {
+          const videos = getVideos('nofilter_videos');
+          videos.unshift({ title, date: dateStr, dataUrl: e.target.result, fileName: file.name });
+          saveVideos('nofilter_videos', videos);
+        } else {
+          const slotIndex = parseInt(document.getElementById('tcSlot').value);
+          const desc = document.getElementById('tcDesc').value || '';
+          const storyLine = document.getElementById('tcStoryLine').value || '';
+          const videos = getVideos('truecrime_videos');
+          while (videos.length <= slotIndex) videos.push(null);
+          videos[slotIndex] = { title, desc, storyLine, date: dateStr, dataUrl: e.target.result, fileName: file.name };
+          saveVideos('truecrime_videos', videos);
+        }
+
+        setTimeout(() => {
+          progressWrap.style.display = 'none';
+          successEl.style.display = 'block';
+          renderAdminLists();
+          showToast('✅ Video uploaded!');
+        }, 400);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ---- RENDER ADMIN LISTS ----
+    function renderAdminLists() {
+      // No-Filter Zone list
+      const nfList = document.getElementById('nfVideoList');
+      if (nfList) {
+        const videos = getVideos('nofilter_videos');
+        if (videos.length === 0) {
+          nfList.innerHTML = '<p style="color:var(--gray);font-size:13px;">No videos uploaded yet.</p>';
+        } else {
+          nfList.innerHTML = videos.map((v,i) => `
+            <div class="video-item">
+              <i class="fas fa-film"></i>
+              <div class="video-item-info">
+                <strong>${v.title || 'Video ' + (i+1)}</strong>
+                <span>${v.fileName} · ${v.date}</span>
+              </div>
+              <button class="delete-btn" onclick="deleteVideo('nofilter', ${i})"><i class="fas fa-trash"></i> Delete</button>
+            </div>
+          `).join('');
+        }
+      }
+
+      // True Crime list
+      const tcList = document.getElementById('tcVideoList');
+      if (tcList) {
+        const videos = getVideos('truecrime_videos');
+        const slots = 6;
+        let html = '';
+        for (let i = 0; i < slots; i++) {
+          const v = videos[i];
+          html += `
+            <div class="video-item">
+              <i class="fas fa-gavel"></i>
+              <div class="video-item-info">
+                <strong>Case File ${i+1}: ${v ? v.title : 'Empty Slot'}</strong>
+                <span>${v ? v.fileName + ' · ' + v.date : 'No video assigned'}</span>
+              </div>
+              ${v ? `<button class="delete-btn" onclick="deleteVideo('truecrime', ${i})"><i class="fas fa-trash"></i> Delete</button>` : '<span style="color:var(--gray);font-size:12px;">Empty</span>'}
+            </div>
+          `;
+        }
+        tcList.innerHTML = html;
+      }
+    }
+
+    // ---- NO-FILTER ZONE: 3-slot upload ----
+    function handleNFUpload(slotIndex, input) {
+      const file = input.files[0];
+      if (!file) return;
+
+      const progressWrap = document.getElementById('nfProgress' + slotIndex);
+      const progressBar = document.getElementById('nfProgressBar' + slotIndex);
+      const successEl = document.getElementById('nfSuccess' + slotIndex);
+
+      progressWrap.style.display = 'block';
+      progressBar.style.width = '0%';
+      successEl.style.display = 'none';
+
+      let prog = 0;
+      const interval = setInterval(() => {
+        prog = Math.min(prog + 10, 90);
+        progressBar.style.width = prog + '%';
+      }, 100);
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        clearInterval(interval);
+        progressBar.style.width = '100%';
+
+        const title = document.getElementById('nfTitle' + slotIndex).value || file.name.replace('.mp4','');
+        const desc = document.getElementById('nfDesc' + slotIndex).value || '';
+        const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+        const videos = getVideos('nofilter_videos');
+        while (videos.length <= slotIndex) videos.push(null);
+        videos[slotIndex] = { title, desc, date: dateStr, dataUrl: e.target.result, fileName: file.name };
+        saveVideos('nofilter_videos', videos);
+
+        setTimeout(() => {
+          progressWrap.style.display = 'none';
+          successEl.style.display = 'block';
+          renderNFCurrentSlots();
+          showToast('✅ TikTok Slot ' + (slotIndex+1) + ' uploaded!');
+        }, 400);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function renderNFCurrentSlots() {
+      const videos = getVideos('nofilter_videos');
+      for (let i = 0; i < 3; i++) {
+        const el = document.getElementById('nfCurrent' + i);
+        if (!el) continue;
+        const v = videos[i];
+        if (v) {
+          el.innerHTML = `<div class="video-item" style="margin-top:0;">
+            <i class="fas fa-film" style="color:var(--gold);"></i>
+            <div class="video-item-info">
+              <strong>${v.title}</strong>
+              <span>${v.desc ? v.desc.substring(0,60)+'...' : 'No description'} · ${v.date}</span>
+            </div>
+            <button class="delete-btn" onclick="deleteNFSlot(${i})"><i class="fas fa-trash"></i> Delete</button>
+          </div>`;
+        } else {
+          el.innerHTML = '<p style="color:var(--gray);font-size:12px;margin-top:4px;">No video in this slot yet.</p>';
+        }
+      }
+    }
+
+    function deleteNFSlot(index) {
+      if (!confirm('Delete TikTok Slot ' + (index+1) + '? This cannot be undone.')) return;
+      const videos = getVideos('nofilter_videos');
+      if (videos[index]) videos[index] = null;
+      saveVideos('nofilter_videos', videos);
+      renderNFCurrentSlots();
+      showToast('Slot ' + (index+1) + ' cleared.');
+    }
+
+    function deleteVideo(type, index) {
+      if (!confirm('Delete this video? This cannot be undone.')) return;
+      if (type === 'nofilter') {
+        const videos = getVideos('nofilter_videos');
+        videos.splice(index, 1);
+        saveVideos('nofilter_videos', videos);
+      } else {
+        const videos = getVideos('truecrime_videos');
+        videos[index] = null;
+        saveVideos('truecrime_videos', videos);
+      }
+      renderAdminLists();
+      showToast('Video deleted.', 'error');
+    }
+
+    function clearAllVideos() {
+      if (!confirm('⚠️ This will delete ALL videos from both pages. Are you absolutely sure?')) return;
+      localStorage.removeItem('nofilter_videos');
+      localStorage.removeItem('truecrime_videos');
+      renderAdminLists();
+      showToast('All videos cleared.', 'error');
+    }
+
+    // ---- PASSWORD CHANGE ----
+    function changePassword() {
+      const curr = document.getElementById('currPass').value;
+      const newp = document.getElementById('newPass').value;
+      const conf = document.getElementById('confPass').value;
+      const msg = document.getElementById('passMsg');
+
+      if (curr !== getAdminPass()) {
+        msg.style.display = 'block'; msg.style.color = '#ff4444';
+        msg.textContent = '❌ Current password incorrect.'; return;
+      }
+      if (newp.length < 6) {
+        msg.style.display = 'block'; msg.style.color = '#ff4444';
+        msg.textContent = '❌ New password must be at least 6 characters.'; return;
+      }
+      if (newp !== conf) {
+        msg.style.display = 'block'; msg.style.color = '#ff4444';
+        msg.textContent = '❌ Passwords do not match.'; return;
+      }
+      localStorage.setItem('nfa_admin_pass', newp);
+      msg.style.display = 'block'; msg.style.color = '#00cc55';
+      msg.textContent = '✅ Password updated successfully!';
+      document.getElementById('currPass').value = '';
+      document.getElementById('newPass').value = '';
+      document.getElementById('confPass').value = '';
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      if (sessionStorage.getItem('nfa_admin') === '1') renderAdminLists();
+
+      // Drag & drop
+      ['nfDropZone','tcDropZone'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('dragover', e => { e.preventDefault(); el.classList.add('drag-over'); });
+        el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
+        el.addEventListener('drop', e => {
+          e.preventDefault(); el.classList.remove('drag-over');
+          const file = e.dataTransfer.files[0];
+          if (!file) return;
+          const inputId = id === 'nfDropZone' ? 'nfFileInput' : 'tcFileInput';
+          const dt = new DataTransfer();
+          dt.items.add(file);
+          document.getElementById(inputId).files = dt.files;
+          handleUpload(id === 'nfDropZone' ? 'nofilter' : 'truecrime', document.getElementById(inputId));
+        });
+      });
+    });
+  </script>
+</body>
+</html>
