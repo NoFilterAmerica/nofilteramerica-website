@@ -245,7 +245,7 @@ async function loadNews() {
   renderFeatured(articles.slice(0, 5));
 
   // More stories grid: articles 4-9
-  renderNewsCards(articles.slice(4, 13), false);
+  renderNewsCards(articles.slice(5, 11), false);
 
   // Ticker — update both spans for seamless infinite loop
   if (articles.length > 0) {
