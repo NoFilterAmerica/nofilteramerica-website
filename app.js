@@ -219,24 +219,29 @@ function renderBothSides(demArticles, repArticles) {
   const demEl = document.getElementById('demStories');
   const repEl = document.getElementById('repStories');
 
-  // Pool of varied fallback images so no two cards look the same
-  const fallbackPool = [
-    'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&q=80', // Capitol steps
-    'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80', // newspaper
-    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80', // globe
+  // Separate pools for each side — LEFT = blue-toned, RIGHT = red-toned themes
+  const demFallbackPool = [
+    'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80', // newspaper front page
+    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80', // globe world
     'https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=800&q=80',    // microphone podium
-    'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&q=80',    // White House
-    'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&q=80', // American flag
+    'https://images.unsplash.com/photo-1521791055366-0d553872952f?w=800&q=80', // handshake diplomacy
+  ];
+  const repFallbackPool = [
+    'https://images.unsplash.com/photo-1541872705-1f73c6400ec9?w=800&q=80',    // US flag waving
+    'https://images.unsplash.com/photo-1568992688065-536aad8a12f6?w=800&q=80', // government building
+    'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80', // courtroom/law
+    'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&q=80', // American flag close
   ];
 
   function buildStoryCards(articles, side) {
+    const pool = side === 'dem' ? demFallbackPool : repFallbackPool;
     return articles.map((a, idx) => {
-      // Use article's own image if available, otherwise pick a unique fallback by index
-      const fallback = fallbackPool[idx % fallbackPool.length];
+      // Use article's own image if available, otherwise pick unique fallback by index
+      const fallback = pool[idx % pool.length];
       const imgSrc = a.image_url || fallback;
       return `
         <a class="sides-card" href="${a.link || '#'}" target="_blank" rel="noopener">
-          <img class="sides-card-img" src="${imgSrc}" alt="${a.title}" onerror="this.src='${fallbackPool[(idx + 2) % fallbackPool.length]}'">
+          <img class="sides-card-img" src="${imgSrc}" alt="${a.title}" onerror="this.src='${pool[(idx + 1) % pool.length]}'">
           <div class="sides-card-body">
             <div class="sides-card-title">${a.title}</div>
             <div class="sides-card-meta">${a.source_id || ''} · ${formatDate(a.pubDate)}</div>
