@@ -78,29 +78,78 @@
 
       <!-- NO-FILTER ZONE TAB -->
       <div id="tab-nofilter" class="tab-content active">
+        <p style="color:var(--gray);font-size:13px;margin-bottom:24px;">Upload up to 3 TikTok-style videos. Each slot has its own title and description that appears beneath the video on the site.</p>
+
+        <!-- SLOT 1 -->
         <div class="admin-card">
-          <h3>Upload No-Filter Zone Video</h3>
+          <h3>📱 TikTok Slot 1</h3>
           <div class="form-group">
             <label>Video Title</label>
-            <input type="text" id="nfTitle" placeholder="e.g. Raw Footage: Capitol Chaos"/>
+            <input type="text" id="nfTitle0" placeholder="e.g. Raw Footage: Capitol Chaos"/>
           </div>
-          <label class="upload-zone" for="nfFileInput" id="nfDropZone">
+          <div class="form-group">
+            <label>Video Description</label>
+            <textarea id="nfDesc0" rows="3" placeholder="Describe what this video is about..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+          <label class="upload-zone" for="nfFileInput0" id="nfDropZone0">
             <i class="fas fa-cloud-upload-alt"></i>
             <p>Drag & drop your MP4 here</p>
             <strong>or click to browse files</strong>
-            <input type="file" id="nfFileInput" accept="video/mp4,video/*" onchange="handleUpload('nofilter', this)"/>
+            <input type="file" id="nfFileInput0" accept="video/mp4,video/*" onchange="handleNFUpload(0, this)"/>
           </label>
-          <div class="progress-bar-wrap" id="nfProgress">
-            <div class="progress-bar" id="nfProgressBar" style="width:0%"></div>
+          <div class="progress-bar-wrap" id="nfProgress0" style="display:none;">
+            <div class="progress-bar" id="nfProgressBar0" style="width:0%"></div>
           </div>
-          <div class="success-msg" id="nfSuccess">✅ Video uploaded successfully!</div>
+          <div class="success-msg" id="nfSuccess0" style="display:none;">✅ Slot 1 uploaded!</div>
+          <div id="nfCurrent0" style="margin-top:10px;"></div>
         </div>
 
+        <!-- SLOT 2 -->
         <div class="admin-card">
-          <h3>Published Videos</h3>
-          <div class="video-list" id="nfVideoList">
-            <!-- rendered by JS -->
+          <h3>📱 TikTok Slot 2</h3>
+          <div class="form-group">
+            <label>Video Title</label>
+            <input type="text" id="nfTitle1" placeholder="e.g. Behind the Story: Unfiltered"/>
           </div>
+          <div class="form-group">
+            <label>Video Description</label>
+            <textarea id="nfDesc1" rows="3" placeholder="Describe what this video is about..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+          <label class="upload-zone" for="nfFileInput1" id="nfDropZone1">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Drag & drop your MP4 here</p>
+            <strong>or click to browse files</strong>
+            <input type="file" id="nfFileInput1" accept="video/mp4,video/*" onchange="handleNFUpload(1, this)"/>
+          </label>
+          <div class="progress-bar-wrap" id="nfProgress1" style="display:none;">
+            <div class="progress-bar" id="nfProgressBar1" style="width:0%"></div>
+          </div>
+          <div class="success-msg" id="nfSuccess1" style="display:none;">✅ Slot 2 uploaded!</div>
+          <div id="nfCurrent1" style="margin-top:10px;"></div>
+        </div>
+
+        <!-- SLOT 3 -->
+        <div class="admin-card">
+          <h3>📱 TikTok Slot 3</h3>
+          <div class="form-group">
+            <label>Video Title</label>
+            <input type="text" id="nfTitle2" placeholder="e.g. No Filter Exclusive"/>
+          </div>
+          <div class="form-group">
+            <label>Video Description</label>
+            <textarea id="nfDesc2" rows="3" placeholder="Describe what this video is about..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+          <label class="upload-zone" for="nfFileInput2" id="nfDropZone2">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Drag & drop your MP4 here</p>
+            <strong>or click to browse files</strong>
+            <input type="file" id="nfFileInput2" accept="video/mp4,video/*" onchange="handleNFUpload(2, this)"/>
+          </label>
+          <div class="progress-bar-wrap" id="nfProgress2" style="display:none;">
+            <div class="progress-bar" id="nfProgressBar2" style="width:0%"></div>
+          </div>
+          <div class="success-msg" id="nfSuccess2" style="display:none;">✅ Slot 3 uploaded!</div>
+          <div id="nfCurrent2" style="margin-top:10px;"></div>
         </div>
       </div>
 
@@ -109,8 +158,16 @@
         <div class="admin-card">
           <h3>Upload True Crime Video</h3>
           <div class="form-group">
-            <label>Video Title</label>
+            <label>Case Title</label>
             <input type="text" id="tcTitle" placeholder="e.g. The Disappearance of Jane Doe"/>
+          </div>
+          <div class="form-group">
+            <label>Story Description / Case Summary</label>
+            <textarea id="tcDesc" rows="3" placeholder="Summarize the case — what happened, who was involved, key details..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Story Line (short tagline)</label>
+            <input type="text" id="tcStoryLine" placeholder="e.g. A cold case reopened 20 years later..."/>
           </div>
           <div class="form-group">
             <label>Assign to Slot</label>
@@ -220,6 +277,7 @@
         document.getElementById('loginSection').style.display = 'none';
         document.getElementById('adminSection').style.display = 'block';
         renderAdminLists();
+        renderNFCurrentSlots();
       } else {
         document.getElementById('loginError').style.display = 'block';
       }
@@ -273,7 +331,7 @@
         progressBar.style.width = '100%';
 
         const title = type === 'nofilter'
-          ? document.getElementById('nfTitle').value || file.name.replace('.mp4','')
+          ? (document.getElementById('nfTitle') ? document.getElementById('nfTitle').value : '') || file.name.replace('.mp4','')
           : document.getElementById('tcTitle').value || file.name.replace('.mp4','');
 
         const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -284,9 +342,11 @@
           saveVideos('nofilter_videos', videos);
         } else {
           const slotIndex = parseInt(document.getElementById('tcSlot').value);
+          const desc = document.getElementById('tcDesc').value || '';
+          const storyLine = document.getElementById('tcStoryLine').value || '';
           const videos = getVideos('truecrime_videos');
           while (videos.length <= slotIndex) videos.push(null);
-          videos[slotIndex] = { title, date: dateStr, dataUrl: e.target.result, fileName: file.name };
+          videos[slotIndex] = { title, desc, storyLine, date: dateStr, dataUrl: e.target.result, fileName: file.name };
           saveVideos('truecrime_videos', videos);
         }
 
@@ -343,6 +403,79 @@
         }
         tcList.innerHTML = html;
       }
+    }
+
+    // ---- NO-FILTER ZONE: 3-slot upload ----
+    function handleNFUpload(slotIndex, input) {
+      const file = input.files[0];
+      if (!file) return;
+
+      const progressWrap = document.getElementById('nfProgress' + slotIndex);
+      const progressBar = document.getElementById('nfProgressBar' + slotIndex);
+      const successEl = document.getElementById('nfSuccess' + slotIndex);
+
+      progressWrap.style.display = 'block';
+      progressBar.style.width = '0%';
+      successEl.style.display = 'none';
+
+      let prog = 0;
+      const interval = setInterval(() => {
+        prog = Math.min(prog + 10, 90);
+        progressBar.style.width = prog + '%';
+      }, 100);
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        clearInterval(interval);
+        progressBar.style.width = '100%';
+
+        const title = document.getElementById('nfTitle' + slotIndex).value || file.name.replace('.mp4','');
+        const desc = document.getElementById('nfDesc' + slotIndex).value || '';
+        const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+        const videos = getVideos('nofilter_videos');
+        while (videos.length <= slotIndex) videos.push(null);
+        videos[slotIndex] = { title, desc, date: dateStr, dataUrl: e.target.result, fileName: file.name };
+        saveVideos('nofilter_videos', videos);
+
+        setTimeout(() => {
+          progressWrap.style.display = 'none';
+          successEl.style.display = 'block';
+          renderNFCurrentSlots();
+          showToast('✅ TikTok Slot ' + (slotIndex+1) + ' uploaded!');
+        }, 400);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function renderNFCurrentSlots() {
+      const videos = getVideos('nofilter_videos');
+      for (let i = 0; i < 3; i++) {
+        const el = document.getElementById('nfCurrent' + i);
+        if (!el) continue;
+        const v = videos[i];
+        if (v) {
+          el.innerHTML = `<div class="video-item" style="margin-top:0;">
+            <i class="fas fa-film" style="color:var(--gold);"></i>
+            <div class="video-item-info">
+              <strong>${v.title}</strong>
+              <span>${v.desc ? v.desc.substring(0,60)+'...' : 'No description'} · ${v.date}</span>
+            </div>
+            <button class="delete-btn" onclick="deleteNFSlot(${i})"><i class="fas fa-trash"></i> Delete</button>
+          </div>`;
+        } else {
+          el.innerHTML = '<p style="color:var(--gray);font-size:12px;margin-top:4px;">No video in this slot yet.</p>';
+        }
+      }
+    }
+
+    function deleteNFSlot(index) {
+      if (!confirm('Delete TikTok Slot ' + (index+1) + '? This cannot be undone.')) return;
+      const videos = getVideos('nofilter_videos');
+      if (videos[index]) videos[index] = null;
+      saveVideos('nofilter_videos', videos);
+      renderNFCurrentSlots();
+      showToast('Slot ' + (index+1) + ' cleared.');
     }
 
     function deleteVideo(type, index) {

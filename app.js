@@ -32,15 +32,18 @@ async function fetchTopNews(cursor = null) {
   }
 }
 
-// ---- FETCH: Dem-leaning sources ----
+// ---- FETCH: Democrat-leaning news (progressive/left keywords) ----
 async function fetchDemNews() {
   try {
-    const demSources = 'nytimes,washingtonpost,nbcnews,cnn,msnbc,thehill,apnews,politico';
-    const url = `https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&language=en&category=politics,world,top&domainurl=${demSources}&country=us`;
+    // Search for left-leaning political keywords
+    const url = `https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&language=en&category=politics,top&q=healthcare OR climate OR immigration OR progressive OR democrats OR senate OR Biden OR voting rights&country=us&prioritydomain=top`;
     const res = await fetch(url);
     const data = await res.json();
     if (data.status === 'success' && data.results && data.results.length > 0) {
-      return data.results.slice(0, 4);
+      // Prefer stories that lean left by filtering out obvious right-wing sources
+      const rightSources = ['foxnews','breitbart','dailywire','oann','theblaze','nypost','washingtonexaminer'];
+      const filtered = data.results.filter(a => !rightSources.some(s => (a.source_id||'').toLowerCase().includes(s)));
+      return (filtered.length >= 3 ? filtered : data.results).slice(0, 4);
     }
     return getSampleDemStories();
   } catch(e) {
@@ -48,15 +51,18 @@ async function fetchDemNews() {
   }
 }
 
-// ---- FETCH: Rep-leaning sources ----
+// ---- FETCH: Republican-leaning news (conservative/right keywords) ----
 async function fetchRepNews() {
   try {
-    const repSources = 'foxnews,breitbart,nypost,washingtonexaminer,dailywire,nationalreview,theblaze,oann';
-    const url = `https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&language=en&category=politics,world,top&domainurl=${repSources}&country=us`;
+    // Search for right-leaning political keywords
+    const url = `https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&language=en&category=politics,top&q=border security OR tax cuts OR second amendment OR republicans OR conservative OR Trump OR spending cuts OR election integrity&country=us&prioritydomain=top`;
     const res = await fetch(url);
     const data = await res.json();
     if (data.status === 'success' && data.results && data.results.length > 0) {
-      return data.results.slice(0, 4);
+      // Prefer stories from right-leaning outlets
+      const leftSources = ['nytimes','washingtonpost','nbcnews','cnn','msnbc','apnews','politico'];
+      const filtered = data.results.filter(a => !leftSources.some(s => (a.source_id||'').toLowerCase().includes(s)));
+      return (filtered.length >= 3 ? filtered : data.results).slice(0, 4);
     }
     return getSampleRepStories();
   } catch(e) {
@@ -262,24 +268,45 @@ function showToast(msg, type = 'success') {
 }
 
 // ---- VIDEO RENDERS ----
-function renderPublicVideos(containerId, storageKey, gridClass = 'video-grid-2') {
+function renderPublicVideos(containerId, storageKey, gridClass = 'video-grid-3') {
   const container = document.getElementById(containerId);
   if (!container) return;
   const videos = getVideos(storageKey);
   container.className = gridClass;
   container.innerHTML = '';
-  if (videos.length === 0) {
+
+  // Always render 3 fixed slots
+  let hasAny = videos.some(v => v);
+  if (!hasAny) {
     container.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--gray);">
-      <i class="fas fa-film" style="font-size:3rem;display:block;margin-bottom:16px;"></i>Videos coming soon. Stay tuned!</div>`;
+      <i class="fab fa-tiktok" style="font-size:3rem;display:block;margin-bottom:16px;color:var(--gold);opacity:0.4;"></i>
+      <p style="font-family:Oswald,sans-serif;letter-spacing:2px;">VIDEOS COMING SOON</p>
+      <p style="font-size:13px;margin-top:8px;">Upload via the Admin Panel</p></div>`;
     return;
   }
-  videos.forEach((vid, i) => {
+
+  for (let i = 0; i < 3; i++) {
+    const vid = videos[i];
     const slot = document.createElement('div');
     slot.className = 'video-slot';
-    slot.innerHTML = `<video controls preload="none"><source src="${vid.dataUrl}" type="video/mp4"></video>
-      <div class="video-info"><div class="video-title">${vid.title || 'No Filter Video ' + (i+1)}</div><div class="video-date">${vid.date || ''}</div></div>`;
+    if (vid) {
+      slot.innerHTML = `
+        <video controls preload="none"><source src="${vid.dataUrl}" type="video/mp4"></video>
+        <div class="video-info">
+          <div class="video-title">${vid.title || 'No Filter Video ' + (i+1)}</div>
+          ${vid.desc ? `<div class="video-desc">${vid.desc}</div>` : ''}
+          <div class="video-date">${vid.date || ''}</div>
+        </div>`;
+    } else {
+      slot.innerHTML = `
+        <div class="video-placeholder"><i class="fab fa-tiktok"></i><span>Slot ${i+1}</span><small>Coming Soon</small></div>
+        <div class="video-info">
+          <div class="video-title">TikTok Slot ${i+1}</div>
+          <div class="video-date">Upload via Admin Panel</div>
+        </div>`;
+    }
     container.appendChild(slot);
-  });
+  }
 }
 
 function renderTrueCrimeSlots(containerId) {
@@ -293,11 +320,21 @@ function renderTrueCrimeSlots(containerId) {
     const slot = document.createElement('div');
     slot.className = 'video-slot';
     if (vid) {
-      slot.innerHTML = `<video controls preload="none"><source src="${vid.dataUrl}" type="video/mp4"></video>
-        <div class="video-info"><div class="video-title">${vid.title || 'Case File ' + (i+1)}</div><div class="video-date">${vid.date || ''}</div></div>`;
+      slot.innerHTML = `
+        <video controls preload="none"><source src="${vid.dataUrl}" type="video/mp4"></video>
+        <div class="video-info">
+          <div class="video-title">${vid.title || 'Case File ' + (i+1)}</div>
+          ${vid.storyLine ? `<div class="video-storyline">${vid.storyLine}</div>` : ''}
+          ${vid.desc ? `<div class="video-desc">${vid.desc}</div>` : ''}
+          <div class="video-date">${vid.date || ''}</div>
+        </div>`;
     } else {
-      slot.innerHTML = `<div class="video-placeholder"><i class="fas fa-gavel"></i><span>Case File ${i+1}</span><small>Coming Soon</small></div>
-        <div class="video-info"><div class="video-title">Case File ${i+1}</div><div class="video-date">Upload via Admin Panel</div></div>`;
+      slot.innerHTML = `
+        <div class="video-placeholder"><i class="fas fa-gavel"></i><span>Case File ${i+1}</span><small>Coming Soon</small></div>
+        <div class="video-info">
+          <div class="video-title">Case File ${i+1}</div>
+          <div class="video-date">Upload via Admin Panel</div>
+        </div>`;
     }
     container.appendChild(slot);
   }
