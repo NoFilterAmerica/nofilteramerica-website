@@ -615,7 +615,7 @@
   <div class="ticker-wrap">
     <div class="ticker-label" style="color:#ffffff !important;background:#8b0000 !important;">▸ BREAKING</div>
     <div class="ticker-content">
-      <div class="ticker-track">
+      <div class="ticker-track" id="ticker-track">
         <span id="ticker-text" style="display:inline-block;white-space:nowrap;font-size:13px;font-weight:600;letter-spacing:0.5px;padding-right:80px;color:#ffffff !important;">Loading latest headlines...</span>
         <span id="ticker-text-dupe" aria-hidden="true" style="display:inline-block;white-space:nowrap;font-size:13px;font-weight:600;letter-spacing:0.5px;padding-right:80px;color:#ffffff !important;"></span>
       </div>
@@ -775,5 +775,45 @@
 
 
   </script>
+
+  <!-- JS TICKER ENGINE — works on all iOS/Android -->
+  <script>
+  (function() {
+    function startTicker() {
+      var track = document.getElementById('ticker-track');
+      if (!track) return;
+      var pos = 0;
+      var speed = 0.6; // px per frame — adjust for faster/slower
+      var halfWidth = 0;
+
+      function getHalf() {
+        var t1 = document.getElementById('ticker-text');
+        return t1 ? t1.offsetWidth + 80 : track.scrollWidth / 2;
+      }
+
+      function step() {
+        if (!halfWidth) halfWidth = getHalf();
+        pos -= speed;
+        if (Math.abs(pos) >= halfWidth) pos = 0;
+        track.style.transform = 'translateX(' + pos + 'px)';
+        track.style.webkitTransform = 'translateX(' + pos + 'px)';
+        requestAnimationFrame(step);
+      }
+
+      // Pause on touch
+      track.addEventListener('touchstart', function() { speed = 0; });
+      track.addEventListener('touchend', function() { speed = 0.6; });
+
+      requestAnimationFrame(step);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startTicker);
+    } else {
+      startTicker();
+    }
+  })();
+  </script>
+
 </body>
 </html>

@@ -64,9 +64,9 @@ body {
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: ticker-scroll 35s linear infinite;
   will-change: transform;
-  -webkit-animation: ticker-scroll 35s linear infinite;
+  animation: none !important;
+  -webkit-animation: none !important;
 }
 .ticker-track:hover { animation-play-state: paused; }
 #ticker-text,
