@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>No Filter America – Truth. Freedom. Accountability.</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- BREAKING NEWS TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-label">🔴 BREAKING</div>
+    <div class="ticker-content">
+      <span id="ticker-text">Loading latest headlines...</span>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <img src="assets/logo.png" alt="No Filter America" class="logo-img"/>
+      </div>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="no-filter-zone.html">No-Filter Zone</a>
+        <a href="true-crime.html">True Crime</a>
+        <a href="contact.html">Contact</a>
+        <a href="admin.html" class="admin-btn"><i class="fas fa-lock"></i> Admin</a>
+      </div>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="no-filter-zone.html">No-Filter Zone</a>
+      <a href="true-crime.html">True Crime</a>
+      <a href="contact.html">Contact</a>
+      <a href="admin.html">Admin</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge">EST. 2024 · TRUTH · FREEDOM · ACCOUNTABILITY</div>
+        <h1 class="hero-title">THE NEWS THEY <span class="gold">DON'T WANT</span> YOU TO SEE</h1>
+        <p class="hero-sub">Unfiltered. Unafraid. Unapologetically American.</p>
+        <div class="hero-socials">
+          <a href="https://www.tiktok.com/@nofilteramerica" target="_blank" class="social-btn tiktok"><i class="fab fa-tiktok"></i> TikTok</a>
+          <a href="http://www.youtube.com/@NofilterAmerica" target="_blank" class="social-btn youtube"><i class="fab fa-youtube"></i> YouTube</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="liam-wrap">
+          <img src="assets/liam.png" alt="Liam" class="liam-img"/>
+          <div class="liam-badge">
+            <span class="liam-name">LIAM</span>
+            <span class="liam-title">Host & Founder · No Filter America</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>SCROLL FOR LATEST NEWS</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- FEATURED STORIES -->
+  <section class="news-section">
+    <div class="section-header">
+      <div class="section-line"></div>
+      <h2 class="section-title">LATEST STORIES</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="news-grid" id="newsGrid">
+      <!-- News cards injected by JS -->
+      <div class="news-card skeleton"></div>
+      <div class="news-card skeleton"></div>
+      <div class="news-card skeleton"></div>
+      <div class="news-card skeleton"></div>
+      <div class="news-card skeleton"></div>
+      <div class="news-card skeleton"></div>
+    </div>
+    <div class="load-more-wrap">
+      <button class="load-more-btn" onclick="loadMoreNews()">LOAD MORE STORIES</button>
+    </div>
+  </section>
+
+  <!-- PLATFORM LINKS -->
+  <section class="platform-section">
+    <div class="platform-inner">
+      <div class="platform-card tiktok-card">
+        <i class="fab fa-tiktok platform-icon"></i>
+        <div>
+          <h3>No-Filter Zone</h3>
+          <p>Raw. Uncut. Unfiltered TikTok content.</p>
+        </div>
+        <a href="no-filter-zone.html" class="platform-link">WATCH NOW <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="platform-card crime-card">
+        <i class="fas fa-gavel platform-icon"></i>
+        <div>
+          <h3>True Crime</h3>
+          <p>Deep dives into cases they want buried.</p>
+        </div>
+        <a href="true-crime.html" class="platform-link">EXPLORE <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="platform-card yt-card">
+        <i class="fab fa-youtube platform-icon"></i>
+        <div>
+          <h3>YouTube Channel</h3>
+          <p>Full episodes and exclusive content.</p>
+        </div>
+        <a href="http://www.youtube.com/@NofilterAmerica" target="_blank" class="platform-link">SUBSCRIBE <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="assets/logo.png" alt="No Filter America" style="height:80px;"/>
+        <p>Truth. Freedom. Accountability.</p>
+      </div>
+      <div class="footer-links">
+        <h4>NAVIGATE</h4>
+        <a href="index.html">Home</a>
+        <a href="no-filter-zone.html">No-Filter Zone</a>
+        <a href="true-crime.html">True Crime</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="footer-social">
+        <h4>FOLLOW US</h4>
+        <a href="https://www.tiktok.com/@nofilteramerica" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a href="http://www.youtube.com/@NofilterAmerica" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 No Filter America · All Rights Reserved · <a href="https://www.nofilteramerica.com">nofilteramerica.com</a></p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
