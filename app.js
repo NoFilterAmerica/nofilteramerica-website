@@ -205,24 +205,23 @@ function renderBothSides(demArticles, repArticles) {
   const demEl = document.getElementById('demStories');
   const repEl = document.getElementById('repStories');
 
-  function buildStoryCards(articles) {
+  function buildStoryCards(articles, side) {
     return articles.map(a => {
-      const imgHtml = a.image_url
-        ? `<img class="stack-card-img" src="${a.image_url}" alt="${a.title}" onerror="this.style.display='none'">`
-        : '';
+      const fallback = getCategoryImage(a.category);
+      const imgSrc = a.image_url || fallback;
       return `
-        <a class="stack-card" href="${a.link || '#'}" target="_blank" rel="noopener" style="margin-bottom:10px;">
-          ${imgHtml ? `<div>${imgHtml}</div>` : ''}
-          <div class="stack-card-body">
-            <div class="stack-title" style="font-size:14px;">${a.title}</div>
-            <div class="stack-meta">${a.source_id || ''} · ${formatDate(a.pubDate)}</div>
+        <a class="sides-card" href="${a.link || '#'}" target="_blank" rel="noopener">
+          <img class="sides-card-img" src="${imgSrc}" alt="${a.title}" onerror="this.src='${fallback}'">
+          <div class="sides-card-body">
+            <div class="sides-card-title">${a.title}</div>
+            <div class="sides-card-meta">${a.source_id || ''} · ${formatDate(a.pubDate)}</div>
           </div>
         </a>`;
     }).join('');
   }
 
-  if (demEl) demEl.innerHTML = buildStoryCards(demArticles);
-  if (repEl) repEl.innerHTML = buildStoryCards(repArticles);
+  if (demEl) demEl.innerHTML = buildStoryCards(demArticles, 'dem');
+  if (repEl) repEl.innerHTML = buildStoryCards(repArticles, 'rep');
 }
 
 // ---- MAIN LOAD ----
@@ -234,7 +233,7 @@ async function loadNews() {
   renderFeatured(articles.slice(0, 4));
 
   // More stories grid: articles 4-9
-  renderNewsCards(articles.slice(4, 10), false);
+  renderNewsCards(articles.slice(4, 13), false);
 
   // Ticker — update both spans for seamless infinite loop
   if (articles.length > 0) {
@@ -284,37 +283,34 @@ function renderPublicVideos(containerId, storageKey, gridClass = 'video-grid-3')
   const container = document.getElementById(containerId);
   if (!container) return;
   const videos = getVideos(storageKey);
-  container.className = gridClass;
+  container.className = 'nfz-grid';
   container.innerHTML = '';
 
-  // Always render 3 fixed slots
-  let hasAny = videos.some(v => v);
-  if (!hasAny) {
-    container.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--gray);">
-      <i class="fab fa-tiktok" style="font-size:3rem;display:block;margin-bottom:16px;color:var(--gold);opacity:0.4;"></i>
-      <p style="font-family:Oswald,sans-serif;letter-spacing:2px;">VIDEOS COMING SOON</p>
-      <p style="font-size:13px;margin-top:8px;">Upload via the Admin Panel</p></div>`;
-    return;
-  }
-
+  // Always render 3 portrait (9:16) slots
   for (let i = 0; i < 3; i++) {
     const vid = videos[i];
     const slot = document.createElement('div');
-    slot.className = 'video-slot';
+    slot.className = 'nfz-slot';
     if (vid) {
       slot.innerHTML = `
-        <video controls preload="none"><source src="${vid.dataUrl}" type="video/mp4"></video>
-        <div class="video-info">
-          <div class="video-title">${vid.title || 'No Filter Video ' + (i+1)}</div>
-          ${vid.desc ? `<div class="video-desc">${vid.desc}</div>` : ''}
-          <div class="video-date">${vid.date || ''}</div>
+        <div class="nfz-media">
+          <video controls preload="none" playsinline style="width:100%;height:100%;object-fit:cover;"><source src="${vid.dataUrl}" type="video/mp4"></video>
+        </div>
+        <div class="nfz-info">
+          <div class="nfz-title">${vid.title || 'No Filter Video ' + (i+1)}</div>
+          ${vid.desc ? `<div class="nfz-desc">${vid.desc}</div>` : ''}
+          <div class="nfz-date">${vid.date || ''}</div>
         </div>`;
     } else {
       slot.innerHTML = `
-        <div class="video-placeholder"><i class="fab fa-tiktok"></i><span>Slot ${i+1}</span><small>Coming Soon</small></div>
-        <div class="video-info">
-          <div class="video-title">TikTok Slot ${i+1}</div>
-          <div class="video-date">Upload via Admin Panel</div>
+        <div class="nfz-media nfz-empty">
+          <i class="fab fa-tiktok"></i>
+          <span>Slot ${i+1}</span>
+          <small>Upload via Admin Panel</small>
+        </div>
+        <div class="nfz-info">
+          <div class="nfz-title">TikTok Slot ${i+1}</div>
+          <div class="nfz-date">1080 × 1920 · 9:16</div>
         </div>`;
     }
     container.appendChild(slot);
