@@ -120,14 +120,24 @@ function getCatLabel(article) {
 
 // ---- RENDER: Featured big hero + side stack ----
 // ---- CATEGORY FALLBACK IMAGES ----
+// Rotating pool — cycles so no two cards ever share the same fallback
+const _imgPool = [
+  'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&q=80', // Capitol building
+  'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80', // Globe/world
+  'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80', // Newspaper
+  'https://images.unsplash.com/photo-1541872705-1f73c6400ec9?w=800&q=80',    // US flag
+  'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80', // Courtroom/law
+  'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80',    // Diplomats/summit
+  'https://images.unsplash.com/photo-1568992688065-536aad8a12f6?w=800&q=80', // Senate/government
+  'https://images.unsplash.com/photo-1575320181282-9afab399332c?w=800&q=80', // Press conference
+  'https://images.unsplash.com/photo-1569163139394-de4e5f43e5ca?w=800&q=80', // White House
+];
+let _imgPoolIdx = 0;
 function getCategoryImage(cats) {
-  const c = (cats || []).map(x => x.toLowerCase());
-  // Use reliable Unsplash source images by category
-  if (c.includes('world'))    return 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80';
-  if (c.includes('politics')) return 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&q=80';
-  if (c.includes('top'))      return 'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80';
-  // Default — US Capitol / news
-  return 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&q=80';
+  // Always return next unique image from pool — never repeats until all 9 used
+  const img = _imgPool[_imgPoolIdx % _imgPool.length];
+  _imgPoolIdx++;
+  return img;
 }
 
 function renderFeatured(articles) {
