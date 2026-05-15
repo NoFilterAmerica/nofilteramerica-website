@@ -85,12 +85,18 @@
       </div>
     </div>
 
-    <!-- Contact Form -->
+    <!-- Contact Form — Netlify Forms -->
     <div class="contact-form">
       <h2 style="font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:8px;font-size:1.6rem;">SEND A MESSAGE</h2>
       <p style="color:var(--gray);font-size:13px;margin-bottom:30px;letter-spacing:0.5px;">All messages go directly to our team. We read everything.</p>
 
-      <form id="contactForm" onsubmit="submitContact(event)">
+      <!-- netlify attribute activates Netlify Forms automatically on deploy -->
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success.html">
+        <!-- Hidden field required by Netlify -->
+        <input type="hidden" name="form-name" value="contact"/>
+        <!-- Honeypot spam filter (hidden from real users) -->
+        <p style="display:none;"><label>Don't fill this out: <input name="bot-field"/></label></p>
+
         <div class="form-row">
           <div class="form-group">
             <label for="firstName">First Name</label>
@@ -113,10 +119,7 @@
           <label for="message">Message</label>
           <textarea id="message" name="message" placeholder="Tell us what's on your mind. We don't filter anything here." required></textarea>
         </div>
-        <button type="submit" class="submit-btn" id="submitBtn">SEND MESSAGE</button>
-        <div class="success-msg" id="successMsg">
-          ✅ Message sent! We'll get back to you soon.
-        </div>
+        <button type="submit" class="submit-btn">SEND MESSAGE</button>
       </form>
     </div>
   </section>
@@ -148,40 +151,5 @@
   </footer>
 
   <script src="app.js"></script>
-  <script>
-    async function submitContact(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      btn.textContent = 'SENDING...';
-      btn.disabled = true;
-
-      const formData = {
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value,
-      };
-
-      // Send via Formspree (free form backend) — replace YOUR_FORM_ID
-      // OR: wire to your Microsoft account via Power Automate / SMTP
-      try {
-        const res = await fetch('https://formspree.io/f/news@nofilteramerica.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ ...formData, _replyto: formData.email })
-        });
-        document.getElementById('successMsg').style.display = 'block';
-        document.getElementById('contactForm').reset();
-      } catch(err) {
-        // Fallback: open mail client
-        const body = encodeURIComponent(`Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\n\n${formData.message}`);
-        window.location.href = `mailto:news@nofilteramerica.com?subject=${encodeURIComponent(formData.subject)}&body=${body}`;
-      }
-
-      btn.textContent = 'SEND MESSAGE';
-      btn.disabled = false;
-    }
-  </script>
 </body>
 </html>
