@@ -115,6 +115,17 @@ function getCatLabel(article) {
 }
 
 // ---- RENDER: Featured big hero + side stack ----
+// ---- CATEGORY FALLBACK IMAGES ----
+function getCategoryImage(cats) {
+  const c = (cats || []).map(x => x.toLowerCase());
+  // Use reliable Unsplash source images by category
+  if (c.includes('world'))    return 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80';
+  if (c.includes('politics')) return 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&q=80';
+  if (c.includes('top'))      return 'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80';
+  // Default — US Capitol / news
+  return 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&q=80';
+}
+
 function renderFeatured(articles) {
   const layout = document.getElementById('featuredLayout');
   if (!layout || articles.length === 0) return;
@@ -123,9 +134,9 @@ function renderFeatured(articles) {
   const sideItems = articles.slice(1, 4);
   const { label, cls } = getCatLabel(hero);
 
-  const heroImgHtml = hero.image_url
-    ? `<img class="featured-hero-img" src="${hero.image_url}" alt="${hero.title}" onerror="this.parentNode.innerHTML='<div class=featured-hero-img-placeholder><i class=fas fa-newspaper></i></div>'">`
-    : `<div class="featured-hero-img-placeholder"><i class="fas fa-newspaper"></i></div>`;
+  // Use article image, or a category-specific fallback image
+  const heroFallback = getCategoryImage(hero.category);
+  const heroImgHtml = `<img class="featured-hero-img" src="${hero.image_url || heroFallback}" alt="${hero.title}" onerror="this.src='${heroFallback}'">`;
 
   const heroHtml = `
     <a class="featured-hero" href="${hero.link || '#'}" target="_blank" rel="noopener">
@@ -142,9 +153,8 @@ function renderFeatured(articles) {
     <div class="side-stack">
       ${sideItems.map(a => {
         const { label: l, cls: c } = getCatLabel(a);
-        const imgHtml = a.image_url
-          ? `<img class="stack-card-img" src="${a.image_url}" alt="${a.title}" onerror="this.parentNode.innerHTML='<div class=stack-card-img-placeholder><i class=fas fa-newspaper></i></div>'">`
-          : `<div class="stack-card-img-placeholder"><i class="fas fa-newspaper"></i></div>`;
+        const cardFallback = getCategoryImage(a.category);
+        const imgHtml = `<img class="stack-card-img" src="${a.image_url || cardFallback}" alt="${a.title}" onerror="this.src='${cardFallback}'">`;
         return `
           <a class="stack-card" href="${a.link || '#'}" target="_blank" rel="noopener">
             ${imgHtml}
@@ -178,7 +188,7 @@ function renderNewsCards(articles, append = false) {
     card.target = '_blank';
     card.rel = 'noopener';
     card.innerHTML = `
-      ${article.image_url ? `<img class="card-img" src="${article.image_url}" alt="${article.title}" onerror="this.style.display='none'"/>` : ''}
+      <img class="card-img" src="${article.image_url || getCategoryImage(article.category)}" alt="${article.title}" onerror="this.style.display='none'"/>
       <div class="card-body">
         <div class="card-cat-wrap">
           <span class="card-cat ${partyClass}">${label}</span>
@@ -226,11 +236,13 @@ async function loadNews() {
   // More stories grid: articles 4-9
   renderNewsCards(articles.slice(4, 10), false);
 
-  // Ticker
+  // Ticker — update both spans for seamless infinite loop
   if (articles.length > 0) {
     const headlines = articles.map(a => '★ ' + a.title).join('   ·   ');
-    const ticker = document.getElementById('ticker-text');
-    if (ticker) ticker.textContent = headlines;
+    const t1 = document.getElementById('ticker-text');
+    const t2 = document.getElementById('ticker-text-dupe');
+    if (t1) t1.textContent = headlines;
+    if (t2) t2.textContent = headlines;
   }
 
   // Both Sides: fetch in parallel
@@ -343,6 +355,6 @@ function renderTrueCrimeSlots(containerId) {
 // ---- INIT ----
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('newsGrid') || document.getElementById('featuredLayout')) loadNews();
-  if (document.getElementById('noFilterVideos')) renderPublicVideos('noFilterVideos', 'nofilter_videos', 'video-grid-2');
+  if (document.getElementById('noFilterVideos')) renderPublicVideos('noFilterVideos', 'nofilter_videos', 'video-grid-3');
   if (document.getElementById('trueCrimeSlots')) renderTrueCrimeSlots('trueCrimeSlots');
 });
