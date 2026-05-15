@@ -19,12 +19,15 @@ async function fetchTopNews(cursor = null) {
     const data = await res.json();
     if (data.status === 'success') {
       nextPageCursor = data.nextPage || null;
-      // Filter out sports/entertainment
-      const blocked = ['sport','sports','entertainment','lifestyle','food','health','tech','science'];
-      return (data.results || []).filter(a => {
+      // Filter out sports/entertainment — keep enough articles for layout
+      const blocked = ['sport','sports','entertainment','lifestyle','food'];
+      const all = data.results || [];
+      const filtered = all.filter(a => {
         const cats = (a.category || []).map(c => c.toLowerCase());
         return !cats.some(c => blocked.includes(c));
       });
+      // If filtering leaves us short, fall back to unfiltered results
+      return filtered.length >= 11 ? filtered : all;
     }
     return getSampleStories();
   } catch(e) {
