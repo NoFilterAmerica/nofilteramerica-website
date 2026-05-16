@@ -185,6 +185,11 @@
             <label>TikTok Video URL</label>
             <input type="url" id="nfUrl0" placeholder="https://www.tiktok.com/@nofilteramerica/video/..." style="width:100%;"/>
           </div>
+          <div class="form-group">
+            <label>Thumbnail Image URL <span style="color:var(--gray);font-weight:400;">(screenshot or promo image)</span></label>
+            <input type="url" id="nfThumb0" placeholder="https://... paste any image URL" style="width:100%;"/>
+            <div id="nfThumbPreview0" style="margin-top:8px;display:none;"><img id="nfThumbImg0" src="" alt="Preview" style="width:120px;height:200px;object-fit:cover;border-radius:6px;border:1px solid var(--border-gold);"/></div>
+          </div>
           <button onclick="saveNFSlot(0)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
             <i class="fas fa-cloud-upload-alt"></i> Save Slot 1 to Site
           </button>
@@ -207,6 +212,11 @@
             <label>TikTok Video URL</label>
             <input type="url" id="nfUrl1" placeholder="https://www.tiktok.com/@nofilteramerica/video/..." style="width:100%;"/>
           </div>
+          <div class="form-group">
+            <label>Thumbnail Image URL <span style="color:var(--gray);font-weight:400;">(screenshot or promo image)</span></label>
+            <input type="url" id="nfThumb1" placeholder="https://... paste any image URL" style="width:100%;"/>
+            <div id="nfThumbPreview1" style="margin-top:8px;display:none;"><img id="nfThumbImg1" src="" alt="Preview" style="width:120px;height:200px;object-fit:cover;border-radius:6px;border:1px solid var(--border-gold);"/></div>
+          </div>
           <button onclick="saveNFSlot(1)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
             <i class="fas fa-cloud-upload-alt"></i> Save Slot 2 to Site
           </button>
@@ -228,6 +238,11 @@
           <div class="form-group">
             <label>TikTok Video URL</label>
             <input type="url" id="nfUrl2" placeholder="https://www.tiktok.com/@nofilteramerica/video/..." style="width:100%;"/>
+          </div>
+          <div class="form-group">
+            <label>Thumbnail Image URL <span style="color:var(--gray);font-weight:400;">(screenshot or promo image)</span></label>
+            <input type="url" id="nfThumb2" placeholder="https://... paste any image URL" style="width:100%;"/>
+            <div id="nfThumbPreview2" style="margin-top:8px;display:none;"><img id="nfThumbImg2" src="" alt="Preview" style="width:120px;height:200px;object-fit:cover;border-radius:6px;border:1px solid var(--border-gold);"/></div>
           </div>
           <button onclick="saveNFSlot(2)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
             <i class="fas fa-cloud-upload-alt"></i> Save Slot 3 to Site
@@ -435,6 +450,15 @@
             document.getElementById('nfTitle' + i).value = v.title || '';
             document.getElementById('nfDesc' + i).value = v.description || '';
             document.getElementById('nfUrl' + i).value = v.video_url || '';
+            const thumbEl = document.getElementById('nfThumb' + i);
+            if (thumbEl) {
+              thumbEl.value = v.thumbnail_url || '';
+              if (v.thumbnail_url) {
+                const pr = document.getElementById('nfThumbPreview' + i);
+                const im = document.getElementById('nfThumbImg' + i);
+                if (pr && im) { im.src = v.thumbnail_url; pr.style.display = 'block'; }
+              }
+            }
             if (v.video_url) {
               const el = document.getElementById('nfCurrent' + i);
               if (el) el.innerHTML = '<p style="color:#4caf50;font-size:12px;margin-top:6px;">✅ Saved: ' + v.title + '</p><p style="color:#8899aa;font-size:11px;">' + v.video_url + '</p>';
@@ -469,6 +493,7 @@
     const title = (document.getElementById('nfTitle' + i).value || '').trim();
     const desc  = (document.getElementById('nfDesc'  + i).value || '').trim();
     const url   = (document.getElementById('nfUrl'   + i).value || '').trim();
+    const thumb = (document.getElementById('nfThumb' + i) ? document.getElementById('nfThumb' + i).value : '').trim();
     const successEl = document.getElementById('nfSuccess' + i);
 
     if (!title) { showToast('⚠️ Please enter a title.', 'error'); return; }

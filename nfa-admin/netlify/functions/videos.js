@@ -76,13 +76,13 @@ exports.handler = async (event) => {
     // POST: save a slot
     if (method === 'POST' && action === 'save') {
       const body = JSON.parse(event.body || '{}');
-      const { section, slot, title, description, story_line, video_url } = body;
+      const { section, slot, title, description, story_line, video_url, thumbnail_url } = body;
       const { data, sha } = await getFileFromGitHub();
 
       if (!data[section]) data[section] = [];
       // Find existing slot or add new
       const idx = data[section].findIndex(v => v.slot === Number(slot));
-      const record = { slot: Number(slot), title, description, story_line: story_line || '', video_url, updated: new Date().toISOString() };
+      const record = { slot: Number(slot), title, description, story_line: story_line || '', video_url, thumbnail_url: thumbnail_url || '', updated: new Date().toISOString() };
       if (idx >= 0) {
         data[section][idx] = record;
       } else {
@@ -103,7 +103,7 @@ exports.handler = async (event) => {
       if (data[section]) {
         const idx = data[section].findIndex(v => v.slot === Number(slot));
         if (idx >= 0) {
-          data[section][idx] = { slot: Number(slot), title: '', description: '', story_line: '', video_url: '' };
+          data[section][idx] = { slot: Number(slot), title: '', description: '', story_line: '', video_url: '', thumbnail_url: '' };
         }
       }
 

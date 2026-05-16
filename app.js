@@ -357,22 +357,18 @@ async function renderPublicVideos(containerId, storageKey, gridClass = 'video-gr
     const slot = document.createElement('div');
     slot.className = 'nfz-slot';
     if (vid && vid.video_url) {
-      const embedUrl = getTikTokEmbedUrl(vid.video_url);
-      const isEmbed = embedUrl && embedUrl.includes('tiktok.com/embed');
+      const hasThumbnail = vid.thumbnail_url && vid.thumbnail_url.trim();
       slot.innerHTML = `
-        <div class="nfz-media">
-          ${isEmbed
-            ? `<iframe src="${embedUrl}" allowfullscreen scrolling="no" allow="encrypted-media;" style="width:100%;height:100%;border:none;border-radius:8px;"></iframe>`
-            : `<a href="${vid.video_url}" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--gold);text-decoration:none;gap:12px;">
-                <i class="fab fa-tiktok" style="font-size:3rem;"></i>
-                <span style="font-size:14px;font-weight:600;">Watch on TikTok</span>
-               </a>`
-          }
-        </div>
+        <a href="${vid.video_url}" target="_blank" rel="noopener" class="nfz-media nfz-thumb-link" style="${hasThumbnail ? `background-image:url('${vid.thumbnail_url}');background-size:cover;background-position:center top;` : ''}">
+          <div class="nfz-thumb-overlay">
+            <i class="fab fa-tiktok" style="font-size:2.2rem;"></i>
+            <span style="font-size:13px;font-weight:700;letter-spacing:1px;">WATCH ON TIKTOK</span>
+          </div>
+        </a>
         <div class="nfz-info">
           <div class="nfz-title">${vid.title || 'No Filter Video ' + (i+1)}</div>
           ${vid.description ? `<div class="nfz-desc">${vid.description}</div>` : ''}
-          <a href="${vid.video_url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-size:12px;color:var(--gold);text-decoration:none;"><i class="fab fa-tiktok"></i> Watch on TikTok</a>
+          <a href="${vid.video_url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;color:var(--gold);text-decoration:none;font-weight:600;letter-spacing:1px;"><i class="fab fa-tiktok"></i> Watch on TikTok</a>
         </div>`;
     } else {
       slot.innerHTML = `
