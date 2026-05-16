@@ -394,40 +394,45 @@ async function renderTrueCrimeSlots(containerId) {
   container.className = 'video-grid-3';
   container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--gray);"><i class="fas fa-spinner fa-spin" style="font-size:2rem;color:var(--gold);"></i></div>';
 
-  // Fetch from cloud backend
+  // Fetch from GitHub-backed cloud storage
   let allVideos = [];
   try {
-    const res = await fetch(NFA_VIDEO_API + '?action=list&section=truecrime');
+    const res = await fetch('https://nofilteramerica-admin.netlify.app/.netlify/functions/videos?action=list&section=truecrime');
     const data = await res.json();
     if (data.ok && Array.isArray(data.data)) {
-      allVideos = data.data.sort((a,b) => a.slot - b.slot);
+      allVideos = data.data.filter(v => v.title).sort((a,b) => a.slot - b.slot);
     }
   } catch(e) { allVideos = []; }
 
   container.innerHTML = '';
-  for (let i = 0; i < 6; i++) {
-    const vid = allVideos.find(v => v.slot === i);
-    const slot = document.createElement('div');
-    slot.className = 'video-slot';
-    if (vid && vid.video_url) {
-      slot.innerHTML = `
-        <video controls preload="none"><source src="${vid.video_url}" type="video/mp4"></video>
-        <div class="video-info">
-          <div class="video-title">${vid.title || 'Case File ' + (i+1)}</div>
-          ${vid.story_line ? `<div class="video-storyline">${vid.story_line}</div>` : ''}
-          ${vid.description ? `<div class="video-desc">${vid.description}</div>` : ''}
-          <div class="video-date">${vid.upload_date || ''}</div>
-        </div>`;
-    } else {
-      slot.innerHTML = `
-        <div class="video-placeholder"><i class="fas fa-gavel"></i><span>Case File ${i+1}</span><small>Coming Soon</small></div>
-        <div class="video-info">
-          <div class="video-title">Case File ${i+1}</div>
-          <div class="video-date">Upload via Admin Panel</div>
-        </div>`;
-    }
-    container.appendChild(slot);
+
+  if (allVideos.length === 0) {
+    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--gray);"><i class="fas fa-gavel" style="font-size:3rem;color:var(--gold);margin-bottom:16px;display:block;"></i><p style="font-size:16px;">Case files coming soon. Stay tuned.</p></div>';
+    return;
   }
+
+  allVideos.forEach((vid, idx) => {
+    const slot = document.createElement('div');
+    slot.className = 'nfz-card';
+    const thumb = vid.thumbnail_url || '';
+    const tiktokUrl = vid.video_url || '#';
+
+    slot.innerHTML = `
+      <a href="${tiktokUrl}" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
+        <div class="nfz-thumb" style="${thumb ? 'background-image:url(' + thumb + ');background-size:cover;background-position:center top;' : 'background:linear-gradient(135deg,#1a0a0a,#2d0a0a);'}">
+          ${!thumb ? '<i class="fas fa-gavel" style="font-size:3rem;color:var(--gold);position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);opacity:0.4;"></i>' : ''}
+          <div class="nfz-overlay">
+            <span class="nfz-watch-badge"><i class="fab fa-tiktok"></i> WATCH ON TIKTOK</span>
+          </div>
+        </div>
+      </a>
+      <div class="nfz-info">
+        <div class="nfz-title">${vid.title || 'Case File ' + (idx+1)}</div>
+        ${vid.description ? '<div class="nfz-desc">' + vid.description + '</div>' : ''}
+        ${tiktokUrl !== '#' ? '<a href="' + tiktokUrl + '" target="_blank" class="nfz-link"><i class="fab fa-tiktok"></i> Watch on TikTok</a>' : ''}
+      </div>`;
+    container.appendChild(slot);
+  });
 }
 
 // ---- INIT ----

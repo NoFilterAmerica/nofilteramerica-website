@@ -275,48 +275,120 @@
 
       <!-- TRUE CRIME TAB -->
       <div id="tab-truecrime" class="tab-content">
+        <p style="color:var(--gray);font-size:13px;margin-bottom:24px;">Manage up to 3 True Crime case files. Each slot has its own thumbnail, title, description, and TikTok link.</p>
+
+        <!-- TC SLOT 0 -->
         <div class="admin-card">
-          <h3>Upload True Crime Video</h3>
+          <h3>🔪 Case File 1</h3>
           <div class="form-group">
             <label>Case Title</label>
-            <input type="text" id="tcTitle" placeholder="e.g. The Disappearance of Jane Doe"/>
+            <input type="text" id="tcTitle0" placeholder="e.g. The Disappearance of Jane Doe"/>
           </div>
           <div class="form-group">
-            <label>Story Description / Case Summary</label>
-            <textarea id="tcDesc" rows="3" placeholder="Summarize the case — what happened, who was involved, key details..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+            <label>Case Description</label>
+            <textarea id="tcDesc0" rows="3" placeholder="Summarize the case — what happened, who was involved, key details..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
           </div>
           <div class="form-group">
-            <label>Story Line (short tagline)</label>
-            <input type="text" id="tcStoryLine" placeholder="e.g. A cold case reopened 20 years later..."/>
+            <label>Story Line <span style="color:var(--gray);font-weight:400;">(short tagline)</span></label>
+            <input type="text" id="tcStory0" placeholder="e.g. A cold case reopened 20 years later..."/>
           </div>
           <div class="form-group">
-            <label>Assign to Slot</label>
-            <select class="slot-select" id="tcSlot">
-              <option value="0">Case File 1</option>
-              <option value="1">Case File 2</option>
-              <option value="2">Case File 3</option>
-              <option value="3">Case File 4</option>
-              <option value="4">Case File 5</option>
-              <option value="5">Case File 6</option>
-            </select>
+            <label>TikTok Video URL</label>
+            <input type="url" id="tcUrl0" placeholder="https://www.tiktok.com/@nofilteramerica/video/..."/>
           </div>
-          <label class="upload-zone" for="tcFileInput" id="tcDropZone">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p>Drag & drop your MP4 here</p>
-            <strong>or click to browse files</strong>
-            <input type="file" id="tcFileInput" accept="video/mp4,video/*" onchange="handleUpload('truecrime', this)"/>
-          </label>
-          <div class="progress-bar-wrap" id="tcProgress">
-            <div class="progress-bar" id="tcProgressBar" style="width:0%"></div>
+          <div class="form-group">
+            <label>Thumbnail Image <span style="color:var(--gray);font-weight:400;">(upload from your device)</span></label>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px;">
+              <label for="tcThumbFile0" id="tcThumbBtn0" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy3);border:1px solid var(--border-gold);color:var(--gold);padding:10px 18px;border-radius:4px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:1px;white-space:nowrap;">
+                <i class="fas fa-image"></i> Choose Image
+              </label>
+              <span id="tcThumbFileName0" style="font-size:12px;color:var(--gray);">No file chosen</span>
+            </div>
+            <input type="file" id="tcThumbFile0" accept="image/*" style="display:none;" onchange="document.getElementById('tcThumbFileName0').textContent=this.files[0]?this.files[0].name:'No file chosen'; uploadThumb(this,'tcThumb0','tcThumbImg0','tcThumbPreview0',document.getElementById('tcThumbBtn0'))"/>
+            <input type="hidden" id="tcThumb0" value=""/>
+            <div id="tcThumbPreview0" style="margin-top:8px;display:none;"><img id="tcThumbImg0" src="" alt="Preview" style="width:120px;height:200px;object-fit:cover;border-radius:6px;border:1px solid var(--border-gold);"/></div>
           </div>
-          <div class="success-msg" id="tcSuccess">✅ Video uploaded to slot!</div>
+          <button onclick="saveTCSlot(0)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
+            <i class="fas fa-cloud-upload-alt"></i> Save Case File 1 to Site
+          </button>
+          <div class="success-msg" id="tcSuccess0" style="display:none;margin-top:8px;">✅ Case File 1 live on site!</div>
+          <div id="tcCurrent0" style="margin-top:8px;"></div>
         </div>
 
+        <!-- TC SLOT 1 -->
         <div class="admin-card">
-          <h3>Current Case File Slots</h3>
-          <div class="video-list" id="tcVideoList">
-            <!-- rendered by JS -->
+          <h3>🔪 Case File 2</h3>
+          <div class="form-group">
+            <label>Case Title</label>
+            <input type="text" id="tcTitle1" placeholder="e.g. The Disappearance of Jane Doe"/>
           </div>
+          <div class="form-group">
+            <label>Case Description</label>
+            <textarea id="tcDesc1" rows="3" placeholder="Summarize the case..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Story Line <span style="color:var(--gray);font-weight:400;">(short tagline)</span></label>
+            <input type="text" id="tcStory1" placeholder="e.g. A cold case reopened 20 years later..."/>
+          </div>
+          <div class="form-group">
+            <label>TikTok Video URL</label>
+            <input type="url" id="tcUrl1" placeholder="https://www.tiktok.com/@nofilteramerica/video/..."/>
+          </div>
+          <div class="form-group">
+            <label>Thumbnail Image <span style="color:var(--gray);font-weight:400;">(upload from your device)</span></label>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px;">
+              <label for="tcThumbFile1" id="tcThumbBtn1" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy3);border:1px solid var(--border-gold);color:var(--gold);padding:10px 18px;border-radius:4px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:1px;white-space:nowrap;">
+                <i class="fas fa-image"></i> Choose Image
+              </label>
+              <span id="tcThumbFileName1" style="font-size:12px;color:var(--gray);">No file chosen</span>
+            </div>
+            <input type="file" id="tcThumbFile1" accept="image/*" style="display:none;" onchange="document.getElementById('tcThumbFileName1').textContent=this.files[0]?this.files[0].name:'No file chosen'; uploadThumb(this,'tcThumb1','tcThumbImg1','tcThumbPreview1',document.getElementById('tcThumbBtn1'))"/>
+            <input type="hidden" id="tcThumb1" value=""/>
+            <div id="tcThumbPreview1" style="margin-top:8px;display:none;"><img id="tcThumbImg1" src="" alt="Preview" style="width:120px;height:200px;object-fit:cover;border-radius:6px;border:1px solid var(--border-gold);"/></div>
+          </div>
+          <button onclick="saveTCSlot(1)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
+            <i class="fas fa-cloud-upload-alt"></i> Save Case File 2 to Site
+          </button>
+          <div class="success-msg" id="tcSuccess1" style="display:none;margin-top:8px;">✅ Case File 2 live on site!</div>
+          <div id="tcCurrent1" style="margin-top:8px;"></div>
+        </div>
+
+        <!-- TC SLOT 2 -->
+        <div class="admin-card">
+          <h3>🔪 Case File 3</h3>
+          <div class="form-group">
+            <label>Case Title</label>
+            <input type="text" id="tcTitle2" placeholder="e.g. The Disappearance of Jane Doe"/>
+          </div>
+          <div class="form-group">
+            <label>Case Description</label>
+            <textarea id="tcDesc2" rows="3" placeholder="Summarize the case..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Story Line <span style="color:var(--gray);font-weight:400;">(short tagline)</span></label>
+            <input type="text" id="tcStory2" placeholder="e.g. A cold case reopened 20 years later..."/>
+          </div>
+          <div class="form-group">
+            <label>TikTok Video URL</label>
+            <input type="url" id="tcUrl2" placeholder="https://www.tiktok.com/@nofilteramerica/video/..."/>
+          </div>
+          <div class="form-group">
+            <label>Thumbnail Image <span style="color:var(--gray);font-weight:400;">(upload from your device)</span></label>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px;">
+              <label for="tcThumbFile2" id="tcThumbBtn2" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy3);border:1px solid var(--border-gold);color:var(--gold);padding:10px 18px;border-radius:4px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:1px;white-space:nowrap;">
+                <i class="fas fa-image"></i> Choose Image
+              </label>
+              <span id="tcThumbFileName2" style="font-size:12px;color:var(--gray);">No file chosen</span>
+            </div>
+            <input type="file" id="tcThumbFile2" accept="image/*" style="display:none;" onchange="document.getElementById('tcThumbFileName2').textContent=this.files[0]?this.files[0].name:'No file chosen'; uploadThumb(this,'tcThumb2','tcThumbImg2','tcThumbPreview2',document.getElementById('tcThumbBtn2'))"/>
+            <input type="hidden" id="tcThumb2" value=""/>
+            <div id="tcThumbPreview2" style="margin-top:8px;display:none;"><img id="tcThumbImg2" src="" alt="Preview" style="width:120px;height:200px;object-fit:cover;border-radius:6px;border:1px solid var(--border-gold);"/></div>
+          </div>
+          <button onclick="saveTCSlot(2)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
+            <i class="fas fa-cloud-upload-alt"></i> Save Case File 3 to Site
+          </button>
+          <div class="success-msg" id="tcSuccess2" style="display:none;margin-top:8px;">✅ Case File 3 live on site!</div>
+          <div id="tcCurrent2" style="margin-top:8px;"></div>
         </div>
       </div>
 
@@ -499,9 +571,18 @@
             document.getElementById('tcDesc' + i).value = v.description || '';
             document.getElementById('tcStory' + i).value = v.story_line || '';
             document.getElementById('tcUrl' + i).value = v.video_url || '';
-            if (v.video_url) {
+            const thumbEl = document.getElementById('tcThumb' + i);
+            if (thumbEl) {
+              thumbEl.value = v.thumbnail_url || '';
+              if (v.thumbnail_url) {
+                const pr = document.getElementById('tcThumbPreview' + i);
+                const im = document.getElementById('tcThumbImg' + i);
+                if (pr && im) { im.src = v.thumbnail_url; pr.style.display = 'block'; }
+              }
+            }
+            if (v.title) {
               const el = document.getElementById('tcCurrent' + i);
-              if (el) el.innerHTML = '<p style="color:#4caf50;font-size:12px;margin-top:6px;">✅ Saved: ' + v.title + '</p>';
+              if (el) el.innerHTML = '<p style="color:#4caf50;font-size:12px;margin-top:6px;">✅ Saved: ' + v.title + '</p>' + (v.video_url ? '<p style="color:#8899aa;font-size:11px;">' + v.video_url + '</p>' : '');
             }
           }
         });
@@ -579,15 +660,16 @@
     const desc  = (document.getElementById('tcDesc'  + i).value || '').trim();
     const story = (document.getElementById('tcStory' + i).value || '').trim();
     const url   = (document.getElementById('tcUrl'   + i).value || '').trim();
+    const thumb = (document.getElementById('tcThumb' + i) ? document.getElementById('tcThumb' + i).value : '').trim();
     const successEl = document.getElementById('tcSuccess' + i);
 
     if (!title) { showToast('⚠️ Please enter a title.', 'error'); return; }
 
     showToast('💾 Saving...');
     try {
-      await apiSave('truecrime', i, title, desc, story, url);
-      if (successEl) { successEl.style.display = 'block'; successEl.textContent = '✅ TC Slot ' + (i+1) + ' live on site!'; }
-      showToast('✅ True Crime Slot ' + (i+1) + ' saved!');
+      await apiSave('truecrime', i, title, desc, story, url, thumb);
+      if (successEl) { successEl.style.display = 'block'; successEl.textContent = '✅ Case File ' + (i+1) + ' live on site!'; }
+      showToast('✅ Case File ' + (i+1) + ' saved!');
       const el = document.getElementById('tcCurrent' + i);
       if (el) el.innerHTML = '<p style="color:#4caf50;font-size:12px;margin-top:6px;">✅ ' + title + '</p>';
     } catch(e) {
