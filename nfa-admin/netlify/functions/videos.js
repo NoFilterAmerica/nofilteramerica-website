@@ -1,4 +1,4 @@
-// NFA Video Management — Netlify Serverless Function
+// NFA Video + Investigations Management — Netlify Serverless Function
 // Uses GitHub repo file as persistent storage (no npm packages needed)
 // Set GITHUB_TOKEN and GITHUB_REPO in Netlify environment variables
 
@@ -37,7 +37,7 @@ async function saveFileToGitHub(data, sha) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      message: 'Update NFA video data',
+      message: 'Update NFA data',
       content,
       sha,
     })
@@ -47,6 +47,38 @@ async function saveFileToGitHub(data, sha) {
     throw new Error(`GitHub write failed: ${res.status} - ${err}`);
   }
   return await res.json();
+}
+
+// Upload a binary file (image/PDF) to GitHub
+async function uploadFileToGitHub(filePath, base64Content, mimeType) {
+  // Check if file exists to get sha for update
+  let sha = undefined;
+  const checkRes = await fetch(`${GITHUB_API}/repos/${GITHUB_REPO}/contents/${filePath}`, {
+    headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Accept': 'application/vnd.github.v3+json' }
+  });
+  if (checkRes.ok) {
+    const existing = await checkRes.json();
+    sha = existing.sha;
+  }
+
+  const body = { message: `Upload NFA investigation file: ${filePath}`, content: base64Content };
+  if (sha) body.sha = sha;
+
+  const res = await fetch(`${GITHUB_API}/repos/${GITHUB_REPO}/contents/${filePath}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `token ${GITHUB_TOKEN}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`GitHub file upload failed: ${res.status} - ${err}`);
+  }
+  const result = await res.json();
+  return result.content.download_url;
 }
 
 exports.handler = async (event) => {
@@ -63,7 +95,7 @@ exports.handler = async (event) => {
     const params = event.queryStringParameters || {};
     const action = params.action;
 
-    // GET: list videos
+    // ─── GET: list ───────────────────────────────────────────────
     if (method === 'GET' && action === 'list') {
       const { data } = await getFileFromGitHub();
       const section = params.section;
@@ -73,14 +105,22 @@ exports.handler = async (event) => {
       };
     }
 
-    // POST: save a slot
+    // ─── GET: single investigation by id ─────────────────────────
+    if (method === 'GET' && action === 'get') {
+      const { data } = await getFileFromGitHub();
+      const id = params.id;
+      const inv = (data.investigations || []).find(i => i.id === id);
+      if (!inv) return { statusCode: 404, headers, body: JSON.stringify({ error: 'Not found' }) };
+      return { statusCode: 200, headers, body: JSON.stringify({ ok: true, data: inv }) };
+    }
+
+    // ─── POST: save a video slot ──────────────────────────────────
     if (method === 'POST' && action === 'save') {
       const body = JSON.parse(event.body || '{}');
       const { section, slot, title, description, story_line, video_url, thumbnail_url } = body;
       const { data, sha } = await getFileFromGitHub();
 
       if (!data[section]) data[section] = [];
-      // Find existing slot or add new
       const idx = data[section].findIndex(v => v.slot === Number(slot));
       const record = { slot: Number(slot), title, description, story_line: story_line || '', video_url, thumbnail_url: thumbnail_url || '', updated: new Date().toISOString() };
       if (idx >= 0) {
@@ -94,7 +134,69 @@ exports.handler = async (event) => {
       return { statusCode: 200, headers, body: JSON.stringify({ ok: true, record }) };
     }
 
-    // POST: delete a slot
+    // ─── POST: save investigation ─────────────────────────────────
+    if (method === 'POST' && action === 'save_investigation') {
+      const body = JSON.parse(event.body || '{}');
+      const { data, sha } = await getFileFromGitHub();
+      if (!data.investigations) data.investigations = [];
+
+      const now = new Date().toISOString();
+      const inv = body;
+
+      if (inv.id) {
+        // Update existing
+        const idx = data.investigations.findIndex(i => i.id === inv.id);
+        if (idx >= 0) {
+          data.investigations[idx] = { ...data.investigations[idx], ...inv, updated: now };
+        } else {
+          data.investigations.push({ ...inv, created: now, updated: now });
+        }
+      } else {
+        // Create new
+        inv.id = 'inv_' + Date.now();
+        inv.created = now;
+        inv.updated = now;
+        data.investigations.push(inv);
+      }
+
+      // Sort: published first, then by updated desc
+      data.investigations.sort((a, b) => {
+        if (a.status === 'archived' && b.status !== 'archived') return 1;
+        if (b.status === 'archived' && a.status !== 'archived') return -1;
+        return new Date(b.updated) - new Date(a.updated);
+      });
+
+      await saveFileToGitHub(data, sha);
+      return { statusCode: 200, headers, body: JSON.stringify({ ok: true, id: inv.id, data: inv }) };
+    }
+
+    // ─── POST: delete investigation ───────────────────────────────
+    if (method === 'POST' && action === 'delete_investigation') {
+      const body = JSON.parse(event.body || '{}');
+      const { id } = body;
+      const { data, sha } = await getFileFromGitHub();
+      if (data.investigations) {
+        data.investigations = data.investigations.filter(i => i.id !== id);
+      }
+      await saveFileToGitHub(data, sha);
+      return { statusCode: 200, headers, body: JSON.stringify({ ok: true }) };
+    }
+
+    // ─── POST: upload file (image or document) ────────────────────
+    if (method === 'POST' && action === 'upload_file') {
+      const body = JSON.parse(event.body || '{}');
+      const { filename, base64, mime_type } = body;
+      if (!filename || !base64) {
+        return { statusCode: 400, headers, body: JSON.stringify({ error: 'filename and base64 required' }) };
+      }
+      const ext = filename.split('.').pop().toLowerCase();
+      const safeName = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
+      const filePath = `nfa-admin/investigation-files/${Date.now()}_${safeName}`;
+      const url = await uploadFileToGitHub(filePath, base64, mime_type || 'application/octet-stream');
+      return { statusCode: 200, headers, body: JSON.stringify({ ok: true, url }) };
+    }
+
+    // ─── POST: delete a video slot ────────────────────────────────
     if (method === 'POST' && action === 'delete') {
       const body = JSON.parse(event.body || '{}');
       const { section, slot } = body;

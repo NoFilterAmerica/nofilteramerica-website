@@ -440,3 +440,171 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('noFilterVideos')) renderPublicVideos('noFilterVideos', 'nofilter_videos', 'video-grid-3');
   if (document.getElementById('trueCrimeSlots')) renderTrueCrimeSlots('trueCrimeSlots');
 });
+
+// ============================================================
+// NFA INVESTIGATIONS — PUBLIC RENDERING
+// ============================================================
+const INV_API = 'https://nofilteramerica-admin.netlify.app/.netlify/functions/videos';
+
+async function renderInvestigationsGrid() {
+  const container = document.getElementById('invGrid');
+  if (!container) return;
+
+  let investigations = [];
+  try {
+    const res = await fetch(INV_API + '?action=list&section=investigations');
+    const data = await res.json();
+    if (data.ok && Array.isArray(data.data)) {
+      investigations = data.data.filter(i => i && i.title && i.status !== 'draft' && i.status !== 'archived');
+    }
+  } catch(e) { investigations = []; }
+
+  if (investigations.length === 0) {
+    container.innerHTML = `<div class="inv-empty"><i class="fas fa-search"></i><h3>INVESTIGATIONS COMING SOON</h3><p style="margin-top:12px;font-size:14px;color:rgba(255,255,255,0.3);">The first case files are being prepared. Check back soon.</p></div>`;
+    return;
+  }
+
+  const statusLabel = { active:'🔴 ACTIVE', developing:'🟠 DEVELOPING', ongoing:'🔵 ONGOING', updated:'⭐ UPDATED', archived:'⬛ ARCHIVED' };
+
+  container.innerHTML = investigations.map(inv => {
+    const thumb = inv.cover_url || '';
+    const status = inv.status || 'active';
+    const date = inv.updated ? new Date(inv.updated).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) : '';
+    return `
+      <a href="investigation.html?id=${inv.id}" class="inv-card" style="text-decoration:none;">
+        <div class="inv-card-thumb" style="${thumb ? 'background-image:url('+thumb+');background-size:cover;background-position:center;' : ''}">
+          ${!thumb ? '<div class="inv-card-thumb-placeholder"><i class="fas fa-search" style="font-size:2.5rem;color:var(--gold);opacity:0.35;"></i></div>' : ''}
+          <span class="inv-status-badge ${status}">${statusLabel[status] || status.toUpperCase()}</span>
+        </div>
+        <div class="inv-card-body">
+          <div class="inv-card-title">${inv.title}</div>
+          ${inv.summary ? `<div class="inv-card-summary">${inv.summary}</div>` : ''}
+          <div class="inv-card-meta">
+            <span>${date}</span>
+            <span class="inv-card-cta">READ CASE FILE →</span>
+          </div>
+        </div>
+      </a>`;
+  }).join('');
+}
+
+async function renderInvestigationPage() {
+  const container = document.getElementById('invPage');
+  if (!container) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  if (!id) { container.innerHTML = '<p style="text-align:center;color:var(--gray);padding:60px;">No investigation ID provided.</p>'; return; }
+
+  try {
+    const res = await fetch(INV_API + '?action=get&section=investigations&id=' + id);
+    const data = await res.json();
+    if (!data.ok || !data.data) throw new Error('Investigation not found');
+    const inv = data.data;
+
+    const statusLabel = { active:'🔴 ACTIVE', developing:'🟠 DEVELOPING', ongoing:'🔵 ONGOING', updated:'⭐ UPDATED', archived:'⬛ ARCHIVED' };
+    const statusClass = inv.status || 'active';
+    const date = inv.updated ? new Date(inv.updated).toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'}) : '';
+
+    // Update page title
+    document.title = inv.title + ' – NFA Investigations | No Filter America';
+
+    let html = `
+      <a href="investigations.html" class="inv-back-btn"><i class="fas fa-arrow-left"></i> BACK TO INVESTIGATIONS</a>
+      <div class="inv-page-header">
+        <div class="inv-page-status"><span class="inv-status-badge ${statusClass}">${statusLabel[statusClass] || statusClass.toUpperCase()}</span></div>
+        <h1 class="inv-page-title">${inv.title}</h1>
+        <div class="inv-page-meta">NFA INVESTIGATIONS · ${date}${inv.status ? ' · STATUS: ' + (statusLabel[inv.status]||inv.status).toUpperCase() : ''}</div>
+      </div>`;
+
+    // Cover image
+    if (inv.cover_url) {
+      html += `<img src="${inv.cover_url}" alt="${inv.title}" style="width:100%;max-height:420px;object-fit:cover;border-radius:8px;margin-bottom:40px;border:1px solid var(--border);"/>`;
+    }
+
+    // Key Findings
+    if (inv.findings && inv.findings.length > 0) {
+      html += `<div class="inv-section-label"><i class="fas fa-exclamation-triangle"></i> KEY FINDINGS</div>
+        <div class="inv-findings" style="margin-bottom:40px;">
+          ${inv.findings.map((f,i) => `<div class="inv-finding-item"><div class="inv-finding-num">${i+1}</div><div>${f}</div></div>`).join('')}
+        </div>`;
+    }
+
+    // Full Story
+    if (inv.story) {
+      html += `<div class="inv-section-label"><i class="fas fa-file-alt"></i> FULL INVESTIGATION</div>
+        <div class="inv-story-content">${inv.story.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('')}</div>`;
+    }
+
+    // Timeline
+    if (inv.timeline && inv.timeline.length > 0) {
+      html += `<div class="inv-section-label"><i class="fas fa-history"></i> TIMELINE OF EVENTS</div>
+        <div class="inv-timeline" style="margin-bottom:40px;">
+          ${inv.timeline.map(t => `<div class="inv-timeline-item"><div class="inv-timeline-date">${t.date}</div><div class="inv-timeline-event">${t.event}</div></div>`).join('')}
+        </div>`;
+    }
+
+    // Documents
+    if (inv.documents && inv.documents.length > 0) {
+      const docIcon = (type) => {
+        if (!type) return 'fa-file';
+        if (type.includes('pdf')) return 'fa-file-pdf';
+        if (type.includes('image')) return 'fa-file-image';
+        if (type.includes('word') || type.includes('doc')) return 'fa-file-word';
+        return 'fa-file-alt';
+      };
+      const docClass = (type) => {
+        if (!type) return 'inv-doc-other';
+        if (type.includes('pdf')) return 'inv-doc-pdf';
+        if (type.includes('image')) return 'inv-doc-img';
+        if (type.includes('word') || type.includes('doc')) return 'inv-doc-doc';
+        return 'inv-doc-other';
+      };
+      html += `<div class="inv-section-label"><i class="fas fa-folder-open"></i> EVIDENCE & DOCUMENTS</div>
+        <div class="inv-docs-grid" style="margin-bottom:40px;">
+          ${inv.documents.map(d => `
+            <a href="${d.url}" target="_blank" class="inv-doc-item ${docClass(d.type)}">
+              <i class="fas ${docIcon(d.type)}" style="font-size:2rem;"></i>
+              <div class="doc-name">${d.name}</div>
+              <div class="doc-type">${(d.type||'file').split('/').pop().toUpperCase()}</div>
+            </a>`).join('')}
+        </div>`;
+    }
+
+    // TikTok references
+    if (inv.tiktoks && inv.tiktoks.length > 0) {
+      html += `<div class="inv-section-label"><i class="fab fa-tiktok"></i> TIKTOK REFERENCES</div>
+        <div class="inv-tiktok-list" style="margin-bottom:40px;">
+          ${inv.tiktoks.map((url, i) => `
+            <a href="${url}" target="_blank" rel="noopener" class="inv-tiktok-item">
+              <i class="fab fa-tiktok"></i>
+              <span>TikTok Reference ${i+1} — Watch Clip</span>
+              <i class="fas fa-external-link-alt" style="margin-left:auto;font-size:11px;opacity:0.4;"></i>
+            </a>`).join('')}
+        </div>`;
+    }
+
+    // Sources
+    if (inv.sources && inv.sources.length > 0) {
+      const srcClass = { primary:'inv-source-primary', govt:'inv-source-govt', news:'inv-source-news', social:'inv-source-social', unverified:'inv-source-unverified' };
+      const srcLabel = { primary:'PRIMARY SOURCE', govt:'GOV\'T DOCUMENT', news:'NEWS ARTICLE', social:'SOCIAL MEDIA', unverified:'UNVERIFIED' };
+      html += `<div class="inv-section-label"><i class="fas fa-link"></i> SOURCE CREDIBILITY</div>
+        <div class="inv-sources-list">
+          ${inv.sources.map(s => `
+            <div class="inv-source-item">
+              <span class="inv-source-badge ${srcClass[s.type]||'inv-source-news'}">${srcLabel[s.type]||s.type.toUpperCase()}</span>
+              <div class="inv-source-text">${s.url ? `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>` : s.label}</div>
+            </div>`).join('')}
+        </div>`;
+    }
+
+    container.innerHTML = html;
+  } catch(e) {
+    container.innerHTML = `<div style="text-align:center;padding:80px 30px;"><i class="fas fa-exclamation-circle" style="font-size:3rem;color:var(--gold);opacity:0.4;margin-bottom:20px;display:block;"></i><p style="color:var(--gray);">Case file not found or could not be loaded.</p><a href="investigations.html" style="color:var(--gold);margin-top:16px;display:inline-block;">← Back to Investigations</a></div>`;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('invGrid')) renderInvestigationsGrid();
+  if (document.getElementById('invPage')) renderInvestigationPage();
+});

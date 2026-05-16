@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Investigation – No Filter America</title>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#07101e"/>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-label">🔴 BREAKING</div>
+    <div class="ticker-content">
+      <span id="ticker-text">NFA Investigations — where evidence meets accountability.</span>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <img src="assets/logo.png" alt="No Filter America" class="logo-img"/>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="no-filter-zone.html">No-Filter Zone</a>
+        <a href="true-crime.html">True Crime</a>
+        <a href="investigations.html" class="active">Investigations</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="no-filter-zone.html">No-Filter Zone</a>
+      <a href="true-crime.html">True Crime</a>
+      <a href="investigations.html">Investigations</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <!-- CASE FILE CONTENT -->
+  <div class="inv-page" id="invPage">
+    <div style="text-align:center;padding:80px 0;color:var(--gray);">
+      <i class="fas fa-spinner fa-spin" style="font-size:2.5rem;color:var(--gold);"></i>
+      <p style="margin-top:20px;">Loading case file...</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="assets/logo.png" alt="No Filter America" style="height:80px;"/>
+        <p>Truth. Freedom. Accountability.</p>
+      </div>
+      <div class="footer-links">
+        <h4>NAVIGATE</h4>
+        <a href="index.html">Home</a>
+        <a href="no-filter-zone.html">No-Filter Zone</a>
+        <a href="true-crime.html">True Crime</a>
+        <a href="investigations.html">Investigations</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="footer-social">
+        <h4>FOLLOW US</h4>
+        <a href="https://www.tiktok.com/@nofilteramerica" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a href="http://www.youtube.com/@NofilterAmerica" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 No Filter America · All Rights Reserved ·
+        <a href="privacy.html">Privacy Policy</a> ·
+        <a href="terms.html">Terms of Use</a> ·
+        <a href="disclaimer.html">Disclaimer</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

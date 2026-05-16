@@ -163,6 +163,7 @@
       <div class="admin-tabs">
         <button class="admin-tab active" onclick="switchTab('nofilter')">📱 No-Filter Zone</button>
         <button class="admin-tab" onclick="switchTab('truecrime')">🔪 True Crime</button>
+        <button class="admin-tab" onclick="switchTab('investigations')">🔍 Investigations</button>
         <button class="admin-tab" onclick="switchTab('settings')">⚙️ Settings</button>
       </div>
 
@@ -389,6 +390,126 @@
           </button>
           <div class="success-msg" id="tcSuccess2" style="display:none;margin-top:8px;">✅ Case File 3 live on site!</div>
           <div id="tcCurrent2" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <!-- INVESTIGATIONS TAB -->
+      <div id="tab-investigations" class="tab-content">
+        <p style="color:var(--gray);font-size:13px;margin-bottom:24px;">Create and manage NFA Investigation case files. Each investigation becomes a full multimedia dossier on the public site.</p>
+
+        <!-- INVESTIGATION LIST -->
+        <div class="admin-card" id="invListCard">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+            <h3 style="margin:0;">📁 Published Case Files</h3>
+            <button onclick="showInvForm(null)" style="background:var(--gold,#c9a84c);color:#000;border:none;padding:10px 20px;border-radius:4px;font-weight:700;cursor:pointer;font-size:13px;letter-spacing:1px;">
+              + NEW INVESTIGATION
+            </button>
+          </div>
+          <div id="invList" style="display:flex;flex-direction:column;gap:10px;">
+            <p style="color:var(--gray);font-size:13px;">Loading...</p>
+          </div>
+        </div>
+
+        <!-- INVESTIGATION FORM (hidden until New or Edit clicked) -->
+        <div class="admin-card" id="invFormCard" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+            <h3 style="margin:0;" id="invFormTitle">✍️ New Investigation</h3>
+            <button onclick="hideInvForm()" style="background:transparent;border:1px solid var(--border);color:var(--gray);padding:8px 16px;border-radius:4px;cursor:pointer;font-size:12px;">✕ Cancel</button>
+          </div>
+          <input type="hidden" id="invId" value=""/>
+
+          <!-- 1. Headline -->
+          <div class="form-group">
+            <label style="color:var(--gold);font-weight:700;letter-spacing:1px;">1. HEADLINE TITLE</label>
+            <input type="text" id="invTitle" placeholder="Enter the main headline / title for this investigation..." style="font-size:16px;"/>
+          </div>
+
+          <!-- 2. Status -->
+          <div class="form-group">
+            <label style="color:var(--gold);font-weight:700;letter-spacing:1px;">2. INVESTIGATION STATUS</label>
+            <select id="invStatus" style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;">
+              <option value="active">🔴 Active</option>
+              <option value="developing">🟠 Developing</option>
+              <option value="ongoing">🔵 Ongoing</option>
+              <option value="updated">⭐ Updated</option>
+              <option value="archived">⬛ Archived</option>
+            </select>
+          </div>
+
+          <!-- 3. Summary (card preview text) -->
+          <div class="form-group">
+            <label style="color:var(--gold);font-weight:700;letter-spacing:1px;">3. CARD SUMMARY <span style="color:var(--gray);font-weight:400;">(shown on the investigations listing page)</span></label>
+            <textarea id="invSummary" rows="2" placeholder="Brief 1-2 sentence teaser shown on the card..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+
+          <!-- 4. Full Story -->
+          <div class="form-group">
+            <label style="color:var(--gold);font-weight:700;letter-spacing:1px;">4. FULL INVESTIGATION STORY</label>
+            <textarea id="invStory" rows="12" placeholder="Write the full story, findings, background, and analysis here. You can use line breaks for paragraphs." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;line-height:1.7;"></textarea>
+            <div id="invWordCount" style="font-size:11px;color:var(--gray);margin-top:4px;">0 WORDS</div>
+          </div>
+
+          <!-- 5. Key Findings -->
+          <div class="form-group">
+            <label style="color:var(--gold);font-weight:700;letter-spacing:1px;">5. KEY FINDINGS <span style="color:var(--gray);font-weight:400;">(one per line)</span></label>
+            <textarea id="invFindings" rows="5" placeholder="Finding #1: The document was altered before release.&#10;Finding #2: Three sources confirm the timeline contradiction.&#10;Finding #3: ..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+
+          <!-- 6. Timeline -->
+          <div class="form-group">
+            <label style="color:var(--gold);font-weight:700;letter-spacing:1px;">6. TIMELINE EVENTS <span style="color:var(--gray);font-weight:400;">(format: DATE | EVENT, one per line)</span></label>
+            <textarea id="invTimeline" rows="5" placeholder="Jan 6, 2021 | The Capitol breach begins at 2:11 PM.&#10;Jan 7, 2021 | Congress certifies the election results.&#10;..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+
+          <!-- 7. Sources -->
+          <div class="form-group">
+            <label style="color:var(--gold);font-weight:700;letter-spacing:1px;">7. SOURCES <span style="color:var(--gray);font-weight:400;">(format: TYPE | Label | URL, one per line)</span></label>
+            <p style="font-size:12px;color:var(--gray);margin-bottom:8px;">Types: primary | govt | news | social | unverified</p>
+            <textarea id="invSources" rows="5" placeholder="primary | Leaked Budget Document | https://example.com/doc.pdf&#10;news | Washington Post Report | https://washingtonpost.com/...&#10;govt | Congressional Record | https://congress.gov/..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+
+          <!-- 8. TikTok References -->
+          <div class="form-group">
+            <label style="color:var(--gold);font-weight:700;letter-spacing:1px;">8. TIKTOK REFERENCES <span style="color:var(--gray);font-weight:400;">(one URL per line, up to 10)</span></label>
+            <textarea id="invTiktoks" rows="4" placeholder="https://www.tiktok.com/@nofilteramerica/video/...&#10;https://www.tiktok.com/@nofilteramerica/video/..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
+          </div>
+
+          <!-- 9. Cover Image -->
+          <div class="form-group">
+            <label style="color:var(--gold);font-weight:700;letter-spacing:1px;">9. COVER IMAGE <span style="color:var(--gray);font-weight:400;">(thumbnail shown on card)</span></label>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px;">
+              <label for="invCoverFile" id="invCoverBtn" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy3);border:1px solid var(--border-gold);color:var(--gold);padding:10px 18px;border-radius:4px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:1px;white-space:nowrap;">
+                <i class="fas fa-image"></i> Choose Image
+              </label>
+              <span id="invCoverFileName" style="font-size:12px;color:var(--gray);">No file chosen</span>
+            </div>
+            <input type="file" id="invCoverFile" accept="image/*" style="display:none;" onchange="handleInvFileUpload(this, 'cover')"/>
+            <input type="hidden" id="invCoverUrl" value=""/>
+            <div id="invCoverPreview" style="margin-top:8px;display:none;"><img id="invCoverImg" src="" alt="Preview" style="width:200px;height:120px;object-fit:cover;border-radius:6px;border:1px solid var(--border-gold);"/></div>
+          </div>
+
+          <!-- 10. Supporting Documents -->
+          <div class="form-group">
+            <label style="color:var(--gold);font-weight:700;letter-spacing:1px;">10. SUPPORTING DOCUMENTS <span style="color:var(--gray);font-weight:400;">(PDFs, images, DOCs)</span></label>
+            <label for="invDocFiles" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--navy3);border:2px dashed var(--border);border-radius:8px;padding:30px;cursor:pointer;margin-top:6px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+              <i class="fas fa-cloud-upload-alt" style="font-size:2rem;color:var(--gold);opacity:0.6;"></i>
+              <p style="margin:0;color:var(--gray);font-size:13px;">Drag & Drop files here or click to browse</p>
+              <small style="color:rgba(255,255,255,0.3);">PDF, DOC, DOCX, JPG, PNG, GIF, TXT</small>
+            </label>
+            <input type="file" id="invDocFiles" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.txt" style="display:none;" onchange="handleInvDocsUpload(this)"/>
+            <div id="invDocsList" style="margin-top:12px;display:flex;flex-direction:column;gap:6px;"></div>
+          </div>
+
+          <!-- Save Buttons -->
+          <div style="display:flex;gap:14px;margin-top:24px;flex-wrap:wrap;">
+            <button onclick="saveInvestigation('draft')" style="flex:1;background:var(--navy3);color:#fff;border:1px solid var(--border);padding:14px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;letter-spacing:1px;min-width:160px;">
+              <i class="fas fa-save"></i> SAVE DRAFT
+            </button>
+            <button onclick="saveInvestigation('published')" style="flex:2;background:#cc2200;color:#fff;border:none;padding:14px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;letter-spacing:1px;min-width:200px;">
+              <i class="fas fa-paper-plane"></i> PUBLISH INVESTIGATION
+            </button>
+          </div>
+          <div id="invSaveMsg" style="display:none;margin-top:12px;padding:12px;border-radius:4px;font-size:13px;"></div>
         </div>
       </div>
 
@@ -676,6 +797,222 @@
       showToast('❌ Save failed: ' + e.message, 'error');
     }
   }
+
+  // ======================================================
+  // INVESTIGATIONS ADMIN JS
+  // ======================================================
+  const NFA_INV_API = 'https://nofilteramerica-admin.netlify.app/.netlify/functions/videos';
+
+  let invDocs = [];
+
+  async function loadInvestigations() {
+    const el = document.getElementById('invList');
+    if (!el) return;
+    el.innerHTML = '<p style="color:var(--gray);font-size:13px;">Loading...</p>';
+    try {
+      const res = await fetch(NFA_INV_API + '?action=list&section=investigations');
+      const data = await res.json();
+      const list = (data.ok ? (data.data || []) : []).filter(i => i && i.title);
+      if (list.length === 0) {
+        el.innerHTML = '<p style="color:var(--gray);font-size:13px;">No investigations yet. Click \"+ NEW INVESTIGATION\" to create your first case file.</p>';
+        return;
+      }
+      const statusStyle = (s) => ({active:'background:#cc2200;color:#fff;',developing:'background:#d97706;color:#fff;',ongoing:'background:#1d4ed8;color:#fff;',archived:'background:#374151;color:#aaa;',updated:'background:#c9a84c;color:#000;',draft:'background:#374151;color:#aaa;',published:'background:#c9a84c;color:#000;'})[s] || 'background:#374151;color:#aaa;';
+      el.innerHTML = list.map(inv => `
+        <div style="display:flex;justify-content:space-between;align-items:center;background:var(--navy3);border:1px solid var(--border);border-radius:6px;padding:14px 18px;gap:10px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:200px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;flex-wrap:wrap;">
+              <span style="font-size:9px;font-weight:700;letter-spacing:2px;padding:3px 8px;border-radius:3px;text-transform:uppercase;${statusStyle(inv.status)}">${inv.status||'draft'}</span>
+              <span style="font-weight:700;color:#fff;font-size:14px;">${inv.title||'Untitled'}</span>
+            </div>
+            <div style="font-size:11px;color:var(--gray);">${inv.summary||''}</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.25);margin-top:4px;">Updated: ${new Date(inv.updated).toLocaleDateString()}</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-shrink:0;">
+            <button onclick="showInvForm('${inv.id}')" style="background:var(--gold);color:#000;border:none;padding:8px 14px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;">EDIT</button>
+            <button onclick="deleteInvestigation('${inv.id}','${(inv.title||'').replace(/'/g,"\\'")}')" style="background:#cc2200;color:#fff;border:none;padding:8px 14px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;">DELETE</button>
+          </div>
+        </div>`).join('');
+    } catch(e) {
+      el.innerHTML = '<p style="color:#e74c3c;font-size:13px;">Error loading: ' + e.message + '</p>';
+    }
+  }
+
+  async function showInvForm(id) {
+    invDocs = [];
+    document.getElementById('invFormCard').style.display = 'block';
+    document.getElementById('invListCard').style.display = 'none';
+    ['invId','invTitle','invSummary','invStory','invFindings','invTimeline','invSources','invTiktoks','invCoverUrl'].forEach(k => { const el = document.getElementById(k); if(el) el.value=''; });
+    document.getElementById('invStatus').value = 'active';
+    document.getElementById('invCoverPreview').style.display = 'none';
+    document.getElementById('invCoverFileName').textContent = 'No file chosen';
+    document.getElementById('invDocsList').innerHTML = '';
+    document.getElementById('invSaveMsg').style.display = 'none';
+    document.getElementById('invWordCount').textContent = '0 WORDS';
+    document.getElementById('invFormTitle').textContent = id ? '\u270D\uFE0F Edit Investigation' : '\u270D\uFE0F New Investigation';
+
+    if (id) {
+      try {
+        const res = await fetch(NFA_INV_API + '?action=get&section=investigations&id=' + id);
+        const data = await res.json();
+        if (data.ok && data.data) {
+          const inv = data.data;
+          document.getElementById('invId').value = inv.id || '';
+          document.getElementById('invTitle').value = inv.title || '';
+          document.getElementById('invStatus').value = inv.status || 'active';
+          document.getElementById('invSummary').value = inv.summary || '';
+          document.getElementById('invStory').value = inv.story || '';
+          document.getElementById('invFindings').value = (inv.findings||[]).join('\n');
+          document.getElementById('invTimeline').value = (inv.timeline||[]).map(t=>t.date+' | '+t.event).join('\n');
+          document.getElementById('invSources').value = (inv.sources||[]).map(s=>s.type+' | '+s.label+' | '+s.url).join('\n');
+          document.getElementById('invTiktoks').value = (inv.tiktoks||[]).join('\n');
+          document.getElementById('invCoverUrl').value = inv.cover_url || '';
+          if (inv.cover_url) { document.getElementById('invCoverImg').src = inv.cover_url; document.getElementById('invCoverPreview').style.display = 'block'; }
+          invDocs = inv.documents || [];
+          renderInvDocs();
+          updateWordCount();
+        }
+      } catch(e) { showToast('Error loading investigation: ' + e.message, 'error'); }
+    }
+    document.getElementById('invStory').addEventListener('input', updateWordCount);
+  }
+
+  function hideInvForm() {
+    document.getElementById('invFormCard').style.display = 'none';
+    document.getElementById('invListCard').style.display = 'block';
+  }
+
+  function updateWordCount() {
+    const words = (document.getElementById('invStory').value||'').trim().split(/\s+/).filter(w=>w).length;
+    document.getElementById('invWordCount').textContent = words + ' WORDS';
+  }
+
+  async function handleInvFileUpload(input) {
+    const file = input.files[0];
+    if (!file) return;
+    document.getElementById('invCoverFileName').textContent = file.name;
+    const btn = document.getElementById('invCoverBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+    try {
+      const base64 = await fileToBase64(file);
+      const res = await fetch(NFA_INV_API + '?action=upload_file', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({filename:file.name, base64:base64.split(',')[1], mime_type:file.type})
+      });
+      const data = await res.json();
+      if (data.ok) {
+        document.getElementById('invCoverUrl').value = data.url;
+        document.getElementById('invCoverImg').src = data.url;
+        document.getElementById('invCoverPreview').style.display = 'block';
+        btn.innerHTML = '<i class="fas fa-check"></i> Uploaded!';
+      } else { throw new Error(data.error); }
+    } catch(e) {
+      btn.innerHTML = '<i class="fas fa-image"></i> Choose Image';
+      showToast('Upload failed: ' + e.message, 'error');
+    }
+  }
+
+  async function handleInvDocsUpload(input) {
+    const files = Array.from(input.files);
+    const listEl = document.getElementById('invDocsList');
+    for (const file of files) {
+      const row = document.createElement('div');
+      row.style = 'font-size:12px;color:var(--gray);padding:6px 10px;background:var(--navy3);border-radius:4px;';
+      row.innerHTML = '<i class="fas fa-spinner fa-spin" style="color:var(--gold);margin-right:8px;"></i> Uploading ' + file.name + '...';
+      listEl.appendChild(row);
+      try {
+        const base64 = await fileToBase64(file);
+        const res = await fetch(NFA_INV_API + '?action=upload_file', {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({filename:file.name, base64:base64.split(',')[1], mime_type:file.type})
+        });
+        const data = await res.json();
+        if (data.ok) {
+          invDocs.push({name:file.name, url:data.url, type:file.type});
+          row.remove();
+          renderInvDocs();
+        } else { row.innerHTML = '<i class="fas fa-times" style="color:#e74c3c;margin-right:8px;"></i> Failed: ' + file.name; }
+      } catch(e) { row.innerHTML = '<i class="fas fa-times" style="color:#e74c3c;margin-right:8px;"></i> Error: ' + file.name; }
+    }
+    input.value = '';
+  }
+
+  function renderInvDocs() {
+    const el = document.getElementById('invDocsList');
+    if (!el) return;
+    if (invDocs.length === 0) { el.innerHTML = ''; return; }
+    el.innerHTML = '<p style="font-size:11px;color:var(--gray);margin:8px 0 4px;">UPLOADED FILES:</p>' + invDocs.map((d,i) => `
+      <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.7);padding:8px 12px;background:var(--navy3);border:1px solid var(--border);border-radius:4px;margin-bottom:4px;">
+        <span><i class="fas fa-file" style="color:var(--gold);margin-right:8px;"></i><a href="${d.url}" target="_blank" style="color:var(--gold);">${d.name}</a></span>
+        <button onclick="removeInvDoc(${i})" style="background:none;border:none;color:#e74c3c;cursor:pointer;font-size:11px;">✕</button>
+      </div>`).join('');
+  }
+
+  function removeInvDoc(idx) { invDocs.splice(idx,1); renderInvDocs(); }
+
+  function fileToBase64(file) {
+    return new Promise((resolve,reject) => { const r=new FileReader(); r.onload=()=>resolve(r.result); r.onerror=reject; r.readAsDataURL(file); });
+  }
+
+  async function saveInvestigation(publishStatus) {
+    const title = (document.getElementById('invTitle').value||'').trim();
+    if (!title) { showToast('\u26A0\uFE0F Headline is required.','error'); return; }
+    const status = publishStatus==='published' ? (document.getElementById('invStatus').value||'active') : 'draft';
+    const msgEl = document.getElementById('invSaveMsg');
+    msgEl.style.cssText = 'display:block;padding:12px;border-radius:4px;font-size:13px;background:rgba(201,168,76,0.1);border:1px solid var(--gold);color:var(--gold);';
+    msgEl.textContent = publishStatus==='published' ? '\uD83D\uDCE1 Publishing to site...' : '\uD83D\uDCBE Saving draft...';
+
+    const findings = (document.getElementById('invFindings').value||'').split('\n').map(s=>s.trim()).filter(Boolean);
+    const timeline = (document.getElementById('invTimeline').value||'').split('\n').map(s=>{const p=s.split('|');return p.length>=2?{date:p[0].trim(),event:p.slice(1).join('|').trim()}:null;}).filter(Boolean);
+    const sources = (document.getElementById('invSources').value||'').split('\n').map(s=>{const p=s.split('|');return p.length>=3?{type:p[0].trim(),label:p[1].trim(),url:p.slice(2).join('|').trim()}:null;}).filter(Boolean);
+    const tiktoks = (document.getElementById('invTiktoks').value||'').split('\n').map(s=>s.trim()).filter(Boolean).slice(0,10);
+
+    const inv = {
+      id: document.getElementById('invId').value||'',
+      title, status,
+      summary: (document.getElementById('invSummary').value||'').trim(),
+      story: (document.getElementById('invStory').value||'').trim(),
+      findings, timeline, sources, tiktoks,
+      cover_url: document.getElementById('invCoverUrl').value||'',
+      documents: invDocs,
+    };
+
+    try {
+      const res = await fetch(NFA_INV_API+'?action=save_investigation',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(inv)});
+      const data = await res.json();
+      if (data.ok) {
+        msgEl.style.cssText = 'display:block;padding:12px;border-radius:4px;font-size:13px;background:rgba(76,175,80,0.1);border:1px solid #4caf50;color:#4caf50;';
+        msgEl.textContent = publishStatus==='published' ? '\u2705 Investigation published and LIVE!' : '\u2705 Draft saved!';
+        showToast(publishStatus==='published'?'\u2705 Investigation is LIVE!':'\u2705 Draft saved!');
+        document.getElementById('invId').value = data.id || inv.id;
+        setTimeout(()=>{ hideInvForm(); loadInvestigations(); }, 1800);
+      } else { throw new Error(data.error); }
+    } catch(e) {
+      msgEl.style.cssText = 'display:block;padding:12px;border-radius:4px;font-size:13px;background:rgba(204,34,0,0.1);border:1px solid #cc2200;color:#ff6b6b;';
+      msgEl.textContent = '\u274C Error: ' + e.message;
+    }
+  }
+
+  async function deleteInvestigation(id, title) {
+    if (!confirm('Delete "' + title + '"? This cannot be undone.')) return;
+    try {
+      await fetch(NFA_INV_API+'?action=delete_investigation',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id})});
+      showToast('\uD83D\uDDD1\uFE0F Investigation deleted.');
+      loadInvestigations();
+    } catch(e) { showToast('Error: '+e.message,'error'); }
+  }
+
+  // Hook into tab switching
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.admin-tab');
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.getAttribute('onclick').match(/switchTab\('(\w+)'/)?.[1];
+        if (tab === 'investigations') setTimeout(loadInvestigations, 100);
+      });
+    });
+  });
+
 </script>
 </body>
 </html>
