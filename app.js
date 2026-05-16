@@ -7,7 +7,7 @@ function toggleMenu() {
 }
 
 const NEWS_API_KEY = 'pub_174f039e3cf945a3a0b9491b18a2befd';
-const API_BASE = 'https://6a0717be1b2d3fb43fda6201.base44.app/functions';
+const NFA_VIDEO_API = 'https://nofilteramerica-admin.netlify.app/.netlify/functions/videos';
 let nextPageCursor = null;
 
 // ---- FETCH: Politics + World + Domestic (NO sports) ----
@@ -318,22 +318,35 @@ function showToast(msg, type = 'success') {
 }
 
 // ---- VIDEO RENDERS ----
+function getTikTokEmbedUrl(url) {
+  // Convert TikTok share URLs (t/xxxxx or @user/video/id) to embed format
+  if (!url) return null;
+  // Already an embed URL
+  if (url.includes('tiktok.com/embed')) return url;
+  // Format: https://www.tiktok.com/t/XXXXXX/ (short share link)
+  // Format: https://www.tiktok.com/@user/video/12345
+  const videoMatch = url.match(/video\/([0-9]+)/);
+  if (videoMatch) {
+    return 'https://www.tiktok.com/embed/v2/' + videoMatch[1];
+  }
+  // Short share link — use blockquote embed via oEmbed or just link out
+  return url;
+}
+
 async function renderPublicVideos(containerId, storageKey, gridClass = 'video-grid-3') {
   const container = document.getElementById(containerId);
   if (!container) return;
   container.className = 'nfz-grid';
   container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--gray);"><i class="fas fa-spinner fa-spin" style="font-size:2rem;color:var(--gold);"></i></div>';
 
-  // Fetch from cloud backend
+  // Fetch from Netlify serverless function
   let videos = [];
   try {
-    const res = await fetch(API_BASE + '/getVideos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ section: 'nofilter' })
-    });
+    const res = await fetch(NFA_VIDEO_API + '?action=list&section=nofilter');
     const data = await res.json();
-    videos = (data.videos || []).sort((a,b) => a.slot - b.slot);
+    if (data.ok && Array.isArray(data.data)) {
+      videos = data.data.filter(v => v.video_url).sort((a,b) => a.slot - b.slot);
+    }
   } catch(e) { videos = []; }
 
   container.innerHTML = '';
@@ -344,14 +357,22 @@ async function renderPublicVideos(containerId, storageKey, gridClass = 'video-gr
     const slot = document.createElement('div');
     slot.className = 'nfz-slot';
     if (vid && vid.video_url) {
+      const embedUrl = getTikTokEmbedUrl(vid.video_url);
+      const isEmbed = embedUrl && embedUrl.includes('tiktok.com/embed');
       slot.innerHTML = `
         <div class="nfz-media">
-          <video controls preload="none" playsinline style="width:100%;height:100%;object-fit:cover;"><source src="${vid.video_url}" type="video/mp4"></video>
+          ${isEmbed
+            ? `<iframe src="${embedUrl}" allowfullscreen scrolling="no" allow="encrypted-media;" style="width:100%;height:100%;border:none;border-radius:8px;"></iframe>`
+            : `<a href="${vid.video_url}" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--gold);text-decoration:none;gap:12px;">
+                <i class="fab fa-tiktok" style="font-size:3rem;"></i>
+                <span style="font-size:14px;font-weight:600;">Watch on TikTok</span>
+               </a>`
+          }
         </div>
         <div class="nfz-info">
           <div class="nfz-title">${vid.title || 'No Filter Video ' + (i+1)}</div>
           ${vid.description ? `<div class="nfz-desc">${vid.description}</div>` : ''}
-          <div class="nfz-date">${vid.upload_date || ''}</div>
+          <a href="${vid.video_url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-size:12px;color:var(--gold);text-decoration:none;"><i class="fab fa-tiktok"></i> Watch on TikTok</a>
         </div>`;
     } else {
       slot.innerHTML = `
@@ -378,13 +399,11 @@ async function renderTrueCrimeSlots(containerId) {
   // Fetch from cloud backend
   let allVideos = [];
   try {
-    const res = await fetch(API_BASE + '/getVideos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ section: 'truecrime' })
-    });
+    const res = await fetch(NFA_VIDEO_API + '?action=list&section=truecrime');
     const data = await res.json();
-    allVideos = (data.videos || []).sort((a,b) => a.slot - b.slot);
+    if (data.ok && Array.isArray(data.data)) {
+      allVideos = data.data.sort((a,b) => a.slot - b.slot);
+    }
   } catch(e) { allVideos = []; }
 
   container.innerHTML = '';
