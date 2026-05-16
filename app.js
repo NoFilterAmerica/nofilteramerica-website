@@ -415,21 +415,20 @@ async function renderTrueCrimeSlots(containerId) {
     const slot = document.createElement('div');
     slot.className = 'nfz-card';
     const thumb = vid.thumbnail_url || '';
-    const tiktokUrl = vid.video_url || '#';
+    const youtubeUrl = vid.video_url || '';
+    const youtubeId = youtubeUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/)?.[1] || '';
 
     slot.innerHTML = `
-      <a href="${tiktokUrl}" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
-        <div class="nfz-thumb" style="${thumb ? 'background-image:url(' + thumb + ');background-size:cover;background-position:center top;' : 'background:linear-gradient(135deg,#1a0a0a,#2d0a0a);'}">
-          ${!thumb ? '<i class="fas fa-gavel" style="font-size:3rem;color:var(--gold);position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);opacity:0.4;"></i>' : ''}
-          <div class="nfz-overlay">
-            <span class="nfz-watch-badge"><i class="fab fa-tiktok"></i> WATCH ON TIKTOK</span>
-          </div>
+      <div class="nfz-thumb" style="${thumb ? 'background-image:url(' + thumb + ');background-size:cover;background-position:center top;' : 'background:linear-gradient(135deg,#1a0a0a,#2d0a0a);'}">
+        ${!thumb ? '<i class="fas fa-gavel" style="font-size:3rem;color:var(--gold);position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);opacity:0.4;"></i>' : ''}
+        <div class="nfz-overlay">
+          <span class="nfz-watch-badge"><i class="fab fa-youtube" style="color:#ff0000;"></i> WATCH ON YOUTUBE</span>
         </div>
-      </a>
+      </div>
       <div class="nfz-info">
         <div class="nfz-title">${vid.title || 'Case File ' + (idx+1)}</div>
         ${vid.description ? '<div class="nfz-desc">' + vid.description + '</div>' : ''}
-        ${tiktokUrl !== '#' ? '<a href="' + tiktokUrl + '" target="_blank" class="nfz-link"><i class="fab fa-tiktok"></i> Watch on TikTok</a>' : ''}
+        ${youtubeUrl ? '<a href="' + youtubeUrl + '" target="_blank" class="nfz-link"><i class="fab fa-youtube" style="color:#ff0000;"></i> Watch on YouTube</a>' : ''}
       </div>`;
     container.appendChild(slot);
   });
