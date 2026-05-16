@@ -2,11 +2,10 @@
   "nofilter": [
     {
       "slot": 0,
-      "title": "Test Upload",
-      "description": "Test TikTok video",
+      "title": "",
+      "description": "",
       "story_line": "",
-      "video_url": "https://www.tiktok.com/t/ZTkoDpsC5/",
-      "updated": "2026-05-16T03:01:36.698Z"
+      "video_url": ""
     },
     {
       "slot": 1,
