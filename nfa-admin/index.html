@@ -350,319 +350,163 @@
 
   <script src="app.js"></script>
   <script>
-    // ---- CLOUD API CONFIG (Base44 Database) ----
-    const B44_BASE = 'https://app.base44.com/api/apps/6a0717be1b2d3fb43fda6201/entities/Video';
-    const B44_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NjAzNDBlNi1lMWZkLTQxZTItYWI0OC1mNjlhOWJjOGRjY2QiLCJjbGllbnRfaWQiOiI0NjAzNDBlNi1lMWZkLTQxZTItYWI0OC1mNjlhOWJjOGRjY2QiLCJhcHBfaWQiOiI2YTA3MTdiZTFiMmQzZmI0M2ZkYTYyMDEiLCJhdWQiOiJiYXNlNDRfYXBpIiwic2NvcGUiOiJhcHAuYWNjZXNzIiwiZXhwIjoxNzc4OTAxOTQxLCJpYXQiOjE3Nzg4OTgzNDF9.McISGKERKlLh40ii_9YZJ8e8DRSlKFdlLTw3KEzQF7c';
-    const B44_HEADERS = { 'Authorization': 'Bearer ' + B44_TOKEN, 'Content-Type': 'application/json' };
+  // ---- API: calls our own Netlify serverless function (no expiring tokens) ----
+  const API = '/.netlify/functions/videos';
 
-    async function apiGet(section) {
-      try {
-        const res = await fetch(B44_BASE + '?section=' + encodeURIComponent(section), { headers: B44_HEADERS });
-        const records = await res.json();
-        if (!Array.isArray(records)) return {};
-        // Convert array to object keyed by slot
-        const result = {};
-        records.forEach(r => { result[String(r.slot)] = r; });
-        return result;
-      } catch(e) { console.error('API GET error:', e); return {}; }
-    }
+  async function apiGet(section) {
+    const res = await fetch(API + '?action=list&section=' + encodeURIComponent(section));
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error || 'Load failed');
+    return json.data; // array of slot objects
+  }
 
-    async function apiSave(section, slot, title, description, story_line, video_url, file_name) {
-      try {
-        // Check if record exists for this section+slot
-        const res = await fetch(B44_BASE + '?section=' + encodeURIComponent(section) + '&slot=' + encodeURIComponent(slot), { headers: B44_HEADERS });
-        const records = await res.json();
-        const existing = Array.isArray(records) && records.length > 0 ? records[0] : null;
+  async function apiSave(section, slot, title, description, story_line, video_url) {
+    const res = await fetch(API + '?action=save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ section, slot, title, description, story_line, video_url })
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error || 'Save failed');
+    return true;
+  }
 
-        const body = JSON.stringify({ section, slot: Number(slot), title, description, story_line: story_line || '', video_url, file_name, upload_date: new Date().toISOString() });
+  async function apiDelete(section, slot) {
+    const res = await fetch(API + '?action=delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ section, slot })
+    });
+    const json = await res.json();
+    return json.ok;
+  }
 
-        if (existing) {
-          await fetch(B44_BASE + '/' + existing.id, { method: 'PUT', headers: B44_HEADERS, body });
-        } else {
-          await fetch(B44_BASE, { method: 'POST', headers: B44_HEADERS, body });
-        }
-        return true;
-      } catch(e) { console.error('API SAVE error:', e); return false; }
-    }
-
-    async function apiDelete(section, slot) {
-      try {
-        const res = await fetch(B44_BASE + '?section=' + encodeURIComponent(section) + '&slot=' + encodeURIComponent(slot), { headers: B44_HEADERS });
-        const records = await res.json();
-        if (Array.isArray(records) && records.length > 0) {
-          await fetch(B44_BASE + '/' + records[0].id, { method: 'DELETE', headers: B44_HEADERS });
-        }
-        return true;
-      } catch(e) { console.error('API DELETE error:', e); return false; }
-    }
-
-    // ---- ADMIN AUTH ----
-    const DEFAULT_PASS = 'NFA2024!';
-    function getAdminPass() { return localStorage.getItem('nfa_admin_pass') || DEFAULT_PASS; }
-
-    function adminLogin() {
-      const input = document.getElementById('adminPass').value;
-      if (input === getAdminPass()) {
-        sessionStorage.setItem('nfa_admin', '1');
-        document.getElementById('loginSection').style.display = 'none';
-        document.getElementById('adminSection').style.display = 'block';
-        renderAdminLists();
-        renderNFCurrentSlots();
-      } else {
-        document.getElementById('loginError').style.display = 'block';
-      }
-    }
-
-    function adminLogout() {
-      sessionStorage.removeItem('nfa_admin');
-      document.getElementById('loginSection').style.display = 'flex';
-      document.getElementById('adminSection').style.display = 'none';
-      document.getElementById('adminPass').value = '';
-    }
-
-    // Auto-login if session active
-    if (sessionStorage.getItem('nfa_admin') === '1') {
+  // ---- AUTH ----
+  function adminLogin() {
+    const pass = document.getElementById('adminPass').value;
+    if (pass === 'NFA2024!') {
       document.getElementById('loginSection').style.display = 'none';
       document.getElementById('adminSection').style.display = 'block';
-      renderNFCurrentSlots();
+      loadAllSlots();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
     }
+  }
+  function adminLogout() {
+    document.getElementById('loginSection').style.display = 'flex';
+    document.getElementById('adminSection').style.display = 'none';
+    document.getElementById('adminPass').value = '';
+    document.getElementById('loginError').style.display = 'none';
+  }
 
-    // ---- TABS ----
-    function switchTab(name) {
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-      document.getElementById('tab-' + name).classList.add('active');
-      event.target.classList.add('active');
-      renderAdminLists();
+  // ---- TABS ----
+  function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.admin-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // ---- TOAST ----
+  function showToast(msg, type) {
+    let toast = document.getElementById('adminToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'adminToast';
+      toast.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#1a2f4a;border:1px solid #c5a046;color:#fff;padding:12px 24px;border-radius:6px;font-size:14px;font-weight:600;z-index:9999;transition:opacity 0.3s;';
+      document.body.appendChild(toast);
     }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    if (type === 'error') toast.style.borderColor = '#ff4444';
+    else toast.style.borderColor = '#c5a046';
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => { toast.style.opacity = '0'; }, 3500);
+  }
 
-    // ---- FILE UPLOAD ----
-    function handleUpload(type, input) {
-      const file = input.files[0];
-      if (!file) return;
-
-      const progressWrap = document.getElementById(type === 'nofilter' ? 'nfProgress' : 'tcProgress');
-      const progressBar = document.getElementById(type === 'nofilter' ? 'nfProgressBar' : 'tcProgressBar');
-      const successEl = document.getElementById(type === 'nofilter' ? 'nfSuccess' : 'tcSuccess');
-
-      progressWrap.style.display = 'block';
-      progressBar.style.width = '0%';
-      successEl.style.display = 'none';
-
-      // Simulate progress while reading file
-      let prog = 0;
-      const interval = setInterval(() => {
-        prog = Math.min(prog + 10, 90);
-        progressBar.style.width = prog + '%';
-      }, 100);
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        clearInterval(interval);
-        progressBar.style.width = '100%';
-
-        const title = type === 'nofilter'
-          ? (document.getElementById('nfTitle') ? document.getElementById('nfTitle').value : '') || file.name.replace('.mp4','')
-          : document.getElementById('tcTitle').value || file.name.replace('.mp4','');
-
-        const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-
-        if (type === 'nofilter') {
-          const videos = getVideos('nofilter_videos');
-          videos.unshift({ title, date: dateStr, dataUrl: e.target.result, fileName: file.name });
-          saveVideos('nofilter_videos', videos);
-        } else {
-          const slotIndex = parseInt(document.getElementById('tcSlot').value);
-          const desc = document.getElementById('tcDesc').value || '';
-          const storyLine = document.getElementById('tcStoryLine').value || '';
-          const videos = getVideos('truecrime_videos');
-          while (videos.length <= slotIndex) videos.push(null);
-          videos[slotIndex] = { title, desc, storyLine, date: dateStr, dataUrl: e.target.result, fileName: file.name };
-          saveVideos('truecrime_videos', videos);
-        }
-
-        setTimeout(() => {
-          progressWrap.style.display = 'none';
-          successEl.style.display = 'block';
-          renderAdminLists();
-          showToast('✅ Video uploaded!');
-        }, 400);
-      };
-      reader.readAsDataURL(file);
-    }
-
-    // ---- RENDER ADMIN LISTS ----
-    function renderAdminLists() {
-      // No-Filter Zone list
-      const nfList = document.getElementById('nfVideoList');
-      if (nfList) {
-        const videos = getVideos('nofilter_videos');
-        if (videos.length === 0) {
-          nfList.innerHTML = '<p style="color:var(--gray);font-size:13px;">No videos uploaded yet.</p>';
-        } else {
-          nfList.innerHTML = videos.map((v,i) => `
-            <div class="video-item">
-              <i class="fas fa-film"></i>
-              <div class="video-item-info">
-                <strong>${v.title || 'Video ' + (i+1)}</strong>
-                <span>${v.fileName} · ${v.date}</span>
-              </div>
-              <button class="delete-btn" onclick="deleteVideo('nofilter', ${i})"><i class="fas fa-trash"></i> Delete</button>
-            </div>
-          `).join('');
-        }
-      }
-
-      // True Crime list
-      const tcList = document.getElementById('tcVideoList');
-      if (tcList) {
-        const videos = getVideos('truecrime_videos');
-        const slots = 6;
-        let html = '';
-        for (let i = 0; i < slots; i++) {
-          const v = videos[i];
-          html += `
-            <div class="video-item">
-              <i class="fas fa-gavel"></i>
-              <div class="video-item-info">
-                <strong>Case File ${i+1}: ${v ? v.title : 'Empty Slot'}</strong>
-                <span>${v ? v.fileName + ' · ' + v.date : 'No video assigned'}</span>
-              </div>
-              ${v ? `<button class="delete-btn" onclick="deleteVideo('truecrime', ${i})"><i class="fas fa-trash"></i> Delete</button>` : '<span style="color:var(--gray);font-size:12px;">Empty</span>'}
-            </div>
-          `;
-        }
-        tcList.innerHTML = html;
-      }
-    }
-
-    // ---- NO-FILTER ZONE: 3-slot save (URL-based, no file upload) ----
-    async function saveNFSlot(slotIndex) {
-      const title = document.getElementById('nfTitle' + slotIndex).value.trim();
-      const desc = document.getElementById('nfDesc' + slotIndex).value.trim();
-      const url = document.getElementById('nfUrl' + slotIndex).value.trim();
-      const successEl = document.getElementById('nfSuccess' + slotIndex);
-
-      if (!title) { showToast('⚠️ Please enter a title.', 'error'); return; }
-      if (!url) { showToast('⚠️ Please enter a TikTok URL.', 'error'); return; }
-
-      showToast('💾 Saving to site...');
-      const ok = await apiSave('nofilter', String(slotIndex), title, desc, '', url, url);
-
-      if (ok) {
-        successEl.style.display = 'block';
-        renderNFCurrentSlots();
-        showToast('✅ Slot ' + (slotIndex+1) + ' is now live on the site!');
-      } else {
-        showToast('❌ Save failed. Please try again.', 'error');
-      }
-    }
-
-        async function renderNFCurrentSlots() {
-      const videos = await apiGet('nofilter'); // returns object keyed by slot index
-      for (let i = 0; i < 3; i++) {
-        const el = document.getElementById('nfCurrent' + i);
-        if (!el) continue;
-        const v = videos[String(i)] || videos[String(i + '.0')] || videos[i];
-        if (v) {
-          el.innerHTML = `<div class="video-item" style="margin-top:0;">
-            <i class="fas fa-film" style="color:var(--gold);"></i>
-            <div class="video-item-info">
-              <strong>${v.title || 'Untitled'}</strong>
-              <span>${v.description ? v.description.substring(0,60)+'...' : 'No description'} · ${v.upload_date ? new Date(v.upload_date).toLocaleDateString() : ''}</span>
-            </div>
-            <button class="delete-btn" onclick="deleteNFSlot(${i})"><i class="fas fa-trash"></i> Delete</button>
-          </div>`;
-          // Pre-fill fields with existing data
-          const titleEl = document.getElementById('nfTitle' + i);
-          const descEl = document.getElementById('nfDesc' + i);
-          if (titleEl) titleEl.placeholder = v.title || titleEl.placeholder;
-          if (descEl) descEl.placeholder = v.description || descEl.placeholder;
-        } else {
-          el.innerHTML = '<p style="color:var(--gray);font-size:12px;margin-top:4px;">No video in this slot yet.</p>';
-        }
-      }
-    }
-
-    async function deleteNFSlot(index) {
-      if (!confirm('Delete TikTok Slot ' + (index+1) + '? This cannot be undone.')) return;
-      await apiDelete('nofilter', String(index));
-      renderNFCurrentSlots();
-      showToast('Slot ' + (index+1) + ' cleared.');
-    }
-
-    function deleteVideo(type, index) {
-      if (!confirm('Delete this video? This cannot be undone.')) return;
-      if (type === 'nofilter') {
-        const videos = getVideos('nofilter_videos');
-        videos.splice(index, 1);
-        saveVideos('nofilter_videos', videos);
-      } else {
-        const videos = getVideos('truecrime_videos');
-        videos[index] = null;
-        saveVideos('truecrime_videos', videos);
-      }
-      renderAdminLists();
-      showToast('Video deleted.', 'error');
-    }
-
-    function clearAllVideos() {
-      if (!confirm('⚠️ This will delete ALL videos from both pages. Are you absolutely sure?')) return;
-      localStorage.removeItem('nofilter_videos');
-      localStorage.removeItem('truecrime_videos');
-      renderAdminLists();
-      showToast('All videos cleared.', 'error');
-    }
-
-    // ---- PASSWORD CHANGE ----
-    function changePassword() {
-      const curr = document.getElementById('currPass').value;
-      const newp = document.getElementById('newPass').value;
-      const conf = document.getElementById('confPass').value;
-      const msg = document.getElementById('passMsg');
-
-      if (curr !== getAdminPass()) {
-        msg.style.display = 'block'; msg.style.color = '#ff4444';
-        msg.textContent = '❌ Current password incorrect.'; return;
-      }
-      if (newp.length < 6) {
-        msg.style.display = 'block'; msg.style.color = '#ff4444';
-        msg.textContent = '❌ New password must be at least 6 characters.'; return;
-      }
-      if (newp !== conf) {
-        msg.style.display = 'block'; msg.style.color = '#ff4444';
-        msg.textContent = '❌ Passwords do not match.'; return;
-      }
-      localStorage.setItem('nfa_admin_pass', newp);
-      msg.style.display = 'block'; msg.style.color = '#00cc55';
-      msg.textContent = '✅ Password updated successfully!';
-      document.getElementById('currPass').value = '';
-      document.getElementById('newPass').value = '';
-      document.getElementById('confPass').value = '';
-    }
-
-    // Init
-    document.addEventListener('DOMContentLoaded', () => {
-      if (sessionStorage.getItem('nfa_admin') === '1') renderAdminLists();
-
-      // Drag & drop
-      ['nfDropZone','tcDropZone'].forEach(id => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.addEventListener('dragover', e => { e.preventDefault(); el.classList.add('drag-over'); });
-        el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
-        el.addEventListener('drop', e => {
-          e.preventDefault(); el.classList.remove('drag-over');
-          const file = e.dataTransfer.files[0];
-          if (!file) return;
-          const inputId = id === 'nfDropZone' ? 'nfFileInput' : 'tcFileInput';
-          const dt = new DataTransfer();
-          dt.items.add(file);
-          document.getElementById(inputId).files = dt.files;
-          handleUpload(id === 'nfDropZone' ? 'nofilter' : 'truecrime', document.getElementById(inputId));
+  // ---- LOAD ALL SLOTS ON LOGIN ----
+  async function loadAllSlots() {
+    try {
+      const nfData = await apiGet('nofilter');
+      if (Array.isArray(nfData)) {
+        nfData.forEach(v => {
+          const i = v.slot;
+          if (document.getElementById('nfTitle' + i)) {
+            document.getElementById('nfTitle' + i).value = v.title || '';
+            document.getElementById('nfDesc' + i).value = v.description || '';
+            document.getElementById('nfUrl' + i).value = v.video_url || '';
+            if (v.video_url) {
+              const el = document.getElementById('nfCurrent' + i);
+              if (el) el.innerHTML = '<p style="color:#4caf50;font-size:12px;margin-top:6px;">✅ Saved: ' + v.title + '</p><p style="color:#8899aa;font-size:11px;">' + v.video_url + '</p>';
+            }
+          }
         });
-      });
-    });
-  </script>
+      }
+    } catch(e) { console.warn('Could not load NF slots:', e); }
+
+    try {
+      const tcData = await apiGet('truecrime');
+      if (Array.isArray(tcData)) {
+        tcData.forEach(v => {
+          const i = v.slot;
+          if (document.getElementById('tcTitle' + i)) {
+            document.getElementById('tcTitle' + i).value = v.title || '';
+            document.getElementById('tcDesc' + i).value = v.description || '';
+            document.getElementById('tcStory' + i).value = v.story_line || '';
+            document.getElementById('tcUrl' + i).value = v.video_url || '';
+            if (v.video_url) {
+              const el = document.getElementById('tcCurrent' + i);
+              if (el) el.innerHTML = '<p style="color:#4caf50;font-size:12px;margin-top:6px;">✅ Saved: ' + v.title + '</p>';
+            }
+          }
+        });
+      }
+    } catch(e) { console.warn('Could not load TC slots:', e); }
+  }
+
+  // ---- SAVE NF SLOT ----
+  async function saveNFSlot(i) {
+    const title = (document.getElementById('nfTitle' + i).value || '').trim();
+    const desc  = (document.getElementById('nfDesc'  + i).value || '').trim();
+    const url   = (document.getElementById('nfUrl'   + i).value || '').trim();
+    const successEl = document.getElementById('nfSuccess' + i);
+
+    if (!title) { showToast('⚠️ Please enter a title.', 'error'); return; }
+    if (!url)   { showToast('⚠️ Please enter a TikTok URL.', 'error'); return; }
+
+    showToast('💾 Saving...');
+    try {
+      await apiSave('nofilter', i, title, desc, '', url);
+      if (successEl) { successEl.style.display = 'block'; successEl.textContent = '✅ Slot ' + (i+1) + ' live on site!'; }
+      showToast('✅ Slot ' + (i+1) + ' saved!');
+      const el = document.getElementById('nfCurrent' + i);
+      if (el) el.innerHTML = '<p style="color:#4caf50;font-size:12px;margin-top:6px;">✅ ' + title + '</p><p style="color:#8899aa;font-size:11px;">' + url + '</p>';
+    } catch(e) {
+      showToast('❌ Save failed: ' + e.message, 'error');
+    }
+  }
+
+  // ---- SAVE TC SLOT ----
+  async function saveTCSlot(i) {
+    const title = (document.getElementById('tcTitle' + i).value || '').trim();
+    const desc  = (document.getElementById('tcDesc'  + i).value || '').trim();
+    const story = (document.getElementById('tcStory' + i).value || '').trim();
+    const url   = (document.getElementById('tcUrl'   + i).value || '').trim();
+    const successEl = document.getElementById('tcSuccess' + i);
+
+    if (!title) { showToast('⚠️ Please enter a title.', 'error'); return; }
+
+    showToast('💾 Saving...');
+    try {
+      await apiSave('truecrime', i, title, desc, story, url);
+      if (successEl) { successEl.style.display = 'block'; successEl.textContent = '✅ TC Slot ' + (i+1) + ' live on site!'; }
+      showToast('✅ True Crime Slot ' + (i+1) + ' saved!');
+      const el = document.getElementById('tcCurrent' + i);
+      if (el) el.innerHTML = '<p style="color:#4caf50;font-size:12px;margin-top:6px;">✅ ' + title + '</p>';
+    } catch(e) {
+      showToast('❌ Save failed: ' + e.message, 'error');
+    }
+  }
+</script>
 </body>
 </html>
