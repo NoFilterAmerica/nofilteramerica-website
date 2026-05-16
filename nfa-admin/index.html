@@ -396,11 +396,11 @@
     return json.data; // array of slot objects
   }
 
-  async function apiSave(section, slot, title, description, story_line, video_url) {
+  async function apiSave(section, slot, title, description, story_line, video_url, thumbnail_url) {
     const res = await fetch(API + '?action=save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ section, slot, title, description, story_line, video_url })
+      body: JSON.stringify({ section, slot, title, description, story_line, video_url, thumbnail_url: thumbnail_url || '' })
     });
     const json = await res.json();
     if (!json.ok) throw new Error(json.error || 'Save failed');
@@ -563,7 +563,7 @@
 
     showToast('💾 Saving...');
     try {
-      await apiSave('nofilter', i, title, desc, '', url);
+      await apiSave('nofilter', i, title, desc, '', url, thumb);
       if (successEl) { successEl.style.display = 'block'; successEl.textContent = '✅ Slot ' + (i+1) + ' live on site!'; }
       showToast('✅ Slot ' + (i+1) + ' saved!');
       const el = document.getElementById('nfCurrent' + i);
