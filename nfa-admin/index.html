@@ -180,16 +180,14 @@
             <label>Video Description</label>
             <textarea id="nfDesc0" rows="3" placeholder="Describe what this video is about..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
           </div>
-          <label class="upload-zone" for="nfFileInput0" id="nfDropZone0">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p>Drag & drop your MP4 here</p>
-            <strong>or click to browse files</strong>
-            <input type="file" id="nfFileInput0" accept="video/mp4,video/*" onchange="handleNFUpload(0, this)"/>
-          </label>
-          <div class="progress-bar-wrap" id="nfProgress0" style="display:none;">
-            <div class="progress-bar" id="nfProgressBar0" style="width:0%"></div>
+          <div class="form-group">
+            <label>TikTok Video URL</label>
+            <input type="url" id="nfUrl0" placeholder="https://www.tiktok.com/@nofilteramerica/video/..." style="width:100%;"/>
           </div>
-          <div class="success-msg" id="nfSuccess0" style="display:none;">✅ Slot 1 uploaded!</div>
+          <button onclick="saveNFSlot(0)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
+            <i class="fas fa-cloud-upload-alt"></i> Save Slot 1 to Site
+          </button>
+          <div class="success-msg" id="nfSuccess0" style="display:none;margin-top:8px;">✅ Slot 1 live on site!</div>
           <div id="nfCurrent0" style="margin-top:10px;"></div>
         </div>
 
@@ -204,16 +202,14 @@
             <label>Video Description</label>
             <textarea id="nfDesc1" rows="3" placeholder="Describe what this video is about..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
           </div>
-          <label class="upload-zone" for="nfFileInput1" id="nfDropZone1">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p>Drag & drop your MP4 here</p>
-            <strong>or click to browse files</strong>
-            <input type="file" id="nfFileInput1" accept="video/mp4,video/*" onchange="handleNFUpload(1, this)"/>
-          </label>
-          <div class="progress-bar-wrap" id="nfProgress1" style="display:none;">
-            <div class="progress-bar" id="nfProgressBar1" style="width:0%"></div>
+          <div class="form-group">
+            <label>TikTok Video URL</label>
+            <input type="url" id="nfUrl1" placeholder="https://www.tiktok.com/@nofilteramerica/video/..." style="width:100%;"/>
           </div>
-          <div class="success-msg" id="nfSuccess1" style="display:none;">✅ Slot 2 uploaded!</div>
+          <button onclick="saveNFSlot(1)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
+            <i class="fas fa-cloud-upload-alt"></i> Save Slot 2 to Site
+          </button>
+          <div class="success-msg" id="nfSuccess1" style="display:none;margin-top:8px;">✅ Slot 2 live on site!</div>
           <div id="nfCurrent1" style="margin-top:10px;"></div>
         </div>
 
@@ -228,16 +224,14 @@
             <label>Video Description</label>
             <textarea id="nfDesc2" rows="3" placeholder="Describe what this video is about..." style="width:100%;background:var(--navy3);border:1px solid var(--border);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;resize:vertical;"></textarea>
           </div>
-          <label class="upload-zone" for="nfFileInput2" id="nfDropZone2">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p>Drag & drop your MP4 here</p>
-            <strong>or click to browse files</strong>
-            <input type="file" id="nfFileInput2" accept="video/mp4,video/*" onchange="handleNFUpload(2, this)"/>
-          </label>
-          <div class="progress-bar-wrap" id="nfProgress2" style="display:none;">
-            <div class="progress-bar" id="nfProgressBar2" style="width:0%"></div>
+          <div class="form-group">
+            <label>TikTok Video URL</label>
+            <input type="url" id="nfUrl2" placeholder="https://www.tiktok.com/@nofilteramerica/video/..." style="width:100%;"/>
           </div>
-          <div class="success-msg" id="nfSuccess2" style="display:none;">✅ Slot 3 uploaded!</div>
+          <button onclick="saveNFSlot(2)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
+            <i class="fas fa-cloud-upload-alt"></i> Save Slot 3 to Site
+          </button>
+          <div class="success-msg" id="nfSuccess2" style="display:none;margin-top:8px;">✅ Slot 3 live on site!</div>
           <div id="nfCurrent2" style="margin-top:10px;"></div>
         </div>
       </div>
@@ -355,61 +349,39 @@
 
   <script src="app.js"></script>
   <script>
-    // ---- CLOUD API CONFIG ----
-    const API_BASE = 'https://api.base44.com/api/apps/6a0717be1b2d3fb43fda6201/entities';
-    const APP_ID = '6a0717be1b2d3fb43fda6201';
+    // ---- CLOUD API CONFIG (Netlify Blobs via serverless function) ----
+    const API_BASE = '/.netlify/functions/videos';
 
     async function apiGet(section) {
       try {
-        const res = await fetch(`${API_BASE}/Video?section=${encodeURIComponent(section)}`, {
-          headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' }
-        });
-        const data = await res.json();
-        return Array.isArray(data) ? data : [];
-      } catch(e) { console.error('API GET error:', e); return []; }
+        const res = await fetch(`${API_BASE}?action=list&section=${encodeURIComponent(section)}`);
+        const json = await res.json();
+        if (!json.ok) return {};
+        return json.data || {};
+      } catch(e) { console.error('API GET error:', e); return {}; }
     }
 
     async function apiSave(section, slot, title, description, story_line, video_url, file_name) {
       try {
-        // Try to find existing record first
-        const existing = await fetch(`${API_BASE}/Video?section=${encodeURIComponent(section)}&slot=${encodeURIComponent(slot)}`, {
-          headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' }
+        const res = await fetch(`${API_BASE}?action=save`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ section, slot: String(slot), title, description, story_line, video_url, file_name })
         });
-        const existingData = await existing.json();
-        const record = Array.isArray(existingData) && existingData.length > 0 ? existingData[0] : null;
-
-        if (record) {
-          // Update
-          await fetch(`${API_BASE}/Video/${record.id}`, {
-            method: 'PUT',
-            headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title, description, story_line, video_url, file_name, upload_date: new Date().toISOString() })
-          });
-        } else {
-          // Create
-          await fetch(`${API_BASE}/Video`, {
-            method: 'POST',
-            headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' },
-            body: JSON.stringify({ section, slot, title, description, story_line, video_url, file_name, upload_date: new Date().toISOString() })
-          });
-        }
-        return true;
+        const json = await res.json();
+        return json.ok === true;
       } catch(e) { console.error('API SAVE error:', e); return false; }
     }
 
     async function apiDelete(section, slot) {
       try {
-        const existing = await fetch(`${API_BASE}/Video?section=${encodeURIComponent(section)}&slot=${encodeURIComponent(slot)}`, {
-          headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' }
+        const res = await fetch(`${API_BASE}?action=delete`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ section, slot: String(slot) })
         });
-        const existingData = await existing.json();
-        if (Array.isArray(existingData) && existingData.length > 0) {
-          await fetch(`${API_BASE}/Video/${existingData[0].id}`, {
-            method: 'DELETE',
-            headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' }
-          });
-        }
-        return true;
+        const json = await res.json();
+        return json.ok === true;
       } catch(e) { console.error('API DELETE error:', e); return false; }
     }
 
@@ -553,70 +525,48 @@
       }
     }
 
-    // ---- NO-FILTER ZONE: 3-slot upload (CLOUD) ----
-    async function handleNFUpload(slotIndex, input) {
-      const file = input.files[0];
-      if (!file) return;
-
-      const progressWrap = document.getElementById('nfProgress' + slotIndex);
-      const progressBar = document.getElementById('nfProgressBar' + slotIndex);
+    // ---- NO-FILTER ZONE: 3-slot save (URL-based, no file upload) ----
+    async function saveNFSlot(slotIndex) {
+      const title = document.getElementById('nfTitle' + slotIndex).value.trim();
+      const desc = document.getElementById('nfDesc' + slotIndex).value.trim();
+      const url = document.getElementById('nfUrl' + slotIndex).value.trim();
       const successEl = document.getElementById('nfSuccess' + slotIndex);
 
-      progressWrap.style.display = 'block';
-      progressBar.style.width = '10%';
-      successEl.style.display = 'none';
+      if (!title) { showToast('⚠️ Please enter a title.', 'error'); return; }
+      if (!url) { showToast('⚠️ Please enter a TikTok URL.', 'error'); return; }
 
-      const title = document.getElementById('nfTitle' + slotIndex).value || file.name.replace('.mp4','');
-      const desc = document.getElementById('nfDesc' + slotIndex).value || '';
+      showToast('💾 Saving to site...');
+      const ok = await apiSave('nofilter', String(slotIndex), title, desc, '', url, url);
 
-      try {
-        // Read file as base64
-        const reader = new FileReader();
-        reader.onload = async function(e) {
-          progressBar.style.width = '50%';
-          const dataUrl = e.target.result;
-
-          const ok = await apiSave('nofilter', String(slotIndex), title, desc, '', dataUrl, file.name);
-
-          progressBar.style.width = '100%';
-          setTimeout(() => {
-            progressWrap.style.display = 'none';
-            if (ok) {
-              successEl.style.display = 'block';
-              renderNFCurrentSlots();
-              showToast('✅ TikTok Slot ' + (slotIndex+1) + ' saved to cloud!');
-            } else {
-              showToast('❌ Upload failed. Check connection.', 'error');
-            }
-          }, 400);
-        };
-        reader.readAsDataURL(file);
-      } catch(err) {
-        progressWrap.style.display = 'none';
-        showToast('❌ Upload error: ' + err.message, 'error');
+      if (ok) {
+        successEl.style.display = 'block';
+        renderNFCurrentSlots();
+        showToast('✅ Slot ' + (slotIndex+1) + ' is now live on the site!');
+      } else {
+        showToast('❌ Save failed. Please try again.', 'error');
       }
     }
 
-    async function renderNFCurrentSlots() {
-      const videos = await apiGet('nofilter');
+        async function renderNFCurrentSlots() {
+      const videos = await apiGet('nofilter'); // returns object keyed by slot index
       for (let i = 0; i < 3; i++) {
         const el = document.getElementById('nfCurrent' + i);
         if (!el) continue;
-        const v = videos.find(x => x.slot === String(i));
+        const v = videos[String(i)];
         if (v) {
           el.innerHTML = `<div class="video-item" style="margin-top:0;">
             <i class="fas fa-film" style="color:var(--gold);"></i>
             <div class="video-item-info">
-              <strong>${v.title}</strong>
+              <strong>${v.title || 'Untitled'}</strong>
               <span>${v.description ? v.description.substring(0,60)+'...' : 'No description'} · ${v.upload_date ? new Date(v.upload_date).toLocaleDateString() : ''}</span>
             </div>
             <button class="delete-btn" onclick="deleteNFSlot(${i})"><i class="fas fa-trash"></i> Delete</button>
           </div>`;
-          // Pre-fill fields
+          // Pre-fill fields with existing data
           const titleEl = document.getElementById('nfTitle' + i);
           const descEl = document.getElementById('nfDesc' + i);
-          if (titleEl && !titleEl.value) titleEl.value = v.title || '';
-          if (descEl && !descEl.value) descEl.value = v.description || '';
+          if (titleEl) titleEl.placeholder = v.title || titleEl.placeholder;
+          if (descEl) descEl.placeholder = v.description || descEl.placeholder;
         } else {
           el.innerHTML = '<p style="color:var(--gray);font-size:12px;margin-top:4px;">No video in this slot yet.</p>';
         }
