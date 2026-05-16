@@ -1,6 +1,8 @@
 // =============================================
 // NO FILTER AMERICA – Main App JS
 // =============================================
+// NEWS_CACHE_LAST_UPDATED: 2026-05-16 13:02:41 UTC
+// Daily news import from newsdata.io API
 
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
