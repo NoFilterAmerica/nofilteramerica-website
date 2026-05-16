@@ -1,0 +1,12 @@
+{
+  "nofilter": [
+    {"slot": 0, "title": "", "description": "", "video_url": ""},
+    {"slot": 1, "title": "", "description": "", "video_url": ""},
+    {"slot": 2, "title": "", "description": "", "video_url": ""}
+  ],
+  "truecrime": [
+    {"slot": 0, "title": "", "description": "", "story_line": "", "video_url": ""},
+    {"slot": 1, "title": "", "description": "", "story_line": "", "video_url": ""},
+    {"slot": 2, "title": "", "description": "", "story_line": "", "video_url": ""}
+  ]
+}
