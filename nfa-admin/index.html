@@ -350,39 +350,49 @@
 
   <script src="app.js"></script>
   <script>
-    // ---- CLOUD API CONFIG (Netlify Blobs via serverless function) ----
-    const API_BASE = '/.netlify/functions/videos';
+    // ---- CLOUD API CONFIG (Base44 Database) ----
+    const B44_BASE = 'https://app.base44.com/api/apps/6a0717be1b2d3fb43fda6201/entities/Video';
+    const B44_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NjAzNDBlNi1lMWZkLTQxZTItYWI0OC1mNjlhOWJjOGRjY2QiLCJjbGllbnRfaWQiOiI0NjAzNDBlNi1lMWZkLTQxZTItYWI0OC1mNjlhOWJjOGRjY2QiLCJhcHBfaWQiOiI2YTA3MTdiZTFiMmQzZmI0M2ZkYTYyMDEiLCJhdWQiOiJiYXNlNDRfYXBpIiwic2NvcGUiOiJhcHAuYWNjZXNzIiwiZXhwIjoxNzc4OTAxOTQxLCJpYXQiOjE3Nzg4OTgzNDF9.McISGKERKlLh40ii_9YZJ8e8DRSlKFdlLTw3KEzQF7c';
+    const B44_HEADERS = { 'Authorization': 'Bearer ' + B44_TOKEN, 'Content-Type': 'application/json' };
 
     async function apiGet(section) {
       try {
-        const res = await fetch(`${API_BASE}?action=list&section=${encodeURIComponent(section)}`);
-        const json = await res.json();
-        if (!json.ok) return {};
-        return json.data || {};
+        const res = await fetch(B44_BASE + '?section=' + encodeURIComponent(section), { headers: B44_HEADERS });
+        const records = await res.json();
+        if (!Array.isArray(records)) return {};
+        // Convert array to object keyed by slot
+        const result = {};
+        records.forEach(r => { result[String(r.slot)] = r; });
+        return result;
       } catch(e) { console.error('API GET error:', e); return {}; }
     }
 
     async function apiSave(section, slot, title, description, story_line, video_url, file_name) {
       try {
-        const res = await fetch(`${API_BASE}?action=save`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ section, slot: String(slot), title, description, story_line, video_url, file_name })
-        });
-        const json = await res.json();
-        return json.ok === true;
+        // Check if record exists for this section+slot
+        const res = await fetch(B44_BASE + '?section=' + encodeURIComponent(section) + '&slot=' + encodeURIComponent(slot), { headers: B44_HEADERS });
+        const records = await res.json();
+        const existing = Array.isArray(records) && records.length > 0 ? records[0] : null;
+
+        const body = JSON.stringify({ section, slot: Number(slot), title, description, story_line: story_line || '', video_url, file_name, upload_date: new Date().toISOString() });
+
+        if (existing) {
+          await fetch(B44_BASE + '/' + existing.id, { method: 'PUT', headers: B44_HEADERS, body });
+        } else {
+          await fetch(B44_BASE, { method: 'POST', headers: B44_HEADERS, body });
+        }
+        return true;
       } catch(e) { console.error('API SAVE error:', e); return false; }
     }
 
     async function apiDelete(section, slot) {
       try {
-        const res = await fetch(`${API_BASE}?action=delete`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ section, slot: String(slot) })
-        });
-        const json = await res.json();
-        return json.ok === true;
+        const res = await fetch(B44_BASE + '?section=' + encodeURIComponent(section) + '&slot=' + encodeURIComponent(slot), { headers: B44_HEADERS });
+        const records = await res.json();
+        if (Array.isArray(records) && records.length > 0) {
+          await fetch(B44_BASE + '/' + records[0].id, { method: 'DELETE', headers: B44_HEADERS });
+        }
+        return true;
       } catch(e) { console.error('API DELETE error:', e); return false; }
     }
 
@@ -553,7 +563,7 @@
       for (let i = 0; i < 3; i++) {
         const el = document.getElementById('nfCurrent' + i);
         if (!el) continue;
-        const v = videos[String(i)];
+        const v = videos[String(i)] || videos[String(i + '.0')] || videos[i];
         if (v) {
           el.innerHTML = `<div class="video-item" style="margin-top:0;">
             <i class="fas fa-film" style="color:var(--gold);"></i>
