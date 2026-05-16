@@ -355,6 +355,64 @@
 
   <script src="app.js"></script>
   <script>
+    // ---- CLOUD API CONFIG ----
+    const API_BASE = 'https://api.base44.com/api/apps/6a0717be1b2d3fb43fda6201/entities';
+    const APP_ID = '6a0717be1b2d3fb43fda6201';
+
+    async function apiGet(section) {
+      try {
+        const res = await fetch(`${API_BASE}/Video?section=${encodeURIComponent(section)}`, {
+          headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        return Array.isArray(data) ? data : [];
+      } catch(e) { console.error('API GET error:', e); return []; }
+    }
+
+    async function apiSave(section, slot, title, description, story_line, video_url, file_name) {
+      try {
+        // Try to find existing record first
+        const existing = await fetch(`${API_BASE}/Video?section=${encodeURIComponent(section)}&slot=${encodeURIComponent(slot)}`, {
+          headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' }
+        });
+        const existingData = await existing.json();
+        const record = Array.isArray(existingData) && existingData.length > 0 ? existingData[0] : null;
+
+        if (record) {
+          // Update
+          await fetch(`${API_BASE}/Video/${record.id}`, {
+            method: 'PUT',
+            headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, description, story_line, video_url, file_name, upload_date: new Date().toISOString() })
+          });
+        } else {
+          // Create
+          await fetch(`${API_BASE}/Video`, {
+            method: 'POST',
+            headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ section, slot, title, description, story_line, video_url, file_name, upload_date: new Date().toISOString() })
+          });
+        }
+        return true;
+      } catch(e) { console.error('API SAVE error:', e); return false; }
+    }
+
+    async function apiDelete(section, slot) {
+      try {
+        const existing = await fetch(`${API_BASE}/Video?section=${encodeURIComponent(section)}&slot=${encodeURIComponent(slot)}`, {
+          headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' }
+        });
+        const existingData = await existing.json();
+        if (Array.isArray(existingData) && existingData.length > 0) {
+          await fetch(`${API_BASE}/Video/${existingData[0].id}`, {
+            method: 'DELETE',
+            headers: { 'x-api-key': 'service', 'Content-Type': 'application/json' }
+          });
+        }
+        return true;
+      } catch(e) { console.error('API DELETE error:', e); return false; }
+    }
+
     // ---- ADMIN AUTH ----
     const DEFAULT_PASS = 'NFA2024!';
     function getAdminPass() { return localStorage.getItem('nfa_admin_pass') || DEFAULT_PASS; }
@@ -383,6 +441,7 @@
     if (sessionStorage.getItem('nfa_admin') === '1') {
       document.getElementById('loginSection').style.display = 'none';
       document.getElementById('adminSection').style.display = 'block';
+      renderNFCurrentSlots();
     }
 
     // ---- TABS ----
@@ -494,8 +553,8 @@
       }
     }
 
-    // ---- NO-FILTER ZONE: 3-slot upload ----
-    function handleNFUpload(slotIndex, input) {
+    // ---- NO-FILTER ZONE: 3-slot upload (CLOUD) ----
+    async function handleNFUpload(slotIndex, input) {
       const file = input.files[0];
       if (!file) return;
 
@@ -504,65 +563,69 @@
       const successEl = document.getElementById('nfSuccess' + slotIndex);
 
       progressWrap.style.display = 'block';
-      progressBar.style.width = '0%';
+      progressBar.style.width = '10%';
       successEl.style.display = 'none';
 
-      let prog = 0;
-      const interval = setInterval(() => {
-        prog = Math.min(prog + 10, 90);
-        progressBar.style.width = prog + '%';
-      }, 100);
+      const title = document.getElementById('nfTitle' + slotIndex).value || file.name.replace('.mp4','');
+      const desc = document.getElementById('nfDesc' + slotIndex).value || '';
 
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        clearInterval(interval);
-        progressBar.style.width = '100%';
+      try {
+        // Read file as base64
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+          progressBar.style.width = '50%';
+          const dataUrl = e.target.result;
 
-        const title = document.getElementById('nfTitle' + slotIndex).value || file.name.replace('.mp4','');
-        const desc = document.getElementById('nfDesc' + slotIndex).value || '';
-        const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+          const ok = await apiSave('nofilter', String(slotIndex), title, desc, '', dataUrl, file.name);
 
-        const videos = getVideos('nofilter_videos');
-        while (videos.length <= slotIndex) videos.push(null);
-        videos[slotIndex] = { title, desc, date: dateStr, dataUrl: e.target.result, fileName: file.name };
-        saveVideos('nofilter_videos', videos);
-
-        setTimeout(() => {
-          progressWrap.style.display = 'none';
-          successEl.style.display = 'block';
-          renderNFCurrentSlots();
-          showToast('✅ TikTok Slot ' + (slotIndex+1) + ' uploaded!');
-        }, 400);
-      };
-      reader.readAsDataURL(file);
+          progressBar.style.width = '100%';
+          setTimeout(() => {
+            progressWrap.style.display = 'none';
+            if (ok) {
+              successEl.style.display = 'block';
+              renderNFCurrentSlots();
+              showToast('✅ TikTok Slot ' + (slotIndex+1) + ' saved to cloud!');
+            } else {
+              showToast('❌ Upload failed. Check connection.', 'error');
+            }
+          }, 400);
+        };
+        reader.readAsDataURL(file);
+      } catch(err) {
+        progressWrap.style.display = 'none';
+        showToast('❌ Upload error: ' + err.message, 'error');
+      }
     }
 
-    function renderNFCurrentSlots() {
-      const videos = getVideos('nofilter_videos');
+    async function renderNFCurrentSlots() {
+      const videos = await apiGet('nofilter');
       for (let i = 0; i < 3; i++) {
         const el = document.getElementById('nfCurrent' + i);
         if (!el) continue;
-        const v = videos[i];
+        const v = videos.find(x => x.slot === String(i));
         if (v) {
           el.innerHTML = `<div class="video-item" style="margin-top:0;">
             <i class="fas fa-film" style="color:var(--gold);"></i>
             <div class="video-item-info">
               <strong>${v.title}</strong>
-              <span>${v.desc ? v.desc.substring(0,60)+'...' : 'No description'} · ${v.date}</span>
+              <span>${v.description ? v.description.substring(0,60)+'...' : 'No description'} · ${v.upload_date ? new Date(v.upload_date).toLocaleDateString() : ''}</span>
             </div>
             <button class="delete-btn" onclick="deleteNFSlot(${i})"><i class="fas fa-trash"></i> Delete</button>
           </div>`;
+          // Pre-fill fields
+          const titleEl = document.getElementById('nfTitle' + i);
+          const descEl = document.getElementById('nfDesc' + i);
+          if (titleEl && !titleEl.value) titleEl.value = v.title || '';
+          if (descEl && !descEl.value) descEl.value = v.description || '';
         } else {
           el.innerHTML = '<p style="color:var(--gray);font-size:12px;margin-top:4px;">No video in this slot yet.</p>';
         }
       }
     }
 
-    function deleteNFSlot(index) {
+    async function deleteNFSlot(index) {
       if (!confirm('Delete TikTok Slot ' + (index+1) + '? This cannot be undone.')) return;
-      const videos = getVideos('nofilter_videos');
-      if (videos[index]) videos[index] = null;
-      saveVideos('nofilter_videos', videos);
+      await apiDelete('nofilter', String(index));
       renderNFCurrentSlots();
       showToast('Slot ' + (index+1) + ' cleared.');
     }
