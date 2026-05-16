@@ -186,8 +186,15 @@
             <input type="url" id="nfUrl0" placeholder="https://www.tiktok.com/@nofilteramerica/video/..." style="width:100%;"/>
           </div>
           <div class="form-group">
-            <label>Thumbnail Image URL <span style="color:var(--gray);font-weight:400;">(screenshot or promo image)</span></label>
-            <input type="url" id="nfThumb0" placeholder="https://... paste any image URL" style="width:100%;"/>
+            <label>Thumbnail Image <span style="color:var(--gray);font-weight:400;">(upload from your device)</span></label>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px;">
+              <label for="nfThumbFile0" id="nfThumbBtn0" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy3);border:1px solid var(--border-gold);color:var(--gold);padding:10px 18px;border-radius:4px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:1px;white-space:nowrap;">
+                <i class="fas fa-image"></i> Choose Image
+              </label>
+              <span id="nfThumbFileName0" style="font-size:12px;color:var(--gray);">No file chosen</span>
+            </div>
+            <input type="file" id="nfThumbFile0" accept="image/*" style="display:none;" onchange="document.getElementById('nfThumbFileName0').textContent=this.files[0]?this.files[0].name:'No file chosen'; uploadThumb(this, 'nfThumb0', 'nfThumbImg0', 'nfThumbPreview0', document.getElementById('nfThumbBtn0'))"/>
+            <input type="hidden" id="nfThumb0" value=""/>
             <div id="nfThumbPreview0" style="margin-top:8px;display:none;"><img id="nfThumbImg0" src="" alt="Preview" style="width:120px;height:200px;object-fit:cover;border-radius:6px;border:1px solid var(--border-gold);"/></div>
           </div>
           <button onclick="saveNFSlot(0)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
@@ -213,8 +220,15 @@
             <input type="url" id="nfUrl1" placeholder="https://www.tiktok.com/@nofilteramerica/video/..." style="width:100%;"/>
           </div>
           <div class="form-group">
-            <label>Thumbnail Image URL <span style="color:var(--gray);font-weight:400;">(screenshot or promo image)</span></label>
-            <input type="url" id="nfThumb1" placeholder="https://... paste any image URL" style="width:100%;"/>
+            <label>Thumbnail Image <span style="color:var(--gray);font-weight:400;">(upload from your device)</span></label>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px;">
+              <label for="nfThumbFile1" id="nfThumbBtn1" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy3);border:1px solid var(--border-gold);color:var(--gold);padding:10px 18px;border-radius:4px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:1px;white-space:nowrap;">
+                <i class="fas fa-image"></i> Choose Image
+              </label>
+              <span id="nfThumbFileName1" style="font-size:12px;color:var(--gray);">No file chosen</span>
+            </div>
+            <input type="file" id="nfThumbFile1" accept="image/*" style="display:none;" onchange="document.getElementById('nfThumbFileName1').textContent=this.files[0]?this.files[0].name:'No file chosen'; uploadThumb(this, 'nfThumb1', 'nfThumbImg1', 'nfThumbPreview1', document.getElementById('nfThumbBtn1'))"/>
+            <input type="hidden" id="nfThumb1" value=""/>
             <div id="nfThumbPreview1" style="margin-top:8px;display:none;"><img id="nfThumbImg1" src="" alt="Preview" style="width:120px;height:200px;object-fit:cover;border-radius:6px;border:1px solid var(--border-gold);"/></div>
           </div>
           <button onclick="saveNFSlot(1)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
@@ -240,8 +254,15 @@
             <input type="url" id="nfUrl2" placeholder="https://www.tiktok.com/@nofilteramerica/video/..." style="width:100%;"/>
           </div>
           <div class="form-group">
-            <label>Thumbnail Image URL <span style="color:var(--gray);font-weight:400;">(screenshot or promo image)</span></label>
-            <input type="url" id="nfThumb2" placeholder="https://... paste any image URL" style="width:100%;"/>
+            <label>Thumbnail Image <span style="color:var(--gray);font-weight:400;">(upload from your device)</span></label>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px;">
+              <label for="nfThumbFile2" id="nfThumbBtn2" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy3);border:1px solid var(--border-gold);color:var(--gold);padding:10px 18px;border-radius:4px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:1px;white-space:nowrap;">
+                <i class="fas fa-image"></i> Choose Image
+              </label>
+              <span id="nfThumbFileName2" style="font-size:12px;color:var(--gray);">No file chosen</span>
+            </div>
+            <input type="file" id="nfThumbFile2" accept="image/*" style="display:none;" onchange="document.getElementById('nfThumbFileName2').textContent=this.files[0]?this.files[0].name:'No file chosen'; uploadThumb(this, 'nfThumb2', 'nfThumbImg2', 'nfThumbPreview2', document.getElementById('nfThumbBtn2'))"/>
+            <input type="hidden" id="nfThumb2" value=""/>
             <div id="nfThumbPreview2" style="margin-top:8px;display:none;"><img id="nfThumbImg2" src="" alt="Preview" style="width:120px;height:200px;object-fit:cover;border-radius:6px;border:1px solid var(--border-gold);"/></div>
           </div>
           <button onclick="saveNFSlot(2)" style="background:var(--gold);color:#000;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">
@@ -489,6 +510,47 @@
   }
 
   // ---- SAVE NF SLOT ----
+
+  // ---- THUMBNAIL UPLOAD ----
+  async function uploadThumb(inputEl, targetInputId, previewImgId, previewDivId, btnEl) {
+    const file = inputEl.files[0];
+    if (!file) return;
+    const origText = btnEl.innerHTML;
+    btnEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+    btnEl.disabled = true;
+    try {
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        // Strip data:image/...;base64, prefix
+        const base64 = e.target.result.split(',')[1];
+        const res = await fetch('/.netlify/functions/uploadImage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ filename: file.name, data: base64 })
+        });
+        const json = await res.json();
+        if (json.ok && json.url) {
+          document.getElementById(targetInputId).value = json.url;
+          const img = document.getElementById(previewImgId);
+          const div = document.getElementById(previewDivId);
+          if (img && div) { img.src = json.url; div.style.display = 'block'; }
+          btnEl.innerHTML = '<i class="fas fa-check"></i> Uploaded!';
+          btnEl.style.background = '#2e7d32';
+          setTimeout(() => { btnEl.innerHTML = origText; btnEl.style.background = ''; btnEl.disabled = false; }, 2500);
+        } else {
+          btnEl.innerHTML = '<i class="fas fa-times"></i> Failed';
+          btnEl.style.background = '#8b0000';
+          setTimeout(() => { btnEl.innerHTML = origText; btnEl.style.background = ''; btnEl.disabled = false; }, 2500);
+        }
+      };
+      reader.readAsDataURL(file);
+    } catch(err) {
+      btnEl.innerHTML = '<i class="fas fa-times"></i> Error';
+      btnEl.style.background = '#8b0000';
+      setTimeout(() => { btnEl.innerHTML = origText; btnEl.style.background = ''; btnEl.disabled = false; }, 2500);
+    }
+  }
+
   async function saveNFSlot(i) {
     const title = (document.getElementById('nfTitle' + i).value || '').trim();
     const desc  = (document.getElementById('nfDesc'  + i).value || '').trim();
