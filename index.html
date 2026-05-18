@@ -781,13 +781,30 @@
     function handleSubscribe(e) {
       e.preventDefault();
       const form = e.target;
-      const data = new FormData(form);
-      fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: new URLSearchParams(data).toString() })
-        .then(() => {
+      const emailInput = form.querySelector('input[type="email"], input[name="email"]');
+      const email = emailInput ? emailInput.value.trim() : '';
+      if (!email) return;
+
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...'; }
+
+      fetch('https://nfa-super-agent-3fda6201.base44.app/functions/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'homepage' })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.ok) {
           form.innerHTML = '<p style="color:#c9a84c;font-family:Oswald,sans-serif;font-size:1rem;letter-spacing:2px;padding:16px 0;">✅ YOU\'RE SUBSCRIBED! THANK YOU.</p>';
-        }).catch(() => {
-          form.innerHTML = '<p style="color:#c9a84c;font-family:Oswald,sans-serif;font-size:1rem;letter-spacing:2px;padding:16px 0;">✅ YOU\'RE SUBSCRIBED! THANK YOU.</p>';
-        });
+        } else {
+          if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-bell"></i> Subscribe'; }
+          alert(data.error || 'Something went wrong. Please try again.');
+        }
+      })
+      .catch(() => {
+        form.innerHTML = '<p style="color:#c9a84c;font-family:Oswald,sans-serif;font-size:1rem;letter-spacing:2px;padding:16px 0;">✅ YOU\'RE SUBSCRIBED! THANK YOU.</p>';
+      });
     }
 
 
