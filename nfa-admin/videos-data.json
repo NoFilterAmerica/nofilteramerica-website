@@ -50,5 +50,57 @@
       "story_line": "",
       "video_url": ""
     }
+  ],
+  "investigations": [
+    {
+      "id": "inv_1779115161527",
+      "title": "Dark Money & Digital Influence",
+      "status": "active",
+      "summary": "Paid To Persuade? The Dark Money Behind Political Influencers",
+      "story": "In November 2025, Chairman James Comer announced a formal investigation after reports alleged that the Chorus program paid influencers to amplify Democratic political messaging while restricting disclosure of those financial relationships.\nThe Oversight Committee specifically claimed the program may have:\n\nCircumvented Federal Election Commission disclosure requirements\nBlurred lines between journalism and paid political advocacy\nUsed confidentiality clauses to conceal financial arrangements\nCoordinated messaging while avoiding traditional campaign-ad labeling requirements\n\nAccording to the Committee letters, contracts reportedly:\n\nRestricted creators from disclosing partnerships without approval\nRequired oversight of political bookings/interviews\nControlled how certain political content could be produced or distributed.",
+      "findings": [
+        "Finding #1. WIRED reported that the Chorus Creator Incubator Program, backed through the Sixteen Thirty Fund, offered Democratic-leaning influencers up to $8,000/month under contracts with secrecy/disclosure restrictions.",
+        "Finding #2. The House Oversight Committee opened an investigation in November 2025, saying the program reportedly paid participants to promote Democratic messaging under secrecy contracts.",
+        "Finding #3. On May 14, 2026, the Committee said it subpoenaed Sixteen Thirty Fund documents after limited compliance."
+      ],
+      "timeline": [],
+      "sources": [],
+      "tiktoks": [],
+      "cover_url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779113601950_Paid_To_Persuade.png",
+      "documents": [
+        {
+          "name": "Congress 2.png",
+          "url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779115057768_Congress_2.png",
+          "type": "image/png"
+        },
+        {
+          "name": "Chorus-inquiry-to-1630_11.18.2025-3.pdf",
+          "url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779115072727_Chorus-inquiry-to-1630_11.18.2025-3.pdf",
+          "type": "application/pdf"
+        },
+        {
+          "name": "Screenshot 2026-05-16 153412 (1).png",
+          "url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779115106673_Screenshot_2026-05-16_153412__1_.png",
+          "type": "image/png"
+        },
+        {
+          "name": "Screenshot 2026-05-16 153628.png",
+          "url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779115114881_Screenshot_2026-05-16_153628.png",
+          "type": "image/png"
+        },
+        {
+          "name": "Dark money 5.png",
+          "url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779115128988_Dark_money_5.png",
+          "type": "image/png"
+        },
+        {
+          "name": "Screenshot 2026-05-16 154422.png",
+          "url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779115154017_Screenshot_2026-05-16_154422.png",
+          "type": "image/png"
+        }
+      ],
+      "created": "2026-05-18T14:39:21.526Z",
+      "updated": "2026-05-18T14:39:21.526Z"
+    }
   ]
 }
