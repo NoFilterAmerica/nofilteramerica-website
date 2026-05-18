@@ -51,5 +51,51 @@
       "video_url": ""
     }
   ],
-  "investigations": []
+  "investigations": [
+    {
+      "id": "inv_1779126452791",
+      "title": "Dark Money & Digital Influence",
+      "status": "draft",
+      "summary": "Paid To Persuade? The Dark Money Behind Political Influencers",
+      "story": "August 27, 2025, 6:00 AM. The Wire Published a story by Taylor Lorenz titled; A Dark Money Group Is Secretly Funding High-Profile Democratic Influencers. An initiative aimed at boosting Democrats online offers influencers up to $8,000 a month to push the party line. All they have to do is keep it secret and agree to restrictions on their content. \n\nNovember 2025, Chairman James Comer announced a formal investigation after reports alleged that the Chorus program paid influencers to amplify Democratic political messaging while restricting disclosure of those financial relationships.\n\nThe House Oversight investigation has evolved from a media-report inquiry into a broader probe examining whether the Chorus Creator Incubator Program and related organizations attempted to avoid campaign-finance disclosure rules and obscure operational control structures.\n\nKey Entities Involved\nHouse Committee on Oversight and Government Reform\nJames Comer\nSixteen Thirty Fund\nArabella Advisors\nSunflower Services\nCreator Collective\nChorus Creator Incubator Program\n\nBy spring 2026, Comer stated the Committee believed compliance had been incomplete, leading to escalated pressure and additional document demands.\n\nOn May 14, 2026, House Oversight Committee Chairman James Comer issued a subpoena to the Sixteen Thirty Fund demanding documents and communications tied to the Chorus Creator Incubator Program.\n\nThe subpoena was sent to:\n\nAmy Kurtz, President of Sixteen Thirty Fund.\n\nAccording to the House Oversight Committee, the investigation is examining whether the Chorus influencer network:\n\nattempted to avoid federal campaign-finance disclosure requirements,\ncoordinated political messaging through paid influencers,\nand operated as what Comer called a “dark money operation.”\n\nThe Committee stated that:\n\n“influencers paid through the Chorus program generated content advocating for candidates, ballot initiatives, and political parties in U.S. elections.”\nComer also claimed Sixteen Thirty Fund’s response to earlier document requests was inadequate, saying the organization had only produced:\n\n135 pages since November 2025.\n\nAnother major issue raised in the subpoena:\n\nThe Committee alleged the program’s legal structure changed shortly after congressional scrutiny began, potentially to obscure records or operational control.\n\nThe Oversight Committee specifically referenced concerns involving:\n\ncontracts,\ninternal communications,\nfunding documents,\ncreator agreements,\norganizational charts,\nand communications involving influencers and political figures.\n\n\n\nThe “Restructuring” Issue\n\nOne of the biggest developments came in March 2026.\n\nComer alleged that after the Committee requested records:\n\nSixteen Thirty Fund distanced itself from Chorus,\na new entity called Creator Collective appeared,\nand operational control allegedly shifted shortly after congressional scrutiny began.\n\nThe Committee described the sequence as:\n\n“dubious at best”\n\nand suggested it may have been designed to:\n\nshield records,\nobscure ownership/control,\nor complicate congressional oversight.\n\nCommittee’s Main Concern\n\nThe investigation is centered on whether the structure functioned as:\n\ncoordinated political influence disguised as independent creator content.\n\nThe Committee argues that if influencers were compensated to push political narratives while withholding disclosure, that could raise:\n\ncampaign-finance issues,\nethics concerns,\ntransparency problems,\nand potential FEC reporting questions\n\nThe Sixteen Thirty Fund responded publicly saying it:\n\n“complies with the law and has cooperated with the Committee’s inquiry while protecting the rights and safety of the people who work with us.”\n\nDefenses From Chorus-Linked Figures\n\nPeople connected to the program disputed many allegations.\n\nSome creators argued:\n\nChorus was more of a creator-support or networking initiative,\nnot a covert political operation,\nand that reporting exaggerated the contracts.\n\nBrian Tyler Cohen reportedly compared the initiative to a “scholarship program” rather than an illegal influence operation.\n\nElizabeth Booker Houston publicly argued:\n\nChorus did not control her independent interviews,\nSixteen Thirty Fund was merely a fiscal sponsor,\nand some media reporting was inaccurate.\n\nWhy This Investigation Matters\n\nThis probe is significant because it sits at the intersection of:\n\ninfluencer marketing,\npolitical campaigning,\nnonprofit “dark money” networks,\nand digital media disclosure laws.\n\nCongress is effectively asking:\n\nWhen does a paid influencer stop being an “independent creator” and become part of a coordinated political communications operation?\n\nThat question has implications far beyond this case and could affect:\n\nfuture influencer disclosure rules,\npolitical podcast sponsorships,\nTikTok creator funding,\nnonprofit media operations,\nand online campaign coordination.\n\n\nThe Sixteen Thirty Fund’s Larger Role\n\nThe Sixteen Thirty Fund has long been described by critics and media outlets as one of the largest Democratic-aligned “dark money” hubs in American politics. It operates through nonprofit/fiscal sponsorship structures tied historically to Arabella Advisors.\n\nThe organization has spent hundreds of millions on:\n\nballot initiatives,\nadvocacy campaigns,\nvoter mobilization,\nissue advertising,\nand progressive infrastructure.\n\nThe Chorus investigation is the first major congressional attempt to examine whether those same nonprofit-network strategies were adapted to the influencer economy",
+      "findings": [
+        "Finding #1. WIRED reported that the Chorus Creator Incubator Program, backed through the Sixteen Thirty Fund, offered Democratic-leaning influencers up to $8,000/month under contracts with secrecy/disclosure restrictions.",
+        "Finding #2.The House Oversight Committee opened an investigation in November 2025, saying the program reportedly paid participants to promote Democratic messaging under secrecy contracts.",
+        "Finding #3.  On May 14, 2026, the Committee said it subpoenaed Sixteen Thirty Fund documents after limited compliance."
+      ],
+      "timeline": [],
+      "sources": [],
+      "tiktoks": [],
+      "cover_url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779124797933_Paid_to_Persuade_Investigation.png",
+      "documents": [
+        {
+          "name": "Congress November 18 2025 Sunflower Services Request.pdf",
+          "url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779125509905_Congress_November_18_2025_Sunflower_Services_Request.pdf",
+          "type": "application/pdf"
+        },
+        {
+          "name": "Congress November 18 2025 Sixteen Thirty Fund Request.pdf",
+          "url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779125525891_Congress_November_18_2025_Sixteen_Thirty_Fund_Request.pdf",
+          "type": "application/pdf"
+        },
+        {
+          "name": "Congress May 14 2026 Sixteen Thirty Fund Subpoena.pdf",
+          "url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779125542522_Congress_May_14_2026_Sixteen_Thirty_Fund_Subpoena.pdf",
+          "type": "application/pdf"
+        },
+        {
+          "name": "Congress March 20 2026 Creator Collective Request.pdf",
+          "url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779125651227_Congress_March_20_2026_Creator_Collective_Request.pdf",
+          "type": "application/pdf"
+        },
+        {
+          "name": "Sixteen Thirty Exempt From Income Tax.pdf",
+          "url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/investigation-files/1779125660768_Sixteen_Thirty_Exempt_From_Income_Tax.pdf",
+          "type": "application/pdf"
+        }
+      ],
+      "created": "2026-05-18T17:47:32.788Z",
+      "updated": "2026-05-18T17:47:32.788Z"
+    }
+  ]
 }
