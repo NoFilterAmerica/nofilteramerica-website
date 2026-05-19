@@ -1,4 +1,27 @@
 // =============================================
+
+// Open document in viewer — prevents forced download
+function openDoc(e, url) {
+  e.preventDefault();
+  const ext = url.split('?')[0].split('.').pop().toLowerCase();
+  // PDFs: use Google Docs viewer for inline viewing
+  if (ext === 'pdf') {
+    window.open('https://docs.google.com/viewer?url=' + encodeURIComponent(url) + '&embedded=true', '_blank');
+    return;
+  }
+  // Images: open lightbox overlay
+  if (['png','jpg','jpeg','gif','webp'].includes(ext)) {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;';
+    overlay.innerHTML = '<img src="'+url+'" style="max-width:92vw;max-height:90vh;border-radius:6px;box-shadow:0 0 40px rgba(0,0,0,0.8);"/><button style="position:absolute;top:20px;right:28px;background:none;border:none;color:#fff;font-size:2.2rem;cursor:pointer;opacity:0.8;" onclick="this.parentNode.remove()">✕</button>';
+    overlay.onclick = function(ev){ if(ev.target===overlay) overlay.remove(); };
+    document.body.appendChild(overlay);
+    return;
+  }
+  // All other file types — just open in new tab
+  window.open(url, '_blank');
+}
+
 // NO FILTER AMERICA – Main App JS
 // =============================================
 // NEWS_CACHE_LAST_UPDATED: 2026-05-18 13:03:35 UTC
@@ -587,7 +610,7 @@ async function renderInvestigationPage() {
       html += `<div class="inv-section-label"><i class="fas fa-folder-open"></i> EVIDENCE & DOCUMENTS</div>
         <div class="inv-docs-grid" style="margin-bottom:40px;">
           ${inv.documents.map(d => `
-            <a href="${d.url}" target="_blank" class="inv-doc-item ${docClass(d.type)}">
+            <a href="${d.url}" target="_blank" rel="noopener noreferrer" onclick="openDoc(event, '${d.url}')" class="inv-doc-item ${docClass(d.type)}">
               <i class="fas ${docIcon(d.type)}" style="font-size:2rem;"></i>
               <div class="doc-name">${d.name}</div>
               <div class="doc-type">${(d.type||'file').split('/').pop().toUpperCase()}</div>
