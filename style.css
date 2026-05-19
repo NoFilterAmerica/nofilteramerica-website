@@ -1236,7 +1236,19 @@ body {
   line-height: 1.8;
   color: rgba(255,255,255,0.82);
   margin-bottom: 40px;
+  background: rgba(13, 26, 46, 0.7);
+  border: 1px solid rgba(197, 160, 70, 0.25);
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px 32px;
+  max-height: 600px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) rgba(255,255,255,0.05);
 }
+.inv-story-content::-webkit-scrollbar { width: 6px; }
+.inv-story-content::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); border-radius: 3px; }
+.inv-story-content::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
 .inv-story-content p { margin-bottom: 16px; }
 .inv-story-content h2, .inv-story-content h3 { color: var(--gold); font-family: 'Playfair Display', serif; margin: 24px 0 12px; }
 .inv-story-content strong { color: #fff; }
