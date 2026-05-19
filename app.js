@@ -1,25 +1,56 @@
 // =============================================
 
-// Open document in viewer — prevents forced download
+// Open document in viewer — cross-device compatible (desktop + iOS)
 function openDoc(e, url) {
   e.preventDefault();
   const ext = url.split('?')[0].split('.').pop().toLowerCase();
-  // PDFs: use Google Docs viewer for inline viewing
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isMobile = isIOS || /Android/.test(navigator.userAgent);
+
+  // PDFs
   if (ext === 'pdf') {
-    window.open('https://docs.google.com/viewer?url=' + encodeURIComponent(url) + '&embedded=true', '_blank');
+    if (isMobile) {
+      // iOS Safari handles PDFs natively in a new tab — just open directly
+      window.open(url, '_blank');
+    } else {
+      // Desktop: use in-page modal with Google Docs embedded viewer
+      showDocModal('<iframe src="https://docs.google.com/viewer?url=' + encodeURIComponent(url) + '&embedded=true" style="width:100%;height:100%;border:none;" allowfullscreen></iframe>');
+    }
     return;
   }
-  // Images: open lightbox overlay
+
+  // Images — lightbox works on all devices
   if (['png','jpg','jpeg','gif','webp'].includes(ext)) {
     const overlay = document.createElement('div');
-    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;';
-    overlay.innerHTML = '<img src="'+url+'" style="max-width:92vw;max-height:90vh;border-radius:6px;box-shadow:0 0 40px rgba(0,0,0,0.8);"/><button style="position:absolute;top:20px;right:28px;background:none;border:none;color:#fff;font-size:2.2rem;cursor:pointer;opacity:0.8;" onclick="this.parentNode.remove()">✕</button>';
+    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;-webkit-overflow-scrolling:touch;';
+    overlay.innerHTML = '<img src="'+url+'" style="max-width:92vw;max-height:88vh;border-radius:6px;box-shadow:0 0 40px rgba(0,0,0,0.8);object-fit:contain;"/><button style="position:absolute;top:18px;right:24px;background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:2rem;cursor:pointer;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;" onclick="this.parentNode.remove()">✕</button>';
     overlay.onclick = function(ev){ if(ev.target===overlay) overlay.remove(); };
     document.body.appendChild(overlay);
     return;
   }
-  // All other file types — just open in new tab
+
+  // All other files
   window.open(url, '_blank');
+}
+
+// Modal for desktop PDF viewing
+function showDocModal(innerHtml) {
+  const existing = document.getElementById('nfa-doc-modal');
+  if (existing) existing.remove();
+  const modal = document.createElement('div');
+  modal.id = 'nfa-doc-modal';
+  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;';
+  modal.innerHTML = \`
+    <div style="width:100%;max-width:900px;height:85vh;background:#0a1628;border:1px solid rgba(197,160,70,0.4);border-radius:8px;display:flex;flex-direction:column;overflow:hidden;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid rgba(197,160,70,0.2);flex-shrink:0;">
+        <span style="color:#c9a84c;font-family:Oswald,sans-serif;font-size:13px;letter-spacing:2px;">📄 EVIDENCE DOCUMENT</span>
+        <button onclick="document.getElementById('nfa-doc-modal').remove()" style="background:none;border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:1rem;cursor:pointer;padding:4px 12px;border-radius:4px;">✕ CLOSE</button>
+      </div>
+      <div style="flex:1;overflow:hidden;">\${innerHtml}</div>
+    </div>
+  \`;
+  modal.onclick = function(ev){ if(ev.target===modal) modal.remove(); };
+  document.body.appendChild(modal);
 }
 
 // NO FILTER AMERICA – Main App JS
