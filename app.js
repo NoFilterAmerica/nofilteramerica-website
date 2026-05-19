@@ -336,36 +336,91 @@ function renderBothSides(demArticles, repArticles) {
 
 // ---- MAIN LOAD ----
 async function loadNews() {
-  // Fetch top political/world news
-  const articles = await fetchTopNews();
+  // Step 1: Render cached/sample data IMMEDIATELY so the page never hangs on mobile
+  const cached = getSampleStories();
+  renderFeatured(cached.slice(0, 4));
+  renderNewsCards(cached.slice(4, 10), false);
 
-  // Hero + side stack: first 4 articles (1 hero + 3 side)
-  renderFeatured(articles.slice(0, 4));
+  // Set ticker with cached headlines right away
+  const setTicker = (articles) => {
+    if (articles.length > 0) {
+      const headlines = articles.map(a => '▸ ' + a.title).join('   ·   ');
+      const t1 = document.getElementById('ticker-text');
+      const t2 = document.getElementById('ticker-text-dupe');
+      if (t1) t1.textContent = headlines;
+      if (t2) t2.textContent = headlines;
+      if (window.resetTickerWidth) window.resetTickerWidth();
+    }
+  };
+  setTicker(cached);
 
-  // More stories grid: exactly 6 cards — pad with samples if API is short
-  const moreArticles = articles.slice(4);
-  const samples = getSampleStories();
-  let gridArticles = moreArticles;
-  if (gridArticles.length < 6) {
-    // Pad with sample stories to always hit exactly 6
-    gridArticles = [...moreArticles, ...samples.slice(0, 6 - moreArticles.length)];
+  // Render cached Both Sides immediately too
+  renderBothSides(getSampleDemStories(), getSampleRepStories());
+
+  // Step 2: Try live API in background — update page if it succeeds, silently skip if it fails/times out
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000); // 8s timeout — abort on slow mobile
+
+    const res = await fetch(
+      `https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&country=us&language=en&category=politics,world,top&prioritydomain=top`,
+      { signal: controller.signal }
+    );
+    clearTimeout(timeout);
+    const data = await res.json();
+
+    if (data.status === 'success' && data.results && data.results.length > 0) {
+      nextPageCursor = data.nextPage || null;
+      const blocked = ['sport','sports','entertainment','lifestyle','food'];
+      const all = data.results;
+      const filtered = all.filter(a => {
+        const cats = (a.category || []).map(c => c.toLowerCase());
+        return !cats.some(c => blocked.includes(c));
+      });
+      const articles = filtered.length >= 6 ? filtered : all;
+
+      // Update UI with live data
+      renderFeatured(articles.slice(0, 4));
+      const moreArticles = articles.slice(4);
+      const samples = getSampleStories();
+      let gridArticles = moreArticles.length >= 6 ? moreArticles : [...moreArticles, ...samples.slice(0, 6 - moreArticles.length)];
+      renderNewsCards(gridArticles.slice(0, 6), false);
+      setTicker(articles);
+
+      // Both Sides live update — also with timeout
+      const controller2 = new AbortController();
+      const timeout2 = setTimeout(() => controller2.abort(), 8000);
+      const [demRes, repRes] = await Promise.allSettled([
+        fetch(`https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&language=en&category=politics,top&q=healthcare OR climate OR immigration OR progressive OR democrats OR senate OR Biden OR voting rights&country=us&prioritydomain=top`, { signal: controller2.signal }),
+        fetch(`https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&language=en&category=politics,top&q=border security OR tax cuts OR second amendment OR republicans OR conservative OR Trump OR spending cuts OR election integrity&country=us&prioritydomain=top`, { signal: controller2.signal })
+      ]);
+      clearTimeout(timeout2);
+
+      let demNews = getSampleDemStories();
+      let repNews = getSampleRepStories();
+
+      if (demRes.status === 'fulfilled') {
+        const dd = await demRes.value.json().catch(() => null);
+        if (dd && dd.status === 'success' && dd.results && dd.results.length > 0) {
+          const rightSources = ['foxnews','breitbart','dailywire','oann','theblaze','nypost','washingtonexaminer'];
+          const df = dd.results.filter(a => !rightSources.some(s => (a.source_id||'').toLowerCase().includes(s)));
+          demNews = (df.length >= 3 ? df : dd.results).slice(0, 4);
+        }
+      }
+      if (repRes.status === 'fulfilled') {
+        const rd = await repRes.value.json().catch(() => null);
+        if (rd && rd.status === 'success' && rd.results && rd.results.length > 0) {
+          const leftSources = ['nytimes','washingtonpost','nbcnews','cnn','msnbc','apnews','politico'];
+          const rf = rd.results.filter(a => !leftSources.some(s => (a.source_id||'').toLowerCase().includes(s)));
+          repNews = (rf.length >= 3 ? rf : rd.results).slice(0, 4);
+        }
+      }
+      renderBothSides(demNews, repNews);
+    }
+  } catch(e) {
+    // API failed or timed out — cached data already displayed, nothing to do
+    console.log('Live news update skipped:', e.message);
   }
-  renderNewsCards(gridArticles.slice(0, 6), false);
-
-  // Ticker — update both spans for seamless infinite loop
-  if (articles.length > 0) {
-    const headlines = articles.map(a => '▸ ' + a.title).join('   ·   ');
-    const t1 = document.getElementById('ticker-text');
-    const t2 = document.getElementById('ticker-text-dupe');
-    if (t1) t1.textContent = headlines;
-    if (t2) t2.textContent = headlines;
-    // Tell the ticker engine to recalculate width now that real text is loaded
-    if (window.resetTickerWidth) window.resetTickerWidth();
-  }
-
-  // Both Sides: fetch in parallel
-  const [demNews, repNews] = await Promise.all([fetchDemNews(), fetchRepNews()]);
-  renderBothSides(demNews, repNews);
 }
 
 async function loadMoreNews() {
