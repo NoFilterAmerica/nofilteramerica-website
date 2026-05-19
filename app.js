@@ -40,7 +40,7 @@ function showDocModal(innerHtml) {
   const modal = document.createElement('div');
   modal.id = 'nfa-doc-modal';
   modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;';
-  modal.innerHTML = \`
+  modal.innerHTML = `
     <div style="width:100%;max-width:900px;height:85vh;background:#0a1628;border:1px solid rgba(197,160,70,0.4);border-radius:8px;display:flex;flex-direction:column;overflow:hidden;">
       <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid rgba(197,160,70,0.2);flex-shrink:0;">
         <span style="color:#c9a84c;font-family:Oswald,sans-serif;font-size:13px;letter-spacing:2px;">📄 EVIDENCE DOCUMENT</span>
@@ -48,7 +48,7 @@ function showDocModal(innerHtml) {
       </div>
       <div style="flex:1;overflow:hidden;">\${innerHtml}</div>
     </div>
-  \`;
+  `;
   modal.onclick = function(ev){ if(ev.target===modal) modal.remove(); };
   document.body.appendChild(modal);
 }
