@@ -863,8 +863,8 @@
           document.getElementById('invSummary').value = inv.summary || '';
           document.getElementById('invStory').value = inv.story || '';
           document.getElementById('invFindings').value = (inv.findings||[]).join('\n');
-          document.getElementById('invTimeline').value = (inv.timeline||[]).map(t=>t.date+' | '+t.event).join('\n');
-          document.getElementById('invSources').value = (inv.sources||[]).map(s=>s.type+' | '+s.label+' | '+s.url).join('\n');
+          document.getElementById('invTimeline').value = (inv.timeline||[]).map(t=>t.date?(t.date+' | '+t.event):t.event).join('\n');
+          document.getElementById('invSources').value = (inv.sources||[]).map(s=>{if(s.type&&s.label&&s.url)return s.type+' | '+s.label+' | '+s.url;if(s.label&&s.url)return s.label+' | '+s.url;return s.label||s.url||'';}).join('\n');
           document.getElementById('invTiktoks').value = (inv.tiktoks||[]).join('\n');
           document.getElementById('invCoverUrl').value = inv.cover_url || '';
           if (inv.cover_url) { document.getElementById('invCoverImg').src = inv.cover_url; document.getElementById('invCoverPreview').style.display = 'block'; }
@@ -963,8 +963,8 @@
     msgEl.textContent = publishStatus==='published' ? '\uD83D\uDCE1 Publishing to site...' : '\uD83D\uDCBE Saving draft...';
 
     const findings = (document.getElementById('invFindings').value||'').split('\n').map(s=>s.trim()).filter(Boolean);
-    const timeline = (document.getElementById('invTimeline').value||'').split('\n').map(s=>{const p=s.split('|');return p.length>=2?{date:p[0].trim(),event:p.slice(1).join('|').trim()}:null;}).filter(Boolean);
-    const sources = (document.getElementById('invSources').value||'').split('\n').map(s=>{const p=s.split('|');return p.length>=3?{type:p[0].trim(),label:p[1].trim(),url:p.slice(2).join('|').trim()}:null;}).filter(Boolean);
+    const timeline = (document.getElementById('invTimeline').value||'').split('\n').map(s=>{s=s.trim();if(!s)return null;const p=s.split('|');return p.length>=2?{date:p[0].trim(),event:p.slice(1).join('|').trim()}:{date:'',event:s};}).filter(Boolean);
+    const sources = (document.getElementById('invSources').value||'').split('\n').map(s=>{s=s.trim();if(!s)return null;const p=s.split('|');if(p.length>=3)return{type:p[0].trim(),label:p[1].trim(),url:p.slice(2).join('|').trim()};if(p.length===2)return{type:'news',label:p[0].trim(),url:p[1].trim()};return{type:'news',label:s,url:s.startsWith('http')?s:''};}).filter(Boolean);
     const tiktoks = (document.getElementById('invTiktoks').value||'').split('\n').map(s=>s.trim()).filter(Boolean).slice(0,10);
 
     const inv = {
