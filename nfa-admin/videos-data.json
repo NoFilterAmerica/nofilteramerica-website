@@ -162,7 +162,7 @@
       "status": "draft",
       "summary": "One-line summary shown on the investigations grid card. Keep it under 120 characters.",
       "cover_url": "",
-      "story": "Write the full investigation narrative here.\n\nUse line breaks to create paragraphs. Bold key names or facts.\n\nKeep the tone direct and factual. Lead with what happened, then who, then why it matters.\n\nNOTE: The Full Investigation section displays in a contained scrollable box on the public page \u2014 readers scroll within it, keeping the rest of the case file accessible below.",
+      "story": "Write the full investigation narrative here.\n\nUse line breaks to create paragraphs.\n\nKeep the tone direct and factual. Lead with what happened, then who, then why it matters.\n\nThis section displays in a scrollable box on the public page \u2014 readers scroll within it while the rest of the case file stays accessible below.",
       "findings": [
         "Finding #1 \u2014 Replace with your first key finding. One sentence, punchy and factual.",
         "Finding #2 \u2014 Replace with your second key finding. Cite a source or data point.",
@@ -194,7 +194,7 @@
       "sources": [
         {
           "type": "primary",
-          "label": "Replace with primary source name \u2014 e.g. official report or document",
+          "label": "Replace with primary source \u2014 e.g. official report or document",
           "url": "https://"
         },
         {
@@ -219,7 +219,7 @@
         }
       ],
       "created": "2026-05-23T02:25:00.794609Z",
-      "updated": "2026-05-23T04:12:00.000000Z"
+      "updated": "2026-05-23T17:38:00.000000Z"
     },
     {
       "id": "inv_1779126452791",
