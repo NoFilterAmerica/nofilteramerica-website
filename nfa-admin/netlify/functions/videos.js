@@ -184,16 +184,27 @@ exports.handler = async (event) => {
 
     // ─── POST: upload file (image or document) ────────────────────
     if (method === 'POST' && action === 'upload_file') {
-      const body = JSON.parse(event.body || '{}');
+      let body;
+      try { body = JSON.parse(event.body || '{}'); } catch(e) {
+        return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON body: ' + e.message }) };
+      }
       const { filename, base64, mime_type } = body;
       if (!filename || !base64) {
         return { statusCode: 400, headers, body: JSON.stringify({ error: 'filename and base64 required' }) };
       }
-      const ext = filename.split('.').pop().toLowerCase();
+      // Check base64 size — GitHub API limit is 100MB but Netlify fn body is ~6MB
+      const approxBytes = base64.length * 0.75;
+      if (approxBytes > 5 * 1024 * 1024) {
+        return { statusCode: 413, headers, body: JSON.stringify({ error: 'File too large (max 5MB). Please compress the PDF and try again.' }) };
+      }
       const safeName = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
       const filePath = `nfa-admin/investigation-files/${Date.now()}_${safeName}`;
-      const url = await uploadFileToGitHub(filePath, base64, mime_type || 'application/octet-stream');
-      return { statusCode: 200, headers, body: JSON.stringify({ ok: true, url }) };
+      try {
+        const url = await uploadFileToGitHub(filePath, base64, mime_type || 'application/octet-stream');
+        return { statusCode: 200, headers, body: JSON.stringify({ ok: true, url }) };
+      } catch(uploadErr) {
+        return { statusCode: 500, headers, body: JSON.stringify({ error: 'GitHub upload failed: ' + uploadErr.message }) };
+      }
     }
 
     // ─── POST: delete a video slot ────────────────────────────────
