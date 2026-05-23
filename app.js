@@ -56,7 +56,7 @@ function showDocModal(innerHtml) {
         <span style="color:#c9a84c;font-family:Oswald,sans-serif;font-size:13px;letter-spacing:2px;">📄 EVIDENCE DOCUMENT</span>
         <button onclick="document.getElementById('nfa-doc-modal').remove()" style="background:none;border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:1rem;cursor:pointer;padding:4px 12px;border-radius:4px;">✕ CLOSE</button>
       </div>
-      <div style="flex:1;overflow:hidden;">\${innerHtml}</div>
+      <div style="flex:1;overflow:hidden;">${innerHtml}</div>
     </div>
   `;
   modal.onclick = function(ev){ if(ev.target===modal) modal.remove(); };
