@@ -756,3 +756,1252 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('invGrid')) renderInvestigationsGrid();
   if (document.getElementById('invPage')) renderInvestigationPage();
 });
+
+
+const newsCache = {
+  "politics": [
+    {
+      "article_id": "12d148e690c993746d7306320e9ac89e",
+      "link": "https://www.kvue.com/article/news/nation-world/britney-spears-dui-stop-police-report/507-11747941-3fb7-4b62-8e7e-9c2a6e767560",
+      "title": "Britney Spears was 'confrontational' and 'flamboyant' but tested low for alcohol during DUI stop",
+      "description": "The singer refused to get out of her vehicle for 10 minutes, according to the California Highway Patrol.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": [
+        "andrew dalton (associated press)"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "politics",
+        "entertainment"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:28",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:04:38",
+      "image_url": "https://media.kvue.com/assets/CCT/images/f1e48e5a-b6c4-4d3b-87ad-f9f733e4ea88/20260407T153909/f1e48e5a-b6c4-4d3b-87ad-f9f733e4ea88_1920x1080.jpg",
+      "video_url": null,
+      "source_id": "kvue",
+      "source_name": "Kvue",
+      "source_priority": 24029,
+      "source_url": "https://www.kvue.com",
+      "source_icon": "https://n.bytvi.com/kvue.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "dc2148e683a3bdc39ceda3b839a83950",
+      "link": "https://www.12news.com/article/news/nation-world/britney-spears-dui-stop-police-report/507-11747941-3fb7-4b62-8e7e-9c2a6e767560",
+      "title": "Britney Spears was 'confrontational' and 'flamboyant' but tested low for alcohol during DUI stop",
+      "description": "The singer refused to get out of her vehicle for 10 minutes, according to the California Highway Patrol.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": [
+        "andrew dalton (associated press)"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "politics",
+        "entertainment"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:28",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:59:57",
+      "image_url": "https://media.12news.com/assets/CCT/images/f7febb6e-cd48-4bf4-a9f4-3887a2692072/20260523T005634/f7febb6e-cd48-4bf4-a9f4-3887a2692072_1920x1080.jpg",
+      "video_url": null,
+      "source_id": "a12news",
+      "source_name": "12news",
+      "source_priority": 24546,
+      "source_url": "https://www.12news.com",
+      "source_icon": "https://n.bytvi.com/a12news.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "d5908d9f00f157773fe0b74bff6cffb0",
+      "link": "https://www.wgrz.com/article/news/nation-world/britney-spears-dui-stop-police-report/507-11747941-3fb7-4b62-8e7e-9c2a6e767560",
+      "title": "Britney Spears was 'confrontational' and 'flamboyant' but tested low for alcohol during DUI stop",
+      "description": "The singer refused to get out of her vehicle for 10 minutes, according to the California Highway Patrol.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": [
+        "andrew dalton (associated press)"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "politics",
+        "entertainment"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:28",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:10:32",
+      "image_url": "https://media.wgrz.com/assets/WGRZ/images/fabf7afd-d384-4c0e-89a3-09caa88c734e/20260403T201310/fabf7afd-d384-4c0e-89a3-09caa88c734e_1920x1080.jpg",
+      "video_url": null,
+      "source_id": "wgrz",
+      "source_name": "Buffalo",
+      "source_priority": 154114,
+      "source_url": "https://www.wgrz.com",
+      "source_icon": "https://n.bytvi.com/wgrz.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "4ceda817030fc2d1e3f42dd4d3b5e241",
+      "link": "https://www.khou.com/article/news/nation-world/britney-spears-dui-stop-police-report/507-11747941-3fb7-4b62-8e7e-9c2a6e767560",
+      "title": "Britney Spears was 'confrontational' and 'flamboyant' but tested low for alcohol during DUI stop",
+      "description": "The singer refused to get out of her vehicle for 10 minutes, according to the California Highway Patrol.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": null,
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "politics",
+        "entertainment"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:28",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:34:14",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "khou",
+      "source_name": "Khou",
+      "source_priority": 14652,
+      "source_url": "https://www.khou.com",
+      "source_icon": "https://n.bytvi.com/khou.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "e79f870d620206b2578865485bbb2732",
+      "link": "https://www.kens5.com/article/news/nation-world/britney-spears-dui-stop-police-report/507-11747941-3fb7-4b62-8e7e-9c2a6e767560",
+      "title": "Britney Spears was 'confrontational' and 'flamboyant' but tested low for alcohol during DUI stop",
+      "description": "The singer refused to get out of her vehicle for 10 minutes, according to the California Highway Patrol.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": null,
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "politics",
+        "entertainment"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:28",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:36:19",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "kens5",
+      "source_name": "Kens5.com",
+      "source_priority": 34349,
+      "source_url": "https://www.kens5.com",
+      "source_icon": "https://n.bytvi.com/kens5.jpeg",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "6d32077f93792b30c8ef1b588920757c",
+      "link": "https://townhall.com/tipsheet/scott-mcclallen/2026/05/22/man-bilked-taxpayers-for-20-years-out-of-283k-by-stealing-dead-boys-identity-n2676560",
+      "title": "Man Allegedly Bilked Taxpayers for 20 Years Out of $283k by Stealing Dead Boy's Identity",
+      "description": "After a three-day trial, a federal jury sitting in Pocatello, Idaho found a man whose identity remains unknown guilty of...",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "snap",
+        "doj",
+        "social security",
+        "medicaid",
+        "crime"
+      ],
+      "creator": [
+        "scott mcclallen"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "politics"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:27",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:03:45",
+      "image_url": "https://media.townhall.com/cdn/hodl/2026/110/1fdc0ce6-0bc3-4b54-98e2-7f2c363e5ccb-1200x630.jpg",
+      "video_url": null,
+      "source_id": "townhall",
+      "source_name": "Townhall",
+      "source_priority": 13454,
+      "source_url": "https://townhall.com",
+      "source_icon": null,
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "3ff021a66069989f69ad9bef7d4a87cb",
+      "link": "https://nwitimes.com/obituaries/article_9385c795-4d27-5b7c-8a3d-517c36abfb2b.html",
+      "title": "Szafranski, Joseph",
+      "description": null,
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": null,
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "politics",
+        "top"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:16",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 04:30:16",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "nwitimes",
+      "source_name": "The Times Of Northwest Indiana | Breaking News | R",
+      "source_priority": 10623,
+      "source_url": "https://www.nwitimes.com",
+      "source_icon": "https://n.bytvi.com/nwitimes.jpg",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "7e19dc7bc8b5f61e8ecfe442de73f34a",
+      "link": "https://www.wsj.com/politics/policy/david-sacks-trump-ai-executive-order-6019242d",
+      "title": "President Trump postponed signing an order on the dangers of artificial intelligence, heeding an adviser\u2019s warning that industry guardrails could slow down U.S. models in the race with tools from China",
+      "description": "President Trump postponed signing an order on the dangers posed by artificial intelligence after an adviser warned that industry guardrails could slow down U.S. models in the race against tools from China.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": null,
+      "language": "english",
+      "country": [
+        "china",
+        "united states of america"
+      ],
+      "category": [
+        "politics"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:00",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:32:20",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "wsj",
+      "source_name": "Wsj",
+      "source_priority": 311,
+      "source_url": "http://www.wsj.com",
+      "source_icon": "https://n.bytvi.com/wsj.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "203169bf1b236c971fe7fbcdca5b0767",
+      "link": "https://www.crescent-news.com/opinion/opinion_columnists/star-parker---democratic-control-means-redefining-america/article_96d2062e-c107-4ee2-8342-7c06b166f395.html",
+      "title": "Star Parker - Democratic control means redefining America",
+      "description": "Per USA Today columnist Chris Brennan, the Rededicate 250 event, held on the National Mall to rededicate our country as One Nation Under God, violated both our national spirit and our Constitution.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "politics and race",
+        "corporation",
+        "dan caine",
+        "religion",
+        "human pregnancy",
+        "murder of george floyd",
+        "arab\u2013israeli conflict",
+        "due process clause",
+        "poverty",
+        "child",
+        "hezbollah",
+        "political law",
+        "courts",
+        "society of the united states",
+        "democracy in america",
+        "donald trump controversies",
+        "presidencies of the united states",
+        "zohran mamdani",
+        "business roundtable",
+        "good and evil"
+      ],
+      "creator": null,
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "politics"
+      ],
+      "datatype": "opinion",
+      "pubDate": "2026-05-23 01:00:00",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 06:02:39",
+      "image_url": "https://bloximages.newyork1.vip.townnews.com/crescent-news.com/content/tncms/assets/v3/editorial/4/d8/4d8068de-baa9-5e2b-b4d9-361e7cb6518a/5f0fedd2ee869.image.jpg?crop=200%2C200%2C0%2C75",
+      "video_url": null,
+      "source_id": "crescentnews",
+      "source_name": "Crescent-news",
+      "source_priority": 529263,
+      "source_url": "https://www.crescent-news.com",
+      "source_icon": "https://n.bytvi.com/crescentnews.jpg",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "ee3be4e3dd86592c2be4b2bf2653785d",
+      "link": "https://www.crescent-news.com/opinion/opinion_columnists/cal-thomas---being-wrong-means-never-having-to-say-sorry/article_a5c19c54-b789-443d-b138-db7c0384e802.html",
+      "title": "Cal Thomas - Being wrong means never having to say \u2018sorry\u2019",
+      "description": "It\u2019s so easy and comfortable being a liberal. You never have to admit you\u2019re wrong when you\u2019re demonstrably wrong.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "judaism and warfare",
+        "secularism",
+        "lymphoma",
+        "national security",
+        "mass media",
+        "hezbollah",
+        "social ethics",
+        "society of the united states",
+        "energy and the environment",
+        "presidencies of the united states",
+        "gender dysphoria",
+        "presidency of the united states",
+        "alien and sedition acts",
+        "abigail spanberger",
+        "trump administration controversies",
+        "new testament content",
+        "george w. bush",
+        "politics of israel",
+        "personal income",
+        "rainbow/push"
+      ],
+      "creator": null,
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "politics"
+      ],
+      "datatype": "opinion",
+      "pubDate": "2026-05-23 01:00:00",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 06:02:39",
+      "image_url": "https://bloximages.newyork1.vip.townnews.com/crescent-news.com/content/tncms/assets/v3/editorial/2/ec/2ec715ed-78bd-5f85-95ef-e565da83f889/5a733e709baa7.image.jpg?crop=200%2C200%2C0%2C75",
+      "video_url": null,
+      "source_id": "crescentnews",
+      "source_name": "Crescent-news",
+      "source_priority": 529263,
+      "source_url": "https://www.crescent-news.com",
+      "source_icon": "https://n.bytvi.com/crescentnews.jpg",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    }
+  ],
+  "crime": [
+    {
+      "article_id": "80df85d742e4da6b73f90ac7ce623911",
+      "link": "https://www.kold.com/2026/05/23/hikers-warned-after-recent-rash-car-break-ins-telegraph-pass-east-yuma/",
+      "title": "Hikers warned after recent rash of car break-ins at Telegraph Pass east of Yuma",
+      "description": "The weather may be heating up, but that hasn\u2019t stopped people from hitting the trails at mountain parks and more remote areas of the state. In Yuma County, however, deputies say trailheads can also attract thieves.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "yuma news",
+        "yuma county sheriff's office",
+        "memorial day weekend",
+        "phoenix news",
+        "telegraph pass",
+        "azfamily",
+        "hiking trail thefts",
+        "vehicle burglaries"
+      ],
+      "creator": [
+        "kold"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "environment",
+        "crime"
+      ],
+      "datatype": "multimedia",
+      "pubDate": "2026-05-23 01:01:07",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 04:41:21",
+      "image_url": "https://gray-kold-prod.gtv-cdn.com/resizer/v2/LG66BOF45RD4NO6QRWN3RWPZXM.png?auth=91dd5792be70a333a798cfebb8d9f0950b98510dff897a4519df3e784d38dd0d&width=1200&height=600&smart=true",
+      "video_url": "https://d1l66zlxaqpl1u.cloudfront.net/wp-gray/azfamily/20260523/6a10f16fca617458d84631f7/file_1920x1080-5400-v4/file_1280x720-2000-v3_1.mp4",
+      "source_id": "kold",
+      "source_name": "Https://www.kold.com",
+      "source_priority": 253037,
+      "source_url": "https://www.kold.com",
+      "source_icon": "https://n.bytvi.com/kold.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "6a65288f66d23e35844edf90448e87c2",
+      "link": "https://www.carscoops.com/2026/05/camaro-z28-sebago-lake-discovery/",
+      "title": "Lost A 1974 Camaro Z28 In Maine? Someone Found It 55 Feet Underwater",
+      "description": "An underwater drone hunting for a sunken snowmobile in Maine pulled up something far older, rarer, and a lot more confusing",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "chevrolet videos",
+        "chevrolet camaro",
+        "chevrolet",
+        "offbeat news",
+        "usa",
+        "video"
+      ],
+      "creator": [
+        "brad anderson"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "crime"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:01:00",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:08:41",
+      "image_url": "https://www.carscoops.com/wp-content/uploads/2026/05/Chevrolet-Camaro-Z28-underwater-copy.jpg",
+      "video_url": null,
+      "source_id": "carscoops",
+      "source_name": "Carscoops",
+      "source_priority": 105136,
+      "source_url": "https://www.carscoops.com",
+      "source_icon": "https://n.bytvi.com/carscoops.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "13283860bb85768ec9871b9f8bb79d82",
+      "link": "https://patch.com/new-jersey/paramus/man-masturbated-exposed-self-children-bergen-county-mall-police",
+      "title": "Man Masturbated, Exposed Self To Children At Bergen County Mall: Police",
+      "description": "Police were called to a mall in Bergen County after witnesses said a man masturbated while in line at Old Navy.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "new jersey",
+        "crime",
+        "safety",
+        "paramus"
+      ],
+      "creator": [
+        "caren lissner"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "crime"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:58",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:01:53",
+      "image_url": "https://patch.com/img/cdn20/users/23738927/20260522/085736/styles/patch_image/public/pd-car2-copy-3___22204832710.jpg",
+      "video_url": null,
+      "source_id": "patch",
+      "source_name": "Patch",
+      "source_priority": 5510,
+      "source_url": "https://patch.com",
+      "source_icon": "https://n.bytvi.com/patch.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "e57f9b4a8dcfb421638fb1c6a7932edf",
+      "link": "https://www.klfy.com/louisiana/five-vehicle-collision-on-louisiana-hwy-27-results-in-fatality/",
+      "title": "Five-vehicle collision on Louisiana Hwy 27 results in fatality",
+      "description": "A multi-vehicle crash occurred on Louisiana Highway 27 near Louisiana Highway 384 in Cameron Parish on Thursday shortly after 6 p.m. The incident claimed the life of Danny Hillebrandt, 71, of Westlake, officials said.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": null,
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "crime"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:52",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:16:20",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "klfy",
+      "source_name": "Klfy.com",
+      "source_priority": 766991,
+      "source_url": "https://www.klfy.com",
+      "source_icon": "https://n.bytvi.com/klfy.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "e4feeb9523ef47129d0cc69ddb08fe36",
+      "link": "https://www.clarksvilleonline.com/2026/05/22/clarksville-obituary-rebecca-suzanne-drenth/",
+      "title": "Clarksville Obituary: Rebecca Suzanne Drenth",
+      "description": "Clarksville, TN \u2013 A visitation for Rebecca Suzanne Drenth, 38, of Clarksville, TN will be May 27th, 2026 from 1:00pm until 3:00pm. Rebecca was born on July 29th, 1987 in Clarksville, TN. She passed away on May 20th, 2026. Rebecca was a creative and kind-hearted person who found joy in the little things. She loved [...] The post Clarksville Obituary: Rebecca Suzanne Drenth appeared first on Clarksville Online - Clarksville News, Sports, Events and Information .",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "clarksville",
+        "clarksville obituary",
+        "featured",
+        "obituary",
+        "clarksville tn",
+        "sykes funeral home"
+      ],
+      "creator": [
+        "news staff"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "crime"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:47",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:16:30",
+      "image_url": "https://www.clarksvilleonline.com/wp-content/uploads/2025/09/Candles.jpg",
+      "video_url": null,
+      "source_id": "clarksvilleonline",
+      "source_name": "Clarksville Online",
+      "source_priority": 806456,
+      "source_url": "https://www.clarksvilleonline.com",
+      "source_icon": "https://n.bytvi.com/ClarksvilleOnline.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "009df9fc037641ae1b1974e461c2f909",
+      "link": "https://patch.com/california/napavalley/judgment-paris-5-things-we-think-we-know",
+      "title": "Judgment of Paris: 5 Things We Think We Know",
+      "description": "A list of five \"on second sip\" stories about the \"Judgment of Paris, the May 24, 1976 tasting whose legacy continue 50 years later.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "restaurants",
+        "napa valley",
+        "california",
+        "bars"
+      ],
+      "creator": [
+        "angela woodall"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "crime"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:13",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:01:53",
+      "image_url": "https://patch.com/img/cdn20/users/27173486/20260522/125930/styles/patch_image/public/img-3848___22005802517.jpg",
+      "video_url": null,
+      "source_id": "patch",
+      "source_name": "Patch",
+      "source_priority": 5510,
+      "source_url": "https://patch.com",
+      "source_icon": "https://n.bytvi.com/patch.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "2756e365bf7a58aeb5b6f9ad5e4c3dd6",
+      "link": "https://www.kotatv.com/2026/05/23/two-students-expelled-spearfish-high-school-after-gun-brought-campus/",
+      "title": "Two students expelled from Spearfish High School after gun brought on campus",
+      "description": "The Spearfish School District says two students were expelled for 12 months after an investigation into a gun believed brought to Spearfish High School on May 5.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "kota territory",
+        "spearfish school district expulsions",
+        "gun brought to school may 5 spearfish",
+        "south dakota school expulsion",
+        "ongoing investigation spearfish police",
+        "kota territory news",
+        "spearfish students expelled 12 months",
+        "no plan to harm spearfish high",
+        "spearfish school safety investigation",
+        "kota",
+        "spearfish police weapon found off-campus",
+        "kota tv",
+        "black hills school gun report",
+        "spearfish high school gun investigation"
+      ],
+      "creator": [
+        "matt chibe"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "crime"
+      ],
+      "datatype": "multimedia",
+      "pubDate": "2026-05-23 01:00:13",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:18:00",
+      "image_url": "https://gray-kota-prod.gtv-cdn.com/resizer/v2/WHUEEHNP6ZEL3CHF3QG7DRUPSA.jpg?auth=e9c01ad69a69467fc9180679f758e61a98a95a4d84bb434341dfcc3f8d0f422f&width=1200&height=600&smart=true",
+      "video_url": "https://d1l66zlxaqpl1u.cloudfront.net/wp-gray/20260523/6a10fa201f4cb9048fa00280/t_a9d00cae5e9045a2a65636e25d9ec905_name_file_1920x1080_5400_v4_cropped/file_1280x720-2000-v3_1.mp4",
+      "source_id": "kotatv",
+      "source_name": "Https://www.kotatv.com",
+      "source_priority": 936958,
+      "source_url": "https://www.kotatv.com",
+      "source_icon": "https://n.bytvi.com/kotatv.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "004d6174232812aaf712fbc011ca55e8",
+      "link": "https://www.conwaydailysun.com/lifestyles/entertainment/deadliest-catch-fire-breaks-out-aboard-rick-shelford-s-aleutian-lady/article_971881fb-29a2-5e6b-9f76-4e9ec7504b22.html",
+      "title": "\u2018Deadliest Catch\u2019: Fire Breaks Out Aboard Rick Shelford\u2019s Aleutian Lady",
+      "description": "Plus, things get heated between members of Johnathan Hillstrand's team.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": null,
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "crime"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:11",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 05:22:41",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "conwaydailysun",
+      "source_name": "Conwaydailysun",
+      "source_priority": 90245,
+      "source_url": "https://www.conwaydailysun.com",
+      "source_icon": "https://n.bytvi.com/conwaydailysun.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "7a4acede53eacf642998ff55e6c39e68",
+      "link": "https://carrollspaper.com/lifestyles/entertainment/deadliest-catch-fire-breaks-out-aboard-rick-shelford-s-aleutian-lady/article_42fdbd89-d54f-5be8-8dbe-96ba89227580.html",
+      "title": "\u2018Deadliest Catch\u2019: Fire Breaks Out Aboard Rick Shelford\u2019s Aleutian Lady",
+      "description": "Plus, things get heated between members of Johnathan Hillstrand's team.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": null,
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "crime"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:11",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 03:44:12",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "carrollspaper",
+      "source_name": "Carrollspaper",
+      "source_priority": 1047475,
+      "source_url": "https://carrollspaper.com",
+      "source_icon": "https://n.bytvi.com/carrollspaper.jpg",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "01167aae28d309efa6896cf35a07403e",
+      "link": "https://www.shelbynews.com/lifestyles/entertainment/deadliest-catch-fire-breaks-out-aboard-rick-shelford-s-aleutian-lady/article_e7fafaf4-4652-5bab-a4b0-3823ff75d2ca.html",
+      "title": "\u2018Deadliest Catch\u2019: Fire Breaks Out Aboard Rick Shelford\u2019s Aleutian Lady",
+      "description": "Plus, things get heated between members of Johnathan Hillstrand's team.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": null,
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "crime"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:00:11",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 11:12:09",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "shelbynews",
+      "source_name": "Shelbynews Com",
+      "source_priority": 143184,
+      "source_url": "https://www.shelbynews.com",
+      "source_icon": "https://n.bytvi.com/shelbynews.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    }
+  ],
+  "top": [
+    {
+      "article_id": "08affdc0c16850293ae94fd115820562",
+      "link": "https://sports.yahoo.com/articles/softball-arcanum-bats-reign-d-010200714.html",
+      "title": "Softball: Arcanum bats reign in D-V district title win over Williamsburg",
+      "description": "May 22\u2014Four days of sitting in the dugout, watching the sky, getting to play a few innings, only to repeatedly be told you'll have to come back tomorrow could have weighed more on Arcanum. It did on the coaches. Mike Morris wanted another day to be able to prepare his squad for its next game in the district championship round. The players proved they were itching the whole time to just get a ...",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "jordyn garbig",
+        "cam garbig",
+        "arcanum",
+        "mike morris",
+        "williamsburg"
+      ],
+      "creator": [
+        "steven wright",
+        "ohio",
+        "dayton daily news"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "breaking",
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:02:00",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:33:45",
+      "image_url": "https://s.yimg.com/cv/apiv2/sports/share/PD_010626-Social_Share_GENRIC_YAHOO_SPORTS-1200x630.jpg",
+      "video_url": null,
+      "source_id": "yahoo",
+      "source_name": "Yahoo! News",
+      "source_priority": 17,
+      "source_url": "https://news.yahoo.com",
+      "source_icon": "https://n.bytvi.com/yahoo.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "c1de8526c316ec9c326de8ba786dfb4a",
+      "link": "https://www.davisenterprise.com/sports/aggie-track-wraps-up-postseason-run/article_dc288f5e-9ca5-4d14-bc1c-0b2e8a4ae058.html",
+      "title": "Aggie track wraps up postseason run",
+      "description": "LONG BEACH \u2014 Earning the first NCAA regional qualification of her career, UC Davis junior long jumper Kylee Davis qualified for the 2026 NCAA West First Round in Fayetteville, Ark. Davis advanced to the national stage after capturing the individual...",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "track and field",
+        "sport of athletics",
+        "formula racing",
+        "auto racing",
+        "solo activities",
+        "athletic sports",
+        "sports",
+        "games of physical skill",
+        "formula racing series",
+        "b1",
+        "individual sports",
+        "motorsport competitions",
+        "052426",
+        "motorsport",
+        "fia world championships",
+        "uc davis aggies",
+        "motor racing competitions"
+      ],
+      "creator": [
+        "enterprise staff"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:02:00",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 08:14:01",
+      "image_url": "https://bloximages.chicago2.vip.townnews.com/davisenterprise.com/content/tncms/custom/image/86db99ca-ccc8-11ed-9099-0b776fc1e8b8.png?resize=600%2C315",
+      "video_url": null,
+      "source_id": "davisenterprise",
+      "source_name": "Davis Enterprise",
+      "source_priority": 98093,
+      "source_url": "https://www.davisenterprise.com",
+      "source_icon": "https://n.bytvi.com/davisenterprise.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "f8d3dfee987bb7d5b9af384ca0050248",
+      "link": "https://sports.yahoo.com/articles/rams-qb-ty-simpson-details-010152991.html",
+      "title": "Rams QB Ty Simpson Details Los Angeles \u2018Culture Shock\u2019",
+      "description": "The Los Angeles Rams made quarterback Ty Simpson the talk of the 2026 NFL Draft by surprisingly taking him 13th overall.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "los angeles rams",
+        "ty simpson",
+        "los angeles",
+        "nfl",
+        "rams quarterback"
+      ],
+      "creator": [
+        "megan armstrong"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "breaking",
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:01:52",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:33:45",
+      "image_url": "https://s.yimg.com/ny/api/res/1.2/WQgCH3KRhxA.O.EptbMgyA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTIwNDg7aD0xMzY0O2NmPXdlYnA-/https://media.zenfs.com/en/newsweek_sports_200/b7b226ddfb63ed4f464baf3d77192baa",
+      "video_url": null,
+      "source_id": "yahoo",
+      "source_name": "Yahoo! News",
+      "source_priority": 17,
+      "source_url": "https://news.yahoo.com",
+      "source_icon": "https://n.bytvi.com/yahoo.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "4bb671cf2f9abb10751a8923d2300da8",
+      "link": "https://deadspin.com/victor-wembanyama-a-unanimous-all-defensive-first-team-selection/",
+      "title": "Victor Wembanyama a unanimous All-Defensive first-team selection",
+      "description": "After being named the unanimous Defensive Player of the Year last month, dominant San Antonio Spurs superstar Victor Wembanyama was also the lone unan",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": [
+        "field level media"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:01:52",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 05:34:28",
+      "image_url": "https://lineup-publishing.s3.amazonaws.com/28661422.jpg",
+      "video_url": null,
+      "source_id": "deadspin",
+      "source_name": "Deadspin",
+      "source_priority": 22768,
+      "source_url": "https://deadspin.com",
+      "source_icon": "https://n.bytvi.com/deadspin.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "948c5eb555aa05213838eeb58715337a",
+      "link": "https://www.newsweek.com/sports/nfl/rams-qb-ty-simpson-details-los-angeles-culture-shock-11985586",
+      "title": "Rams QB Ty Simpson Details Los Angeles 'Culture Shock'",
+      "description": "The Los Angeles Rams made quarterback Ty Simpson the talk of the 2026 NFL Draft by surprisingly taking him 13th overall.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "nfl",
+        "alabama",
+        "los angeles rams"
+      ],
+      "creator": [
+        "megan armstrong"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:01:52",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:32:15",
+      "image_url": "https://assets.newsweek.com/wp-content/uploads/2026/05/GettyImages-2272974812-e1779498064958.jpg?w=1600&h=900&q=88",
+      "video_url": null,
+      "source_id": "newsweek",
+      "source_name": "Newsweek",
+      "source_priority": 2129,
+      "source_url": "https://www.newsweek.com",
+      "source_icon": "https://n.bytvi.com/newsweek.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "9d340e45db12e248e509333df6a947f3",
+      "link": "https://sports.yahoo.com/articles/pitt-stuns-fsu-baseball-8-010148019.html",
+      "title": "Pitt stuns FSU baseball, 8-6, to knock Seminoles out of ACC Tournament",
+      "description": "Down to his final strike and behind 6-5, Pitt\u2019s Kai Wagner hit a three-run home run to knock Florida State baseball out of the ACC Tournament.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "fsu",
+        "seminoles",
+        "kai wagner",
+        "ninth inning",
+        "fsu baseball",
+        "pitt baseball",
+        "chris knier",
+        "ben barrett",
+        "brodie purcell"
+      ],
+      "creator": [
+        "tallahassee democrat",
+        "liam rooney"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "breaking",
+        "sports"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:01:48",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:33:45",
+      "image_url": "https://s.yimg.com/ny/api/res/1.2/JbSTb2oW_G_12pwYzc0Z3Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTI0MDA7aD0xMzUwO2NmPXdlYnA-/https://media.zenfs.com/en/tallahassee-democrat/9e8489b4786532ce1540199b03298d74",
+      "video_url": null,
+      "source_id": "yahoo",
+      "source_name": "Yahoo! News",
+      "source_priority": 17,
+      "source_url": "https://news.yahoo.com",
+      "source_icon": "https://n.bytvi.com/yahoo.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "af897231d669ea605fe4e72a27760445",
+      "link": "https://www.investing.com/news/insider-trading-news/slide-insurance-coo-lucas-shannon-sells-343279-in-company-stock-93CH-4707908",
+      "title": "Slide insurance COO Lucas Shannon sells $343,279 in company stock",
+      "description": null,
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": null,
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "business",
+        "top"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:01:45",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:03:46",
+      "image_url": null,
+      "video_url": null,
+      "source_id": "investing_us",
+      "source_name": "Investing Us",
+      "source_priority": 12473,
+      "source_url": "https://www.investing.com",
+      "source_icon": "https://n.bytvi.com/investing_us.jpg",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": true
+    },
+    {
+      "article_id": "8845512f2254eb9e50a0d70479cfb56f",
+      "link": "https://www.therooseveltreview.com/the-big-six-of-small-business/",
+      "title": "The Big Six of Small Business",
+      "description": "Dave, In your opinion, why do most small businesses fail? I\u2019d also be interested to know which business reports you believe are most valuable to a small business owner. Prater Prater, There are many different reasons why small businesses go under. But in my mind, most fail due to poor financial management relating to cash [...] The post The Big Six of Small Business appeared first on The Roosevelt Review .",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "the entreleadership podcast"
+      ],
+      "creator": [
+        "quaylene parkey"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:01:42",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:22:31",
+      "image_url": "https://i0.wp.com/www.therooseveltreview.com/wp-content/uploads/2019/03/Dave-Ramsey-1-e1582722599521.jpg?fit=2708%2C1956&ssl=1",
+      "video_url": null,
+      "source_id": "therooseveltreview",
+      "source_name": "The Roosevelt Review",
+      "source_priority": 5508617,
+      "source_url": "https://www.therooseveltreview.com",
+      "source_icon": null,
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "7fa1a30748ab47a7b486d46bfef58845",
+      "link": "https://www.investing.com/news/insider-trading-news/slide-insurance-ceo-lucas-bruce-sells-347-million-in-shares-93CH-4707907",
+      "title": "Slide insurance CEO Lucas Bruce sells $3.47 million in shares",
+      "description": "Slide insurance CEO Lucas Bruce sells $3.47 million in shares",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": null,
+      "creator": [
+        "investing.com"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "business"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:01:35",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:03:46",
+      "image_url": "https://i-invdn-com.investing.com/news/moved_LYNXNPEL3803O_L.jpg",
+      "video_url": null,
+      "source_id": "investing_us",
+      "source_name": "Investing Us",
+      "source_priority": 12473,
+      "source_url": "https://www.investing.com",
+      "source_icon": "https://n.bytvi.com/investing_us.jpg",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    },
+    {
+      "article_id": "e8183b36a491c8b54ceb4ff0cc39f300",
+      "link": "https://patch.com/california/napavalley/judgment-paris-wines-power-shift-50-years-later",
+      "title": "Judgment Of Paris: Wine's Power Shift 50 Years Later",
+      "description": "The \"Judgment of Paris\" was a geopolitical event in food culture that still reverberates 50 years later.",
+      "content": "ONLY AVAILABLE IN PAID PLANS",
+      "keywords": [
+        "corner",
+        "community",
+        "california",
+        "napa valley"
+      ],
+      "creator": [
+        "angela woodall"
+      ],
+      "language": "english",
+      "country": [
+        "united states of america"
+      ],
+      "category": [
+        "top",
+        "food"
+      ],
+      "datatype": "news",
+      "pubDate": "2026-05-23 01:01:31",
+      "pubDateTZ": "UTC",
+      "fetched_at": "2026-05-23 01:01:53",
+      "image_url": "https://patch.com/img/cdn20/users/27173486/20260522/090127/styles/patch_image/public/napajopwinemapj___22205819379.png",
+      "video_url": null,
+      "source_id": "patch",
+      "source_name": "Patch",
+      "source_priority": 5510,
+      "source_url": "https://patch.com",
+      "source_icon": "https://n.bytvi.com/patch.png",
+      "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+      "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+      "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+      "duplicate": false
+    }
+  ],
+  "last_updated": "2026-05-23T13:02:00.425052Z"
+};
