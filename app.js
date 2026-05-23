@@ -583,7 +583,7 @@ async function renderInvestigationsGrid() {
     const res = await fetch(INV_API + '?action=list&section=investigations');
     const data = await res.json();
     if (data.ok && Array.isArray(data.data)) {
-      investigations = data.data.filter(i => i && i.title && i.status !== 'draft' && i.status !== 'archived');
+      investigations = data.data.filter(i => i && i.title && i.status !== 'draft' && i.status !== 'archived' && i.id !== 'inv_template_nfa');
     }
   } catch(e) { investigations = []; }
 
