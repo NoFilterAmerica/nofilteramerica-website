@@ -399,11 +399,16 @@
 
         <!-- INVESTIGATION LIST -->
         <div class="admin-card" id="invListCard">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
             <h3 style="margin:0;">📁 Published Case Files</h3>
-            <button onclick="showInvForm(null)" style="background:var(--gold,#c9a84c);color:#000;border:none;padding:10px 20px;border-radius:4px;font-weight:700;cursor:pointer;font-size:13px;letter-spacing:1px;">
-              + NEW INVESTIGATION
-            </button>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button onclick="useInvTemplate()" style="background:rgba(197,160,70,0.15);color:var(--gold);border:1px solid var(--gold);padding:10px 18px;border-radius:4px;font-weight:700;cursor:pointer;font-size:13px;letter-spacing:1px;">
+                📋 USE TEMPLATE
+              </button>
+              <button onclick="showInvForm(null)" style="background:var(--gold,#c9a84c);color:#000;border:none;padding:10px 20px;border-radius:4px;font-weight:700;cursor:pointer;font-size:13px;letter-spacing:1px;">
+                + NEW INVESTIGATION
+              </button>
+            </div>
           </div>
           <div id="invList" style="display:flex;flex-direction:column;gap:10px;">
             <p style="color:var(--gray);font-size:13px;">Loading...</p>
@@ -835,6 +840,48 @@
         </div>`).join('');
     } catch(e) {
       el.innerHTML = '<p style="color:#e74c3c;font-size:13px;">Error loading: ' + e.message + '</p>';
+    }
+  }
+
+  async function useInvTemplate() {
+    // Load the template investigation and open a NEW form pre-filled with its structure
+    try {
+      const res = await fetch(NFA_INV_API + '?action=get&section=investigations&id=inv_template_nfa');
+      const data = await res.json();
+      if (!data.ok || !data.data) throw new Error('Template not found');
+      const tmpl = data.data;
+
+      // Open a clean new form
+      invDocs = [];
+      document.getElementById('invFormCard').style.display = 'block';
+      document.getElementById('invListCard').style.display = 'none';
+      document.getElementById('invFormTitle').textContent = '📋 New Investigation (from Template)';
+      document.getElementById('invSaveMsg').style.display = 'none';
+
+      // Clear the ID so this saves as a new investigation
+      document.getElementById('invId').value = '';
+
+      // Pre-fill all fields from template
+      document.getElementById('invTitle').value = '';  // Title always starts blank
+      document.getElementById('invStatus').value = tmpl.status || 'active';
+      document.getElementById('invSummary').value = tmpl.summary || '';
+      document.getElementById('invStory').value = tmpl.story || '';
+      document.getElementById('invFindings').value = (tmpl.findings||[]).join('\n');
+      document.getElementById('invTimeline').value = (tmpl.timeline||[]).map(t => t.date ? (t.date + ' | ' + t.event) : t.event).join('\n');
+      document.getElementById('invSources').value = (tmpl.sources||[]).map(s => s.type + ' | ' + s.label + ' | ' + s.url).join('\n');
+      document.getElementById('invTiktoks').value = (tmpl.tiktoks||[]).join('\n');
+      document.getElementById('invCoverUrl').value = '';
+      document.getElementById('invCoverPreview').style.display = 'none';
+      document.getElementById('invCoverFileName').textContent = 'No file chosen';
+      document.getElementById('invDocsList').innerHTML = '';
+      invDocs = [];
+      updateWordCount();
+      document.getElementById('invStory').addEventListener('input', updateWordCount);
+
+      showToast('📋 Template loaded — fill in your headline and replace the placeholder text!');
+    } catch(e) {
+      showToast('❌ Could not load template: ' + e.message, 'error');
+      showInvForm(null); // Fall back to blank form
     }
   }
 
