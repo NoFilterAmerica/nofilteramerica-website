@@ -1231,6 +1231,25 @@ body {
 }
 
 /* Story Content */
+.inv-story-box {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px 32px;
+  max-height: 520px;
+  overflow-y: auto;
+  margin-bottom: 40px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) rgba(255,255,255,0.05);
+}
+.inv-story-box::-webkit-scrollbar { width: 6px; }
+.inv-story-box::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); border-radius: 3px; }
+.inv-story-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; opacity: 0.7; }
+@media (max-width: 768px) {
+  .inv-story-box { max-height: 400px; padding: 20px 18px; }
+}
 .inv-story-content {
   font-size: 16px;
   line-height: 1.8;
