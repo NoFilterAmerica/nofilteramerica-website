@@ -661,7 +661,9 @@ async function renderInvestigationPage() {
     // Full Story
     if (inv.story) {
       html += `<div class="inv-section-label"><i class="fas fa-file-alt"></i> FULL INVESTIGATION</div>
-        <div class="inv-story-content">${inv.story.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('')}</div>`;
+        <div class="inv-story-box">
+          <div class="inv-story-content">${inv.story.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('')}</div>
+        </div>`;
     }
 
     // Timeline
