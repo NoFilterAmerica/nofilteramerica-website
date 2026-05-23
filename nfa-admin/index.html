@@ -916,9 +916,15 @@
     const files = Array.from(input.files);
     const listEl = document.getElementById('invDocsList');
     for (const file of files) {
+      // Size check — warn if over 4MB (base64 inflates ~33%)
+      const MAX_MB = 4;
+      if (file.size > MAX_MB * 1024 * 1024) {
+        showToast('⚠️ ' + file.name + ' is over 4MB — try compressing it first.', 'error');
+        continue;
+      }
       const row = document.createElement('div');
       row.style = 'font-size:12px;color:var(--gray);padding:6px 10px;background:var(--navy3);border-radius:4px;';
-      row.innerHTML = '<i class="fas fa-spinner fa-spin" style="color:var(--gold);margin-right:8px;"></i> Uploading ' + file.name + '...';
+      row.innerHTML = '<i class="fas fa-spinner fa-spin" style="color:var(--gold);margin-right:8px;"></i> Uploading ' + file.name + ' (' + (file.size/1024).toFixed(0) + ' KB)...';
       listEl.appendChild(row);
       try {
         const base64 = await fileToBase64(file);
@@ -926,13 +932,22 @@
           method:'POST', headers:{'Content-Type':'application/json'},
           body: JSON.stringify({filename:file.name, base64:base64.split(',')[1], mime_type:file.type})
         });
-        const data = await res.json();
+        let data;
+        try { data = await res.json(); } catch(je) { throw new Error('Server returned non-JSON (status ' + res.status + ')'); }
         if (data.ok) {
           invDocs.push({name:file.name, url:data.url, type:file.type});
           row.remove();
           renderInvDocs();
-        } else { row.innerHTML = '<i class="fas fa-times" style="color:#e74c3c;margin-right:8px;"></i> Failed: ' + file.name; }
-      } catch(e) { row.innerHTML = '<i class="fas fa-times" style="color:#e74c3c;margin-right:8px;"></i> Error: ' + file.name; }
+          showToast('✅ ' + file.name + ' uploaded!');
+        } else {
+          row.innerHTML = '<i class="fas fa-times" style="color:#e74c3c;margin-right:8px;"></i> ❌ Failed: ' + file.name + ' — ' + (data.error||'Unknown error');
+          showToast('❌ Upload failed: ' + (data.error||file.name), 'error');
+        }
+      } catch(e) {
+        row.innerHTML = '<i class="fas fa-times" style="color:#e74c3c;margin-right:8px;"></i> ❌ Error: ' + file.name + ' — ' + e.message;
+        showToast('❌ Upload error: ' + e.message, 'error');
+        console.error('Upload error for', file.name, e);
+      }
     }
     input.value = '';
   }
