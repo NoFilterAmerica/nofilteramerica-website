@@ -9,12 +9,22 @@ function openDoc(e, url) {
 
   // PDFs
   if (ext === 'pdf') {
+    // Convert raw.githubusercontent.com URLs to a proxy-friendly URL
+    // Google Docs Viewer and direct open both fail on raw GitHub URLs —
+    // use a CORS-safe PDF.js CDN viewer instead
+    const isRawGitHub = url.includes('raw.githubusercontent.com');
     if (isMobile) {
-      // iOS Safari handles PDFs natively in a new tab — just open directly
-      window.open(url, '_blank');
+      // On mobile: use Google Docs Viewer (works reliably on Android/iOS Chrome)
+      // For raw GitHub URLs, encode properly
+      if (isRawGitHub) {
+        window.open('https://docs.google.com/viewer?url=' + encodeURIComponent(url), '_blank');
+      } else {
+        window.open(url, '_blank');
+      }
     } else {
-      // Desktop: use in-page modal with Google Docs embedded viewer
-      showDocModal('<iframe src="https://docs.google.com/viewer?url=' + encodeURIComponent(url) + '&embedded=true" style="width:100%;height:100%;border:none;" allowfullscreen></iframe>');
+      // Desktop: use Mozilla PDF.js viewer (no CORS issues, works with any URL)
+      const pdfJsUrl = 'https://mozilla.github.io/pdf.js/web/viewer.html?file=' + encodeURIComponent(url);
+      showDocModal('<iframe src="' + pdfJsUrl + '" style="width:100%;height:100%;border:none;" allowfullscreen></iframe>');
     }
     return;
   }
