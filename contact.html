@@ -208,7 +208,6 @@
       <a href="index.html">Home</a>
       <a href="no-filter-zone.html">No-Filter Zone</a>
       <a href="true-crime.html">True Crime</a>
-      <a href="investigations.html">Investigations</a>
       <a href="contact.html">Contact</a>
     </div>
   </nav>
@@ -291,9 +290,8 @@
         <div class="tip-badge"><i class="fas fa-exclamation-triangle"></i> CONFIDENTIAL</div>
         <div class="form-card-title" style="color:#ff8080;">Report a Tip</div>
         <p class="form-card-sub">Have information the public needs to know? Got a story the mainstream media won't touch? Submit it here — your identity is kept strictly confidential.</p>
-        <form name="tip" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success.html">
-          <input type="hidden" name="form-name" value="tip"/>
-          <p style="display:none;"><label>Don't fill this out: <input name="bot-field"/></label></p>
+        <form name="tip" id="tip-form" method="POST">
+          <!-- tip form handled by submitTip function -->
           <div class="form-group">
             <label>Your Name <span style="color:var(--gray);font-size:10px;">(Optional — tips can be anonymous)</span></label>
             <input type="text" name="tipName" placeholder="Anonymous"/>
@@ -323,8 +321,59 @@
             <label>Evidence / Source Links <span style="color:var(--gray);font-size:10px;">(Optional)</span></label>
             <input type="text" name="tipEvidence" placeholder="Any URLs, document names, or evidence references..."/>
           </div>
-          <button type="submit" class="submit-btn tip-btn">Submit Tip Confidentially <i class="fas fa-shield-alt"></i></button>
+          <button type="submit" id="tip-submit-btn" class="submit-btn tip-btn">Submit Tip Confidentially <i class="fas fa-shield-alt"></i></button>
+          <div id="tip-status" style="margin-top:14px;display:none;padding:12px 16px;border-radius:4px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-align:center;"></div>
         </form>
+
+        <script>
+        document.getElementById('tip-form').addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const btn = document.getElementById('tip-submit-btn');
+          const status = document.getElementById('tip-status');
+          const form = e.target;
+
+          btn.disabled = true;
+          btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+          status.style.display = 'none';
+
+          const data = {
+            tipName:     form.tipName.value || 'Anonymous',
+            tipEmail:    form.tipEmail.value || 'Not provided',
+            tipCategory: form.tipCategory.value || 'other',
+            tipMessage:  form.tipMessage.value,
+            tipEvidence: form.tipEvidence.value || 'None provided'
+          };
+
+          try {
+            const res = await fetch('/.netlify/functions/submitTip', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+            const result = await res.json();
+
+            if (res.ok && result.ok) {
+              status.style.background = 'rgba(0,180,80,0.15)';
+              status.style.border = '1px solid rgba(0,180,80,0.4)';
+              status.style.color = '#4dff91';
+              status.innerHTML = '✅ TIP RECEIVED — Thank you. We review all submissions confidentially.';
+              status.style.display = 'block';
+              form.reset();
+            } else {
+              throw new Error('Server error');
+            }
+          } catch(err) {
+            status.style.background = 'rgba(204,34,0,0.15)';
+            status.style.border = '1px solid rgba(204,34,0,0.4)';
+            status.style.color = '#ff8080';
+            status.innerHTML = '❌ Submission failed. Please email us directly at news@nofilteramerica.com';
+            status.style.display = 'block';
+          }
+
+          btn.disabled = false;
+          btn.innerHTML = 'Submit Tip Confidentially <i class="fas fa-shield-alt"></i>';
+        });
+        </script>
       </div>
 
     </div>
