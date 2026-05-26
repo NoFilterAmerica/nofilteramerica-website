@@ -2,7 +2,7 @@
 
 // Open document in viewer — cross-device compatible (desktop + iOS)
 function openDoc(e, url) {
-  e.preventDefault();
+  if (e) { e.preventDefault(); e.stopPropagation(); }
   const ext = url.split('?')[0].split('.').pop().toLowerCase();
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   const isMobile = isIOS || /Android/.test(navigator.userAgent);
@@ -705,11 +705,11 @@ async function renderInvestigationPage() {
         <div class="inv-docs-grid" style="margin-bottom:40px;">
           ${docs.length > 0
             ? docs.map(d => `
-            <a href="${d.url}" target="_blank" rel="noopener noreferrer" onclick="openDoc(event, '${d.url}')" class="inv-doc-item ${docClass(d.type)}">
+            <div onclick="openDoc(event, '${d.url}')" class="inv-doc-item ${docClass(d.type)}" style="cursor:pointer;">
               <i class="fas ${docIcon(d.type)}" style="font-size:2rem;"></i>
               <div class="doc-name">${d.name}</div>
               <div class="doc-type">${(d.type||'file').split('/').pop().toUpperCase()}</div>
-            </a>`).join('')
+            </div>`).join('')
             : `<div style="grid-column:1/-1;text-align:center;padding:40px 20px;border:2px dashed rgba(197,160,70,0.2);border-radius:8px;color:rgba(255,255,255,0.25);font-family:'Oswald',sans-serif;letter-spacing:2px;font-size:13px;"><i class="fas fa-file-pdf" style="font-size:2.5rem;color:rgba(231,76,60,0.3);display:block;margin-bottom:14px;"></i>EVIDENCE DOCUMENTS PENDING<br><span style="font-size:11px;letter-spacing:1px;margin-top:8px;display:block;opacity:0.6;">Upload via Admin Panel</span></div>`
           }
         </div>`;
