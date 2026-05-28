@@ -73,7 +73,7 @@
 
   <!-- INVESTIGATIONS GRID -->
   <div class="inv-grid" id="invGrid">
-    <div class="inv-empty">
+    <div class="inv-empty" id="invLoading">
       <i class="fas fa-search"></i>
       <h3>Loading Case Files...</h3>
     </div>
@@ -111,5 +111,111 @@
   </footer>
 
   <script src="app.js"></script>
+<script>
+// ── NFA Investigations Loader ──────────────────────────────────────────
+(function() {
+  const ADMIN_API = 'https://nofilteramerica-admin.netlify.app/.netlify/functions/videos';
+  const RAW_DATA  = 'https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/videos-data.json';
+
+  function statusBadge(status) {
+    const map = { active:'ACTIVE', draft:'DRAFT', archived:'ARCHIVED' };
+    const cls  = { active:'badge-active', draft:'badge-draft', archived:'badge-archived' };
+    return `<span class="inv-badge ${cls[status]||'badge-draft'}">${map[status]||status.toUpperCase()}</span>`;
+  }
+
+  function renderCard(inv) {
+    const thumb = inv.thumbnail
+      ? `<img src="${inv.thumbnail}" alt="${inv.title}" style="width:100%;height:180px;object-fit:cover;border-radius:4px 4px 0 0;">`
+      : `<div style="width:100%;height:180px;background:linear-gradient(135deg,#0a1628,#1a2a4a);display:flex;align-items:center;justify-content:center;border-radius:4px 4px 0 0;"><i class="fas fa-folder-open" style="font-size:48px;color:#c9a84c;opacity:.5;"></i></div>`;
+
+    const docsCount   = (inv.documents||[]).filter(d=>d&&d.url).length;
+    const tiktokCount = (inv.tiktoks||[]).filter(t=>t&&t.url).length;
+
+    return `
+    <div class="inv-card" onclick="window.location.href='investigation.html?id=${inv.id}'" style="cursor:pointer;">
+      ${thumb}
+      <div class="inv-card-body">
+        ${statusBadge(inv.status||'active')}
+        <h2 class="inv-title">${inv.title}</h2>
+        <p class="inv-summary">${inv.summary||''}</p>
+        <div class="inv-meta">
+          ${docsCount ? `<span><i class="fas fa-file-alt"></i> ${docsCount} Doc${docsCount!==1?'s':''}</span>` : ''}
+          ${tiktokCount ? `<span><i class="fab fa-tiktok"></i> ${tiktokCount} Video${tiktokCount!==1?'s':''}</span>` : ''}
+          ${inv.date ? `<span><i class="fas fa-calendar-alt"></i> ${inv.date}</span>` : ''}
+        </div>
+        <div class="inv-cta">VIEW FULL CASE FILE <i class="fas fa-arrow-right"></i></div>
+      </div>
+    </div>`;
+  }
+
+  function renderGrid(investigations) {
+    const grid = document.getElementById('invGrid');
+    if (!grid) return;
+    // Only show active investigations (skip drafts/templates on public site)
+    const active = investigations.filter(i =>
+      i.status === 'active' && !i.id.includes('template')
+    );
+    if (!active.length) {
+      grid.innerHTML = `<div class="inv-empty"><i class="fas fa-folder-open"></i><h3>No Active Investigations Yet</h3><p>Check back soon.</p></div>`;
+      return;
+    }
+    grid.innerHTML = active.map(renderCard).join('');
+  }
+
+  async function loadInvestigations() {
+    // Try admin API first, fall back to raw GitHub
+    try {
+      const res = await fetch(ADMIN_API + '?action=list&section=investigations', { cache: 'no-cache' });
+      if (res.ok) {
+        const json = await res.json();
+        if (json.ok && Array.isArray(json.data) && json.data.length) {
+          renderGrid(json.data);
+          return;
+        }
+      }
+    } catch(e) {}
+
+    // Fallback: raw GitHub
+    try {
+      const res = await fetch(RAW_DATA + '?cb=' + Date.now());
+      if (res.ok) {
+        const json = await res.json();
+        renderGrid(json.investigations || []);
+        return;
+      }
+    } catch(e) {}
+
+    // Nothing worked
+    const grid = document.getElementById('invGrid');
+    if (grid) grid.innerHTML = `<div class="inv-empty"><i class="fas fa-exclamation-triangle"></i><h3>Unable to Load Case Files</h3><p>Please try refreshing the page.</p></div>`;
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadInvestigations);
+  } else {
+    loadInvestigations();
+  }
+})();
+</script>
+
+<style>
+.inv-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:24px; max-width:1200px; margin:40px auto; padding:0 20px 60px; }
+.inv-card { background:#0d1f3c; border:1px solid #c9a84c44; border-radius:6px; overflow:hidden; transition:transform .2s,box-shadow .2s; }
+.inv-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(201,168,76,.2); }
+.inv-card-body { padding:18px; }
+.inv-badge { display:inline-block; font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:2px; padding:3px 10px; border-radius:2px; margin-bottom:10px; }
+.badge-active { background:rgba(0,180,80,.15); color:#4dff91; border:1px solid rgba(0,180,80,.4); }
+.badge-draft  { background:rgba(201,168,76,.15); color:#c9a84c; border:1px solid rgba(201,168,76,.4); }
+.badge-archived { background:rgba(120,120,120,.15); color:#888; border:1px solid rgba(120,120,120,.4); }
+.inv-title { font-family:'Oswald',sans-serif; font-size:18px; color:#fff; margin:0 0 8px; line-height:1.3; }
+.inv-summary { font-size:13px; color:#a0aec0; margin:0 0 14px; line-height:1.5; }
+.inv-meta { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+.inv-meta span { font-size:11px; color:#c9a84c; font-family:'Oswald',sans-serif; letter-spacing:1px; }
+.inv-cta { font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:2px; color:#c9a84c; border-top:1px solid #c9a84c33; padding-top:12px; margin-top:4px; }
+.inv-empty { grid-column:1/-1; text-align:center; padding:80px 20px; color:#a0aec0; }
+.inv-empty i { font-size:48px; color:#c9a84c; opacity:.4; margin-bottom:16px; }
+.inv-empty h3 { font-family:'Oswald',sans-serif; font-size:20px; color:#fff; margin:0 0 8px; }
+</style>
 </body>
 </html>
