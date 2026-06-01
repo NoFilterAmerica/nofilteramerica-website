@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-06-01T13:05:01.998228",
+  "source": "newsdata.io",
+  "total_articles": 10,
+  "articles": [
+    {
+      "title": "DOJ seeks recusal of judge from Georgia election case over reported attendance at Willis event",
+      "description": "ATLANTA \u2014 The U.S. Department of Justice is asking a judge to recuse herself in a fight over Georgia election records, arguing that she attended an event honoring Fulton County District Attorney Fani Willis, who prosecuted President Donald Trump, raising...",
+      "link": "https://www.newspressnow.com/ap/doj-seeks-recusal-of-judge-from-georgia-election-case-over-reported-attendance-at-willis-event/article_863ec434-4311-468e-9b4b-69d01bd26a60.html",
+      "source_id": "newspressnow",
+      "category": "politics",
+      "pubDate": "2026-06-01 01:05:00",
+      "image_url": "https://bloximages.newyork1.vip.townnews.com/newspressnow.com/content/tncms/assets/v3/editorial/1/45/145f63f9-8001-42b7-85d2-f414bcecf415/6a1cdb597ae2c.image.jpg?crop=1749%2C918%2C0%2C133&resize=1200%2C630&order=crop%2Cresize"
+    },
+    {
+      "title": "Streetcar construction to close downtown, midtown streets before College World Series",
+      "description": "Several downtown and midtown Omaha streets will close next week for streetcar construction and related utility work, affecting routes just before the College World Series.",
+      "link": "https://journalstar.com/news/state-regional/nebraska/article_4fdd94b4-999f-506a-92d4-4147c5338633.html",
+      "source_id": "journalstar",
+      "category": "top",
+      "pubDate": "2026-06-01 01:05:00",
+      "image_url": "https://bloximages.chicago2.vip.townnews.com/journalstar.com/content/tncms/assets/v3/editorial/7/91/7919bf36-a601-5742-afc3-dd4e609d5a49/6a1a1373c3d5f.image.jpg?resize=623%2C500"
+    },
+    {
+      "title": "Newark mayor imposes curfew around Delaney Hall after clashes over immigration detention center",
+      "description": "The mayor of Newark has imposed a curfew around an immigration detention center in New Jersey after a series of intense clashes between protesters and police",
+      "link": "https://abcnews.com/US/wireStory/newark-mayor-imposes-curfew-delaney-hall-after-clashes-133466550",
+      "source_id": "abcnews",
+      "category": "top",
+      "pubDate": "2026-06-01 01:04:56",
+      "image_url": "https://i.abcnewsfe.com/a/df665052-09f0-4bce-b379-0030432e685e/wirestory_f46fbc4942e063c74fa7b3515eb4dbc6_16x9.jpg?w=1600"
+    },
+    {
+      "title": "New Hampton woman arrested for reckless conduct with deadly weapon in NH",
+      "description": "A New Hampton woman was arrested on multiple charges, including felony reckless conduct with a deadly weapon, following a series of incidents in New Hampton,...",
+      "link": "https://www.yahoo.com/news/us/articles/hampton-woman-arrested-reckless-conduct-010452417.html",
+      "source_id": "yahoo",
+      "category": "top",
+      "pubDate": "2026-06-01 01:04:52",
+      "image_url": "https://media.zenfs.com/en/wfxt_cox_articles_703/ee62db14678fcaafc4c8dec807ec0eb5"
+    },
+    {
+      "title": "Funeral today for fallen Boston firefighter Robert Kilduff Jr.: Watch live at 10",
+      "description": "Bobby Kilduff Jr. is being remembered as a true hero by the Boston Fire Department after his line of duty death following a fire on May 23, 2026.",
+      "link": "https://www.nbcboston.com/news/local/robert-kilduff-jr-boston-firefighter-funeral-today/3958028/",
+      "source_id": "necn",
+      "category": "politics",
+      "pubDate": "2026-06-01 01:04:26",
+      "image_url": "https://media.nbcboston.com/2026/05/robert-kilduff-jr-line-of-duty-death.jpg?quality=85&strip=all&fit=960,540"
+    },
+    {
+      "title": "Lost chicken becomes temporary police recruit following road rescue",
+      "description": "Police have temporarily \"hired\" an \"egg-cellent\" companion to their team, following what they say was a \"hilarious series of events and a short foot pursuit\" on Sunday.",
+      "link": "https://www.wcvb.com/article/chicken-police-recruit-road-rescue-pittsburgh/71453981",
+      "source_id": "wcvb",
+      "category": "top",
+      "pubDate": "2026-06-01 01:04:00",
+      "image_url": "https://kubrick.htvapps.com/htv-prod/images/57b41a40-e7c2-4e84-8e35-e6649edd5528.jpg?crop=1.00xw:0.990xh;0,0&resize=1200:*"
+    },
+    {
+      "title": "Colombia\u2019s far-right presidential candidate Espriella wins first round of vote ahead of runoff",
+      "description": "The far-right lawyer Abelardo de la Espriella won the first round of Colombia\u2019s presidential election on Sunday and will face senator Iva\u0301n Cepeda, the candidate backed by leftwing president Gustavo Petro, in the runoff. With 99.97% of ballots counted, the outsider and Donald Trump admirer Espriella secured 43.7% of the vote \u2013 just over 10.3m [...] The post Colombia\u2019s far-right presidential candidate Espriella wins first round of vote ahead of runoff appeared first on NYT News Today .",
+      "link": "https://www.nytimesnewstoday.com/colombias-far-right-presidential-candidate-espriella-wins-first-round-of-vote-ahead-of-runoff/",
+      "source_id": "nytimesnewstoday",
+      "category": "top",
+      "pubDate": "2026-06-01 01:04:00",
+      "image_url": "https://i.guim.co.uk/img/media/977ad409e59e748b6f6ecb41652dcfac6331042c/318_0_3200_2560/master/3200.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=7fcf1f6d8762a7597e3f8ce9b52f1b62"
+    },
+    {
+      "title": "Lost chicken becomes temporary police recruit following road rescue",
+      "description": "Police have temporarily \"hired\" an \"egg-cellent\" companion to their team, following what they say was a \"hilarious series of events and a short foot pursuit\" on Sunday.",
+      "link": "https://www.wvtm13.com/article/chicken-police-recruit-road-rescue-pittsburgh/71453981",
+      "source_id": "wvtm13",
+      "category": "top",
+      "pubDate": "2026-06-01 01:04:00",
+      "image_url": "https://kubrick.htvapps.com/htv-prod/images/57b41a40-e7c2-4e84-8e35-e6649edd5528.jpg?crop=1.00xw:0.990xh;0,0&resize=1200:*"
+    },
+    {
+      "title": "Lost chicken becomes temporary police recruit following road rescue",
+      "description": "Police have temporarily \"hired\" an \"egg-cellent\" companion to their team, following what they say was a \"hilarious series of events and a short foot pursuit\" on Sunday.",
+      "link": "https://www.kcra.com/article/chicken-police-recruit-road-rescue-pittsburgh/71453981",
+      "source_id": "kcra",
+      "category": "top",
+      "pubDate": "2026-06-01 01:04:00",
+      "image_url": "https://kubrick.htvapps.com/htv-prod/images/57b41a40-e7c2-4e84-8e35-e6649edd5528.jpg?crop=1.00xw:0.990xh;0,0&resize=1200:*"
+    },
+    {
+      "title": "Lost chicken becomes temporary police recruit following road rescue",
+      "description": "Police have temporarily \"hired\" an \"egg-cellent\" companion to their team, following what they say was a \"hilarious series of events and a short foot pursuit\" on Sunday.",
+      "link": "https://www.wmur.com/article/chicken-police-recruit-road-rescue-pittsburgh/71453981",
+      "source_id": "wmur",
+      "category": "top",
+      "pubDate": "2026-06-01 01:04:00",
+      "image_url": "https://kubrick.htvapps.com/htv-prod/images/57b41a40-e7c2-4e84-8e35-e6649edd5528.jpg?crop=1.00xw:0.990xh;0,0&resize=1200:*"
+    }
+  ]
+}
