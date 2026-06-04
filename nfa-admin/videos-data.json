@@ -12,7 +12,7 @@
     {
       "slot": 1,
       "title": "Burning Down The Workplace",
-      "description": "some workers cross a dangerous line. A look into the growing anger, desperation, and tension inside America’s workplaces — and how rage can turn destructive.",
+      "description": "some workers cross a dangerous line. A look into the growing anger, desperation, and tension inside America\u2019s workplaces \u2014 and how rage can turn destructive.",
       "story_line": "",
       "video_url": "https://www.tiktok.com/t/ZTkoUHcFo/",
       "thumbnail_url": "https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/thumbs/1778953494044_Burning_Down_The_Workplace.png",
@@ -57,11 +57,11 @@
       "title": "Left-Wing Terrorism Is on the Rise",
       "status": "active",
       "summary": "Left-Wing Terrorism & Political Violence in the United States",
-      "story": "Left-wing terror attacks reach record highs in 2025 — fueled by unhinged opposition to Trump admin, disturbing study finds\neft-wing terror attacks are on track to reach a record high this year — as Democrats have been accused of ramping up their harmful rhetoric in their opposition to the Trump administration, a disturbing new study has found.\n\nViolent plots planned or perpetrated by the far left in the US, as a percentage of all terrorist attacks and plots, hit a high in the first half of 2025, and are on pace to reach a three-decade high by the end of the year, according to a study from the Center for Strategic & International Studies.\n\nThrough July 4, 2025 — thus excluding the assassination of Charlie Kirk and the attack on the Dallas ICE facility — there were five left-wing attacks or plots, the study found.\n\nResearchers noted that the increase in left-wing violence since President Trump first took office in 2016 has been largely motivated by anti-government extremism or partisan extremism.\n\nSince then, “all left-wing attacks through July 4, 2025, appeared to be motivated by one of these ideologies,” the study found, noting that Kirk’s fatal shooting appears to fit the pattern.\n\nKirk’s alleged killer, 22-year-old Tyler Robinson, scrawled “Hey fascist, catch this” on a shell casing before shooting him dead on Sept. 10, law enforcement officials said.",
+      "story": "Left-wing terror attacks reach record highs in 2025 \u2014 fueled by unhinged opposition to Trump admin, disturbing study finds\neft-wing terror attacks are on track to reach a record high this year \u2014 as Democrats have been accused of ramping up their harmful rhetoric in their opposition to the Trump administration, a disturbing new study has found.\n\nViolent plots planned or perpetrated by the far left in the US, as a percentage of all terrorist attacks and plots, hit a high in the first half of 2025, and are on pace to reach a three-decade high by the end of the year, according to a study from the Center for Strategic & International Studies.\n\nThrough July 4, 2025 \u2014 thus excluding the assassination of Charlie Kirk and the attack on the Dallas ICE facility \u2014 there were five left-wing attacks or plots, the study found.\n\nResearchers noted that the increase in left-wing violence since President Trump first took office in 2016 has been largely motivated by anti-government extremism or partisan extremism.\n\nSince then, \u201call left-wing attacks through July 4, 2025, appeared to be motivated by one of these ideologies,\u201d the study found, noting that Kirk\u2019s fatal shooting appears to fit the pattern.\n\nKirk\u2019s alleged killer, 22-year-old Tyler Robinson, scrawled \u201cHey fascist, catch this\u201d on a shell casing before shooting him dead on Sept. 10, law enforcement officials said.",
       "findings": [
         "Finding #1. CSIS says 2025 was the first time in 30+ years that left-wing terrorist attacks outnumbered far-right attacks, while also noting right-wing terrorism remains historically larger over recent decades.",
-        "Finding #2. Left-wing actors responsible for more attacks this year, report says” — Washington Post discussing CSIS findings that left-wing attacks surpassed right-wing attacks during parts of 2025 for the first time in decades.",
-        "Left-Wing Terrorism and Political Violence in the United States: What the Data Tells Us” — CSIS analysis explaining that attacks tied to anti-government, anti-ICE, anti-corporate, and extremist activist motives increased sharply."
+        "Finding #2. Left-wing actors responsible for more attacks this year, report says\u201d \u2014 Washington Post discussing CSIS findings that left-wing attacks surpassed right-wing attacks during parts of 2025 for the first time in decades.",
+        "Left-Wing Terrorism and Political Violence in the United States: What the Data Tells Us\u201d \u2014 CSIS analysis explaining that attacks tied to anti-government, anti-ICE, anti-corporate, and extremist activist motives increased sharply."
       ],
       "timeline": [
         {
@@ -86,7 +86,7 @@
         },
         {
           "date": "Jul 2025",
-          "event": "North Texas ICE Detention Center Attack. A protest escalated into violence — a police officer was shot, multiple suspects charged, and prosecutors alleged links to extremist anti-fascist ideology. The DOJ described the group as a North Texas 'antifa cell.'"
+          "event": "North Texas ICE Detention Center Attack. A protest escalated into violence \u2014 a police officer was shot, multiple suspects charged, and prosecutors alleged links to extremist anti-fascist ideology. The DOJ described the group as a North Texas 'antifa cell.'"
         },
         {
           "date": "Summer 2025",
@@ -100,7 +100,7 @@
       "sources": [
         {
           "type": "primary",
-          "label": "CSIS: Terrorism in the United States – 2025 Analysis",
+          "label": "CSIS: Terrorism in the United States \u2013 2025 Analysis",
           "url": "https://www.csis.org/analysis/terrorism-united-states"
         },
         {
@@ -120,7 +120,7 @@
         },
         {
           "type": "govt",
-          "label": "Secret Service: Expanded threat monitoring – Trump second term",
+          "label": "Secret Service: Expanded threat monitoring \u2013 Trump second term",
           "url": "https://www.secretservice.gov"
         }
       ],
@@ -157,36 +157,37 @@
         }
       ],
       "created": "2026-05-23T01:50:48.978Z",
-      "updated": "2026-05-26T18:10:16.782Z"
+      "updated": "2026-05-26T18:10:16.782Z",
+      "thumbnail": "https://images.unsplash.com/photo-1594994168786-f43f22a2c39d?w=800&q=80"
     },
     {
       "id": "inv_template_nfa",
-      "title": "🗂️ NEW INVESTIGATION TEMPLATE — DUPLICATE THIS",
+      "title": "\ud83d\uddc2\ufe0f NEW INVESTIGATION TEMPLATE \u2014 DUPLICATE THIS",
       "status": "draft",
       "summary": "One-line summary shown on the investigations grid card. Keep it under 120 characters.",
       "cover_url": "",
-      "story": "Write the full investigation narrative here.\n\nUse line breaks to create paragraphs.\n\nKeep the tone direct and factual. Lead with what happened, then who, then why it matters.\n\nThis section displays in a scrollable box on the public page — readers scroll within it while the rest of the case file stays accessible below.",
+      "story": "Write the full investigation narrative here.\n\nUse line breaks to create paragraphs.\n\nKeep the tone direct and factual. Lead with what happened, then who, then why it matters.\n\nThis section displays in a scrollable box on the public page \u2014 readers scroll within it while the rest of the case file stays accessible below.",
       "findings": [
-        "Finding #1 — Replace with your first key finding. One sentence, punchy and factual.",
-        "Finding #2 — Replace with your second key finding. Cite a source or data point.",
-        "Finding #3 — Replace with your third key finding. State what this proves or implies."
+        "Finding #1 \u2014 Replace with your first key finding. One sentence, punchy and factual.",
+        "Finding #2 \u2014 Replace with your second key finding. Cite a source or data point.",
+        "Finding #3 \u2014 Replace with your third key finding. State what this proves or implies."
       ],
       "timeline": [
         {
           "date": "Month DD, YYYY",
-          "event": "Replace with first timeline event — what happened and who was involved."
+          "event": "Replace with first timeline event \u2014 what happened and who was involved."
         },
         {
           "date": "Month DD, YYYY",
-          "event": "Replace with second timeline event — include key names and actions."
+          "event": "Replace with second timeline event \u2014 include key names and actions."
         },
         {
           "date": "Month DD, YYYY",
-          "event": "Replace with third timeline event — note any escalation or response."
+          "event": "Replace with third timeline event \u2014 note any escalation or response."
         },
         {
           "date": "Month DD, YYYY",
-          "event": "Replace with fourth timeline event — outcome or current status."
+          "event": "Replace with fourth timeline event \u2014 outcome or current status."
         }
       ],
       "documents": [],
@@ -197,17 +198,17 @@
       "sources": [
         {
           "type": "primary",
-          "label": "Replace with primary source — e.g. official report or document",
+          "label": "Replace with primary source \u2014 e.g. official report or document",
           "url": "https://"
         },
         {
           "type": "govt",
-          "label": "Replace with government document — e.g. DOJ filing, congressional letter",
+          "label": "Replace with government document \u2014 e.g. DOJ filing, congressional letter",
           "url": "https://"
         },
         {
           "type": "news",
-          "label": "Replace with news article — e.g. NYT, Washington Post, Fox News",
+          "label": "Replace with news article \u2014 e.g. NYT, Washington Post, Fox News",
           "url": "https://"
         },
         {
@@ -229,7 +230,7 @@
       "title": "Dark Money & Digital Influence",
       "status": "active",
       "summary": "Paid To Persuade? The Dark Money Behind Political Influencers",
-      "story": "August 27, 2025, 6:00 AM. The Wire Published a story by Taylor Lorenz titled; A Dark Money Group Is Secretly Funding High-Profile Democratic Influencers. An initiative aimed at boosting Democrats online offers influencers up to $8,000 a month to push the party line. All they have to do is keep it secret and agree to restrictions on their content. \n\nNovember 2025, Chairman James Comer announced a formal investigation after reports alleged that the Chorus program paid influencers to amplify Democratic political messaging while restricting disclosure of those financial relationships.\n\nThe House Oversight investigation has evolved from a media-report inquiry into a broader probe examining whether the Chorus Creator Incubator Program and related organizations attempted to avoid campaign-finance disclosure rules and obscure operational control structures.\n\nKey Entities Involved\nHouse Committee on Oversight and Government Reform\nJames Comer\nSixteen Thirty Fund\nArabella Advisors\nSunflower Services\nCreator Collective\nChorus Creator Incubator Program\n\nBy spring 2026, Comer stated the Committee believed compliance had been incomplete, leading to escalated pressure and additional document demands.\n\nOn May 14, 2026, House Oversight Committee Chairman James Comer issued a subpoena to the Sixteen Thirty Fund demanding documents and communications tied to the Chorus Creator Incubator Program.\n\nThe subpoena was sent to:\n\nAmy Kurtz, President of Sixteen Thirty Fund.\n\nAccording to the House Oversight Committee, the investigation is examining whether the Chorus influencer network:\n\nattempted to avoid federal campaign-finance disclosure requirements,\ncoordinated political messaging through paid influencers,\nand operated as what Comer called a “dark money operation.”\n\nThe Committee stated that:\n\n“influencers paid through the Chorus program generated content advocating for candidates, ballot initiatives, and political parties in U.S. elections.”\nComer also claimed Sixteen Thirty Fund’s response to earlier document requests was inadequate, saying the organization had only produced:\n\n135 pages since November 2025.\n\nAnother major issue raised in the subpoena:\n\nThe Committee alleged the program’s legal structure changed shortly after congressional scrutiny began, potentially to obscure records or operational control.\n\nThe Oversight Committee specifically referenced concerns involving:\n\ncontracts,\ninternal communications,\nfunding documents,\ncreator agreements,\norganizational charts,\nand communications involving influencers and political figures.\n\n\n\nThe “Restructuring” Issue\n\nOne of the biggest developments came in March 2026.\n\nComer alleged that after the Committee requested records:\n\nSixteen Thirty Fund distanced itself from Chorus,\na new entity called Creator Collective appeared,\nand operational control allegedly shifted shortly after congressional scrutiny began.\n\nThe Committee described the sequence as:\n\n“dubious at best”\n\nand suggested it may have been designed to:\n\nshield records,\nobscure ownership/control,\nor complicate congressional oversight.\n\nCommittee’s Main Concern\n\nThe investigation is centered on whether the structure functioned as:\n\ncoordinated political influence disguised as independent creator content.\n\nThe Committee argues that if influencers were compensated to push political narratives while withholding disclosure, that could raise:\n\ncampaign-finance issues,\nethics concerns,\ntransparency problems,\nand potential FEC reporting questions\n\nThe Sixteen Thirty Fund responded publicly saying it:\n\n“complies with the law and has cooperated with the Committee’s inquiry while protecting the rights and safety of the people who work with us.”\n\nDefenses From Chorus-Linked Figures\n\nPeople connected to the program disputed many allegations.\n\nSome creators argued:\n\nChorus was more of a creator-support or networking initiative,\nnot a covert political operation,\nand that reporting exaggerated the contracts.\n\nBrian Tyler Cohen reportedly compared the initiative to a “scholarship program” rather than an illegal influence operation.\n\nElizabeth Booker Houston publicly argued:\n\nChorus did not control her independent interviews,\nSixteen Thirty Fund was merely a fiscal sponsor,\nand some media reporting was inaccurate.\n\nWhy This Investigation Matters\n\nThis probe is significant because it sits at the intersection of:\n\ninfluencer marketing,\npolitical campaigning,\nnonprofit “dark money” networks,\nand digital media disclosure laws.\n\nCongress is effectively asking:\n\nWhen does a paid influencer stop being an “independent creator” and become part of a coordinated political communications operation?\n\nThat question has implications far beyond this case and could affect:\n\nfuture influencer disclosure rules,\npolitical podcast sponsorships,\nTikTok creator funding,\nnonprofit media operations,\nand online campaign coordination.\n\n\nThe Sixteen Thirty Fund’s Larger Role\n\nThe Sixteen Thirty Fund has long been described by critics and media outlets as one of the largest Democratic-aligned “dark money” hubs in American politics. It operates through nonprofit/fiscal sponsorship structures tied historically to Arabella Advisors.\n\nThe organization has spent hundreds of millions on:\n\nballot initiatives,\nadvocacy campaigns,\nvoter mobilization,\nissue advertising,\nand progressive infrastructure.\n\nThe Chorus investigation is the first major congressional attempt to examine whether those same nonprofit-network strategies were adapted to the influencer economy",
+      "story": "August 27, 2025, 6:00 AM. The Wire Published a story by Taylor Lorenz titled; A Dark Money Group Is Secretly Funding High-Profile Democratic Influencers. An initiative aimed at boosting Democrats online offers influencers up to $8,000 a month to push the party line. All they have to do is keep it secret and agree to restrictions on their content. \n\nNovember 2025, Chairman James Comer announced a formal investigation after reports alleged that the Chorus program paid influencers to amplify Democratic political messaging while restricting disclosure of those financial relationships.\n\nThe House Oversight investigation has evolved from a media-report inquiry into a broader probe examining whether the Chorus Creator Incubator Program and related organizations attempted to avoid campaign-finance disclosure rules and obscure operational control structures.\n\nKey Entities Involved\nHouse Committee on Oversight and Government Reform\nJames Comer\nSixteen Thirty Fund\nArabella Advisors\nSunflower Services\nCreator Collective\nChorus Creator Incubator Program\n\nBy spring 2026, Comer stated the Committee believed compliance had been incomplete, leading to escalated pressure and additional document demands.\n\nOn May 14, 2026, House Oversight Committee Chairman James Comer issued a subpoena to the Sixteen Thirty Fund demanding documents and communications tied to the Chorus Creator Incubator Program.\n\nThe subpoena was sent to:\n\nAmy Kurtz, President of Sixteen Thirty Fund.\n\nAccording to the House Oversight Committee, the investigation is examining whether the Chorus influencer network:\n\nattempted to avoid federal campaign-finance disclosure requirements,\ncoordinated political messaging through paid influencers,\nand operated as what Comer called a \u201cdark money operation.\u201d\n\nThe Committee stated that:\n\n\u201cinfluencers paid through the Chorus program generated content advocating for candidates, ballot initiatives, and political parties in U.S. elections.\u201d\nComer also claimed Sixteen Thirty Fund\u2019s response to earlier document requests was inadequate, saying the organization had only produced:\n\n135 pages since November 2025.\n\nAnother major issue raised in the subpoena:\n\nThe Committee alleged the program\u2019s legal structure changed shortly after congressional scrutiny began, potentially to obscure records or operational control.\n\nThe Oversight Committee specifically referenced concerns involving:\n\ncontracts,\ninternal communications,\nfunding documents,\ncreator agreements,\norganizational charts,\nand communications involving influencers and political figures.\n\n\n\nThe \u201cRestructuring\u201d Issue\n\nOne of the biggest developments came in March 2026.\n\nComer alleged that after the Committee requested records:\n\nSixteen Thirty Fund distanced itself from Chorus,\na new entity called Creator Collective appeared,\nand operational control allegedly shifted shortly after congressional scrutiny began.\n\nThe Committee described the sequence as:\n\n\u201cdubious at best\u201d\n\nand suggested it may have been designed to:\n\nshield records,\nobscure ownership/control,\nor complicate congressional oversight.\n\nCommittee\u2019s Main Concern\n\nThe investigation is centered on whether the structure functioned as:\n\ncoordinated political influence disguised as independent creator content.\n\nThe Committee argues that if influencers were compensated to push political narratives while withholding disclosure, that could raise:\n\ncampaign-finance issues,\nethics concerns,\ntransparency problems,\nand potential FEC reporting questions\n\nThe Sixteen Thirty Fund responded publicly saying it:\n\n\u201ccomplies with the law and has cooperated with the Committee\u2019s inquiry while protecting the rights and safety of the people who work with us.\u201d\n\nDefenses From Chorus-Linked Figures\n\nPeople connected to the program disputed many allegations.\n\nSome creators argued:\n\nChorus was more of a creator-support or networking initiative,\nnot a covert political operation,\nand that reporting exaggerated the contracts.\n\nBrian Tyler Cohen reportedly compared the initiative to a \u201cscholarship program\u201d rather than an illegal influence operation.\n\nElizabeth Booker Houston publicly argued:\n\nChorus did not control her independent interviews,\nSixteen Thirty Fund was merely a fiscal sponsor,\nand some media reporting was inaccurate.\n\nWhy This Investigation Matters\n\nThis probe is significant because it sits at the intersection of:\n\ninfluencer marketing,\npolitical campaigning,\nnonprofit \u201cdark money\u201d networks,\nand digital media disclosure laws.\n\nCongress is effectively asking:\n\nWhen does a paid influencer stop being an \u201cindependent creator\u201d and become part of a coordinated political communications operation?\n\nThat question has implications far beyond this case and could affect:\n\nfuture influencer disclosure rules,\npolitical podcast sponsorships,\nTikTok creator funding,\nnonprofit media operations,\nand online campaign coordination.\n\n\nThe Sixteen Thirty Fund\u2019s Larger Role\n\nThe Sixteen Thirty Fund has long been described by critics and media outlets as one of the largest Democratic-aligned \u201cdark money\u201d hubs in American politics. It operates through nonprofit/fiscal sponsorship structures tied historically to Arabella Advisors.\n\nThe organization has spent hundreds of millions on:\n\nballot initiatives,\nadvocacy campaigns,\nvoter mobilization,\nissue advertising,\nand progressive infrastructure.\n\nThe Chorus investigation is the first major congressional attempt to examine whether those same nonprofit-network strategies were adapted to the influencer economy",
       "findings": [
         "Finding #1. WIRED reported that the Chorus Creator Incubator Program, backed through the Sixteen Thirty Fund, offered Democratic-leaning influencers up to $8,000/month under contracts with secrecy/disclosure restrictions.",
         "Finding #2.The House Oversight Committee opened an investigation in November 2025, saying the program reportedly paid participants to promote Democratic messaging under secrecy contracts.",
@@ -270,7 +271,8 @@
         }
       ],
       "created": "2026-05-18T17:47:32.788Z",
-      "updated": "2026-05-19T16:00:18.640Z"
+      "updated": "2026-05-19T16:00:18.640Z",
+      "thumbnail": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800&q=80"
     }
   ]
 }
