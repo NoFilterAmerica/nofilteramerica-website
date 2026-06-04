@@ -119,8 +119,123 @@ function populateNewsFeeds() {
   }
 }
 
-// Initialize on page load
+// Initialize is now handled by the news rendering block below
+
+// =============================================
+// NEWS RENDERING FUNCTIONS
+// =============================================
+
+let newsIndex = 0;
+
+function getCatClass(cat) {
+  if (!cat) return 'neutral';
+  const c = Array.isArray(cat) ? cat[0] : cat;
+  if (['politics','government','top'].includes(c)) return 'neutral';
+  if (['crime','domestic'].includes(c)) return 'rep';
+  return 'neutral';
+}
+
+function getCatLabel(cat) {
+  if (!cat) return 'NEWS';
+  const c = (Array.isArray(cat) ? cat[0] : cat).toUpperCase();
+  const labels = {POLITICS:'POLITICS',CRIME:'CRIME',TOP:'TOP NEWS',DOMESTIC:'DOMESTIC',HEALTH:'HEALTH',BUSINESS:'BUSINESS'};
+  return labels[c] || c;
+}
+
+function buildFeaturedCard(article) {
+  const hasImg = article.image_url && article.image_url.trim();
+  const catClass = getCatClass(article.category);
+  const catLabel = getCatLabel(article.category);
+  const desc = (article.description || '').replace(/ONLY AVAILABLE IN PAID PLANS/gi, '').trim().substring(0, 180);
+  return `
+    <a href="${article.link}" target="_blank" rel="noopener" class="news-card" style="display:block;text-decoration:none;color:inherit;height:360px;overflow:hidden;border-radius:8px;border-top:3px solid var(--gold);background:var(--card);position:relative;">
+      ${hasImg ? `<img src="${article.image_url}" class="card-img" alt="" style="width:100%;height:200px;object-fit:cover;" onerror="this.style.display='none'">` : `<div style="height:200px;background:linear-gradient(135deg,#0f1a2e,#152035);display:flex;align-items:center;justify-content:center;"><i class='fas fa-newspaper' style='font-size:3rem;color:rgba(201,168,76,0.2)'></i></div>`}
+      <div style="padding:16px;">
+        <div class="card-cat-wrap"><span class="card-cat ${catClass}">${catLabel}</span></div>
+        <h3 style="font-family:Oswald,sans-serif;font-size:1.1rem;color:#fff;margin:0 0 8px;line-height:1.3;">${article.title}</h3>
+        ${desc ? `<p style="font-size:0.82rem;color:#8a9bb5;margin:0;line-height:1.5;">${desc}</p>` : ''}
+      </div>
+    </a>`;
+}
+
+function buildStackCard(article) {
+  const hasImg = article.image_url && article.image_url.trim();
+  return `
+    <a href="${article.link}" target="_blank" rel="noopener" class="stack-card" style="display:flex;gap:12px;padding:12px;text-decoration:none;color:inherit;background:var(--card);border-radius:6px;margin-bottom:10px;border-left:3px solid var(--gold);">
+      ${hasImg ? `<img src="${article.image_url}" style="width:70px;height:70px;object-fit:cover;border-radius:4px;flex-shrink:0;" onerror="this.style.display='none'">` : `<div style="width:70px;height:70px;background:#152035;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><i class='fas fa-newspaper' style='color:rgba(201,168,76,0.3)'></i></div>`}
+      <div style="flex:1;min-width:0;">
+        <p style="font-size:0.83rem;font-weight:600;color:#e0e6ef;line-height:1.3;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">${article.title}</p>
+        <span style="font-size:0.72rem;color:#556070;margin-top:4px;display:block;">${article.source_id || ''}</span>
+      </div>
+    </a>`;
+}
+
+function buildNewsCard(article) {
+  const hasImg = article.image_url && article.image_url.trim();
+  const catClass = getCatClass(article.category);
+  const catLabel = getCatLabel(article.category);
+  const desc = (article.description || '').replace(/ONLY AVAILABLE IN PAID PLANS/gi, '').trim().substring(0, 150);
+  return `
+    <a href="${article.link}" target="_blank" rel="noopener" class="news-card ${catClass}" style="display:block;text-decoration:none;color:inherit;border-radius:8px;overflow:hidden;background:var(--card);border-top:3px solid ${catClass==='rep'?'var(--red-rep)':'var(--gold)'};">
+      ${hasImg ? `<img src="${article.image_url}" class="card-img" alt="" onerror="this.style.display='none'">` : `<div style="height:160px;background:linear-gradient(135deg,#0f1a2e,#152035);display:flex;align-items:center;justify-content:center;"><i class='fas fa-newspaper' style='font-size:2.5rem;color:rgba(201,168,76,0.2)'></i></div>`}
+      <div class="card-body">
+        <div class="card-cat-wrap"><span class="card-cat ${catClass}">${catLabel}</span></div>
+        <h4 class="card-title" style="font-size:0.95rem;line-height:1.35;">${article.title}</h4>
+        ${desc ? `<p class="card-desc">${desc}</p>` : ''}
+      </div>
+    </a>`;
+}
+
+function renderFeaturedSection() {
+  const container = document.getElementById('featuredLayout');
+  if (!container || !DAILY_NEWS_CACHE.length) return;
+  
+  const featured = DAILY_NEWS_CACHE[0];
+  const stackItems = DAILY_NEWS_CACHE.slice(1, 4);
+  
+  container.innerHTML = buildFeaturedCard(featured) +
+    '<div class="side-stack">' + stackItems.map(buildStackCard).join('') + '</div>';
+  
+  newsIndex = 4;
+}
+
+function renderNewsGrid() {
+  const grid = document.getElementById('newsGrid');
+  if (!grid || !DAILY_NEWS_CACHE.length) return;
+  
+  const items = DAILY_NEWS_CACHE.slice(newsIndex, newsIndex + 4);
+  if (!items.length) {
+    grid.innerHTML = '<p style="color:#8a9bb5;text-align:center;grid-column:1/-1;padding:20px;">No more stories available.</p>';
+    return;
+  }
+  grid.innerHTML = items.map(buildNewsCard).join('');
+  newsIndex += items.length;
+}
+
+function loadMoreNews() {
+  const grid = document.getElementById('newsGrid');
+  if (!grid) return;
+  const items = DAILY_NEWS_CACHE.slice(newsIndex, newsIndex + 4);
+  if (!items.length) return;
+  grid.innerHTML += items.map(buildNewsCard).join('');
+  newsIndex += items.length;
+}
+
+function updateBreakingTicker() {
+  const t1 = document.getElementById('ticker-text');
+  const t2 = document.getElementById('ticker-text-dupe');
+  if (!t1 || !DAILY_NEWS_CACHE.length) return;
+  
+  const headlines = DAILY_NEWS_CACHE.slice(0, 6).map(a => a.title).join('  ◆  ');
+  t1.textContent = '◆  ' + headlines + '  ◆';
+  if (t2) t2.textContent = t1.textContent;
+  if (window.resetTickerWidth) window.resetTickerWidth();
+}
+
+// Initialize all news on page load
 document.addEventListener('DOMContentLoaded', function() {
+  renderFeaturedSection();
+  renderNewsGrid();
+  updateBreakingTicker();
   populateNewsFeeds();
 });
-
