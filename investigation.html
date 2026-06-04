@@ -7,18 +7,156 @@
   <meta name="robots" content="index, follow"/>
   <meta name="theme-color" content="#07101e"/>
   <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --navy: #07101e;
+      --card: #0d1f3c;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gray: #a0aec0;
+      --border: rgba(201,168,76,0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--navy); color: #e0e6ef; font-family: 'Inter', sans-serif; }
+
+    /* TICKER */
+    .ticker-wrap { background: #8b0000; padding: 8px 0; overflow: hidden; position: relative; z-index: 200; }
+    .ticker-inner { display: flex; align-items: center; gap: 0; }
+    .ticker-label { background: #6b0000; color: #fff; font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; padding: 4px 14px; flex-shrink: 0; white-space: nowrap; }
+    .ticker-scroll { overflow: hidden; flex: 1; }
+    .ticker-track { display: inline-block; white-space: nowrap; animation: ticker-move 40s linear infinite; }
+    .ticker-track span { font-size: 13px; font-weight: 600; color: #fff; padding: 0 40px; }
+    @keyframes ticker-move { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* NAVBAR */
+    .navbar { background: #0a1628; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo img { height: 46px; }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-links a { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 1.5px; color: #b0bec5; text-decoration: none; padding: 6px 12px; border-radius: 3px; transition: color .2s, background .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); background: rgba(201,168,76,0.08); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); border-radius: 2px; }
+    .mobile-menu { display: none; flex-direction: column; background: #0a1628; padding: 12px 20px; border-top: 1px solid var(--border); }
+    .mobile-menu a { font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 1px; color: #b0bec5; text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-menu.open { display: flex; }
+    @media(max-width:768px) { .nav-links { display: none; } .hamburger { display: flex; } }
+
+    /* BREADCRUMB */
+    .breadcrumb { max-width: 1100px; margin: 0 auto; padding: 16px 20px 0; }
+    .breadcrumb a { color: var(--gold); text-decoration: none; font-size: 12px; font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
+    .breadcrumb span { color: #556; font-size: 12px; margin: 0 8px; }
+    .breadcrumb .current { color: #8a9bb5; font-size: 12px; font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
+
+    /* HERO */
+    .case-hero { max-width: 1100px; margin: 0 auto; padding: 24px 20px 0; }
+    .case-hero-img { width: 100%; max-height: 420px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); display: block; }
+    .case-hero-placeholder { width: 100%; height: 280px; background: linear-gradient(135deg,#0a1628,#162540); border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+    .case-hero-placeholder i { font-size: 64px; color: var(--gold); opacity: 0.25; }
+
+    /* HEADER */
+    .case-header { max-width: 1100px; margin: 24px auto 0; padding: 0 20px; }
+    .case-badge { display: inline-block; font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; padding: 3px 12px; border-radius: 2px; margin-bottom: 14px; background: rgba(0,180,80,.12); color: #4dff91; border: 1px solid rgba(0,180,80,.35); }
+    .case-badge.draft { background: rgba(201,168,76,.12); color: var(--gold); border-color: rgba(201,168,76,.35); }
+    .case-title { font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 12px; }
+    .case-summary { font-size: 1.05rem; color: #8a9bb5; line-height: 1.65; margin-bottom: 20px; }
+    .case-meta { display: flex; flex-wrap: wrap; gap: 16px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 0; margin-bottom: 32px; }
+    .case-meta-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-family: 'Oswald', sans-serif; letter-spacing: 1px; color: var(--gold); }
+    .case-meta-item i { font-size: 11px; }
+
+    /* CONTENT LAYOUT */
+    .case-body { max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; display: grid; grid-template-columns: 1fr 320px; gap: 40px; }
+    @media(max-width: 860px) { .case-body { grid-template-columns: 1fr; } }
+
+    /* STORY */
+    .case-section { margin-bottom: 36px; }
+    .case-section-label { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 3px; color: var(--gold); border-left: 3px solid var(--gold); padding-left: 10px; margin-bottom: 16px; }
+    .case-story { font-size: 0.97rem; color: #c8d6e5; line-height: 1.85; white-space: pre-wrap; }
+
+    /* FINDINGS */
+    .finding-item { background: var(--card); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; padding: 14px 16px; margin-bottom: 10px; font-size: 0.9rem; color: #c8d6e5; line-height: 1.6; }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 24px; }
+    .timeline::before { content:''; position:absolute; left:7px; top:0; bottom:0; width:2px; background:linear-gradient(to bottom, var(--gold), transparent); }
+    .timeline-item { position: relative; margin-bottom: 22px; }
+    .timeline-dot { position: absolute; left: -21px; top: 4px; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; border: 2px solid var(--navy); }
+    .timeline-date { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px; }
+    .timeline-event { font-size: 0.88rem; color: #a0b4c8; line-height: 1.55; }
+
+    /* SIDEBAR */
+    .case-sidebar {}
+    .sidebar-section { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 18px; margin-bottom: 20px; }
+    .sidebar-title { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 2px; color: var(--gold); margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+
+    /* DOCUMENTS */
+    .doc-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; text-decoration: none; }
+    .doc-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .doc-icon { width: 36px; height: 36px; background: rgba(201,168,76,0.1); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .doc-icon i { color: var(--gold); font-size: 14px; }
+    .doc-label { font-size: 12px; color: #c8d6e5; line-height: 1.4; }
+    .doc-label small { color: #556; font-size: 10px; display: block; margin-top: 2px; }
+
+    /* TIKTOKS */
+    .tiktok-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); text-decoration: none; }
+    .tiktok-item:last-child { border-bottom: none; }
+    .tiktok-icon { width: 36px; height: 36px; background: rgba(255,255,255,0.05); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .tiktok-icon i { color: #fff; font-size: 14px; }
+    .tiktok-label { font-size: 12px; color: #c8d6e5; }
+
+    /* SOURCES */
+    .source-item { display: flex; align-items: flex-start; gap: 8px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .source-item:last-child { border-bottom: none; }
+    .source-item i { color: var(--gold); font-size: 10px; margin-top: 4px; flex-shrink: 0; }
+    .source-item a { font-size: 11px; color: #8a9bb5; text-decoration: none; line-height: 1.4; word-break: break-word; }
+    .source-item a:hover { color: var(--gold); }
+
+    /* BACK BUTTON */
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 2px; color: var(--gold); text-decoration: none; border: 1px solid var(--border); padding: 8px 16px; border-radius: 3px; margin-bottom: 24px; transition: background .2s; }
+    .back-btn:hover { background: rgba(201,168,76,0.08); }
+
+    /* LOADING / ERROR */
+    .inv-loading { text-align: center; padding: 100px 20px; }
+    .inv-loading i { font-size: 2.5rem; color: var(--gold); animation: spin 1s linear infinite; }
+    .inv-loading p { margin-top: 16px; color: var(--gray); font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .inv-error { text-align: center; padding: 80px 20px; }
+    .inv-error i { font-size: 3rem; color: #c9504c; opacity: 0.5; margin-bottom: 16px; }
+    .inv-error h3 { font-family: 'Oswald', sans-serif; color: #fff; font-size: 1.4rem; margin-bottom: 8px; }
+    .inv-error p { color: var(--gray); margin-bottom: 20px; }
+
+    /* FOOTER */
+    .footer { background: #050d1a; border-top: 2px solid var(--gold); padding: 48px 20px 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 32px; margin-bottom: 32px; }
+    .footer-logo img { height: 70px; margin-bottom: 12px; }
+    .footer-logo p { font-size: 12px; color: #556; font-style: italic; }
+    .footer-links h4, .footer-social h4 { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 3px; color: var(--gold); margin-bottom: 14px; }
+    .footer-links a, .footer-social a { display: block; font-size: 13px; color: #8a9bb5; text-decoration: none; margin-bottom: 8px; }
+    .footer-links a:hover, .footer-social a:hover { color: var(--gold); }
+    .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; }
+    .footer-bottom p { font-size: 11px; color: #394050; }
+    .footer-bottom a { color: #556; }
+  </style>
 </head>
 <body>
 
   <!-- TICKER -->
   <div class="ticker-wrap">
-    <div class="ticker-label">🔴 BREAKING</div>
-    <div class="ticker-content">
-      <span id="ticker-text">NFA Investigations — where evidence meets accountability.</span>
+    <div class="ticker-inner">
+      <div class="ticker-label">🔴 BREAKING</div>
+      <div class="ticker-scroll">
+        <div class="ticker-track" id="tickerTrack">
+          <span>NFA Investigations — where evidence meets accountability. No Filter. No Fear.</span>
+          <span>NFA Investigations — where evidence meets accountability. No Filter. No Fear.</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -26,7 +164,7 @@
   <nav class="navbar">
     <div class="nav-inner">
       <div class="nav-logo">
-        <img src="assets/logo.png" alt="No Filter America" class="logo-img"/>
+        <a href="index.html"><img src="assets/logo.png" alt="No Filter America"/></a>
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
@@ -48,11 +186,11 @@
     </div>
   </nav>
 
-  <!-- CASE FILE CONTENT -->
-  <div class="inv-page" id="invPage">
-    <div style="text-align:center;padding:80px 0;color:var(--gray);">
-      <i class="fas fa-spinner fa-spin" style="font-size:2.5rem;color:var(--gold);"></i>
-      <p style="margin-top:20px;">Loading case file...</p>
+  <!-- PAGE CONTENT (injected by JS) -->
+  <div id="invDetail">
+    <div class="inv-loading">
+      <i class="fas fa-spinner"></i>
+      <p>Loading case file...</p>
     </div>
   </div>
 
@@ -60,7 +198,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-logo">
-        <img src="assets/logo.png" alt="No Filter America" style="height:80px;"/>
+        <img src="assets/logo.png" alt="No Filter America"/>
         <p>Truth. Freedom. Accountability.</p>
       </div>
       <div class="footer-links">
@@ -87,6 +225,251 @@
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    const ADMIN_API = 'https://nofilteramerica-admin.netlify.app/.netlify/functions/videos';
+    const RAW_DATA  = 'https://raw.githubusercontent.com/NoFilterAmerica/nofilteramerica-website/main/nfa-admin/videos-data.json';
+
+    function getParam(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+
+    function docIcon(url) {
+      if (!url) return 'fa-file-alt';
+      const u = url.toLowerCase();
+      if (u.includes('.pdf')) return 'fa-file-pdf';
+      if (u.includes('.png') || u.includes('.jpg') || u.includes('.jpeg') || u.includes('.webp')) return 'fa-file-image';
+      if (u.includes('.mp4') || u.includes('.mov')) return 'fa-file-video';
+      if (u.includes('youtube') || u.includes('youtu.be')) return 'fa-brands fa-youtube';
+      if (u.includes('tiktok')) return 'fa-brands fa-tiktok';
+      return 'fa-file-alt';
+    }
+
+    function renderDetail(inv) {
+      const container = document.getElementById('invDetail');
+      const isActive = (inv.status || 'active') === 'active';
+      const badgeClass = isActive ? '' : 'draft';
+      const badgeLabel = isActive ? 'ACTIVE INVESTIGATION' : (inv.status || 'DRAFT').toUpperCase();
+
+      const docs    = (inv.documents || []).filter(d => d && d.url);
+      const tiktoks = (inv.tiktoks   || []).filter(t => t && t.url);
+      const findings= inv.findings   || [];
+      const timeline= inv.timeline   || [];
+      const sources = inv.sources    || [];
+
+      // Hero image
+      const heroHtml = inv.thumbnail
+        ? `<img src="${inv.thumbnail}" alt="${inv.title}" class="case-hero-img"/>`
+        : `<div class="case-hero-placeholder"><i class="fas fa-folder-open"></i></div>`;
+
+      // Story paragraphs
+      const storyHtml = inv.story
+        ? `<div class="case-section">
+            <div class="case-section-label">THE FULL STORY</div>
+            <div class="case-story">${escHtml(inv.story)}</div>
+           </div>`
+        : '';
+
+      // Findings
+      const findingsHtml = findings.length
+        ? `<div class="case-section">
+            <div class="case-section-label">KEY FINDINGS</div>
+            ${findings.map(f => `<div class="finding-item"><i class="fas fa-chevron-right" style="color:var(--gold);margin-right:8px;font-size:10px;"></i>${escHtml(f)}</div>`).join('')}
+           </div>`
+        : '';
+
+      // Timeline
+      const timelineHtml = timeline.length
+        ? `<div class="case-section">
+            <div class="case-section-label">TIMELINE OF EVENTS</div>
+            <div class="timeline">
+              ${timeline.map(t => `
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-date">${escHtml(t.date || '')}</div>
+                  <div class="timeline-event">${escHtml(t.event || '')}</div>
+                </div>`).join('')}
+            </div>
+           </div>`
+        : '';
+
+      // Docs sidebar
+      const docsHtml = docs.length
+        ? `<div class="sidebar-section">
+            <div class="sidebar-title"><i class="fas fa-folder-open" style="margin-right:6px;"></i>EVIDENCE DOCUMENTS</div>
+            ${docs.map(d => `
+              <a href="${d.url}" target="_blank" class="doc-item" onclick="handleDoc(event,'${d.url}')">
+                <div class="doc-icon"><i class="fas ${docIcon(d.url)}"></i></div>
+                <div class="doc-label">${escHtml(d.label || d.title || 'Document')}<small>TAP TO VIEW</small></div>
+              </a>`).join('')}
+           </div>`
+        : '';
+
+      // TikToks sidebar
+      const tiktoksHtml = tiktoks.length
+        ? `<div class="sidebar-section">
+            <div class="sidebar-title"><i class="fab fa-tiktok" style="margin-right:6px;"></i>RELATED VIDEOS</div>
+            ${tiktoks.map(t => `
+              <a href="${t.url}" target="_blank" class="tiktok-item">
+                <div class="tiktok-icon"><i class="fab fa-tiktok"></i></div>
+                <div class="tiktok-label">${escHtml(t.title || t.label || 'Watch Video')}</div>
+              </a>`).join('')}
+           </div>`
+        : '';
+
+      // Sources sidebar
+      const sourcesHtml = sources.length
+        ? `<div class="sidebar-section">
+            <div class="sidebar-title"><i class="fas fa-link" style="margin-right:6px;"></i>SOURCES</div>
+            ${sources.map(s => `
+              <div class="source-item">
+                <i class="fas fa-external-link-alt"></i>
+                <a href="${typeof s === 'string' ? s : (s.url || '#')}" target="_blank">${escHtml(typeof s === 'string' ? s : (s.label || s.url || 'Source'))}</a>
+              </div>`).join('')}
+           </div>`
+        : '';
+
+      // Date meta
+      const dateMeta = inv.date
+        ? `<div class="case-meta-item"><i class="fas fa-calendar-alt"></i>${escHtml(inv.date)}</div>`
+        : '';
+      const docsMeta = docs.length
+        ? `<div class="case-meta-item"><i class="fas fa-file-alt"></i>${docs.length} DOCUMENT${docs.length !== 1 ? 'S' : ''}</div>`
+        : '';
+      const videosMeta = tiktoks.length
+        ? `<div class="case-meta-item"><i class="fab fa-tiktok"></i>${tiktoks.length} VIDEO${tiktoks.length !== 1 ? 'S' : ''}</div>`
+        : '';
+
+      // Update page title
+      document.title = `${inv.title} – NFA Investigations`;
+
+      container.innerHTML = `
+        <div class="breadcrumb">
+          <a href="investigations.html"><i class="fas fa-chevron-left" style="font-size:10px;margin-right:4px;"></i>INVESTIGATIONS</a>
+          <span>/</span>
+          <span class="current">${escHtml((inv.title || '').substring(0, 40))}${(inv.title || '').length > 40 ? '…' : ''}</span>
+        </div>
+
+        <div class="case-hero">
+          ${heroHtml}
+        </div>
+
+        <div class="case-header">
+          <div class="case-badge ${badgeClass}">${badgeLabel}</div>
+          <h1 class="case-title">${escHtml(inv.title || 'Investigation')}</h1>
+          <p class="case-summary">${escHtml(inv.summary || '')}</p>
+          <div class="case-meta">
+            ${dateMeta}
+            ${docsMeta}
+            ${videosMeta}
+            <div class="case-meta-item"><i class="fas fa-shield-alt"></i>NFA INVESTIGATIONS</div>
+          </div>
+        </div>
+
+        <div class="case-body">
+          <div class="case-main">
+            ${storyHtml}
+            ${findingsHtml}
+            ${timelineHtml}
+            ${(!storyHtml && !findingsHtml && !timelineHtml) ? '<p style="color:var(--gray);padding:20px 0;">Full investigation content coming soon.</p>' : ''}
+            <a href="investigations.html" class="back-btn"><i class="fas fa-arrow-left"></i>BACK TO ALL INVESTIGATIONS</a>
+          </div>
+          <div class="case-sidebar">
+            ${docsHtml}
+            ${tiktoksHtml}
+            ${sourcesHtml}
+            ${(!docsHtml && !tiktoksHtml && !sourcesHtml) ? '' : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function escHtml(str) {
+      return String(str || '')
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;');
+    }
+
+    function handleDoc(e, url) {
+      e.preventDefault();
+      const ext = (url.split('?')[0].split('.').pop() || '').toLowerCase();
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (ext === 'pdf' && !isMobile) {
+        const viewer = `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`;
+        const modal = document.createElement('div');
+        modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;';
+        modal.innerHTML = `
+          <div style="width:100%;max-width:900px;height:85vh;background:#0a1628;border:1px solid rgba(201,168,76,0.4);border-radius:8px;display:flex;flex-direction:column;overflow:hidden;">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid rgba(201,168,76,0.2);flex-shrink:0;">
+              <span style="color:#c9a84c;font-family:Oswald,sans-serif;font-size:13px;letter-spacing:2px;">📄 EVIDENCE DOCUMENT</span>
+              <div style="display:flex;gap:10px;">
+                <a href="${url}" target="_blank" style="background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);color:#c9a84c;font-size:11px;cursor:pointer;padding:5px 12px;border-radius:3px;text-decoration:none;font-family:Oswald,sans-serif;letter-spacing:1px;">↗ OPEN DIRECT</a>
+                <button onclick="this.closest('.doc-modal').remove()" style="background:none;border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:1rem;cursor:pointer;padding:4px 12px;border-radius:4px;">✕</button>
+              </div>
+            </div>
+            <div style="flex:1;overflow:hidden;"><iframe src="${viewer}" style="width:100%;height:100%;border:none;"></iframe></div>
+          </div>`;
+        modal.className = 'doc-modal';
+        modal.onclick = function(ev){ if(ev.target === modal) modal.remove(); };
+        document.body.appendChild(modal);
+      } else {
+        window.open(url, '_blank');
+      }
+    }
+
+    function showError(msg) {
+      document.getElementById('invDetail').innerHTML = `
+        <div class="inv-error">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h3>Case File Not Found</h3>
+          <p>${msg || 'This investigation could not be loaded.'}</p>
+          <a href="investigations.html" class="back-btn" style="display:inline-flex;"><i class="fas fa-arrow-left"></i>BACK TO INVESTIGATIONS</a>
+        </div>`;
+    }
+
+    async function loadInvestigation() {
+      const id = getParam('id');
+      if (!id) {
+        showError('No investigation ID specified.');
+        return;
+      }
+
+      // Try admin API first
+      try {
+        const res = await fetch(`${ADMIN_API}?action=list&section=investigations`, { cache: 'no-cache' });
+        if (res.ok) {
+          const json = await res.json();
+          if (json.ok && Array.isArray(json.data)) {
+            const inv = json.data.find(i => i.id === id);
+            if (inv) { renderDetail(inv); return; }
+          }
+        }
+      } catch(e) {}
+
+      // Fallback: raw GitHub JSON
+      try {
+        const res = await fetch(`${RAW_DATA}?cb=${Date.now()}`);
+        if (res.ok) {
+          const json = await res.json();
+          const inv = (json.investigations || []).find(i => i.id === id);
+          if (inv) { renderDetail(inv); return; }
+        }
+      } catch(e) {}
+
+      showError('Investigation not found or could not be loaded. Please try again.');
+    }
+
+    // Init
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadInvestigation);
+    } else {
+      loadInvestigation();
+    }
+  </script>
 </body>
 </html>
