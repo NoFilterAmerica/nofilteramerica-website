@@ -1,13 +1,1426 @@
 {
-  "timestamp": "2026-06-06T13:04:21.519834",
+  "timestamp": "2026-06-06T13:04:45.057937",
   "source": "newsdata.io",
-  "total_articles": 0,
-  "politics": [],
-  "crime": [],
-  "top_stories": [],
-  "both_sides": {
-    "left_perspective": [],
-    "right_perspective": []
+  "total_articles_fetched": 26,
+  "categories": {
+    "politics": [
+      {
+        "article_id": "1e3b45509cae39c65d49e1ea372563b1",
+        "link": "https://www.bbc.com/news/articles/cy72r328preo",
+        "title": "Biden cabinet secretary advances in California governor race",
+        "description": "Ballots are still being counted in the largest US state to confirm who will run against the former Biden cabinet secretary in November.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "sareen habeshian"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 01:01:50",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 01:03:27",
+        "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/f70d/live/bba7db50-613f-11f1-aaf6-99c8c6629249.jpg",
+        "video_url": null,
+        "source_id": "bbc",
+        "source_name": "The Bbc",
+        "source_priority": 1781,
+        "source_url": "http://www.bbc.com",
+        "source_icon": "https://n.bytvi.com/bbc.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "de23d8f869686934a57b2123b1b763ef",
+        "link": "https://www.myjoyonline.com/the-cash-in-the-sofa-saga-that-just-wont-go-away-for-south-africas-president/",
+        "title": "The cash-in-the-sofa saga that just won\u2019t go away for South Africa\u2019s president",
+        "description": "Just like Watergate in the US, South Africa's \"Farmgate\" scandal started with a break-in but has since spiralled into something that could threaten the future of the sitting president.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "sofa"
+        ],
+        "creator": [
+          "david apinga"
+        ],
+        "language": "english",
+        "country": [
+          "ghana"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 01:01:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 02:46:36",
+        "image_url": "https://www.myjoyonline.com/wp-content/uploads/2026/05/a6248f50-5922-11f1-8b8c-6d33e1d5abb6.jpg.webp",
+        "video_url": null,
+        "source_id": "myjoyonline",
+        "source_name": "Myjoyonline",
+        "source_priority": 834754,
+        "source_url": "https://www.myjoyonline.com",
+        "source_icon": "https://n.bytvi.com/myjoyonline.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": true
+      },
+      {
+        "article_id": "18b3194ee2ed7c5ac3cf494b4f9c4ede",
+        "link": "https://scroll.in/article/1093308/beyond-the-modi-phenomenon-what-makes-up-the-anatomy-of-indias-new-regime",
+        "title": "Beyond the Modi phenomenon, what makes up the anatomy of India\u2019s new regime?",
+        "description": "The new order is made up three interwoven \u2018body parts\u2019: Hindutva as the head, civil society for the arms, and the state for the legs that kick hard.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "bharatiya janata party",
+          "nehruvian ideology",
+          "narendra modi",
+          "current indian government ideology",
+          "india hindutva",
+          "india under modi government",
+          "nehruvian india",
+          "hindutva"
+        ],
+        "creator": [
+          "the india forum",
+          "suhas palshikar"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 01:00:02",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 01:35:18",
+        "image_url": "https://sc0.blr1.cdn.digitaloceanspaces.com/article/213801-bcrjalrqfr-1780650852.jpg",
+        "video_url": null,
+        "source_id": "scroll",
+        "source_name": "Scroll.in",
+        "source_priority": 26952,
+        "source_url": "https://scroll.in",
+        "source_icon": "https://n.bytvi.com/scroll.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "f5d27c40278f22e2008d637ae7338e64",
+        "link": "https://ww2.kqed.org/news/2026/06/05/jones-dickson-leads-early-in-alameda-county-district-attorney-race/",
+        "title": "Jones Dickson Widens Lead in Alameda County District Attorney Race",
+        "description": "With more ballots tallied, Alameda County District Attorney Ursula Jones Dickson remains well ahead of former DA Pamela Price in the closely watched race.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "oakland",
+          "pamela price",
+          "election 2026",
+          "ursula jones dickson",
+          "alameda county",
+          "politics",
+          "alameda county district attorneys office"
+        ],
+        "creator": [
+          "alex hall"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:45:24",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 01:14:50",
+        "image_url": "https://cdn.kqed.org/wp-content/uploads/sites/10/2025/10/251023-MAYOR-LEE-PRESSER-MD-06_qed.jpg",
+        "video_url": null,
+        "source_id": "kqed_org",
+        "source_name": "Kqed",
+        "source_priority": 481643,
+        "source_url": "https://www.kqed.org",
+        "source_icon": "https://n.bytvi.com/kqed_org.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "e35194e78e5f8c57ddebd0008fea3298",
+        "link": "https://www.oann.com/commentary/a-seismic-third-world-revolution-thats-benefiting-the-u-s-and-israel/",
+        "title": "A Seismic Third World Revolution That\u2019s Benefiting the U.S. and Israel",
+        "description": "By Richard Pollock June 5, 2026 (Views expressed by guest commentators may not reflect the views of OAN or its affiliates.)",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics"
+        ],
+        "datatype": "opinion",
+        "pubDate": "2026-06-06 00:36:13",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:43:38",
+        "image_url": "https://www.oann.com/wp-content/uploads/2026/06/GettyImages-2243211415-scaled-e1780706369399.jpg",
+        "video_url": null,
+        "source_id": "oann",
+        "source_name": "One America News Network",
+        "source_priority": 535979,
+        "source_url": "https://www.oann.com",
+        "source_icon": null,
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": true
+      },
+      {
+        "article_id": "f15271bb7123e4aa4e4aa43aeb322f1d",
+        "link": "https://www.vanguardngr.com/2026/06/we-must-rebuild-trust-in-governance-anyaso-tells-global-audience-at-harvard/",
+        "title": "We must rebuild trust in governance, Anyaso tells global audience at Harvard",
+        "description": "By Esther Onyegbula Nigerian entrepreneur, philanthropist and Labour Party candidate for Bende Federal Constituency in the 2027 House of Representatives election, Chimaobi Desmond Anyaso, has called for a new generation of trust-driven leadership and stronger institutions as the foundation for Africa\u2019s sustainable development. Anyaso made the call while speaking as a panelist at the 10th [...] The post We must rebuild trust in governance, Anyaso tells global audience at Harvard appeared first on Vanguard News .",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "oboh"
+        ],
+        "language": "english",
+        "country": [
+          "nigeria"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:31:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 09:35:12",
+        "image_url": "https://cdn.vanguardngr.com/wp-content/uploads/2026/06/IMG-20260606-WA0005.jpg",
+        "video_url": null,
+        "source_id": "vanguardngr",
+        "source_name": "Vanguard News",
+        "source_priority": 32322,
+        "source_url": "https://www.vanguardngr.com",
+        "source_icon": "https://n.bytvi.com/vanguardngr.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "bb799d027719ef40cba5606e3750445f",
+        "link": "https://ww2.kqed.org/news/2026/06/05/becerra-advances-in-california-governor-race-as-hilton-steyer-battle-for-second-spot/",
+        "title": "Becerra Advances in California Governor Race as Hilton, Steyer Battle for Second Spot",
+        "description": "Democrat Xavier Becerra surged to the top in the millions of votes counted after Election Day, making a remarkable political comeback after trailing in much of the primary campaign.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "governor 2026",
+          "featured-news",
+          "california",
+          "xavier becerra",
+          "2026 governors race",
+          "politics",
+          "featured-politics",
+          "election 2026"
+        ],
+        "creator": [
+          "guy marzorati"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:30:55",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:43:27",
+        "image_url": "https://cdn.kqed.org/wp-content/uploads/sites/10/2026/06/Xavier-Becerra-Getty.jpg",
+        "video_url": null,
+        "source_id": "kqed_org",
+        "source_name": "Kqed",
+        "source_priority": 481643,
+        "source_url": "https://www.kqed.org",
+        "source_icon": "https://n.bytvi.com/kqed_org.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "4d8372c406f119f1c8fc1eabbd0d5000",
+        "link": "https://www.dailymail.com/news/article-15877795/Andy-Burnhams-wife-profit-green-revolution-Manchester-JAMES-TOZER.html",
+        "title": "How Andy Burnham's wife is set to profit from the new green revolution championed by her husband in Manchester: JAMES TOZER reveals the controversy - and how she made him an eternal laughing stock",
+        "description": "Before Burnham's campaign kicked off, his wife was a prolific poster on LinkedIn. Yet since her husband dramatically re-entered national politics, Ms Van Heel's page has mysteriously vanished.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "news",
+          "dailymail"
+        ],
+        "creator": [
+          "james tozer"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:01:02",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:04:32",
+        "image_url": "https://i.dailymail.com/1s/2026/06/05/17/109157739-0-image-a-86_1780677075146.jpg",
+        "video_url": null,
+        "source_id": "dailymailuk",
+        "source_name": "Mail Online",
+        "source_priority": 1973,
+        "source_url": "https://www.dailymail.co.uk",
+        "source_icon": "https://n.bytvi.com/dailymailuk.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "0e1e519da595ed736ab393841a10f2c5",
+        "link": "https://qconline.com/news/local/government-politics/article_46c75813-993c-5e6e-a9f3-cb86c270ed76.html",
+        "title": "Libertarians, independents file to appear on Nov. 3 Iowa ballot",
+        "description": "Iowa third-party candidates filed for the Nov. 3 ballot this week.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:00:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 04:04:19",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "qconline",
+        "source_name": "Dispatch Argus",
+        "source_priority": 58271,
+        "source_url": "https://qconline.com",
+        "source_icon": "https://n.bytvi.com/qconline.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": true
+      },
+      {
+        "article_id": "921574ef53d76e3e7aefd85add45da47",
+        "link": "https://ww2.kqed.org/news/2026/06/05/oaklands-measure-e-tax-in-trouble-threatening-a-push-to-boost-ailing-city-services/",
+        "title": "Oakland\u2019s Measure E Tax in Trouble, Threatening a Push to Boost Ailing City Services",
+        "description": "Mayor Barbara Lee hoped the parcel tax would bring in revenue to improve basic services like police, fire and street cleanliness. It continues to trail in the latest election results.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "featured-news",
+          "oakland",
+          "measure e",
+          "barbara lee",
+          "politics",
+          "election 2026"
+        ],
+        "creator": [
+          "katie debenedetti"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-05 23:56:53",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:14:05",
+        "image_url": "https://cdn.kqed.org/wp-content/uploads/sites/10/2026/01/260123-SIGNATUREKICKOFF00517_TV-KQED.jpg",
+        "video_url": null,
+        "source_id": "kqed_org",
+        "source_name": "Kqed",
+        "source_priority": 481643,
+        "source_url": "https://www.kqed.org",
+        "source_icon": "https://n.bytvi.com/kqed_org.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "crime": [
+      {
+        "article_id": "d2b198a10f23509b147f3322b8579395",
+        "link": "https://hoodline.com/2026/06/cops-say-newburgh-man-tried-to-buy-12-year-old-in-dauphin-county-sting/",
+        "title": "Cops Say Newburgh Man Tried To Buy 12-Year-Old in Dauphin County Sting",
+        "description": "Leonard Bakker, 53, is charged with 23 offenses after allegedly trying to buy a 12-year-old in a Dauphin County undercover operation; tip to Crimestoppers led to the arrest.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "crime & emergencies"
+        ],
+        "creator": [
+          "michael taylor"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "crime"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:57:48",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 01:04:39",
+        "image_url": "https://img.hoodline.com/2026/6/cops-say-newburgh-man-tried-to-buy-12-year-old-in-dauphin-county-sting-5.webp",
+        "video_url": null,
+        "source_id": "hoodline",
+        "source_name": "Hoodline",
+        "source_priority": 18806,
+        "source_url": "https://hoodline.com",
+        "source_icon": "https://n.bytvi.com/hoodline.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "89ceb8888eda67bde8cd9cfcfac6b593",
+        "link": "https://tbrnewsmedia.com/suffolk-county-d-a-huntington-station-man-indicted-for-unlawfully-possesing-illegal-firearms/",
+        "title": "Suffolk County D.A.: Huntington Station man indicted for unlawfully possesing illegal firearms",
+        "description": "Suffolk County District Attorney Raymond A. Tierney announced on June 5 that Matthew Hibner, 36, of Huntington Station, was indicted for Criminal Possession of a Weapon in the Second Degree and other related charges, for allegedly possessing multiple illegal firearms without a proper license or permit to possess. \u201cIt is alleged that this defendant possessed firearms and magazines that are illegal under New York law, including firearms that had no serial numbers,\u201d said District Attorney Tierney. \u201cResponsible gun ownership is paramount to ensuring safety within our community, and we thank our law enforcement partners for their swift response in this case.\u201d According to the investigation, on May 14, 2026, pursuant to a lawful search of Hibner\u2019s residence, law enforcement recovered four loaded illegal rifles, a Tramps Terror revolver, and two illegal ammunition magazines. Law enforcement also recovered materials used in firearm manufacturing, including gun tools, four pistol kits with instructions for assembling, unserialized lower and upper receivers, as well as all the tools and parts needed to assemble additional firearms. Two of the four seized rifles and numerous lower and upper receivers that were seized allegedly do not have serial numbers or the name of a manufacturer as required by law. Two of the ammunition magazines recovered are allegedly \u201clarge capacity\u201d under New York law, meaning they can hold more than 10 rounds of ammunition. The Suffolk County Crime Laboratory tested all the firearms and found them to be operable. Hibner allegedly does not have a permit, license, or any other legal authority to possess the weapons that were seized. On June 4, 2026, Matthew Hibner was arraigned on the indictment before Supreme Court Justice Philip Goglas for the following charges: \uf0b7 Five counts of Criminal Possession of a Weapon in the Second Degree, Class C violent felonies; and \uf0b7 Three counts of Criminal Possession of a Weapon in the Third Degree, Class D violent felonies. Justice Goglas ordered Hibner remanded during the pendency of the case. Hibner is due back in court on July 9, 2026, and faces up to 15 years in prison if convicted of the top count. He is being represented by The Legal Aid Society. This case is being prosecuted by Assistant District Attorney Jacob Kubetz of the Narcotics Bureau.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "matthew hibner",
+          "illegal firearms possession"
+        ],
+        "creator": [
+          "heidi sutton"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:50:53",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:51:51",
+        "image_url": "https://tbrnewsmedia.com/wp-content/uploads/2026/06/0-3.jpeg",
+        "video_url": null,
+        "source_id": "tbrnewsmedia",
+        "source_name": "Tbrnewsmedia",
+        "source_priority": 5007876,
+        "source_url": "https://tbrnewsmedia.com",
+        "source_icon": "https://n.bytvi.com/tbrnewsmedia.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "0d828c9d6f00a27a1935ed661c48eafb",
+        "link": "https://collider.com/hulu-true-crime-miniseries-mystery-under-the-bridge/",
+        "title": "Hulu\u2019s 8-Part True Crime Miniseries Is So Good, You'll Wish You Found It Sooner",
+        "description": "Hulu's Under the Bridge delves into a tragic murder, exploring the devastating consequences of bullying and the lack of support systems for victims.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "liam gaughan"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "entertainment",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:39:14",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 01:01:44",
+        "image_url": "https://static0.colliderimages.com/wordpress/wp-content/uploads/2025/09/under-the-bridge-episode-7-lily-gladstone-still.jpg?w=1600&h=900&fit=crop",
+        "video_url": null,
+        "source_id": "collider",
+        "source_name": "Collider",
+        "source_priority": 6329,
+        "source_url": "https://collider.com",
+        "source_icon": "https://n.bytvi.com/collider.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "d994fc1237e7141c2e10e663d549685f",
+        "link": "https://www.latestly.com/agency-news/world-news-pakistan-karachi-court-remands-man-for-killing-wife-over-domestic-dispute-7461172.html",
+        "title": "World News | Pakistan: Karachi Court Remands Man for Killing Wife over Domestic Dispute",
+        "description": "Get latest articles and stories on World at LatestLY. A Karachi court remanded a man accused of murdering his wife by hitting her with an iron rod to police custody for two days, according to Geo News.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "ani"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:34:15",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:36:25",
+        "image_url": "https://st1.latestly.com/wp-content/uploads/2026/06/ANI-20260605220514.jpeg",
+        "video_url": null,
+        "source_id": "latestly",
+        "source_name": "Latestly",
+        "source_priority": 31923,
+        "source_url": "https://www.latestly.com",
+        "source_icon": "https://n.bytvi.com/latestly.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "04576e061122dc683c9f55e13e8a529d",
+        "link": "https://www.1news.co.nz/2026/06/06/man-jailed-for-rape-after-one-of-uks-worst-miscarriages-of-justice/",
+        "title": "Man jailed for rape after one of UK's worst miscarriages of justice",
+        "description": "A father of six was sentenced Friday to 21 years in prison for a rape that occurred 23 years ago, for which another man had been wrongly convicted.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "crime and justice",
+          "uk and europe"
+        ],
+        "creator": [
+          "1 news"
+        ],
+        "language": "english",
+        "country": [
+          "new zealand"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:32:45",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:39:39",
+        "image_url": "https://www.1news.co.nz/resizer/v2/PVILFWXMA5H2PIWXE7QV22G22I.jpg?auth=2177ea7c86183dc8ec0183395f08453bcbdf7838cafbafb7c007829081e699df&smart=true&width=3500&height=1969",
+        "video_url": null,
+        "source_id": "onenews_co_nz",
+        "source_name": "1news",
+        "source_priority": 136874,
+        "source_url": "https://www.1news.co.nz",
+        "source_icon": "https://n.bytvi.com/onenews_co_nz.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "5be0b226a0c8a6bee7ff9f8bf2b8df7b",
+        "link": "https://www.staradvertiser.com/2026/06/05/breaking-news/police-seek-publics-help-to-find-hanapepe-man-tied-to-hospital-gunshot-case/",
+        "title": "Police seek public\u2019s help to find Hanapepe man tied to hospital gunshot case",
+        "description": "The Kauai Police Department is asking for the public\u2019s help in finding a 45-year-old man who is a person of interest in a criminal investigation.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "star-advertiser staff"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "crime",
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:30:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:41:40",
+        "image_url": "https://www.staradvertiser.com/wp-content/uploads/2026/06/web1_Bagain.jpg",
+        "video_url": null,
+        "source_id": "staradvertiser",
+        "source_name": "Hawaii News",
+        "source_priority": 257147,
+        "source_url": "https://www.staradvertiser.com",
+        "source_icon": "https://n.bytvi.com/staradvertiser.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "e76b6ba6871fd101efaf5a9ebbfeda30",
+        "link": "https://www.app.com/story/news/local/courts/2026/06/05/barnegat-nj-man-sentenced-to-30-years-for-murdering-his-parents/90428303007/",
+        "title": "Barnegat man sentenced to 30 years for murdering his parents",
+        "description": "On March 11, Michael Mulgrew, 37, pleaded guilty to two counts of murder in connection with the deaths of Eugene Mulgrew, 71, and Cheryl Mulgrew, 69.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "asbury park press"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:27:12",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:38:30",
+        "image_url": "https://www.gannett-cdn.com/authoring/authoring-images/2023/11/27/PAPP/71722112007-mulgrewdetention-1127-b.jpg?auto=webp&crop=2399,1349,x0,y0&format=pjpg&width=1200",
+        "video_url": null,
+        "source_id": "app",
+        "source_name": "Asbury Park Press",
+        "source_priority": 109595,
+        "source_url": "https://www.app.com",
+        "source_icon": "https://n.bytvi.com/app.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "17d115d913818592ebf81c3c69923061",
+        "link": "https://www.tribuneindia.com/news/delhi/cops-probe-friendly-entry-angle-in-du-profs-murder",
+        "title": "Cops probe \u2018friendly entry\u2019 angle in DU prof\u2019s murder",
+        "description": "Investigators probing the murder of a Delhi University professor, who was found dead at her apartment in Vasundhara Enclave, suspect it could be a case of \u201cfriendly entry\u201d, officials said. A police officer said initial investigation suggests that the victim, Devosmita Paul, could have been killed by a close associate as clear signs of robbery [...]",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "delhicrime",
+          "#academicmurder",
+          "#duprofessormurder",
+          "#friendlyentry",
+          "#vasundharaenclave",
+          "#devosmitapaul",
+          "#shivajicollege",
+          "murderinvestigation"
+        ],
+        "creator": [
+          "rahul gahlawat"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:16:04",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:38:43",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "tribuneindia",
+        "source_name": "The Tribune India",
+        "source_priority": 115825,
+        "source_url": "https://www.tribuneindia.com",
+        "source_icon": "https://n.bytvi.com/tribuneindia.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "top_stories": [
+      {
+        "article_id": "376ee80d3852cbe8fb25c07bfb8e8a40",
+        "link": "https://www.crescent-news.com/opinion/opinion_columnists/star-parker---a-message-that-must-be-delivered-to-voters/article_44a1cc1e-e3f5-4b59-ab20-53f5f0280da3.html",
+        "title": "Star Parker - A message that must be delivered to voters",
+        "description": null,
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "government and personhood",
+          "palestine (region)",
+          "florida",
+          "pregnancy with abortive outcome",
+          "government debt",
+          "economy",
+          "christian theology",
+          "gavin newsom",
+          "great society",
+          "social psychology",
+          "donald trump controversies",
+          "gross domestic product",
+          "anti-judaism",
+          "government of israel",
+          "voter identification laws in the united states",
+          "republican party (united states)",
+          "medical ethics",
+          "foreign worker",
+          "first presidency of donald trump",
+          "deficit spending"
+        ],
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "other"
+        ],
+        "datatype": "opinion",
+        "pubDate": "2026-06-06 01:00:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 01:14:59",
+        "image_url": "https://bloximages.newyork1.vip.townnews.com/crescent-news.com/content/tncms/assets/v3/editorial/4/d8/4d8068de-baa9-5e2b-b4d9-361e7cb6518a/5f0fedd2ee869.image.jpg?crop=200%2C200%2C0%2C75",
+        "video_url": null,
+        "source_id": "crescentnews",
+        "source_name": "Crescent-news",
+        "source_priority": 529263,
+        "source_url": "https://www.crescent-news.com",
+        "source_icon": "https://n.bytvi.com/crescentnews.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "99f1372c6960777b32c26aba0e57551d",
+        "link": "https://www.crescent-news.com/opinion/opinion_columnists/cal-thomas---will-this-be-the-unhappy-american-birthday/article_7813c494-c4de-4120-b041-56ddc7bebf11.html",
+        "title": "Cal Thomas - Will this be the unhappy American birthday?",
+        "description": "In one month, the United States will observe its 250th birthday. It is shaping up more like a memorial service for a lost loved one than a party to celebrate something special. Rather than anticipating a happy occasion, America at...",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "united states congress",
+          "law and order (politics)",
+          "presidencies",
+          "texas v. johnson",
+          "alan shepard",
+          "space programs",
+          "medicinal chemistry",
+          "government of iran",
+          "edmundo gonz\u00e1lez",
+          "war",
+          "gender equality",
+          "judaism and warfare",
+          "spacecraft",
+          "lgbtq rights",
+          "gaza war",
+          "christianity",
+          "first families of the united states",
+          "apollo 13",
+          "budget",
+          "william f. buckley jr."
+        ],
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics"
+        ],
+        "datatype": "opinion",
+        "pubDate": "2026-06-06 01:00:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 01:14:59",
+        "image_url": "https://bloximages.newyork1.vip.townnews.com/crescent-news.com/content/tncms/assets/v3/editorial/2/ec/2ec715ed-78bd-5f85-95ef-e565da83f889/5a733e709baa7.image.jpg?crop=200%2C200%2C0%2C75",
+        "video_url": null,
+        "source_id": "crescentnews",
+        "source_name": "Crescent-news",
+        "source_priority": 529263,
+        "source_url": "https://www.crescent-news.com",
+        "source_icon": "https://n.bytvi.com/crescentnews.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": true
+      },
+      {
+        "article_id": "53ec225d1c3f8c1dc2bec42bd71f4420",
+        "link": "https://www.crescent-news.com/opinion/opinion_columnists/jacob-sullum---president-tramples-rule-of-law-to-glorify-himself/article_fd8c2df2-4b4b-4c8b-9ee1-43eebe59d73b.html",
+        "title": "Jacob Sullum - President tramples rule of law to glorify himself",
+        "description": "President Donald Trump has a long history of naming things after himself, including Trump Tower, the Trump National Golf Club, the Trump Taj Mahal casino, Trump University, Trump Steaks, Trump Vodka and Trump: The Game. But as he discovered last...",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "james comey",
+          "united states congress",
+          "economy",
+          "sedition",
+          "tobacco smoking",
+          "social aspects of psychoactive drugs",
+          "barack obama",
+          "donald trump controversies",
+          "richard j. leon",
+          "republican party (united states)",
+          "first presidency of donald trump",
+          "substance abuse",
+          "ted cruz",
+          "cannabis (drug)",
+          "presidency of the united states",
+          "economies",
+          "freedom of speech",
+          "news",
+          "electronic cigarette",
+          "american civil liberties union"
+        ],
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "lifestyle"
+        ],
+        "datatype": "opinion",
+        "pubDate": "2026-06-06 01:00:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 01:14:59",
+        "image_url": "https://bloximages.newyork1.vip.townnews.com/crescent-news.com/content/tncms/assets/v3/editorial/8/49/849ed10a-3da2-11ed-848d-b3d50e4619a0/6331aef0d7eb9.image.jpg",
+        "video_url": null,
+        "source_id": "crescentnews",
+        "source_name": "Crescent-news",
+        "source_priority": 529263,
+        "source_url": "https://www.crescent-news.com",
+        "source_icon": "https://n.bytvi.com/crescentnews.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "e35194e78e5f8c57ddebd0008fea3298",
+        "link": "https://www.oann.com/commentary/a-seismic-third-world-revolution-thats-benefiting-the-u-s-and-israel/",
+        "title": "A Seismic Third World Revolution That\u2019s Benefiting the U.S. and Israel",
+        "description": "By Richard Pollock June 5, 2026 (Views expressed by guest commentators may not reflect the views of OAN or its affiliates.)",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics"
+        ],
+        "datatype": "opinion",
+        "pubDate": "2026-06-06 00:36:13",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:43:38",
+        "image_url": "https://www.oann.com/wp-content/uploads/2026/06/GettyImages-2243211415-scaled-e1780706369399.jpg",
+        "video_url": null,
+        "source_id": "oann",
+        "source_name": "One America News Network",
+        "source_priority": 535979,
+        "source_url": "https://www.oann.com",
+        "source_icon": null,
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": true
+      },
+      {
+        "article_id": "8bcf57bfbc0d7bc7f1fa67dfc87b4f7a",
+        "link": "https://www.theatlantic.com/newsletters/2026/06/jg-rioter-pentagon-role-clearance/687460/",
+        "title": "The J6 Rioter Now Working at the Pentagon",
+        "description": "His hiring is part of a dangerous trend in the Trump administration.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "newsletters"
+        ],
+        "creator": [
+          "will gottsegen"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:01:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:04:35",
+        "image_url": "https://cdn.theatlantic.com/thumbor/5PLRAaLZ8rleMper_aYZZACDD7g=/media/newsletters/2026/06/2026_6_5_The_Daily/original.jpg",
+        "video_url": null,
+        "source_id": "theatlantic",
+        "source_name": "The Atlantic",
+        "source_priority": 23494,
+        "source_url": "https://www.theatlantic.com",
+        "source_icon": "https://n.bytvi.com/theatlantic.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "ef199484adaa16025a33b360eed859ed",
+        "link": "https://www.nbcnews.com/politics/2026-election/democrat-xavier-becerra-advances-california-governors-race-rcna347480",
+        "title": "Democrat Xavier Becerra advances to general election in California governor\u2019s race",
+        "description": "Former Health and Human Services Secretary Xavier Becerra has advanced to the general election in the California governor\u2019s race, NBC News projects",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "news"
+        ],
+        "creator": [
+          "adam edelman"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-05 23:47:58",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:01:12",
+        "image_url": "https://media-cldnry.s-nbcnews.com/image/upload/t_fit_1500w/rockcms/2026-04/260421-xavier-becerra-vsb-1746-c076d7.jpg",
+        "video_url": null,
+        "source_id": "nbcnews",
+        "source_name": "Nbc News",
+        "source_priority": 175,
+        "source_url": "https://www.nbcnews.com",
+        "source_icon": "https://n.bytvi.com/nbcnews.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "cd258c36e65f2f9d96c36108b6271f6b",
+        "link": "https://www.winnipegfreepress.com/world/2026/06/05/trump-keeps-the-door-open-to-a-call-with-taiwans-president-even-though-china-has-warned-against-it",
+        "title": "Trump keeps the door open to a call with Taiwan\u2019s president even though China has warned against it",
+        "description": "ABOARD AIR FORCE ONE (AP) \u2014 President Donald Trump on Friday indicated that he may still speak with Taiwan\u2019s President Lai Ching-te \u2014 even after China has publicly urged him not to directly engage with the leader of the self-ruled island that Beijing claims as its own.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "world"
+        ],
+        "creator": [
+          "the associated press",
+          "aamer madhani and michelle l. price"
+        ],
+        "language": "english",
+        "country": [
+          "canada"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-05 23:10:52",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-05 23:38:23",
+        "image_url": "https://www.winnipegfreepress.com/wp-content/uploads/sites/2/2026/05/6a2357745d5ddb8bb3f8f107jpeg.jpg?w=1600",
+        "video_url": null,
+        "source_id": "winnipegfreepress",
+        "source_name": "Winnipeg Free Press",
+        "source_priority": 101538,
+        "source_url": "https://www.winnipegfreepress.com",
+        "source_icon": "https://n.bytvi.com/winnipegfreepress.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": true
+      },
+      {
+        "article_id": "6a2cc19b6835d3545e1165b3b68c2818",
+        "link": "https://newspub.live/west/alaska/best-solution-to-alaskas-pfd-gorilla-is-to-end-the-program-with-10k-payout-walker-argues/",
+        "title": "Best solution to Alaska\u2019s PFD \u2018gorilla\u2019 is to end the program with $10K payout, Walker argues",
+        "description": "Former Gov. Bill Walker, running to again be Alaska\u2019s top elected official, would like to end the Permanent Fund dividend program with a one-time $10,000 payment to each eligible Alaskan. \u201cWe are in this to solve significant issues,\u201d Walker said in a phone interview Friday. \u201cBusiness as usual just isn\u2019t going to work.\u201d Alaska has [...] The post Best solution to Alaska\u2019s PFD \u2018gorilla\u2019 is to end the program with $10K payout, Walker argues appeared first on News Pub . The post Best solution to Alaska\u2019s PFD \u2018gorilla\u2019 is to end the program with $10K payout, Walker argues appeared first on News Pub .",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "featured"
+        ],
+        "creator": [
+          "press room"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-05 23:00:05",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-05 23:21:28",
+        "image_url": "https://npr.brightspotcdn.com/dims4/default/615ca39/2147483647/strip/true/crop/1920x1008+0+36/resize/1200x630!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fwp-content%2Fuploads%2F2022%2F10%2FBill-Walker.jpg",
+        "video_url": null,
+        "source_id": "newspub_live",
+        "source_name": "News Pub",
+        "source_priority": 3777689,
+        "source_url": "https://newspub.live",
+        "source_icon": "https://n.bytvi.com/newspub_live.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ]
   },
-  "last_updated": "June 06, 2026 at 01:04 PM UTC"
+  "both_sides_now": {
+    "left_perspective": [
+      {
+        "article_id": "1e3b45509cae39c65d49e1ea372563b1",
+        "link": "https://www.bbc.com/news/articles/cy72r328preo",
+        "title": "Biden cabinet secretary advances in California governor race",
+        "description": "Ballots are still being counted in the largest US state to confirm who will run against the former Biden cabinet secretary in November.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "sareen habeshian"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 01:01:50",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 01:03:27",
+        "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/f70d/live/bba7db50-613f-11f1-aaf6-99c8c6629249.jpg",
+        "video_url": null,
+        "source_id": "bbc",
+        "source_name": "The Bbc",
+        "source_priority": 1781,
+        "source_url": "http://www.bbc.com",
+        "source_icon": "https://n.bytvi.com/bbc.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "bb799d027719ef40cba5606e3750445f",
+        "link": "https://ww2.kqed.org/news/2026/06/05/becerra-advances-in-california-governor-race-as-hilton-steyer-battle-for-second-spot/",
+        "title": "Becerra Advances in California Governor Race as Hilton, Steyer Battle for Second Spot",
+        "description": "Democrat Xavier Becerra surged to the top in the millions of votes counted after Election Day, making a remarkable political comeback after trailing in much of the primary campaign.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "governor 2026",
+          "featured-news",
+          "california",
+          "xavier becerra",
+          "2026 governors race",
+          "politics",
+          "featured-politics",
+          "election 2026"
+        ],
+        "creator": [
+          "guy marzorati"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:30:55",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:43:27",
+        "image_url": "https://cdn.kqed.org/wp-content/uploads/sites/10/2026/06/Xavier-Becerra-Getty.jpg",
+        "video_url": null,
+        "source_id": "kqed_org",
+        "source_name": "Kqed",
+        "source_priority": 481643,
+        "source_url": "https://www.kqed.org",
+        "source_icon": "https://n.bytvi.com/kqed_org.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "89ceb8888eda67bde8cd9cfcfac6b593",
+        "link": "https://tbrnewsmedia.com/suffolk-county-d-a-huntington-station-man-indicted-for-unlawfully-possesing-illegal-firearms/",
+        "title": "Suffolk County D.A.: Huntington Station man indicted for unlawfully possesing illegal firearms",
+        "description": "Suffolk County District Attorney Raymond A. Tierney announced on June 5 that Matthew Hibner, 36, of Huntington Station, was indicted for Criminal Possession of a Weapon in the Second Degree and other related charges, for allegedly possessing multiple illegal firearms without a proper license or permit to possess. \u201cIt is alleged that this defendant possessed firearms and magazines that are illegal under New York law, including firearms that had no serial numbers,\u201d said District Attorney Tierney. \u201cResponsible gun ownership is paramount to ensuring safety within our community, and we thank our law enforcement partners for their swift response in this case.\u201d According to the investigation, on May 14, 2026, pursuant to a lawful search of Hibner\u2019s residence, law enforcement recovered four loaded illegal rifles, a Tramps Terror revolver, and two illegal ammunition magazines. Law enforcement also recovered materials used in firearm manufacturing, including gun tools, four pistol kits with instructions for assembling, unserialized lower and upper receivers, as well as all the tools and parts needed to assemble additional firearms. Two of the four seized rifles and numerous lower and upper receivers that were seized allegedly do not have serial numbers or the name of a manufacturer as required by law. Two of the ammunition magazines recovered are allegedly \u201clarge capacity\u201d under New York law, meaning they can hold more than 10 rounds of ammunition. The Suffolk County Crime Laboratory tested all the firearms and found them to be operable. Hibner allegedly does not have a permit, license, or any other legal authority to possess the weapons that were seized. On June 4, 2026, Matthew Hibner was arraigned on the indictment before Supreme Court Justice Philip Goglas for the following charges: \uf0b7 Five counts of Criminal Possession of a Weapon in the Second Degree, Class C violent felonies; and \uf0b7 Three counts of Criminal Possession of a Weapon in the Third Degree, Class D violent felonies. Justice Goglas ordered Hibner remanded during the pendency of the case. Hibner is due back in court on July 9, 2026, and faces up to 15 years in prison if convicted of the top count. He is being represented by The Legal Aid Society. This case is being prosecuted by Assistant District Attorney Jacob Kubetz of the Narcotics Bureau.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "matthew hibner",
+          "illegal firearms possession"
+        ],
+        "creator": [
+          "heidi sutton"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:50:53",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:51:51",
+        "image_url": "https://tbrnewsmedia.com/wp-content/uploads/2026/06/0-3.jpeg",
+        "video_url": null,
+        "source_id": "tbrnewsmedia",
+        "source_name": "Tbrnewsmedia",
+        "source_priority": 5007876,
+        "source_url": "https://tbrnewsmedia.com",
+        "source_icon": "https://n.bytvi.com/tbrnewsmedia.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "04576e061122dc683c9f55e13e8a529d",
+        "link": "https://www.1news.co.nz/2026/06/06/man-jailed-for-rape-after-one-of-uks-worst-miscarriages-of-justice/",
+        "title": "Man jailed for rape after one of UK's worst miscarriages of justice",
+        "description": "A father of six was sentenced Friday to 21 years in prison for a rape that occurred 23 years ago, for which another man had been wrongly convicted.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "crime and justice",
+          "uk and europe"
+        ],
+        "creator": [
+          "1 news"
+        ],
+        "language": "english",
+        "country": [
+          "new zealand"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:32:45",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:39:39",
+        "image_url": "https://www.1news.co.nz/resizer/v2/PVILFWXMA5H2PIWXE7QV22G22I.jpg?auth=2177ea7c86183dc8ec0183395f08453bcbdf7838cafbafb7c007829081e699df&smart=true&width=3500&height=1969",
+        "video_url": null,
+        "source_id": "onenews_co_nz",
+        "source_name": "1news",
+        "source_priority": 136874,
+        "source_url": "https://www.1news.co.nz",
+        "source_icon": "https://n.bytvi.com/onenews_co_nz.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "ef199484adaa16025a33b360eed859ed",
+        "link": "https://www.nbcnews.com/politics/2026-election/democrat-xavier-becerra-advances-california-governors-race-rcna347480",
+        "title": "Democrat Xavier Becerra advances to general election in California governor\u2019s race",
+        "description": "Former Health and Human Services Secretary Xavier Becerra has advanced to the general election in the California governor\u2019s race, NBC News projects",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "news"
+        ],
+        "creator": [
+          "adam edelman"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-05 23:47:58",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:01:12",
+        "image_url": "https://media-cldnry.s-nbcnews.com/image/upload/t_fit_1500w/rockcms/2026-04/260421-xavier-becerra-vsb-1746-c076d7.jpg",
+        "video_url": null,
+        "source_id": "nbcnews",
+        "source_name": "Nbc News",
+        "source_priority": 175,
+        "source_url": "https://www.nbcnews.com",
+        "source_icon": "https://n.bytvi.com/nbcnews.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "right_perspective": [
+      {
+        "article_id": "53ec225d1c3f8c1dc2bec42bd71f4420",
+        "link": "https://www.crescent-news.com/opinion/opinion_columnists/jacob-sullum---president-tramples-rule-of-law-to-glorify-himself/article_fd8c2df2-4b4b-4c8b-9ee1-43eebe59d73b.html",
+        "title": "Jacob Sullum - President tramples rule of law to glorify himself",
+        "description": "President Donald Trump has a long history of naming things after himself, including Trump Tower, the Trump National Golf Club, the Trump Taj Mahal casino, Trump University, Trump Steaks, Trump Vodka and Trump: The Game. But as he discovered last...",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "james comey",
+          "united states congress",
+          "economy",
+          "sedition",
+          "tobacco smoking",
+          "social aspects of psychoactive drugs",
+          "barack obama",
+          "donald trump controversies",
+          "richard j. leon",
+          "republican party (united states)",
+          "first presidency of donald trump",
+          "substance abuse",
+          "ted cruz",
+          "cannabis (drug)",
+          "presidency of the united states",
+          "economies",
+          "freedom of speech",
+          "news",
+          "electronic cigarette",
+          "american civil liberties union"
+        ],
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "lifestyle"
+        ],
+        "datatype": "opinion",
+        "pubDate": "2026-06-06 01:00:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 01:14:59",
+        "image_url": "https://bloximages.newyork1.vip.townnews.com/crescent-news.com/content/tncms/assets/v3/editorial/8/49/849ed10a-3da2-11ed-848d-b3d50e4619a0/6331aef0d7eb9.image.jpg",
+        "video_url": null,
+        "source_id": "crescentnews",
+        "source_name": "Crescent-news",
+        "source_priority": 529263,
+        "source_url": "https://www.crescent-news.com",
+        "source_icon": "https://n.bytvi.com/crescentnews.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "8bcf57bfbc0d7bc7f1fa67dfc87b4f7a",
+        "link": "https://www.theatlantic.com/newsletters/2026/06/jg-rioter-pentagon-role-clearance/687460/",
+        "title": "The J6 Rioter Now Working at the Pentagon",
+        "description": "His hiring is part of a dangerous trend in the Trump administration.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "newsletters"
+        ],
+        "creator": [
+          "will gottsegen"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-06 00:01:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-06 00:04:35",
+        "image_url": "https://cdn.theatlantic.com/thumbor/5PLRAaLZ8rleMper_aYZZACDD7g=/media/newsletters/2026/06/2026_6_5_The_Daily/original.jpg",
+        "video_url": null,
+        "source_id": "theatlantic",
+        "source_name": "The Atlantic",
+        "source_priority": 23494,
+        "source_url": "https://www.theatlantic.com",
+        "source_icon": "https://n.bytvi.com/theatlantic.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "cd258c36e65f2f9d96c36108b6271f6b",
+        "link": "https://www.winnipegfreepress.com/world/2026/06/05/trump-keeps-the-door-open-to-a-call-with-taiwans-president-even-though-china-has-warned-against-it",
+        "title": "Trump keeps the door open to a call with Taiwan\u2019s president even though China has warned against it",
+        "description": "ABOARD AIR FORCE ONE (AP) \u2014 President Donald Trump on Friday indicated that he may still speak with Taiwan\u2019s President Lai Ching-te \u2014 even after China has publicly urged him not to directly engage with the leader of the self-ruled island that Beijing claims as its own.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "world"
+        ],
+        "creator": [
+          "the associated press",
+          "aamer madhani and michelle l. price"
+        ],
+        "language": "english",
+        "country": [
+          "canada"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-06-05 23:10:52",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-06-05 23:38:23",
+        "image_url": "https://www.winnipegfreepress.com/wp-content/uploads/sites/2/2026/05/6a2357745d5ddb8bb3f8f107jpeg.jpg?w=1600",
+        "video_url": null,
+        "source_id": "winnipegfreepress",
+        "source_name": "Winnipeg Free Press",
+        "source_priority": 101538,
+        "source_url": "https://www.winnipegfreepress.com",
+        "source_icon": "https://n.bytvi.com/winnipegfreepress.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": true
+      }
+    ]
+  },
+  "last_updated": "June 06, 2026 13:04 UTC"
 }
