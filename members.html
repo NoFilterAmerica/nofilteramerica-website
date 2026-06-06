@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Access | No Filter America</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0d1b2a; font-family: 'Open Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+.card { background: #fff; max-width: 480px; width: 100%; border-top: 5px solid #cc0000; padding: 40px 32px; text-align: center; }
+.logo { height: 80px; margin-bottom: 16px; }
+.site-name { font-family: 'Oswald', sans-serif; font-size: 22px; letter-spacing: 3px; color: #0d1b2a; margin-bottom: 4px; }
+.tagline { font-size: 11px; color: #888; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; }
+#status-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+#status-title { font-family: 'Oswald', sans-serif; font-size: 22px; color: #0d1b2a; margin-bottom: 10px; }
+#status-msg { font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 24px; }
+.btn { display: inline-block; background: #cc0000; color: #fff; text-decoration: none; padding: 14px 32px; font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 1px; margin: 6px 4px; cursor: pointer; border: none; }
+.btn-gold { background: #c5a459; color: #0d1b2a; }
+.btn-outline { background: transparent; color: #0d1b2a; border: 2px solid #0d1b2a; }
+.divider { border: none; border-top: 1px solid #eee; margin: 24px 0; }
+.member-info { background: #f8f8f8; border-left: 4px solid #c5a459; padding: 12px 16px; text-align: left; margin-bottom: 20px; font-size: 12px; color: #333; line-height: 1.8; }
+.member-info strong { color: #0d1b2a; }
+.links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.link-card { background: #0d1b2a; color: #fff; text-decoration: none; padding: 16px 12px; font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 1px; text-align: center; border-bottom: 3px solid #c5a459; transition: background 0.2s; }
+.link-card:hover { background: #1a2d42; }
+.link-card span { display: block; font-size: 22px; margin-bottom: 6px; }
+.spinner { border: 3px solid #eee; border-top: 3px solid #cc0000; border-radius: 50%; width: 36px; height: 36px; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+footer { margin-top: 20px; font-size: 11px; color: #555; }
+footer a { color: #c5a459; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <img src="https://media.base44.com/images/public/6a0717be1b2d3fb43fda6201/4099c079c_NoFilterAmericaLogoWithoutBackground.png" class="logo" alt="No Filter America">
+  <div class="site-name">NO FILTER AMERICA</div>
+  <div class="tagline">Truth · Freedom · Accountability</div>
+
+  <div id="content">
+    <div class="spinner"></div>
+    <div id="status-title">Verifying your membership…</div>
+  </div>
+</div>
+
+<footer>
+  <a href="https://nofilteramerica.com">← Back to nofilteramerica.com</a>
+</footer>
+
+<script>
+const VERIFY_URL = "https://api.base44.com/api/functions/6a0717be1b2d3fb43fda6201/verifyToken";
+
+function getParam(name) {
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+function setCookie(name, value, days) {
+  const d = new Date();
+  d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/;SameSite=Lax`;
+}
+
+function getCookie(name) {
+  const v = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
+  return v ? v.pop() : null;
+}
+
+function showSuccess(name, email) {
+  document.getElementById("content").innerHTML = `
+    <span id="status-icon">✅</span>
+    <div id="status-title">Welcome back, ${name}!</div>
+    <div id="status-msg">Your membership is active. Choose where to go:</div>
+    <div class="member-info">
+      <strong>Logged in as:</strong> ${email}<br>
+      <strong>Access:</strong> Full member — all content unlocked
+    </div>
+    <div class="links-grid">
+      <a href="investigations.html" class="link-card"><span>🔍</span>Investigations</a>
+      <a href="no-filter-zone.html" class="link-card"><span>📺</span>No-Filter Zone</a>
+      <a href="true-crime.html" class="link-card"><span>🔴</span>True Crime</a>
+      <a href="index.html" class="link-card"><span>📰</span>Daily News</a>
+    </div>
+    <hr class="divider">
+    <a href="index.html" class="btn btn-outline" style="font-family:'Oswald',sans-serif;font-size:13px;">← Back to Homepage</a>
+  `;
+}
+
+function showInvalid(reason) {
+  document.getElementById("content").innerHTML = `
+    <span id="status-icon">🔒</span>
+    <div id="status-title">Access Required</div>
+    <div id="status-msg">${reason || "Your link has expired or is invalid. Subscribe below to get a new access link."}</div>
+    <a href="https://form.jotform.com/261566870518062" class="btn">Subscribe — $9.99/month</a>
+    <hr class="divider">
+    <div style="font-size:12px;color:#888;">Already a member? <a href="mailto:news@nofilteramerica.com" style="color:#cc0000;">Email us</a> and we'll resend your link.</div>
+  `;
+}
+
+async function verify() {
+  const token = getParam("token") || getCookie("nfa_token");
+
+  if (!token) {
+    showInvalid("No access token found. Please use the link from your welcome email.");
+    return;
+  }
+
+  try {
+    const res = await fetch(`${VERIFY_URL}?token=${encodeURIComponent(token)}`);
+    const data = await res.json();
+
+    if (data.valid) {
+      // Store token in cookie for 30 days
+      setCookie("nfa_token", token, 30);
+      showSuccess(data.name, data.email);
+    } else {
+      const msgs = {
+        "Expired": "Your subscription has expired. Renew to regain access.",
+        "Inactive": "Your subscription is currently inactive. Please contact us.",
+        "Not found": "This access link is not valid. Please use the link from your welcome email.",
+      };
+      showInvalid(msgs[data.reason] || data.reason);
+    }
+  } catch (e) {
+    showInvalid("Could not verify your membership. Please try again or contact news@nofilteramerica.com.");
+  }
+}
+
+verify();
+</script>
+</body>
+</html>
