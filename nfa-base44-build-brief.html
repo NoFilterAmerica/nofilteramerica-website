@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NFA App Build Brief — Base44</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #07101e; color: #fff; padding: 40px 24px; }
+.container { max-width: 900px; margin: 0 auto; }
+
+/* HEADER */
+.doc-header { text-align: center; border-bottom: 4px solid #c9a84c; padding-bottom: 32px; margin-bottom: 40px; }
+.doc-header img { height: 80px; margin-bottom: 16px; filter: drop-shadow(0 0 20px rgba(201,168,76,0.5)); }
+.doc-header h1 { font-family: 'Oswald', sans-serif; font-size: 28px; letter-spacing: 4px; color: #c9a84c; margin-bottom: 6px; }
+.doc-header p { color: #666; font-size: 13px; }
+.doc-header .date { color: #c9a84c; font-size: 12px; margin-top: 8px; letter-spacing: 2px; font-family: 'Oswald', sans-serif; }
+
+/* SECTION */
+.section { margin-bottom: 40px; }
+.section-header { background: #cc0000; padding: 12px 20px; margin-bottom: 0; display: flex; align-items: center; gap: 12px; }
+.section-header h2 { font-family: 'Oswald', sans-serif; font-size: 16px; letter-spacing: 3px; color: #fff; }
+.section-body { background: #0a1628; border: 1px solid rgba(201,168,76,0.2); border-top: none; padding: 24px; }
+
+/* CHANGE REQUEST */
+.change { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.change:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.change-label { display: inline-block; background: rgba(204,0,0,0.2); border: 1px solid #cc0000; color: #ff6666; font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 2px; padding: 2px 10px; margin-bottom: 8px; text-transform: uppercase; }
+.change-label.new { background: rgba(201,168,76,0.15); border-color: #c9a84c; color: #c9a84c; }
+.change-label.fix { background: rgba(0,150,255,0.1); border-color: #0099ff; color: #66bbff; }
+.change h3 { font-family: 'Oswald', sans-serif; font-size: 15px; color: #fff; margin-bottom: 6px; }
+.change p { font-size: 13px; color: #aaa; line-height: 1.7; }
+.change ul { margin-top: 8px; padding-left: 18px; }
+.change ul li { font-size: 13px; color: #aaa; line-height: 1.8; }
+.change ul li strong { color: #fff; }
+
+/* DESIGN SPECS */
+.spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+.spec-card { background: #07101e; border: 1px solid rgba(201,168,76,0.2); padding: 16px; }
+.spec-card h4 { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; color: #c9a84c; margin-bottom: 10px; }
+.spec-card p, .spec-card li { font-size: 12px; color: #999; line-height: 1.8; }
+.spec-card ul { padding-left: 16px; }
+.color-swatch { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.swatch { width: 20px; height: 20px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
+.swatch-info { font-size: 12px; color: #999; }
+.swatch-info strong { color: #fff; }
+
+/* FEATURE SPEC */
+.feature-box { background: #07101e; border: 1px solid rgba(201,168,76,0.3); border-left: 4px solid #c9a84c; padding: 16px 20px; margin-top: 12px; }
+.feature-box h4 { font-family: 'Oswald', sans-serif; font-size: 13px; color: #c9a84c; letter-spacing: 1px; margin-bottom: 8px; }
+.feature-box ul { padding-left: 18px; }
+.feature-box ul li { font-size: 12px; color: #aaa; line-height: 1.9; }
+.feature-box ul li strong { color: #fff; }
+
+/* PRIORITY TAG */
+.priority { display: inline-block; font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 2px; padding: 2px 8px; margin-left: 8px; vertical-align: middle; }
+.priority.high { background: #cc0000; color: #fff; }
+.priority.medium { background: #c9a84c; color: #07101e; }
+
+/* REPO */
+.repo-box { background: #0a0a0a; border: 1px solid rgba(201,168,76,0.3); padding: 16px 20px; font-family: monospace; font-size: 13px; color: #c9a84c; margin-top: 8px; word-break: break-all; }
+
+/* FOOTER */
+.doc-footer { text-align: center; border-top: 1px solid rgba(201,168,76,0.2); padding-top: 24px; margin-top: 40px; color: #444; font-size: 11px; }
+.doc-footer strong { color: #c9a84c; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <img src="https://media.base44.com/images/public/6a0717be1b2d3fb43fda6201/4099c079c_NoFilterAmericaLogoWithoutBackground.png" alt="NFA Logo">
+    <h1>NO FILTER AMERICA — BASE44 BUILD BRIEF</h1>
+    <p>Complete specifications, change requests, and feature requirements</p>
+    <div class="date">VERSION 1.0 · JUNE 2026 · PREPARED FOR BASE44 APP BUILDER</div>
+  </div>
+
+  <!-- SECTION 0: SOURCE FILES -->
+  <div class="section">
+    <div class="section-header"><h2>📁 SOURCE FILES & GITHUB REPO</h2></div>
+    <div class="section-body">
+      <div class="change">
+        <p>All existing page code, CSS, images, and assets are in the GitHub repository below. Use this as the foundation for the build — do not start from scratch.</p>
+        <div class="repo-box">https://github.com/NoFilterAmerica/nofilteramerica-website</div>
+        <div class="feature-box" style="margin-top:12px;">
+          <h4>KEY FILES TO REFERENCE</h4>
+          <ul>
+            <li><strong>index.html</strong> — Homepage with Both Sides Now news feed</li>
+            <li><strong>investigations.html</strong> — NFA Investigations hub (Stone Creek Ranch HOA case)</li>
+            <li><strong>no-filter-zone.html</strong> — 3-slot video section</li>
+            <li><strong>true-crime.html</strong> — True Crime case files</li>
+            <li><strong>contact.html</strong> — Tip submission + contact form</li>
+            <li><strong>members.html</strong> — Subscriber paywall access page</li>
+            <li><strong>style.css</strong> — Full Dark Patriot theme styles</li>
+            <li><strong>investigation_scr.html</strong> — Stone Creek Ranch full investigation with all 8 exhibits</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: DESIGN SYSTEM -->
+  <div class="section">
+    <div class="section-header"><h2>🎨 DESIGN SYSTEM — DARK PATRIOT THEME</h2></div>
+    <div class="section-body">
+      <div class="spec-grid">
+        <div class="spec-card">
+          <h4>COLOR PALETTE</h4>
+          <div class="color-swatch"><div class="swatch" style="background:#07101e;"></div><div class="swatch-info"><strong>Navy (Primary BG)</strong> — #07101e</div></div>
+          <div class="color-swatch"><div class="swatch" style="background:#0a1628;"></div><div class="swatch-info"><strong>Navy 2 (Cards)</strong> — #0a1628</div></div>
+          <div class="color-swatch"><div class="swatch" style="background:#c9a84c;"></div><div class="swatch-info"><strong>Gold (Accent)</strong> — #c9a84c</div></div>
+          <div class="color-swatch"><div class="swatch" style="background:#cc0000;"></div><div class="swatch-info"><strong>Red (Breaking/Alert)</strong> — #cc0000</div></div>
+          <div class="color-swatch"><div class="swatch" style="background:#ffffff;"></div><div class="swatch-info"><strong>White (Body text)</strong> — #ffffff</div></div>
+        </div>
+        <div class="spec-card">
+          <h4>TYPOGRAPHY</h4>
+          <ul>
+            <li><strong>Headers/Nav:</strong> Oswald (Google Fonts) — Bold 700</li>
+            <li><strong>Body text:</strong> Inter (Google Fonts) — Regular 400</li>
+            <li><strong>Story text:</strong> Merriweather — Italic 400</li>
+            <li><strong>Letter spacing:</strong> 2-4px on all caps labels</li>
+            <li><strong>Nav links:</strong> 13px, uppercase, letter-spaced</li>
+          </ul>
+        </div>
+        <div class="spec-card">
+          <h4>GLOW EFFECTS (CRITICAL)</h4>
+          <ul>
+            <li>All page hero headings need a <strong>deep red radial glow</strong> behind the main title text</li>
+            <li>CSS: <code style="color:#c9a84c;">text-shadow: 0 0 80px rgba(204,0,0,0.6), 0 0 40px rgba(204,0,0,0.4)</code></li>
+            <li>Also add background radial: <code style="color:#c9a84c;">radial-gradient(ellipse at center, rgba(204,0,0,0.15) 0%, transparent 70%)</code></li>
+            <li>Apply to: Contact, Investigations, True Crime, No-Filter Zone heroes</li>
+          </ul>
+        </div>
+        <div class="spec-card">
+          <h4>BREAKING NEWS BANNER</h4>
+          <ul>
+            <li>Full-width solid <strong>red bar (#cc0000)</strong> above hero sections</li>
+            <li>White bold text — "🔴 BREAKING" prefix + scrolling message</li>
+            <li>Font: Oswald, 11px, letter-spacing 3px, ALL CAPS</li>
+            <li>NOT a small gold label — it's a full red ticker/banner</li>
+            <li>Currently shows as a tiny gold "• BREAKING" — this needs to be a prominent red bar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: CONTACT PAGE FIXES -->
+  <div class="section">
+    <div class="section-header"><h2>✉️ PAGE: CONTACT US — CHANGE REQUESTS</h2></div>
+    <div class="section-body">
+
+      <div class="change">
+        <span class="change-label fix">FIX</span>
+        <h3>Add Red Glow Effect Behind "CONTACT US" Heading <span class="priority high">HIGH</span></h3>
+        <p>The hero title "CONTACT US" is missing the signature red radial glow effect. Behind the heading, add a deep red ambient glow — like a backlit neon effect — the same way it appeared on the previous Netlify site. This is a key part of the Dark Patriot visual identity.</p>
+        <div class="feature-box">
+          <h4>IMPLEMENTATION</h4>
+          <ul>
+            <li>Add <strong>radial-gradient red background</strong> behind the hero section (not on the text itself — on the section background)</li>
+            <li>Add <strong>text-shadow</strong> with red glow on the heading</li>
+            <li>The word "US" in "CONTACT US" should be in gold (#c9a84c) — the word "CONTACT" in white</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="change">
+        <span class="change-label fix">FIX</span>
+        <h3>Breaking News Banner — Make Full Red Bar <span class="priority high">HIGH</span></h3>
+        <p>The current "• BREAKING" label is a tiny gold dot + text. This needs to be a <strong>full-width solid red (#cc0000) banner bar</strong> spanning the entire page width, with white bold Oswald text. Like a TV breaking news chyron across the top of the hero section.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 3: INVESTIGATIONS PAGE -->
+  <div class="section">
+    <div class="section-header"><h2>📁 PAGE: NFA INVESTIGATIONS — CHANGE REQUESTS</h2></div>
+    <div class="section-body">
+
+      <div class="change">
+        <span class="change-label fix">FIX</span>
+        <h3>Add Red Glow Effect Behind "NFA INVESTIGATIONS" Heading <span class="priority high">HIGH</span></h3>
+        <p>Same red radial glow effect needed here. The hero title "NFA INVESTIGATIONS" needs the deep red backlit glow on the section background plus red text-shadow on the heading. "NFA" in gold, "INVESTIGATIONS" in white with red glow.</p>
+      </div>
+
+      <div class="change">
+        <span class="change-label fix">FIX</span>
+        <h3>"ACTIVE INVESTIGATIONS" — Change to Full Red Breaking Banner <span class="priority high">HIGH</span></h3>
+        <p>The gold pill/button that says "ACTIVE INVESTIGATIONS" needs to become a <strong>full-width red breaking news bar</strong> — solid red background, white Oswald bold text, same style as the Contact page banner fix above.</p>
+      </div>
+
+      <div class="change">
+        <span class="change-label new">NEW FEATURE</span>
+        <h3>Admin: Create New Investigation Tool <span class="priority high">HIGH</span></h3>
+        <p>Currently there is NO way for the admin to create a new investigation from inside the app. This is the most critical missing feature. The admin portal must include a full investigation builder with the following components:</p>
+        <div class="feature-box">
+          <h4>REQUIRED FIELDS FOR EACH INVESTIGATION</h4>
+          <ul>
+            <li><strong>Investigation Title</strong> — text input (e.g. "The Counsel of Conflict")</li>
+            <li><strong>Subtitle / Case Name</strong> — text input (e.g. "Stone Creek Ranch HOA")</li>
+            <li><strong>Location / Jurisdiction</strong> — text input (e.g. "Harris County, TX")</li>
+            <li><strong>Published Date</strong> — date picker</li>
+            <li><strong>Status</strong> — dropdown: Active / Ongoing / Closed / Developing</li>
+            <li><strong>Tags</strong> — multi-select (HOA, Corruption, Election, Financial Fraud, etc.)</li>
+            <li><strong>Thumbnail Image</strong> — image uploader for the case card photo</li>
+            <li><strong>Case Summary</strong> — short text (2-3 sentences, shown on the card)</li>
+            <li><strong>Full Report / Narrative</strong> — <strong>large rich-text editor / sandbox</strong> where admin types the full investigation story with dates, times, names, and narrative. Should support bold, italic, headers, bullet lists at minimum.</li>
+            <li><strong>PDF Exhibits Uploader</strong> — ability to upload multiple PDF files as exhibits (Exhibit A, B, C, etc.)</li>
+            <li><strong>PDF Viewer</strong> — uploaded PDFs display inline on the investigation page (browser-native, no download required)</li>
+            <li><strong>Image Exhibits</strong> — ability to upload image files as evidence exhibits alongside PDFs</li>
+            <li><strong>Exhibit Labels</strong> — each uploaded file gets a label (e.g. "Exhibit A — Notice of Special Hearing")</li>
+          </ul>
+        </div>
+        <div class="feature-box" style="margin-top:12px;border-left-color:#cc0000;">
+          <h4>HOW IT SHOULD DISPLAY ON THE PUBLIC PAGE</h4>
+          <ul>
+            <li>Each investigation saved in admin appears as a <strong>case card</strong> on investigations.html</li>
+            <li>Clicking "READ FULL INVESTIGATION" opens the full report page</li>
+            <li>Full report shows: headline, narrative text, then exhibit boxes in order</li>
+            <li>PDF exhibits display <strong>inline using browser PDF viewer</strong> — no download prompts</li>
+            <li>Image exhibits display as full-width evidence boxes with labels</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 4: NO FILTER ZONE -->
+  <div class="section">
+    <div class="section-header"><h2>📺 PAGE: NO-FILTER ZONE — CHANGE REQUESTS</h2></div>
+    <div class="section-body">
+
+      <div class="change">
+        <span class="change-label fix">FIX</span>
+        <h3>Replace YouTube Embeds with TikTok Only <span class="priority high">HIGH</span></h3>
+        <p>The 3 video slots are currently using YouTube embed iframes. <strong>These must be changed to TikTok embeds only.</strong> The No-Filter Zone is exclusively a TikTok video section.</p>
+        <div class="feature-box">
+          <h4>TIKTOK EMBED IMPLEMENTATION</h4>
+          <ul>
+            <li>Use official TikTok oEmbed or blockquote embed format</li>
+            <li>Admin enters a <strong>TikTok video URL</strong> (e.g. https://www.tiktok.com/@nofilteramerica/video/123456789)</li>
+            <li>The app extracts the video ID and renders the TikTok embed player</li>
+            <li>TikTok embed script: <code style="color:#c9a84c;">&lt;script async src="https://www.tiktok.com/embed.js"&gt;&lt;/script&gt;</code></li>
+            <li>Remove the "YouTube Channel" button from the hero — keep <strong>TikTok follow button only</strong></li>
+            <li>Hero should say: "Follow @NoFilterAmerica on TikTok" — one button, TikTok only</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="change">
+        <span class="change-label fix">FIX</span>
+        <h3>Add Red Glow to "THE NO-FILTER ZONE" Hero Heading <span class="priority medium">MEDIUM</span></h3>
+        <p>Same red radial glow treatment needed on this page's hero heading to match the rest of the site.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 5: TRUE CRIME -->
+  <div class="section">
+    <div class="section-header"><h2>🔴 PAGE: TRUE CRIME — REQUIREMENTS</h2></div>
+    <div class="section-body">
+
+      <div class="change">
+        <span class="change-label new">FEATURE</span>
+        <h3>3-Slot Admin System — Same Structure as Investigations <span class="priority high">HIGH</span></h3>
+        <p>True Crime uses the same admin-managed slot system but with a darker color scheme (black + deep red instead of navy + gold). Each slot needs:</p>
+        <div class="feature-box">
+          <h4>EACH SLOT REQUIRES</h4>
+          <ul>
+            <li><strong>Case Title</strong> — admin-managed text</li>
+            <li><strong>Thumbnail Image</strong> — uploader</li>
+            <li><strong>Video URL</strong> — TikTok or YouTube (both allowed for True Crime)</li>
+            <li><strong>Short Description</strong> — 1-2 sentence summary shown on card</li>
+            <li><strong>Long-Form Story Narrative</strong> — same large rich-text editor as Investigations. Full case story with dates, names, timeline.</li>
+            <li><strong>Status Badge</strong> — "🔴 LIVE CASE" / "CLOSED" / "COLD CASE"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="change">
+        <span class="change-label fix">FIX</span>
+        <h3>Darker Color Scheme for True Crime <span class="priority medium">MEDIUM</span></h3>
+        <p>True Crime should use a distinctly darker palette: near-black background (#0a0a0a), deep red accents (not gold), and a more ominous/serious visual tone compared to the standard navy+gold pages.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 6: GLOBAL -->
+  <div class="section">
+    <div class="section-header"><h2>⚙️ GLOBAL REQUIREMENTS (ALL PAGES)</h2></div>
+    <div class="section-body">
+
+      <div class="change">
+        <span class="change-label new">REQUIRED</span>
+        <h3>Subscription Paywall — $9.99/month</h3>
+        <p>Full investigation reports, True Crime case narratives, and No-Filter Zone videos are members-only. Non-subscribers see a preview/teaser then hit a paywall. The subscribe flow should go to the JotForm payment link integrated with Authorize.net.</p>
+      </div>
+
+      <div class="change">
+        <span class="change-label new">REQUIRED</span>
+        <h3>Admin Portal Password Protection</h3>
+        <p>All admin functions (create investigation, manage video slots, manage True Crime) must be behind the admin password: <strong>NFA2024!</strong></p>
+      </div>
+
+      <div class="change">
+        <span class="change-label new">REQUIRED</span>
+        <h3>Contact Form Notifications</h3>
+        <p>All contact form submissions and tip reports must send an email notification to: <strong>news@nofilteramerica.com</strong></p>
+      </div>
+
+      <div class="change">
+        <span class="change-label fix">STANDARD</span>
+        <h3>Mobile Responsive — All Pages</h3>
+        <p>Every page must be fully responsive and centered for mobile viewports (iPhone). Navigation collapses to hamburger menu on mobile. Cards stack vertically on small screens.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <p><strong>NO FILTER AMERICA</strong> · nofilteramerica.com · news@nofilteramerica.com</p>
+    <p style="margin-top:6px;">Build Brief prepared June 2026 · Dark Patriot Theme · All source files at github.com/NoFilterAmerica/nofilteramerica-website</p>
+  </div>
+
+</div>
+</body>
+</html>
