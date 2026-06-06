@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NFA Page Design Samples — For Base44 App Build</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #07101e; --navy2: #0a1628; --navy3: #0d1f3c;
+  --gold: #c9a84c; --gold2: #e8c96e; --red: #cc0000;
+  --border-gold: rgba(201,168,76,0.25);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #1a1a2e; color: #fff; }
+
+/* ===== LAYOUT ===== */
+.doc-header {
+  background: #000;
+  padding: 28px 32px;
+  border-bottom: 4px solid var(--gold);
+  text-align: center;
+}
+.doc-header h1 { font-family: 'Oswald', sans-serif; font-size: 22px; color: var(--gold); letter-spacing: 3px; margin-bottom: 6px; }
+.doc-header p { color: #888; font-size: 13px; }
+
+.section-divider {
+  background: #111;
+  border-left: 6px solid var(--red);
+  padding: 18px 32px;
+  margin: 40px 0 0;
+}
+.section-divider h2 { font-family: 'Oswald', sans-serif; font-size: 18px; color: #fff; letter-spacing: 2px; }
+.section-divider p { color: #888; font-size: 12px; margin-top: 4px; }
+
+.page-sample {
+  border: 2px solid var(--border-gold);
+  margin: 0 20px 40px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--navy);
+}
+
+/* ===== SHARED NAV ===== */
+.nav-bar {
+  background: rgba(7,16,30,0.98);
+  border-bottom: 2px solid var(--gold);
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo { height: 40px; }
+.nav-links-row { display: flex; gap: 20px; }
+.nav-links-row a { color: #ccc; text-decoration: none; font-size: 12px; letter-spacing: 1px; font-family: 'Oswald', sans-serif; }
+.nav-links-row a.active { color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+.nav-subscribe { background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 11px; padding: 7px 16px; letter-spacing: 1px; text-decoration: none; }
+
+/* ===== INVESTIGATIONS PAGE ===== */
+.inv-hero {
+  background: linear-gradient(160deg, #07101e 50%, #1a0000);
+  padding: 50px 24px 40px;
+  text-align: center;
+  border-bottom: 4px solid var(--red);
+}
+.inv-hero-seal {
+  height: 90px; width: 90px; object-fit: contain;
+  display: block; margin: 0 auto 16px;
+  filter: drop-shadow(0 4px 20px rgba(197,164,89,0.6));
+}
+.inv-kicker { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+.inv-title { font-family: 'Oswald', sans-serif; font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 12px; letter-spacing: 2px; }
+.inv-title em { color: var(--red); font-style: normal; }
+.inv-sub { font-size: 13px; color: #aaa; max-width: 500px; margin: 0 auto 20px; line-height: 1.7; }
+.inv-badge { display: inline-block; background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 3px; padding: 5px 18px; text-transform: uppercase; }
+
+.sub-banner {
+  background: linear-gradient(90deg, #0a1628, #1a0a0a);
+  border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold);
+  padding: 18px 24px; text-align: center;
+}
+.sub-banner p { font-family: 'Oswald', sans-serif; font-size: 13px; color: #fff; margin-bottom: 10px; }
+.sub-banner p span { color: var(--gold); }
+.sub-btn { display: inline-block; background: var(--gold); color: var(--navy); font-family: 'Oswald', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 10px 26px; text-decoration: none; margin: 3px; }
+.sub-btn.outline { background: transparent; border: 2px solid var(--gold); color: var(--gold); }
+
+.inv-grid { max-width: 1000px; margin: 0 auto; padding: 36px 24px 48px; }
+.inv-section-title { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; color: #fff; border-bottom: 3px solid var(--red); padding-bottom: 14px; margin-bottom: 24px; }
+
+.story-card {
+  display: grid; grid-template-columns: 280px 1fr; gap: 0;
+  background: var(--navy2); border: 1px solid var(--border-gold);
+  overflow: hidden; margin-bottom: 20px;
+  text-decoration: none; color: inherit;
+}
+.story-card-img {
+  background: linear-gradient(135deg, #0d1f3c, #1a0000);
+  min-height: 180px; display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.story-card-img img { width: 100%; height: 180px; object-fit: cover; opacity: 0.85; }
+.story-card-body { padding: 20px 24px; display: flex; flex-direction: column; justify-content: center; }
+.story-tag { display: inline-block; background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 2px; padding: 3px 10px; margin-bottom: 10px; text-transform: uppercase; }
+.story-headline { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.2; }
+.story-deck { font-size: 12px; color: #999; line-height: 1.6; margin-bottom: 14px; }
+.story-meta { font-size: 11px; color: var(--gold); letter-spacing: 1px; font-family: 'Oswald', sans-serif; }
+.story-cta { margin-top: 12px; display: inline-block; border: 1px solid var(--gold); color: var(--gold); font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; padding: 6px 16px; text-decoration: none; }
+
+/* ===== NO FILTER ZONE ===== */
+.nfz-hero {
+  background: linear-gradient(160deg, #07101e, #0d0d1a);
+  padding: 40px 24px 30px; text-align: center;
+  border-bottom: 4px solid var(--gold);
+}
+.nfz-hero-kicker { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+.nfz-hero-title { font-family: 'Oswald', sans-serif; font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 10px; letter-spacing: 3px; }
+.nfz-hero-title span { color: var(--gold); }
+.nfz-hero-sub { font-size: 13px; color: #aaa; max-width: 460px; margin: 0 auto; line-height: 1.6; }
+
+.nfz-grid { max-width: 1000px; margin: 0 auto; padding: 36px 24px; }
+.nfz-grid-title { font-family: 'Oswald', sans-serif; font-size: 16px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; border-bottom: 2px solid var(--border-gold); padding-bottom: 12px; margin-bottom: 24px; }
+.video-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.video-card { background: var(--navy2); border: 1px solid var(--border-gold); overflow: hidden; }
+.video-thumb { width: 100%; height: 160px; object-fit: cover; display: block; background: #0d1f3c; }
+.video-thumb-placeholder { width: 100%; height: 160px; background: linear-gradient(135deg, #0d1f3c, #1a1a2e); display: flex; align-items: center; justify-content: center; }
+.video-thumb-placeholder span { font-size: 36px; opacity: 0.5; }
+.video-body { padding: 14px 16px; }
+.video-badge { display: inline-block; background: var(--gold); color: var(--navy); font-family: 'Oswald', sans-serif; font-size: 8px; letter-spacing: 2px; padding: 2px 8px; margin-bottom: 8px; }
+.video-title { font-family: 'Oswald', sans-serif; font-size: 14px; color: #fff; margin-bottom: 6px; line-height: 1.3; }
+.video-desc { font-size: 11px; color: #888; line-height: 1.5; margin-bottom: 10px; }
+.video-play { display: inline-flex; align-items: center; gap: 6px; background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 1px; padding: 6px 14px; text-decoration: none; }
+
+/* ===== CONTACT PAGE ===== */
+.contact-hero {
+  background: linear-gradient(135deg, #07101e 60%, #0a0a1e);
+  padding: 40px 24px 30px; text-align: center;
+  border-bottom: 3px solid var(--gold);
+}
+.contact-hero-kicker { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+.contact-hero-title { font-family: 'Oswald', sans-serif; font-size: 34px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.contact-hero-sub { font-size: 13px; color: #aaa; max-width: 460px; margin: 0 auto; line-height: 1.6; }
+
+.contact-body { max-width: 900px; margin: 0 auto; padding: 36px 24px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+.tip-box { background: var(--navy2); border: 1px solid var(--border-gold); border-top: 3px solid var(--red); padding: 24px; }
+.tip-box h3 { font-family: 'Oswald', sans-serif; font-size: 16px; color: var(--gold); letter-spacing: 2px; margin-bottom: 6px; }
+.tip-box p { font-size: 12px; color: #999; margin-bottom: 18px; line-height: 1.6; }
+.form-field { margin-bottom: 14px; }
+.form-field label { display: block; font-size: 10px; color: var(--gold); letter-spacing: 2px; font-family: 'Oswald', sans-serif; margin-bottom: 5px; text-transform: uppercase; }
+.form-field input, .form-field textarea, .form-field select {
+  width: 100%; background: #0a1628; border: 1px solid rgba(201,168,76,0.3);
+  color: #fff; padding: 10px 12px; font-size: 12px; font-family: 'Inter', sans-serif;
+}
+.form-field textarea { height: 90px; resize: vertical; }
+.form-submit { background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 2px; padding: 12px 28px; border: none; cursor: pointer; width: 100%; text-transform: uppercase; }
+
+.contact-info-box { display: flex; flex-direction: column; gap: 16px; }
+.info-card { background: var(--navy2); border: 1px solid var(--border-gold); padding: 20px; display: flex; gap: 16px; align-items: flex-start; }
+.info-icon { font-size: 24px; width: 36px; text-align: center; }
+.info-text h4 { font-family: 'Oswald', sans-serif; font-size: 13px; color: var(--gold); margin-bottom: 4px; letter-spacing: 1px; }
+.info-text p { font-size: 12px; color: #999; line-height: 1.5; }
+.anon-box { background: linear-gradient(135deg, #0a1628, #1a0a0a); border: 1px solid var(--red); padding: 20px; }
+.anon-box h4 { font-family: 'Oswald', sans-serif; font-size: 14px; color: #fff; margin-bottom: 6px; }
+.anon-box p { font-size: 11px; color: #aaa; line-height: 1.6; margin-bottom: 14px; }
+.anon-btn { display: block; background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; padding: 10px; text-align: center; text-decoration: none; }
+
+/* ===== TRUE CRIME ===== */
+.tc-hero {
+  background: linear-gradient(160deg, #0a0a0a 40%, #1a0000);
+  padding: 40px 24px 30px; text-align: center;
+  border-bottom: 4px solid var(--red);
+  position: relative;
+}
+.tc-hero-kicker { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 5px; color: #cc4444; text-transform: uppercase; margin-bottom: 10px; }
+.tc-hero-title { font-family: 'Oswald', sans-serif; font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 10px; letter-spacing: 2px; }
+.tc-hero-title span { color: var(--red); }
+.tc-hero-sub { font-size: 13px; color: #aaa; max-width: 460px; margin: 0 auto; line-height: 1.6; }
+
+.tc-grid { max-width: 1000px; margin: 0 auto; padding: 36px 24px 48px; }
+.tc-grid-title { font-family: 'Oswald', sans-serif; font-size: 16px; color: #cc4444; letter-spacing: 3px; text-transform: uppercase; border-bottom: 2px solid rgba(204,0,0,0.3); padding-bottom: 12px; margin-bottom: 24px; }
+
+.tc-featured { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: #0a0a0a; border: 1px solid rgba(204,0,0,0.3); margin-bottom: 24px; overflow: hidden; }
+.tc-featured-img { min-height: 200px; background: linear-gradient(135deg, #1a0000, #0a0a0a); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.tc-featured-img img { width: 100%; height: 200px; object-fit: cover; opacity: 0.7; }
+.tc-featured-body { padding: 24px; display: flex; flex-direction: column; justify-content: center; }
+.tc-tag { display: inline-block; background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 2px; padding: 3px 10px; margin-bottom: 10px; }
+.tc-headline { font-family: 'Oswald', sans-serif; font-size: 22px; color: #fff; margin-bottom: 10px; line-height: 1.2; }
+.tc-deck { font-size: 12px; color: #999; line-height: 1.6; margin-bottom: 14px; }
+.tc-story { font-family: 'Merriweather', serif; font-size: 11px; color: #bbb; line-height: 1.8; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; margin-top: 6px; max-height: 80px; overflow: hidden; }
+.tc-cta { margin-top: 14px; display: inline-block; background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; padding: 8px 18px; text-decoration: none; }
+
+.tc-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.tc-card { background: #0a0a0a; border: 1px solid rgba(204,0,0,0.25); overflow: hidden; }
+.tc-card-img { width: 100%; height: 140px; object-fit: cover; display: block; background: linear-gradient(135deg, #1a0000, #0a0a0a); opacity: 0.8; }
+.tc-card-placeholder { width: 100%; height: 140px; background: linear-gradient(135deg, #1a0000, #0a0a0a); display: flex; align-items: center; justify-content: center; }
+.tc-card-placeholder span { font-size: 32px; opacity: 0.4; }
+.tc-card-body { padding: 14px; }
+.tc-card-tag { display: inline-block; background: rgba(204,0,0,0.8); color: #fff; font-family: 'Oswald', sans-serif; font-size: 8px; letter-spacing: 2px; padding: 2px 8px; margin-bottom: 7px; }
+.tc-card-title { font-family: 'Oswald', sans-serif; font-size: 13px; color: #fff; line-height: 1.3; margin-bottom: 6px; }
+.tc-card-desc { font-size: 10px; color: #888; line-height: 1.5; }
+
+/* ===== LABELS ===== */
+.design-note { background: #0a0a0a; border-left: 4px solid var(--gold); padding: 12px 20px; margin: 0 20px 10px; }
+.design-note p { font-size: 12px; color: #aaa; line-height: 1.6; }
+.design-note strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <h1>NO FILTER AMERICA — PAGE DESIGN SAMPLES</h1>
+  <p>Reference document for Base44 App Build · Dark Patriot Theme (Navy & Gold) · June 2026</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 1: INVESTIGATIONS -->
+<!-- ============================================================ -->
+<div class="section-divider">
+  <h2>📁 PAGE 1 — NFA INVESTIGATIONS</h2>
+  <p>Evidence-based reporting hub. Featured story card + case file grid. Members-only full access.</p>
+</div>
+
+<div class="design-note">
+  <p><strong>Key requirements:</strong> NFA Seal centered in hero · Red accent borders on evidence items · Featured story card (Cliff Davis / Stone Creek Ranch HOA) · "Subscribe" CTA banner between hero and grid · Each investigation card links to full report page · Members-only paywall after preview</p>
+</div>
+
+<div class="page-sample">
+  <!-- Nav -->
+  <div class="nav-bar">
+    <img src="https://media.base44.com/images/public/6a0717be1b2d3fb43fda6201/4099c079c_NoFilterAmericaLogoWithoutBackground.png" class="nav-logo" alt="NFA Logo">
+    <div class="nav-links-row">
+      <a href="#">Home</a>
+      <a href="#" class="active">Investigations</a>
+      <a href="#">No-Filter Zone</a>
+      <a href="#">True Crime</a>
+      <a href="#">Contact</a>
+    </div>
+    <a href="#" class="nav-subscribe">SUBSCRIBE</a>
+  </div>
+
+  <!-- Hero -->
+  <div class="inv-hero">
+    <img src="https://media.base44.com/images/public/6a0717be1b2d3fb43fda6201/4099c079c_NoFilterAmericaLogoWithoutBackground.png" class="inv-hero-seal" alt="NFA Seal">
+    <div class="inv-kicker">🔍 Evidence-Based Reporting</div>
+    <div class="inv-title">NFA <em>INVESTIGATIONS</em></div>
+    <div class="inv-sub">Documented cases told entirely through official records, signed correspondence, and the parties' own words. No spin. No agenda.</div>
+    <span class="inv-badge">🔴 LIVE CASE FILES</span>
+  </div>
+
+  <!-- Subscribe Banner -->
+  <div class="sub-banner">
+    <p>🔒 Full reports, exhibits & documents available to <span>NFA Members</span> only</p>
+    <a href="#" class="sub-btn">Subscribe — $9.99/mo</a>
+    <a href="#" class="sub-btn outline">Already a Member →</a>
+  </div>
+
+  <!-- Grid -->
+  <div class="inv-grid">
+    <div class="inv-section-title">ACTIVE INVESTIGATIONS</div>
+
+    <!-- Featured Card -->
+    <div class="story-card">
+      <div class="story-card-img">
+        <img src="https://media.base44.com/images/public/6a0717be1b2d3fb43fda6201/193505e84_CliffI.png" alt="Cliff Davis">
+      </div>
+      <div class="story-card-body">
+        <span class="story-tag">🔴 ACTIVE · HOA CORRUPTION</span>
+        <div class="story-headline">The Counsel of Conflict:<br>Who Runs the Neighborhood?</div>
+        <div class="story-deck">Stone Creek Ranch HOA — A sitting board member retains the HOA's own attorney for personal real estate deals while residents face uncontested elections and altered bylaws. Eight exhibits. Official documents. Their own words.</div>
+        <div class="story-meta">📁 8 EXHIBITS &nbsp;·&nbsp; 📄 OFFICIAL RECORDS &nbsp;·&nbsp; ⚖️ STONE CREEK RANCH HOA</div>
+        <a href="#" class="story-cta">READ FULL INVESTIGATION →</a>
+      </div>
+    </div>
+
+    <!-- Placeholder Card -->
+    <div class="story-card" style="opacity:0.5;">
+      <div class="story-card-img" style="min-height:140px;">
+        <div style="text-align:center;color:#555;"><div style="font-size:32px;">🔍</div><div style="font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;margin-top:8px;color:#444;">NEXT CASE FILE</div></div>
+      </div>
+      <div class="story-card-body">
+        <span class="story-tag" style="background:#333;">COMING SOON</span>
+        <div class="story-headline" style="color:#555;">Investigation #2</div>
+        <div class="story-deck" style="color:#444;">New case file in development. Submit a tip to bring your story to light.</div>
+        <a href="#" class="story-cta" style="border-color:#333;color:#555;">SUBMIT A TIP →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 2: NO FILTER ZONE -->
+<!-- ============================================================ -->
+<div class="section-divider">
+  <h2>📺 PAGE 2 — NO-FILTER ZONE</h2>
+  <p>Raw unfiltered video content. 3-slot grid of TikTok/YouTube embeds managed via admin portal.</p>
+</div>
+
+<div class="design-note">
+  <p><strong>Key requirements:</strong> 3 video slots managed via admin · Gold accent header (not red) · Each card has: thumbnail, title, description, play button · Admin can update video URL + thumbnail + title + description · Members-only full video access</p>
+</div>
+
+<div class="page-sample">
+  <div class="nav-bar">
+    <img src="https://media.base44.com/images/public/6a0717be1b2d3fb43fda6201/4099c079c_NoFilterAmericaLogoWithoutBackground.png" class="nav-logo" alt="NFA Logo">
+    <div class="nav-links-row">
+      <a href="#">Home</a>
+      <a href="#">Investigations</a>
+      <a href="#" class="active">No-Filter Zone</a>
+      <a href="#">True Crime</a>
+      <a href="#">Contact</a>
+    </div>
+    <a href="#" class="nav-subscribe">SUBSCRIBE</a>
+  </div>
+
+  <div class="nfz-hero">
+    <div class="nfz-hero-kicker">📺 Raw · Uncut · Unfiltered</div>
+    <div class="nfz-hero-title">THE NO-<span>FILTER</span> ZONE</div>
+    <div class="nfz-hero-sub">No spin. No agenda. Just the truth straight from the source. Updated weekly by our team.</div>
+  </div>
+
+  <div class="nfz-grid">
+    <div class="nfz-grid-title">⚡ THIS WEEK'S VIDEOS</div>
+    <div class="video-cards">
+
+      <div class="video-card">
+        <div class="video-thumb-placeholder"><span>▶️</span></div>
+        <div class="video-body">
+          <span class="video-badge">🎬 VIDEO 1</span>
+          <div class="video-title">Admin-Managed Title Goes Here</div>
+          <div class="video-desc">Short description entered by admin. Explains what this video is about in 1-2 sentences.</div>
+          <a href="#" class="video-play">▶ WATCH NOW</a>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb-placeholder"><span>▶️</span></div>
+        <div class="video-body">
+          <span class="video-badge">🎬 VIDEO 2</span>
+          <div class="video-title">Admin-Managed Title Goes Here</div>
+          <div class="video-desc">Short description entered by admin. Explains what this video is about in 1-2 sentences.</div>
+          <a href="#" class="video-play">▶ WATCH NOW</a>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb-placeholder"><span>▶️</span></div>
+        <div class="video-body">
+          <span class="video-badge">🎬 VIDEO 3</span>
+          <div class="video-title">Admin-Managed Title Goes Here</div>
+          <div class="video-desc">Short description entered by admin. Explains what this video is about in 1-2 sentences.</div>
+          <a href="#" class="video-play">▶ WATCH NOW</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 3: CONTACT US -->
+<!-- ============================================================ -->
+<div class="section-divider">
+  <h2>✉️ PAGE 3 — CONTACT / SUBMIT A TIP</h2>
+  <p>Contact form + tip submission + anonymous whistleblower option + direct email info.</p>
+</div>
+
+<div class="design-note">
+  <p><strong>Key requirements:</strong> Tip submission form (Name, Email, Subject, Message) · Anonymous tip option prominently featured · Contact info (news@nofilteramerica.com) · Social links · Form submissions notify news@nofilteramerica.com</p>
+</div>
+
+<div class="page-sample">
+  <div class="nav-bar">
+    <img src="https://media.base44.com/images/public/6a0717be1b2d3fb43fda6201/4099c079c_NoFilterAmericaLogoWithoutBackground.png" class="nav-logo" alt="NFA Logo">
+    <div class="nav-links-row">
+      <a href="#">Home</a>
+      <a href="#">Investigations</a>
+      <a href="#">No-Filter Zone</a>
+      <a href="#">True Crime</a>
+      <a href="#" class="active">Contact</a>
+    </div>
+    <a href="#" class="nav-subscribe">SUBSCRIBE</a>
+  </div>
+
+  <div class="contact-hero">
+    <div class="contact-hero-kicker">📬 Get In Touch</div>
+    <div class="contact-hero-title">CONTACT & REPORT A TIP</div>
+    <div class="contact-hero-sub">Got a story? Witnessed corruption? Know something the public needs to hear? We protect our sources. Your tip stays confidential.</div>
+  </div>
+
+  <div class="contact-body">
+    <!-- Form -->
+    <div class="tip-box">
+      <h3>📩 SUBMIT A TIP OR MESSAGE</h3>
+      <p>All submissions are reviewed by our editorial team. We respond within 48 hours.</p>
+      <div class="form-field">
+        <label>Your Name</label>
+        <input type="text" placeholder="First Last (or Anonymous)">
+      </div>
+      <div class="form-field">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-field">
+        <label>Subject / Topic</label>
+        <select>
+          <option>HOA / Local Government Corruption</option>
+          <option>Public Official Misconduct</option>
+          <option>Financial Fraud</option>
+          <option>General Tip</option>
+          <option>Media Inquiry</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Your Message</label>
+        <textarea placeholder="Tell us what you know. Be as specific as possible — names, dates, documents, locations."></textarea>
+      </div>
+      <button class="form-submit">🔴 SUBMIT YOUR TIP</button>
+    </div>
+
+    <!-- Info Panel -->
+    <div class="contact-info-box">
+      <div class="info-card">
+        <div class="info-icon">📧</div>
+        <div class="info-text">
+          <h4>EMAIL US DIRECTLY</h4>
+          <p>news@nofilteramerica.com<br>We read every message.</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🎙️</div>
+        <div class="info-text">
+          <h4>FOLLOW & CONNECT</h4>
+          <p>@NoFilterAmerica on TikTok &amp; YouTube<br>DMs open for story tips.</p>
+        </div>
+      </div>
+      <div class="anon-box">
+        <h4>🔒 SUBMIT ANONYMOUSLY</h4>
+        <p>Your identity is never required. Use a burner email or submit without one. We protect every source — no exceptions. Documents, photos, recordings all accepted.</p>
+        <a href="#" class="anon-btn">🛡️ ANONYMOUS TIP FORM →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 4: TRUE CRIME -->
+<!-- ============================================================ -->
+<div class="section-divider">
+  <h2>🔴 PAGE 4 — TRUE CRIME</h2>
+  <p>Darker design. Featured story + 3 case cards. YouTube video embeds + long-form story narratives.</p>
+</div>
+
+<div class="design-note">
+  <p><strong>Key requirements:</strong> Darker color scheme (black + deep red) · 1 featured story slot + 3 secondary cards · Each slot: thumbnail, video embed, case title, long-form story narrative · Admin manages 3 slots with same fields as No-Filter Zone · "🔴 LIVE CASE" badge for active stories</p>
+</div>
+
+<div class="page-sample">
+  <div class="nav-bar">
+    <img src="https://media.base44.com/images/public/6a0717be1b2d3fb43fda6201/4099c079c_NoFilterAmericaLogoWithoutBackground.png" class="nav-logo" alt="NFA Logo">
+    <div class="nav-links-row">
+      <a href="#">Home</a>
+      <a href="#">Investigations</a>
+      <a href="#">No-Filter Zone</a>
+      <a href="#" class="active">True Crime</a>
+      <a href="#">Contact</a>
+    </div>
+    <a href="#" class="nav-subscribe">SUBSCRIBE</a>
+  </div>
+
+  <div class="tc-hero">
+    <div class="tc-hero-kicker">🔴 Real Cases · Real Evidence · No Filter</div>
+    <div class="tc-hero-title">TRUE <span>CRIME</span></div>
+    <div class="tc-hero-sub">Deep-dive case files on real crimes, corruption, and cover-ups. Video reports, official documents, and the stories behind the stories.</div>
+  </div>
+
+  <div class="tc-grid">
+    <div class="tc-grid-title">🔴 FEATURED CASE</div>
+
+    <!-- Featured Case -->
+    <div class="tc-featured">
+      <div class="tc-featured-img">
+        <div style="text-align:center;color:#555;padding:20px;"><div style="font-size:48px;">🎬</div><div style="font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;margin-top:8px;color:#555;">VIDEO EMBED</div><div style="font-size:10px;color:#444;margin-top:4px;">YouTube / TikTok</div></div>
+      </div>
+      <div class="tc-featured-body">
+        <span class="tc-tag">🔴 LIVE CASE · TRUE CRIME</span>
+        <div class="tc-headline">Admin-Managed Featured Case Title</div>
+        <div class="tc-deck">Short description of the case — 1-2 sentences. Who, what, where. Entered by admin.</div>
+        <div class="tc-story">Long-form narrative text goes here. This is where the full story is told — background, key players, timeline of events, what the evidence shows, and why it matters. This section scrolls and is managed entirely from the admin portal without touching any code. The admin can update this at any time to add new developments...</div>
+        <a href="#" class="tc-cta">📁 READ FULL CASE FILE →</a>
+      </div>
+    </div>
+
+    <div class="tc-grid-title" style="margin-top:32px;">MORE CASES</div>
+
+    <!-- Secondary Cards -->
+    <div class="tc-cards">
+      <div class="tc-card">
+        <div class="tc-card-placeholder"><span>🎬</span></div>
+        <div class="tc-card-body">
+          <span class="tc-card-tag">CASE FILE</span>
+          <div class="tc-card-title">Admin Case Title #2</div>
+          <div class="tc-card-desc">Short summary of the case. Managed by admin.</div>
+        </div>
+      </div>
+      <div class="tc-card">
+        <div class="tc-card-placeholder"><span>🎬</span></div>
+        <div class="tc-card-body">
+          <span class="tc-card-tag">CASE FILE</span>
+          <div class="tc-card-title">Admin Case Title #3</div>
+          <div class="tc-card-desc">Short summary of the case. Managed by admin.</div>
+        </div>
+      </div>
+      <div class="tc-card" style="opacity:0.4;border-color:#222;">
+        <div class="tc-card-placeholder" style="background:#0a0a0a;"><span style="opacity:0.2;">+</span></div>
+        <div class="tc-card-body">
+          <span class="tc-card-tag" style="background:#222;color:#555;">COMING SOON</span>
+          <div class="tc-card-title" style="color:#444;">Next Case File</div>
+          <div class="tc-card-desc" style="color:#333;">In development.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer Note -->
+<div style="text-align:center;padding:40px 20px;color:#555;font-size:11px;border-top:1px solid #1a1a2e;margin-top:40px;">
+  <p style="color:#c9a84c;font-family:'Oswald',sans-serif;letter-spacing:2px;font-size:13px;margin-bottom:8px;">NO FILTER AMERICA — DESIGN REFERENCE</p>
+  <p>Dark Patriot Theme · Navy #07101e · Gold #c9a84c · Red #cc0000 · Font: Oswald (headers) + Inter (body)</p>
+  <p style="margin-top:6px;">All pages are mobile-responsive · Members-only paywall on gated content · Admin portal manages video/story slots</p>
+</div>
+
+</body>
+</html>
