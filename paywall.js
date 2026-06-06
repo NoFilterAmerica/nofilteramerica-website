@@ -5,7 +5,7 @@
  */
 
 (function () {
-  const VERIFY_URL = "https://api.base44.com/api/functions/6a0717be1b2d3fb43fda6201/verifyToken";
+  const VERIFY_URL = "https://nfa-super-agent-3fda6201.base44.app/functions/verifyToken";
   const SUBSCRIBE_URL = "https://form.jotform.com/261566870518062";
   const MEMBERS_URL = "/members.html";
   const COOKIE_NAME = "nfa_token";
