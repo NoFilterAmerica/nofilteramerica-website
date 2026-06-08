@@ -1,105 +1,65 @@
 {
-  "updated": "2026-06-07T13:05:16.047112",
-  "left_count": 9,
-  "right_count": 9,
-  "left": [
+  "lastUpdated": "2026-06-08T13:04:33.459Z",
+  "leftPerspective": [
     {
-      "title": "Park Ranger Dies After Falling Into a Crevasse on Mt. McKinley",
-      "link": "https://newspub.live/news/park-ranger-dies-after-falling-into-a-crevasse-on-mt-mckinley/",
-      "source": "News Pub",
-      "image": "https://i1.wp.com/static01.nyt.com/images/2026/06/05/multimedia/05xp-ranger-tcqv/05xp-ranger-tcqv-facebookJumbo-v2.jpg?ssl=1"
+      "title": "Democrats Push New Voting Rights Bill Ahead of 2026 Elections",
+      "source": "CNN",
+      "link": "https://example.com/2",
+      "perspective": "left",
+      "date": "2026-06-08"
     },
     {
-      "title": "The Worst Advice for Democrats on How to Win Elections",
-      "link": "https://talkingpointsmemo.com/the-weekender/the-worst-advice-for-democrats-on-how-to-win-elections",
-      "source": "Tpm \u2013 Talking Points Memo",
-      "image": "https://talkingpointsmemo.com/wp-content/uploads/2026/06/weekender-bad-advice-for-dems-weekender.jpg"
+      "title": "Climate Report: US Carbon Emissions Rise Despite Biden Admin Efforts",
+      "source": "NPR",
+      "link": "https://example.com/4",
+      "perspective": "left",
+      "date": "2026-06-08"
     },
     {
-      "title": "The Election Issue Democrats Can't Escape in 2026",
-      "link": "https://www.westernjournal.com/election-issue-democrats-cant-escape-2026/",
-      "source": "The Western Journal",
-      "image": "https://www.westernjournal.com/wp-content/uploads/2026/05/IMG_8961.jpeg"
+      "title": "Senate Democrats Block GOP Healthcare Plan",
+      "source": "MSNBC",
+      "link": "https://example.com/6",
+      "perspective": "left",
+      "date": "2026-06-08"
     },
     {
-      "title": "See Where the L.A. Mayoral Candidates Have Done Best So Far",
-      "link": "https://newspub.live/news/see-where-the-l-a-mayoral-candidates-have-done-best-so-far/",
-      "source": "News Pub",
-      "image": "https://i2.wp.com/static01.nyt.com/images/2026/06/05/multimedia/2026-06-03-los-angeles-mayoral-election-map-index/2026-06-03-los-angeles-mayoral-election-map-index-facebookJumbo-v9.jpg?ssl=1"
-    },
-    {
-      "title": "Platner\u2019s Pine Tree State Appeal Is All About The Leftist Saps Who Moved Here - ",
-      "link": "https://www.americanthinker.com/articles/2026/06/platner_s_pine_tree_state_appeal_is_all_about_the_leftist_saps_who_moved_here.html",
-      "source": "Americanthinker",
-      "image": "https://images.americanthinker.com/xt/xtqw5bpnhogv61pmql9b_1200.jpg"
-    },
-    {
-      "title": "Democrat Xavier Becerra wins the top spot in November\u2019s race for California gove",
-      "link": "https://newspub.live/news/democrat-xavier-becerra-wins-the-top-spot-in-novembers-race-for-california-governor/",
-      "source": "News Pub",
-      "image": "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/5210x2931+0+0/resize/1400/quality/85/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F18%2Fde%2Fc263e83041efa8a28c33739e2f9d%2Fgettyimages-2279539872.jpg"
-    },
-    {
-      "title": "\u2018Dark Horse\u2019 Dem First to Advance in Scramble for Newsom\u2019s Seat",
-      "link": "https://us.headtopics.com/news/dark-horse-dem-first-to-advance-in-scramble-for-newsom-s-84189102",
-      "source": "Headtopics",
-      "image": "https://i.headtopics.com/images/2026/6/6/thedailybeast/dark-horse-dem-first-to-advance-in-scramble-for-ne-dark-horse-dem-first-to-advance-in-scramble-for-ne-8153F7F95E7204A23485BB535164BEF7.webp"
-    },
-    {
-      "title": "Xavier Becerra advances in California\u2019s hotly contested governor\u2019s race",
-      "link": "https://www.yahoo.com/news/politics/articles/xavier-becerra-secures-spot-california-235619660.html",
-      "source": "Yahoo! News",
-      "image": "https://media.zenfs.com/en/the_guardian_765/37a7d60d67417416349d2575fec71ee1"
+      "title": "Abortion Rights Groups Celebrate State Court Victories",
+      "source": "The Guardian",
+      "link": "https://example.com/8",
+      "perspective": "left",
+      "date": "2026-06-08"
     }
   ],
-  "right": [
+  "rightPerspective": [
     {
-      "title": "Spencer Pratt lashes out over LA mayoral vote counting after he loses more groun",
-      "link": "https://www.newsbreak.com/daily-mail-560402/4696145293636-spencer-pratt-lashes-out-over-la-mayoral-vote-counting-after-he-loses-more-ground-to-surging-dem",
-      "source": "Newsbreak",
-      "image": "https://img.particlenews.com/img/id/0PIkiV_1C6wvLEt00"
+      "title": "Trump Urges Restraint as Iran-Israel Tensions Escalate",
+      "source": "Reuters",
+      "link": "https://example.com/1",
+      "perspective": "right",
+      "date": "2026-06-08"
     },
     {
-      "title": "GOP governor candidate\u2019s wife defends husband over Biden donation \u2018error\u2019",
-      "link": "https://us.headtopics.com/news/gop-governor-candidate-s-wife-defends-husband-over-biden-84214793",
-      "source": "Headtopics",
-      "image": "https://i.headtopics.com/images/2026/6/6/newsweek/gop-governor-candidate-s-wife-defends-husband-over-gop-governor-candidate-s-wife-defends-husband-over-71CBDBA7A59F52EE3C3AFADE63D582A3.webp"
+      "title": "GOP Leaders Rally Behind Border Security Enforcement",
+      "source": "Fox News",
+      "link": "https://example.com/3",
+      "perspective": "right",
+      "date": "2026-06-08"
     },
     {
-      "title": "GOP Governor Candidate\u2019s Wife Defends Husband Over Biden Donation \u2018Error\u2019",
-      "link": "https://www.newsweek.com/oklahoma-governor-candidate-wife-biden-donation-error-12040955",
-      "source": "Newsweek",
-      "image": "https://assets.newsweek.com/wp-content/uploads/2026/06/wendy-drummond.png?w=1600&h=900&q=88"
+      "title": "Trump Administration Announces Stricter Immigration Policies",
+      "source": "Breitbart",
+      "link": "https://example.com/5",
+      "perspective": "right",
+      "date": "2026-06-08"
     },
     {
-      "title": "'She just goes a little haywire': Nancy Mace's past catches up with her primary ",
-      "link": "https://www.rawstory.com/nancy-mace-2677007578/",
-      "source": "Raw Story",
-      "image": "https://www.rawstory.com/media-library/image.jpg?id=66874505&width=980"
-    },
-    {
-      "title": "Trump urges Alabama to back Barry Moore as polls show tight GOP Senate primary",
-      "link": "https://www.washingtonexaminer.com/news/campaigns/congressional/4597893/trump-alabama-back-barry-moore-gop-senate-primary/",
-      "source": "Washington Examiner",
-      "image": "https://www.washingtonexaminer.com/wp-content/uploads/2026/06/barry-moore-jared-hudson-collage-e1780767217429.jpg?1780752798&#038;w=696"
-    },
-    {
-      "title": "Inside the drama, backlash, and defense of Sherrill sending State Police to Dela",
-      "link": "https://www.yahoo.com/news/politics/articles/inside-drama-backlash-defense-sherrill-151002239.html",
-      "source": "Yahoo! News",
-      "image": "https://media.zenfs.com/en/nj_com_articles_950/05b9aed0d3cd96b9895056d64146ba52"
-    },
-    {
-      "title": "Trump administration accelerates border wall construction with record contracts ",
-      "link": "https://us.headtopics.com/news/trump-administration-accelerates-border-wall-construction-84207594",
-      "source": "Headtopics",
-      "image": "https://i.headtopics.com/images/2026/6/6/phillydailynews/trump-administration-accelerates-border-wall-const-trump-administration-accelerates-border-wall-const-F7C40D5E28050B4CAABB553D004075FA.webp"
-    },
-    {
-      "title": "The Republican lawmakers who tried to modify abortion bans and became political ",
-      "link": "https://www.grandforksherald.com/news/north-dakota/the-republican-lawmakers-who-tried-to-modify-abortion-bans-and-became-political-targets",
-      "source": "Grandforksherald",
-      "image": "https://cdn.forumcomm.com/dims4/default/dbfce10/2147483647/resize/800x/quality/90/?url=https%3A%2F%2Fforum-communications-production-web.s3.us-west-2.amazonaws.com%2Fbrightspot%2F5d%2Fb4%2F9812e88c4602823055827566148d%2Feric-murphy-01.jpg"
+      "title": "New Study Shows Crime Rates in Democratic-Led Cities",
+      "source": "NY Post",
+      "link": "https://example.com/7",
+      "perspective": "right",
+      "date": "2026-06-08"
     }
-  ]
+  ],
+  "totalArticles": 8,
+  "duplicatesRemoved": 0
 }
